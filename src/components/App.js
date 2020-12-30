@@ -22,7 +22,7 @@ function App() {
 
   return (
     <Provider locale={language}>
-      <Router>
+      <Router history={history}>
         <Header />
         <Switch>
           <Route exact path="/" component={Home} />

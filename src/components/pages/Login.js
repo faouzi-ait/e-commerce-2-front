@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import TokenPane from '../ui/TokenPane';
 import { THEMES } from '../../redux/types';
@@ -32,6 +32,8 @@ function Login() {
         return 'Your activation token has expired, please renew your token and try again';
       case 'already_activated':
         return 'Your account is already active, please login to access your account';
+      default:
+        return '';
     }
   };
 
