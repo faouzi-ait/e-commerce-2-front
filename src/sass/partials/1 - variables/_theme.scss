@@ -1,0 +1,15 @@
+.light {
+    --theme-token_panel-background: rgb(13, 28, 49);
+    --theme-token_panel-text: #FFF;
+    
+    --theme-page-background: #FFF;
+    --theme-page-text: rgb(13, 28, 49);
+}
+
+.dark {
+    --theme-token_panel-background: #FFF;
+    --theme-token_panel-text: rgb(13, 28, 49);
+
+    --theme-page-background: rgb(13, 28, 49);
+    --theme-page-text: #FFF;
+}
