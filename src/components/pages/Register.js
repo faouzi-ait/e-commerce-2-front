@@ -7,14 +7,14 @@ import { selectedTheme } from '../../redux/selectors';
 import { register_user } from '../../redux/actions/register';
 
 function Register() {
-  const dispatch = useDispatch();
-  const { isDark } = useSelector(selectedTheme);
   const { user, errors, registering } = useSelector((state) => state.register);
+  const { isDark } = useSelector(selectedTheme);
   const [password, setPassword] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
+  const dispatch = useDispatch();
 
   const onSubmit = (e) => {
     e.preventDefault();
