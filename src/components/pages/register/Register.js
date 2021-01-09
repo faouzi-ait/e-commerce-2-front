@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { THEMES } from '../../redux/types';
-import { t } from '../../i18n/translate';
+import { THEMES } from '../../../redux/types';
+import { t } from '../../../i18n/translate';
 
-import { selectedTheme } from '../../redux/selectors';
-import { register_user } from '../../redux/actions/register';
+import { selectedTheme } from '../../../redux/selectors';
+import { register_user } from '../../../redux/actions/register';
+
+import { loginForm } from './styles.module.scss';
 
 function Register() {
   const { user, errors, registering } = useSelector((state) => state.register);
@@ -29,7 +31,7 @@ function Register() {
 
   return (
     <div className={`baseTheme app ${isDark ? THEMES.DARK : THEMES.LIGHT}`}>
-      <div className="loginForm">
+      <div className={loginForm}>
         <form onSubmit={onSubmit}>
           <div>
             <label>{t('username')}:</label>

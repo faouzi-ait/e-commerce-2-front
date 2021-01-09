@@ -5,21 +5,26 @@
     cursor: pointer;
 
     &:hover {
-       background: #FFF
+        background: #FFF
     }
 }
 
-.left-radius {
+.leftRadius {
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
 }
-.right-radius {
+
+.rightRadius {
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
 }
 
-.margin-right {
+.marginRight {
     display: flex;
     align-items: center;
     margin-right: 1rem;
+}
+
+.right {
+    margin-left: auto;
 }

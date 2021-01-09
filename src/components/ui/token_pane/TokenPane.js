@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { resendActivationToken } from '../../redux/actions/resendToken';
+import { resendActivationToken } from '../../../redux/actions/resendToken';
+
+import { tokenPane, closeBtn, tokenPaneMsg } from './styles.module.scss';
 
 function TokenPane({ setOpen }) {
   const dispatch = useDispatch();
@@ -20,8 +22,8 @@ function TokenPane({ setOpen }) {
   };
 
   return (
-    <div className="tokenPane">
-      <span onClick={() => setOpen(false)} className="closeBtn">
+    <div className={tokenPane}>
+      <span onClick={() => setOpen(false)} className={closeBtn}>
         X
       </span>
       <div>
@@ -36,12 +38,12 @@ function TokenPane({ setOpen }) {
         Resend token
       </button>
       {result && result.message && (
-        <span className="tokenPaneMsg">
+        <span className={tokenPaneMsg}>
           Check your email to activate your account
         </span>
       )}
       {error && error.data && (
-        <span className="tokenPaneMsg">{error.data.message}</span>
+        <span className={tokenPaneMsg}>{error.data.message}</span>
       )}
     </div>
   );

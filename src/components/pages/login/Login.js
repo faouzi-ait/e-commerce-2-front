@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import TokenPane from '../ui/TokenPane';
-import { THEMES } from '../../redux/types';
-import { t } from '../../i18n/translate';
+import TokenPane from '../../ui/token_pane/TokenPane';
+import { THEMES } from '../../../redux/types';
+import { t } from '../../../i18n/translate';
 
-import { selectedTheme } from '../../redux/selectors';
+import { selectedTheme } from '../../../redux/selectors';
+import { login_user_action } from '../../../redux/actions/login';
 
-import { login_user_action } from '../../redux/actions/login';
-
-// import '../../sass/index.scss';
+import { loginForm } from './styles.module.scss';
 
 function Login() {
   const dispatch = useDispatch();
@@ -55,7 +54,7 @@ function Login() {
   return (
     <div className={`baseTheme app ${isDark ? THEMES.DARK : THEMES.LIGHT}`}>
       {activationLandingScreen(window.location.search)}
-      <div className="loginForm">
+      <div className={loginForm}>
         <form onSubmit={onSubmit}>
           <div>
             <label>{t('username')}:</label>

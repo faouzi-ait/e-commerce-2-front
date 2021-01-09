@@ -1,9 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { THEMES } from '../../redux/types';
-// import { t } from '../../i18n/translate';
+import { THEMES } from '../../../redux/types';
+// import { t } from '../../../i18n/translate';
 
-import { selectedTheme } from '../../redux/selectors';
+import { selectedTheme } from '../../../redux/selectors';
+import {} from './styles.module.scss';
 
 function Dashboard() {
   const { user } = useSelector((state) => state.login);
