@@ -46,18 +46,8 @@ function ToggleLanguage() {
       {show && (
         <>
           <ToggleButton
-            onClick={() => dispatch(setLanguage(LOCALES.ENGLISH))}
-            classes={`${btn} ${leftRadius} ${right}`}
-            content={<img src="./flags/UK_1.png" alt="UK" width="25" />}
-          />
-          <ToggleButton
-            onClick={() => dispatch(setLanguage(LOCALES.FRENCH))}
-            classes={btn}
-            content={<img src="./flags/FR_2.png" alt="UK" width="21" />}
-          />
-          <ToggleButton
             onClick={() => dispatch(switchTheme())}
-            classes={`${btn}`}
+            classes={`${btn} ${leftRadius}`}
             content={
               <img
                 src={isDark ? sun : night}
@@ -66,18 +56,22 @@ function ToggleLanguage() {
               />
             }
           />
+          <ToggleButton
+            onClick={() => dispatch(setLanguage(LOCALES.ENGLISH))}
+            classes={`${btn} ${right}`}
+            content={<img src="./flags/UK_2.png" alt="UK" width="25" />}
+          />
+          <ToggleButton
+            onClick={() => dispatch(setLanguage(LOCALES.FRENCH))}
+            classes={btn}
+            content={<img src="./flags/FR_2.png" alt="UK" width="21" />}
+          />
         </>
       )}
       <ToggleButton
         onClick={() => setShow(!show)}
-        classes={`${btn} ${!show && leftRadius} ${rightRadius}`}
-        content={
-          <img
-            src={`${!show ? './flags/planet.png' : './flags/planet-full.png'}`}
-            alt="UK"
-            width="30"
-          />
-        }
+        classes={`${btn} ${!show && leftRadius}`}
+        content={<img src="./flags/translate.png" alt="translate" width="30" />}
       />
     </>
   );
