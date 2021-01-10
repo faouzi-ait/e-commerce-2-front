@@ -15,7 +15,7 @@ import PrivateRoutes from './PrivateRoutes';
 
 import Header from './components/ui/header';
 
-import './sass_globals/index.scss';
+import './index.scss';
 
 function App() {
   const language = useSelector(selectedLanguage);

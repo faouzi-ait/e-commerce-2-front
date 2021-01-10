@@ -73,7 +73,7 @@ function Login() {
             />
           </div>
           {!loggedIn && (
-            <button type="submit">
+            <button type="submit" disabled={authenticating ? true : false}>
               {authenticating ? 'Logging in...' : 'Login'}
             </button>
           )}
