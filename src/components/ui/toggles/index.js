@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { LOCALES } from '../../../i18n/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../pages/login/actions';
@@ -12,7 +12,7 @@ import sun from '../../../images/sun.svg';
 import night from '../../../images/night.svg';
 
 import {
-  theme,
+  btn,
   right,
   leftRadius,
   rightRadius,
@@ -29,35 +29,52 @@ function ToggleButton(props) {
 
 function ToggleLanguage() {
   const dispatch = useDispatch();
+  const [show, setShow] = useState(false);
   const { isDark } = useSelector(selectedTheme);
   const { loggedIn } = useSelector((state) => state.login);
 
   return (
     <>
-      {loggedIn && (
+      {loggedIn && show && (
         <ToggleButton
           onClick={() => dispatch(logout())}
-          classes={`${theme} ${leftRadius} ${rightRadius} ${marginRight}`}
+          classes={`${btn} ${leftRadius} ${rightRadius} ${marginRight}`}
           content={<img src="./flags/logout.png" alt="logout" width="25" />}
         />
       )}
+
+      {show && (
+        <>
+          <ToggleButton
+            onClick={() => dispatch(setLanguage(LOCALES.ENGLISH))}
+            classes={`${btn} ${leftRadius} ${right}`}
+            content={<img src="./flags/UK_1.png" alt="UK" width="25" />}
+          />
+          <ToggleButton
+            onClick={() => dispatch(setLanguage(LOCALES.FRENCH))}
+            classes={btn}
+            content={<img src="./flags/FR_2.png" alt="UK" width="21" />}
+          />
+          <ToggleButton
+            onClick={() => dispatch(switchTheme())}
+            classes={`${btn}`}
+            content={
+              <img
+                src={isDark ? sun : night}
+                alt={isDark ? 'dark' : 'light'}
+                width="30"
+              />
+            }
+          />
+        </>
+      )}
       <ToggleButton
-        onClick={() => dispatch(setLanguage(LOCALES.ENGLISH))}
-        classes={`${theme} ${leftRadius} ${right}`}
-        content={<img src="./flags/UK_1.png" alt="UK" width="25" />}
-      />
-      <ToggleButton
-        onClick={() => dispatch(setLanguage(LOCALES.FRENCH))}
-        classes={theme}
-        content={<img src="./flags/FR_2.png" alt="UK" width="21" />}
-      />
-      <ToggleButton
-        onClick={() => dispatch(switchTheme())}
-        classes={`${theme} ${rightRadius}`}
+        onClick={() => setShow(!show)}
+        classes={`${btn} ${!show && leftRadius} ${rightRadius}`}
         content={
           <img
-            src={isDark ? sun : night}
-            alt={isDark ? 'dark' : 'light'}
+            src={`${!show ? './flags/planet.png' : './flags/planet-full.png'}`}
+            alt="UK"
             width="30"
           />
         }
