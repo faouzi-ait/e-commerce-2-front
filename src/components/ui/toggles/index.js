@@ -1,16 +1,15 @@
 import React from 'react';
-import { LOCALES } from '../../i18n/constants';
+import { LOCALES } from '../../../i18n/constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { setLanguage } from '../../redux/actions/language';
+import { logout } from '../../pages/login/actions';
 
-import { switchTheme } from '../../redux/actions/theme';
-import { selectedTheme } from '../../redux/selectors';
+import { setLanguage } from '../header/actions';
 
-// import ToggleButton from '../ui/ToggleButton';
-import { logout } from '../../redux/actions/login';
+import { switchTheme } from '../../ui/toggles/actions';
+import { selectedTheme } from '../../ui/toggles/selectors';
 
-import sun from '../../images/sun.svg';
-import night from '../../images/night.svg';
+import sun from '../../../images/sun.svg';
+import night from '../../../images/night.svg';
 
 import {
   theme,

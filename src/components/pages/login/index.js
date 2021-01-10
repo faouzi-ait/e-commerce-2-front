@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import TokenPane from '../../ui/token_pane/TokenPane';
-import { THEMES } from '../../../redux/types';
+import TokenPane from '../../ui/reset_token';
+import { THEMES } from '../../ui/toggles/constants';
 import { t } from '../../../i18n/translate';
 
-import { selectedTheme } from '../../../redux/selectors';
-import { login_user_action } from '../../../redux/actions/login';
+import { selectedTheme } from '../../ui/toggles/selectors';
+import { login_user_action } from './actions';
 
 import { loginForm } from './styles.module.scss';
 
@@ -18,6 +18,8 @@ function Login() {
   const { authenticating, loggedIn, errors } = useSelector(
     (state) => state.login
   );
+
+  console.log(isDark);
 
   const activationLandingScreen = (query) => {
     const queryString = query;

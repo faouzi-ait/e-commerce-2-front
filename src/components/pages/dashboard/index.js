@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { THEMES } from '../../../redux/types';
+import { THEMES } from '../../ui/toggles/constants';
 // import { t } from '../../../i18n/translate';
 
-import { selectedTheme } from '../../../redux/selectors';
+import { selectedTheme } from '../../ui/toggles/selectors';
 import {} from './styles.module.scss';
 
 function Dashboard() {

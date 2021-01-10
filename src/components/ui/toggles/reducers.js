@@ -1,4 +1,4 @@
-import { SWITCH_THEME } from '../types';
+import { SWITCH_THEME } from './constants';
 
 export const initialState = {
   isDark: false,

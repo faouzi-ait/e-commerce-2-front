@@ -2,7 +2,7 @@ import {
   REGISTERING,
   REGISTER_USER_SUCCESS,
   REGISTER_USER_FAILURE,
-} from '../types';
+} from './constants';
 
 const initialState = {
   user: null,

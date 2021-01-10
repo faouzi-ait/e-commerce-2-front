@@ -5,7 +5,7 @@ import {
   UPDATE_USER_INFO,
   IS_AUTHENTICATED,
   SET_IS_AUTHENTICATING,
-} from '../types';
+} from './constants';
 
 export const login_user_action = (payload) => {
   return { type: LOGIN_USER, payload };

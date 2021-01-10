@@ -1,13 +1,13 @@
 import { call, takeEvery, put, delay } from 'redux-saga/effects';
-import { register } from '../../api/apiCalls';
+import { register } from '../../../api/apiCalls';
 
 import {
   register_user_success,
   register_user_failure,
   registering,
-} from '../actions/register';
+} from './actions';
 
-import { REGISTER_USER } from '../types';
+import { REGISTER_USER } from './constants';
 
 export function* user_registration({ payload }) {
   yield put(registering(true));

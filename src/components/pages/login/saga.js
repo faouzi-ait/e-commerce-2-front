@@ -1,13 +1,13 @@
 import { call, takeEvery, put, delay } from 'redux-saga/effects';
 import jwt_decode from 'jwt-decode';
-import { login } from '../../api/apiCalls';
+import { login } from '../../../api/apiCalls';
 import {
   updateUserInfoAction,
   setIsUserAuthenticated,
   setIsAuthenticating,
   setAuthenticationError,
-} from '../actions/login';
-import { LOGIN_USER, LOGOUT_USER } from '../types';
+} from './actions';
+import { LOGIN_USER, LOGOUT_USER } from './constants';
 
 export function* authentication({ payload }) {
   yield put(setIsAuthenticating(true));

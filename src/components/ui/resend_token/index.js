@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { resendActivationToken } from '../../../redux/actions/resendToken';
+import { resendActivationToken } from '../../../components/ui/reset_token/actions';
 
 import { tokenPane, closeBtn, tokenPaneMsg } from './styles.module.scss';
 

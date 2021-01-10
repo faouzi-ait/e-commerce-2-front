@@ -1,4 +1,4 @@
-import { SET_LANGUAGE } from "../types";
+import { SET_LANGUAGE } from "./constants";
 
 const setLanguage = (lang) => {
   return {

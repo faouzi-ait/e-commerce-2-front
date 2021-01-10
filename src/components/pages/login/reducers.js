@@ -4,7 +4,7 @@ import {
   IS_AUTHENTICATED,
   SET_IS_AUTHENTICATING,
   LOGOUT_USER,
-} from '../types';
+} from './constants';
 
 const initialState = {
   user: null,

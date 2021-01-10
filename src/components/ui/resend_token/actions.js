@@ -2,7 +2,7 @@ import {
   RESEND_TOKEN_FAILURE,
   RESEND_TOKEN,
   RESEND_TOKEN_SUCCESS,
-} from '../types';
+} from './constants';
 
 export const resendActivationToken = (payload) => {
   return { type: RESEND_TOKEN, payload };

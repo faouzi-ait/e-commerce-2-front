@@ -1,7 +1,7 @@
 import { all } from 'redux-saga/effects';
-import { authenticateSaga } from './sagas/login';
-import { registerSaga } from './sagas/register';
-import { resendTokenSaga } from './sagas/resendToken';
+import { authenticateSaga } from '../components/pages/login/saga';
+import { registerSaga } from '../components/pages/register/saga';
+import { resendTokenSaga } from '../components/ui/reset_token/saga';
 
 export function* sagas() {
   yield all([authenticateSaga(), registerSaga(), resendTokenSaga()]);

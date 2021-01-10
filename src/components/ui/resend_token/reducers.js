@@ -1,4 +1,4 @@
-import { RESEND_TOKEN_SUCCESS, RESEND_TOKEN_FAILURE } from '../types';
+import { RESEND_TOKEN_SUCCESS, RESEND_TOKEN_FAILURE } from './constants';
 
 const initialState = {
   result: null,

@@ -1,4 +1,4 @@
-import { SET_LANGUAGE } from '../types';
+import { SET_LANGUAGE } from './constants';
 
 export const language = (state = 'en-us', action) => {
   switch (action.type) {

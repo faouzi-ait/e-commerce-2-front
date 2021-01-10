@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { THEMES } from '../../../redux/types';
+import { THEMES } from '../../ui/toggles/constants';
 import { t } from '../../../i18n/translate';
 
-import { selectedTheme } from '../../../redux/selectors';
-import { register_user } from '../../../redux/actions/register';
+import { selectedTheme } from '../../ui/toggles/selectors';
+import { register_user } from './actions';
 
 import { loginForm } from './styles.module.scss';
 

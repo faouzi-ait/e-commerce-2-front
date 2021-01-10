@@ -3,19 +3,19 @@ import Provider from './i18n/Provider';
 
 import { useSelector } from 'react-redux';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
-import { selectedLanguage } from './redux/selectors';
+import { selectedLanguage } from './components/ui/header/selectors';
 import history from './history';
 
-import Home from './components/pages/home/Home';
-import Login from './components/pages/login/Login';
-import Register from './components/pages/register/Register';
-import Dashboard from './components/pages/dashboard/Dashboard';
+import Home from './components/pages/home';
+import Login from './components/pages/login';
+import Register from './components/pages/register';
+import Dashboard from './components/pages/dashboard';
 import PublicRoutes from './PublicRoutes';
 import PrivateRoutes from './PrivateRoutes';
 
-import Header from './components/ui/header/Header';
+import Header from './components/ui/header';
 
-import './sass/index.scss';
+import './sass_globals/index.scss';
 
 function App() {
   const language = useSelector(selectedLanguage);

@@ -3,7 +3,7 @@ import {
   REGISTER_USER_SUCCESS,
   REGISTER_USER_FAILURE,
   REGISTERING,
-} from '../types';
+} from './constants';
 
 export const register_user = (payload) => {
   return { type: REGISTER_USER, payload };

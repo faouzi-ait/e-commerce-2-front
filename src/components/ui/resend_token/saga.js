@@ -1,15 +1,13 @@
 import { call, takeEvery, put, delay } from 'redux-saga/effects';
-import { resendActivationTokenCall } from '../../api/apiCalls';
-import { RESEND_TOKEN } from '../types';
+import { resendActivationTokenCall } from '../../../api/apiCalls';
+import { RESEND_TOKEN } from './constants';
 
 import {
   resendActivationTokenSuccess,
   resendActivationTokenFailure,
-} from '../actions/resendToken';
+} from './actions';
 
 export function* resendToken(payload) {
-  //   yield put(resendActivationTokenFailure(null));
-  console.log(payload);
   const result = yield call(resendActivationTokenCall, payload);
 
   console.log(result);

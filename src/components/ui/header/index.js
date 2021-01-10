@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { useSelector } from 'react-redux';
-import { selectedTheme } from '../../../redux/selectors';
+import { selectedTheme } from '../../ui/toggles/selectors';
+import { THEMES } from '../../ui/toggles/constants';
 // import { t } from '../../i18n/translate';
 
-import { THEMES } from '../../../redux/types';
-import ToggleButtons from '../../toggles/ToggleOptions';
+import ToggleButtons from '../toggles';
 
 import { header, toggleBtn } from './styles.module.scss';
 
