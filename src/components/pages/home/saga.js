@@ -13,7 +13,7 @@ export function* getHomePageProducts({ payload }) {
   yield put(loadingHomePageProducts(true));
   yield put(getHomePageProductFailure(null));
 
-  const result = yield call(fetchHomePageProducts, payload);
+  const result = yield call(fetchHomePageProducts);
   if (result.error) {
     yield put(loadingHomePageProducts(false));
     const { data, status } = result.error.response;

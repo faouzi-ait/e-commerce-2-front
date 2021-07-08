@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getProducts } from './actions';
 
 function Submenu({ location }) {
@@ -15,7 +15,7 @@ function Submenu({ location }) {
 
   useEffect(() => {
     dispatch(getProducts(category?.categoryID));
-  }, [category]);
+  }, [category, dispatch]);
 
   return (
     <>
