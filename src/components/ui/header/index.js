@@ -31,7 +31,7 @@ function Header() {
   const history = useHistory();
 
   useEffect(() => {
-    const menuListFiltered = category.items.foreach((label) => {
+    const menuListFiltered = category?.items?.map((label) => {
       return {
         value: label._id,
         label: label.name,
