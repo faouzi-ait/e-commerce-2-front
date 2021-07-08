@@ -5,7 +5,7 @@ import {
   GET_PRODUCT_BY_CATEGORY_FAILURE,
 } from './constants';
 
-export const getProducts = ({ payload }) => {
+export const getProducts = (payload) => {
   return { type: GET_PRODUCT_BY_CATEGORY, payload };
 };
 
