@@ -13,12 +13,12 @@ import Footer from '../../ui/footer';
 
 function Home() {
   const { isDark } = useSelector(selectedTheme);
-  const { products } = useSelector(homeProductItems);
+  const items = useSelector(homeProductItems);
 
   return (
     <div className={`baseTheme app ${isDark ? THEMES.DARK : THEMES.LIGHT}`}>
       <Carousel />
-      <HomeProducts products={products || {}} />
+      <HomeProducts products={items?.products || {}} />
       <AdvertBanner image="./images/banner-middle.jpg" />
       <AdvertBanner image="./images/gift_card.jpeg" />
       <Footer />
