@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { getProducts } from './actions';
 
 function Submenu({ location }) {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [query, setQuery] = useState();
   const [category, setCategory] = useState();
 
@@ -16,6 +16,10 @@ function Submenu({ location }) {
   useEffect(() => {
     dispatch(getProducts(category?.categoryID));
   }, [category, dispatch]);
+
+  useEffect(() => {
+    // FETCH ALL CATEGORY PRODUCTS HERE
+  }, []);
 
   return (
     <>

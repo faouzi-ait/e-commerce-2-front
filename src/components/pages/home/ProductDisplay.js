@@ -12,7 +12,7 @@ import {
 
 function ProductDisplay({ title, item }) {
   const renderProductDisplay = (item) => {
-    if (item?.length === 2) {
+    if (item?.length < 4) {
       return (
         <div className={productDetailContainer}>
           <img src={item[0]?.photo} alt="product" className={productImage} />
@@ -37,14 +37,6 @@ function ProductDisplay({ title, item }) {
     <div className={productBox}>
       <h2 className={productBoxTitle}>{title}</h2>
       {renderProductDisplay(item)}
-      {/* {item[0]?.photo && (
-        <div className={productDetailContainer}>
-          <img src={item[0]?.photo} alt="product" className={productImage} />
-          <div>{item[0].name}</div>
-          <div>{item[0].description}</div>
-          <div>{item[0].price}</div>
-        </div>
-      )} */}
     </div>
   );
 }

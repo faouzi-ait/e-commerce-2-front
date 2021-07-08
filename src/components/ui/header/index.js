@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Select from 'react-select';
@@ -23,29 +23,36 @@ import {
 
 function Header() {
   // const { isDark } = useSelector(selectedTheme);
+  const [menuList, setMenuList] = useState([]);
+  const [filteredSubmenu, setFilteredSubmenu] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const category = useSelector(catgoriesList);
   const history = useHistory();
 
-  const menuList = category?.items.map((label) => {
-    return {
-      value: label._id,
-      label: label.name,
-      url: label.url,
-    };
-  });
-
-  const filteredSubmenu = category?.items
-    .filter((item) => item.showOnNav === true)
-    .map((label) => {
+  useEffect(() => {
+    const menuListFiltered = category?.items.map((label) => {
       return {
-        id: label._id,
-        value: label.name,
+        value: label._id,
         label: label.name,
         url: label.url,
       };
     });
+
+    const filteredSubmenuFiltered = category?.items
+      .filter((item) => item.showOnNav === true)
+      .map((label) => {
+        return {
+          id: label._id,
+          value: label.name,
+          label: label.name,
+          url: label.url,
+        };
+      });
+
+    setMenuList(menuListFiltered);
+    setFilteredSubmenu(filteredSubmenuFiltered);
+  }, [category]);
 
   const goToCategory = (category, id) => ({
     pathname: '/submenu',
