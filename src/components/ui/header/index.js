@@ -54,9 +54,6 @@ function Header() {
     setFilteredSubmenu(filteredSubmenuFiltered);
   }, [category]);
 
-  console.log(menuList);
-  console.log(filteredSubmenu);
-
   const goToCategory = (category, id) => ({
     pathname: '/submenu',
     search: `?category=${id}`,
