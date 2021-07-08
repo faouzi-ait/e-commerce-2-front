@@ -1,3 +1,4 @@
+
 .header {
     height: 5rem;
 }
@@ -7,10 +8,117 @@
     position: absolute;
     top: .75rem;
     right: 0;
-    transition: all 300ms linear;
 }
 
 .showBtn {
     right: 1rem;
-    transition: all 300ms linear;
+}
+
+.topHeader {
+    height: 5.4rem;
+    background: rgb(20, 25, 32);
+}
+.bottomHeader {
+    display: flex;
+    max-width:100%;
+    padding: .5rem;
+    background: rgb(37, 47, 61);
+
+    .submenu {
+        display: flex;
+        align-items: center;
+        margin-right: .75rem;
+        padding: .5rem;
+        color: #fff;
+        text-decoration: none;
+        font-family: 'Noto Sans JP', sans-serif;
+        font-weight: 500;
+        font-size: 1.35rem;
+        border: 1px solid transparent;
+        cursor: pointer;
+
+        &:hover {
+            border: 1px solid;
+            border-radius: 2px;
+        }
+    }
+}
+
+.logo {
+    width: 12rem;
+    height: 3rem;
+    cursor: pointer;
+}
+
+.logo2 {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 1rem;
+
+    span:nth-child(1) {
+        color: rgb(70, 140, 216);
+        font-weight: bold;
+        font-size: 1.75rem;
+        letter-spacing: .5px;
+    }
+
+    span:nth-child(2) {
+        color: #fff;
+        font-weight: 400;
+        font-size: 1.2rem;
+        letter-spacing: .5px;
+    }
+}
+
+.cartContainer {
+    display: flex;
+    justify-content: flex-end;
+    width: 4rem;
+    margin: -.2rem 5rem 0 auto;
+    color: #fff;
+
+    &>i {
+        font-size: 3rem;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &>span{
+        margin-top: auto;
+        margin-left: .75rem;
+        font-size: 1.25rem;
+        font-weight: bold;
+        letter-spacing: .5px;
+    }
+}
+ 
+.search {
+    width: 45rem;
+    margin-left: -.3rem;
+    padding-left: 1rem;
+    letter-spacing: .5px;
+    font-size: 1.75rem;
+    z-index: 99999;
+    border: 4px solid transparent;
+
+    &:focus {
+        outline: none;
+        border: 4px solid rgb(255, 195, 67);
+    }
+}
+
+.selectBox {
+    z-index: 999999;
+}
+
+.submit {
+    padding: 4px 15px;
+    margin-left: -5rem;
+    font-size: 2.5rem;
+    color: #000;
+    z-index: 9999999;
+    cursor: pointer;
 }

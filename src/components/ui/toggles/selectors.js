@@ -1,5 +1,12 @@
 import { createSelector } from 'reselect';
 
-const theme = (state) => state.theme;
+const baseState = (state) => state;
 
-export const selectedTheme = createSelector([theme], (theme) => theme);
+export const selectedTheme = createSelector(
+  [baseState],
+  (state) => state.theme
+);
+export const catgoriesList = createSelector(
+  [baseState],
+  (state) => state.categories.categories
+);

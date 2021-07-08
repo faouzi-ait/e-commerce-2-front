@@ -1,24 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Provider from './i18n/Provider';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
-import { selectedLanguage } from './components/ui/header/selectors';
 import history from './history';
 
 import Home from './components/pages/home';
+import Header from './components/ui/header';
 import Login from './components/pages/login';
+import Search from './components/pages/search';
+import Submenu from './components/pages/submenu';
 import Register from './components/pages/register';
 import Dashboard from './components/pages/dashboard';
-import PublicRoutes from './PublicRoutes';
-import PrivateRoutes from './PrivateRoutes';
+import PublicRoutes from './components/access_to_routes/PublicRoutes';
+import PrivateRoutes from './components/access_to_routes/PrivateRoutes';
 
-import Header from './components/ui/header';
+import { getCategories } from './components/ui/header/actions';
+import { getHomePageProducts } from './components/pages/home/actions';
+
+import { selectedLanguage } from './components/ui/header/selectors';
 
 import './index.scss';
 
 function App() {
+  const dispatch = useDispatch();
   const language = useSelector(selectedLanguage);
+
+  useEffect(() => {
+    dispatch(getCategories());
+    dispatch(getHomePageProducts());
+  }, [dispatch]);
 
   return (
     <Provider locale={language}>
@@ -26,9 +37,12 @@ function App() {
         <Header />
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/home" component={Home} />
           <PublicRoutes exact path="/login" component={Login} />
           <PublicRoutes exact path="/register" component={Register} />
           <PrivateRoutes exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/search" component={Search} />
+          <Route exact path="/submenu" component={Submenu} />
         </Switch>
       </Router>
     </Provider>

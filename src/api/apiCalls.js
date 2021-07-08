@@ -5,7 +5,7 @@ const TOKEN =
   JSON.parse(localStorage.getItem('CURRENT_USER')) || 'NOT_LOGGED_IN';
 
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_URL_DEV,
+  baseURL: process.env.REACT_APP_URL_PROD,
 });
 
 axiosInstance.interceptors.request.use(
@@ -54,20 +54,35 @@ export async function register(payload) {
 
 export async function resendActivationTokenCall({ payload }) {
   try {
-    console.log('FIRST: ', payload);
     return await apiClient.post('/user/resend', payload);
   } catch (error) {
     return { error };
   }
 }
 
-// export async function getUserProfile() {
-//   try {
-//     return await apiClient.get('/profile');
-//   } catch (error) {
-//     return { error };
-//   }
-// }
+export async function fetchCategories() {
+  try {
+    return await apiClient.get('/categories');
+  } catch (error) {
+    return { error };
+  }
+}
+
+export async function fetchHomePageProducts() {
+  try {
+    return await apiClient.get('/home-page-products');
+  } catch (error) {
+    return { error };
+  }
+}
+
+export async function fetchProducts(id) {
+  try {
+    return await apiClient.get(`/product-list?category=${id}`);
+  } catch (error) {
+    return { error };
+  }
+}
 
 // export async function upload_picture(payload) {
 //   try {

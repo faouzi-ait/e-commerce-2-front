@@ -10,7 +10,7 @@ import {
 export function* resendToken(payload) {
   const result = yield call(resendActivationTokenCall, payload);
 
-  console.log(result);
+  console.log("sending.......");
   if (result.error) {
     const { data, status } = result.error.response;
     yield put(resendActivationTokenFailure({ data, status }));

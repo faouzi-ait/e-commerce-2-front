@@ -39,7 +39,7 @@ function ToggleLanguage() {
         <ToggleButton
           onClick={() => dispatch(logout())}
           classes={`${btn} ${leftRadius} ${rightRadius} ${marginRight}`}
-          content={<img src="./flags/logout.png" alt="logout" width="25" />}
+          content={<img src="/flags/logout.png" alt="logout" width="25" />}
         />
       )}
 
@@ -59,19 +59,19 @@ function ToggleLanguage() {
           <ToggleButton
             onClick={() => dispatch(setLanguage(LOCALES.ENGLISH))}
             classes={`${btn} ${right}`}
-            content={<img src="./flags/UK_2.png" alt="UK" width="25" />}
+            content={<img src="/flags/UK_2.png" alt="UK" width="25" />}
           />
           <ToggleButton
             onClick={() => dispatch(setLanguage(LOCALES.FRENCH))}
             classes={btn}
-            content={<img src="./flags/FR_2.png" alt="UK" width="21" />}
+            content={<img src="/flags/FR_2.png" alt="UK" width="21" />}
           />
         </>
       )}
       <ToggleButton
         onClick={() => setShow(!show)}
         classes={`${btn} ${!show && leftRadius}`}
-        content={<img src="./flags/translate.png" alt="translate" width="30" />}
+        content={<img src="/flags/translate.png" alt="translate" width="30" />}
       />
     </>
   );

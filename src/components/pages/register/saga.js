@@ -22,6 +22,7 @@ export function* user_registration({ payload }) {
     yield delay(4000);
     yield put(register_user_failure(null));
   } else {
+    yield put(registering(false));
     yield put(register_user_success(result.data));
     yield delay(4000);
     yield put(register_user_success(null));

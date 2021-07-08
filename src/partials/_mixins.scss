@@ -21,32 +21,32 @@
 }
 
  @mixin breakpoint($point) {
-     @if $point==desktop {
-         @media (min-width: 70em) {
+     @if $point == desktop {
+         @media (min-width: 1200px) {
              @content ;
          }
      }
 
-     @else if $point==laptop {
-         @media (min-width: 64em) {
+     @else if $point == laptop {
+         @media (max-width: 992px) {
              @content ;
          }
      }
 
-     @else if $point==tablet {
-         @media (min-width: 50em) {
+     @else if $point == tablet {
+         @media (max-width: 768px) {
              @content ;
          }
      }
 
-     @else if $point==phablet {
-         @media (min-width: 37.5em) {
+     @else if $point == phablet {
+         @media (max-width: 401px) {
              @content ;
          }
      }
 
-     @else if $point==mobileonly {
-         @media (max-width: 37.5em) {
+     @else if $point == mobileonly {
+         @media (max-width: 400px) {
              @content ;
          }
      }
@@ -54,9 +54,9 @@
 
  /* 
  .podcasts {
-     margin: 1em auto;
-     @include breakpoint(desktop) {
-        // some desktop layout styles.
-     }
+    margin: 1em auto;
+    @include breakpoint(desktop) {
+    // some desktop layout styles.
+    }
  }
  */
