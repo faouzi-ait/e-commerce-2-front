@@ -31,7 +31,7 @@ function Header() {
   const history = useHistory();
 
   useEffect(() => {
-    const menuListFiltered = category?.items.map((label) => {
+    const menuListFiltered = category.items.map((label) => {
       return {
         value: label._id,
         label: label.name,
@@ -39,7 +39,7 @@ function Header() {
       };
     });
 
-    const filteredSubmenuFiltered = category?.items
+    const filteredSubmenuFiltered = category.items
       .filter((item) => item.showOnNav === true)
       .map((label) => {
         return {
