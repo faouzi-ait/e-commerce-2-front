@@ -14,7 +14,6 @@ import Footer from '../../ui/footer';
 function Home() {
   const { isDark } = useSelector(selectedTheme);
   const { products } = useSelector(homeProductItems);
-  // const { bestSeller, deals, featured, topRated } = products;
 
   return (
     <div className={`baseTheme app ${isDark ? THEMES.DARK : THEMES.LIGHT}`}>
