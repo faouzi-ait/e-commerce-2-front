@@ -39,8 +39,8 @@ function Header() {
       };
     });
 
-    const filteredSubmenuFiltered = category.items
-      .filter((item) => item.showOnNav === true)
+    const filteredSubmenuFiltered = category?.items
+      ?.filter((item) => item.showOnNav === true)
       .map((label) => {
         return {
           id: label._id,
@@ -54,7 +54,7 @@ function Header() {
     setFilteredSubmenu(filteredSubmenuFiltered);
   }, [category]);
 
-  console.log(menuList)
+  console.log(menuList);
   console.log(filteredSubmenu);
 
   const goToCategory = (category, id) => ({
