@@ -13,7 +13,7 @@ function index({ products, category }) {
     <div>
       <div className={container}>{category.category}</div>
       {(items || []).map((item) => (
-        <div className={rowContainer}>
+        <div className={rowContainer} key={item.title}>
           <img src={item.photo} alt="product" className={image} />
           <div className={productRowDisplay}>
             <span>{item.brand}</span>
@@ -23,7 +23,7 @@ function index({ products, category }) {
             <span>Quantity Available: {item.quantity}</span>
             <div>
               <button>
-                View Product <i class="fa fa-eye"></i>
+                View Product <i className="fa fa-eye"></i>
               </button>
             </div>
           </div>

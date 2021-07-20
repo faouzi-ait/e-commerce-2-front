@@ -20,9 +20,9 @@ function LayoutSwitch({ products }) {
       <span className={viewSwitch}>
         Change View
         {!isRow ? (
-          <i class="fa fa-bars" aria-hidden="true"></i>
+          <i className="fa fa-bars" aria-hidden="true"></i>
         ) : (
-          <i class="fa fa-columns" aria-hidden="true"></i>
+          <i className="fa fa-columns" aria-hidden="true"></i>
         )}
       </span>
       <span className={productCount}>Showing: {products?.data?.items?.length} Products</span>
