@@ -6,7 +6,7 @@ function Card({ products, category }) {
   return (
     <div>
       <div>Card</div>
-      {items?.map((item) => (
+      {items.map((item) => (
         <div>{item.quantity}</div>
       ))}
     </div>
