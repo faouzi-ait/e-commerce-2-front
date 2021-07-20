@@ -2,8 +2,7 @@ import React from 'react';
 import {} from './styles.module.scss';
 
 function Card({ products, category }) {
-  const { items } = products?.data;
-  console.log(items);
+  const { items } = products.data;
   return (
     <div>
       <div>Card</div>

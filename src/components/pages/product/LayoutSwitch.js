@@ -7,7 +7,7 @@ import { viewSwitch, productCount } from './styles.module.scss';
 function LayoutSwitch() {
   const dispatch = useDispatch();
   const { isRow } = useSelector((state) => state.products);
-  const { items } = useSelector((state) => state.products.products.data);
+  const { items } = useSelector((state) => state?.products?.products?.data);
 
   return (
     <div
