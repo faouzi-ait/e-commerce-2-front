@@ -25,7 +25,7 @@ function LayoutSwitch({ products }) {
           <i class="fa fa-columns" aria-hidden="true"></i>
         )}
       </span>
-      <span className={productCount}>Showing: {products.data.items.length} Products</span>
+      <span className={productCount}>Showing: {products?.data?.items?.length} Products</span>
     </div>
   );
 }
