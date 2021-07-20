@@ -4,10 +4,9 @@ import { switchLayout } from './actions';
 
 import { viewSwitch, productCount } from './styles.module.scss';
 
-function LayoutSwitch() {
+function LayoutSwitch({ products }) {
   const dispatch = useDispatch();
   const { isRow } = useSelector((state) => state.products);
-  const { items } = useSelector((state) => state?.products?.products?.data);
 
   return (
     <div
@@ -26,7 +25,7 @@ function LayoutSwitch() {
           <i class="fa fa-columns" aria-hidden="true"></i>
         )}
       </span>
-      <span className={productCount}>Showing: {items.length} Products</span>
+      <span className={productCount}>Showing: {products.data.items.length} Products</span>
     </div>
   );
 }

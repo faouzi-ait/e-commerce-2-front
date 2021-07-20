@@ -39,7 +39,7 @@ function Submenu({ location }) {
     <>
       {category && (
         <div>
-          <SwitchLayout />
+          <SwitchLayout products={products} />
           <div style={{ display: 'grid', gridTemplateColumns: '25% 75%' }}>
             <SideBar />
             {productLayout(isRow)}
