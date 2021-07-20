@@ -31,7 +31,7 @@ function Header() {
   const history = useHistory();
 
   useEffect(() => {
-    const menuListFiltered = category?.items?.map((label) => {
+    const menuListFiltered = (category.items || []).map((label) => {
       return {
         value: label._id,
         label: label.name,
@@ -39,7 +39,7 @@ function Header() {
       };
     });
 
-    const filteredSubmenuFiltered = category?.items
+    const submenuFiltered = category?.items
       ?.filter((item) => item.showOnNav === true)
       .map((label) => {
         return {
@@ -50,14 +50,22 @@ function Header() {
         };
       });
 
+    submenuFiltered.unshift({
+      id: 0,
+      value: 'All',
+      label: 'All',
+      url: '',
+    });
+
     setMenuList(menuListFiltered);
-    setFilteredSubmenu(filteredSubmenuFiltered);
+    setFilteredSubmenu(submenuFiltered);
   }, [category]);
 
-  const goToCategory = (category, id) => ({
-    pathname: '/submenu',
-    search: `?category=${id}`,
-    query: { categoryID: id, category },
+  const goToCategory = (category, id, limit = 5, page = 1) => ({
+    pathname: '/product',
+    ...(id !== 0 && { search: `?category=${id}` }),
+    ...(id === 0 && { search: `?page=${page}&limit=${limit}` }),
+    query: { id, category, limit, page },
   });
 
   const styles = {
@@ -65,7 +73,7 @@ function Header() {
       ...base,
       border: 0,
       boxShadow: 'none',
-      width: '175px',
+      width: '15rem',
       height: 37.05,
     }),
     option: (provided, state) => ({

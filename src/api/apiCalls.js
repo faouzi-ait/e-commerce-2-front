@@ -13,6 +13,13 @@ axiosInstance.interceptors.request.use(
     if (TOKEN) {
       config.headers['Authorization'] = `Bearer ${TOKEN}`;
     }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+axiosInstance.interceptors.response.use(
+  (response) => {
     /* 
       DECODE TOKEN
       IF TOKEN EXPIRED
@@ -24,13 +31,8 @@ axiosInstance.interceptors.request.use(
         DISPATCH FECTH USER DETAILS
         DISPATCH SET_AUTH TO TRUE
     */
-    return config;
+    return response;
   },
-  (error) => Promise.reject(error)
-);
-
-axiosInstance.interceptors.response.use(
-  (response) => response,
   (error) => Promise.reject(error)
 );
 
@@ -76,9 +78,9 @@ export async function fetchHomePageProducts() {
   }
 }
 
-export async function fetchProducts(id) {
+export async function fetchProducts(query, params) {
   try {
-    return await apiClient.get(`/product-list?category=${id}`);
+    return await apiClient.get(`/products?${query}`, params);
   } catch (error) {
     return { error };
   }

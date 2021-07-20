@@ -1,0 +1,84 @@
+.container {
+    display: flex;
+    padding: 2rem 0;
+    font-size: 3rem;
+
+    &::after {
+        content: ' Products';
+        padding-left: 1rem
+    }
+
+    &:hover button {
+        display: inline-block !important;
+    }
+}
+
+.image {
+    width: 19rem;
+    height: 18rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgb(238, 238, 238);
+}
+
+.productRowDisplay {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 20rem;
+    margin-bottom: 2rem;
+    padding-left: 2rem;
+    border-bottom: 1px solid rgb(238, 238, 238);
+
+    span:nth-child(1) {
+        margin-bottom: 1.5rem;
+        font-size: 3rem;
+    }
+    
+    span:not(:nth-child(1)) {
+        margin-bottom: .75rem;
+    }
+
+    span:nth-child(2) {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    span:nth-child(3) {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    span:nth-child(4),
+    span:nth-child(5) {
+        font-size: 1.35rem;
+    }
+
+    div {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    button {
+        width: 12rem;
+        display: none;
+        margin-left: 5%;
+        margin-top: .5rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: 0;
+        border-radius: 2rem;
+        cursor: pointer;
+    }
+
+    &:hover button {
+        display: block;
+    }
+
+    &:active button {
+        background: #ccc;
+    }
+}
+
+.rowContainer {
+    display: flex;
+}

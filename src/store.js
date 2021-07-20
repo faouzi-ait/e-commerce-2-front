@@ -5,7 +5,7 @@ import { language, categories } from './components/ui/header/reducers';
 import { theme } from './components/ui/toggles/reducers';
 import { login } from './components/pages/login/reducers';
 import { register } from './components/pages/register/reducers';
-import { products } from './components/pages/submenu/reducers';
+import { products } from './components/pages/product/reducers';
 import { home_page_products } from './components/pages/home/reducers';
 import { tokenRequest } from './components/ui/resend_token/reducers';
 

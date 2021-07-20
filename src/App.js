@@ -9,7 +9,7 @@ import Home from './components/pages/home';
 import Header from './components/ui/header';
 import Login from './components/pages/login';
 import Search from './components/pages/search';
-import Submenu from './components/pages/submenu';
+import Product from './components/pages/product';
 import Register from './components/pages/register';
 import Dashboard from './components/pages/dashboard';
 import PublicRoutes from './components/access_to_routes/PublicRoutes';
@@ -42,7 +42,7 @@ function App() {
           <PublicRoutes exact path="/register" component={Register} />
           <PrivateRoutes exact path="/dashboard" component={Dashboard} />
           <Route exact path="/search" component={Search} />
-          <Route exact path="/submenu" component={Submenu} />
+          <Route exact path="/product" component={Product} />
         </Switch>
       </Router>
     </Provider>
