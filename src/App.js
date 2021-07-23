@@ -42,7 +42,7 @@ function App() {
           <PublicRoutes exact path="/register" component={Register} />
           <PrivateRoutes exact path="/dashboard" component={Dashboard} />
           <Route exact path="/search" component={Search} />
-          <Route exact path="/product" component={Product} />
+          <Route exact path="/category/:category" component={Product} />
         </Switch>
       </Router>
     </Provider>

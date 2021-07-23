@@ -8,12 +8,12 @@ import {
 
 function index({ products, category }) {
   const { items } = products?.data;
-  // console.log(items);
+
   return (
     <div>
       <div className={container}>{category.category}</div>
       {(items || []).map((item) => (
-        <div className={rowContainer} key={item.title}>
+        <div className={rowContainer} key={item._id}>
           <img src={item.photo} alt="product" className={image} />
           <div className={productRowDisplay}>
             <span>{item.brand}</span>

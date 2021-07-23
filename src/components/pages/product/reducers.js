@@ -2,13 +2,13 @@ import {
   LOADING_PRODUCTS,
   GET_PRODUCT_BY_CATEGORY_SUCCESS,
   GET_PRODUCT_BY_CATEGORY_FAILURE,
-  // GET_CATEGORY,
+  GET_CATEGORY,
   SWITCH_LAYOUT,
 } from './constants';
 
 const initialState = {
   products: null,
-  // categoryId: null,
+  category: null,
   errors: null,
   loading: false,
   isRow: false,
@@ -22,8 +22,8 @@ export const products = (state = initialState, action) => {
       return { ...state, errors: action.payload };
     case LOADING_PRODUCTS:
       return { ...state, loading: action.payload };
-    // case GET_CATEGORY:
-    //   return { ...state, categoryId: action.payload };
+    case GET_CATEGORY:
+      return { ...state, category: action.payload };
     case SWITCH_LAYOUT:
       const layout = state.isRow;
       return { ...state, isRow: !layout };

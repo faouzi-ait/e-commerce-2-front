@@ -2,21 +2,22 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { switchLayout } from './actions';
 
-import { viewSwitch, productCount } from './styles.module.scss';
+import {
+  viewSwitch,
+  productCount,
+  viewSwitchContainer,
+} from './styles.module.scss';
 
-function LayoutSwitch({ products }) {
+function LayoutSwitch() {
   const dispatch = useDispatch();
-  const { isRow } = useSelector((state) => state.products);
+  const { isRow, products } = useSelector((state) => state.products);
+  const { totalNumberOfPages, currentPage } = products;
+  const { items } = products.data;
 
   return (
     <div
       onClick={() => dispatch(switchLayout())}
-      style={{
-        alignItems: 'center',
-        display: 'flex',
-        height: '4.2rem',
-        background: 'rgb(21, 25, 31)',
-      }}>
+      className={viewSwitchContainer}>
       <span className={viewSwitch}>
         Change View
         {!isRow ? (
@@ -25,7 +26,10 @@ function LayoutSwitch({ products }) {
           <i className="fa fa-columns" aria-hidden="true"></i>
         )}
       </span>
-      <span className={productCount}>Showing: {products?.data?.items?.length} Products</span>
+      <span className={productCount}>
+        Showing {items?.length} Products | Page {currentPage} /{' '}
+        {totalNumberOfPages}
+      </span>
     </div>
   );
 }

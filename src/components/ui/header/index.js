@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Select from 'react-select';
 // import { THEMES } from '../../ui/toggles/constants';
 // import { t } from '../../i18n/translate';
 
 import { catgoriesList } from '../../ui/toggles/selectors';
+import { getCategory } from '../../pages/product/actions';
 import ToggleButtons from '../toggles';
 
 import {
@@ -23,12 +24,13 @@ import {
 
 function Header() {
   // const { isDark } = useSelector(selectedTheme);
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [menuList, setMenuList] = useState([]);
   const [filteredSubmenu, setFilteredSubmenu] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const category = useSelector(catgoriesList);
-  const history = useHistory();
 
   useEffect(() => {
     const menuListFiltered = (category.items || []).map((label) => {
@@ -61,11 +63,9 @@ function Header() {
     setFilteredSubmenu(submenuFiltered);
   }, [category]);
 
-  const goToCategory = (category, id, limit = 5, page = 1) => ({
-    pathname: '/product',
-    ...(id !== 0 && { search: `?category=${id}` }),
-    ...(id === 0 && { search: `?page=${page}&limit=${limit}` }),
-    query: { id, category, limit, page },
+  const goToCategory = (category, id) => ({
+    pathname: `/category/${id}`,
+    query: { id, category },
   });
 
   const styles = {
@@ -94,6 +94,8 @@ function Header() {
     if (selectedCategory === 'Departments' && !searchTerm) {
       return false;
     }
+
+    history.push('/search');
     // DISPATCH THE SEARCH QUERY HERE
     // IF selectedCategory HAS A VALUE THEN DISPATCH THE SEARCH ACTION
     // IF THERE IS A SEARCH SEARCH TERM THEN USE IT INSTEAD
@@ -143,7 +145,8 @@ function Header() {
           <Link
             key={item.id}
             className={submenu}
-            to={goToCategory(item.value, item.id)}>
+            to={goToCategory(item.value, item.id)}
+            onClick={() => dispatch(getCategory(item))}>
             {item.value}
           </Link>
         ))}

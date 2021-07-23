@@ -13,6 +13,13 @@
     }
 }
 
+.viewSwitchContainer {
+    display: flex;
+    align-items: center;
+    height: 4.2rem;
+    background: rgb(21, 25, 31);
+}
+
 .productCount {
     margin-left: 1.25rem;
     font-size: 1.3rem;

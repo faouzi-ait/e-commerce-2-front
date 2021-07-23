@@ -1,30 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from './actions';
 
+import SwitchLayout from './LayoutSwitch';
 import Row from '../../ui/ProductDisplay/row';
 import Card from '../../ui/ProductDisplay/card';
 import SideBar from '../../ui/ProductDisplay/sidebar';
-import SwitchLayout from './LayoutSwitch';
+import Pagination from '../../ui/ProductDisplay/pagination';
+import { filteredCategoryUrl, defaultUrl /* queryUrl */ } from '../../../utils';
+import {
+  getDefaultUrl,
+  /* getFilteredUrl */
+} from '../../ui/ProductDisplay/pagination/actions';
 
-function Submenu({ location }) {
+function Submenu() {
   const dispatch = useDispatch();
-  const [query, setQuery] = useState();
-  const [category, setCategory] = useState();
-  const { products, isRow } = useSelector((state) => state.products);
+  const { products, isRow, category, loading } = useSelector(
+    (state) => state.products
+  );
 
   useEffect(() => {
-    setQuery(location.search.split('=')[1]);
-    setCategory(location.query);
-  }, [location, category, query]);
+    const { id } = category || {};
 
-  useEffect(() => {
-    const { id, page, limit } = category || {};
-    // console.log(category)
     if (id === 0) {
-      dispatch(getProducts(`&page=${page}&limit=${limit}`));
+      dispatch(getProducts(defaultUrl()));
+      dispatch(getDefaultUrl(getProducts(defaultUrl()).payload));
     } else {
-      dispatch(getProducts(`category=${id}&page=1&limit=10`));
+      dispatch(getProducts(filteredCategoryUrl(id)));
+      dispatch(getDefaultUrl(getProducts(filteredCategoryUrl(id)).payload));
     }
   }, [category, dispatch]);
 
@@ -39,10 +42,13 @@ function Submenu({ location }) {
     <>
       {category && (
         <div>
-          <SwitchLayout products={products} />
+          <SwitchLayout />
           <div style={{ display: 'grid', gridTemplateColumns: '25% 75%' }}>
             <SideBar />
-            {productLayout(isRow)}
+            <div>
+              {loading ? <div>LOADING...</div> : productLayout(isRow)}
+              {!loading && <Pagination />}
+            </div>
           </div>
         </div>
       )}

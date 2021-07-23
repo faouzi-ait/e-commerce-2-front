@@ -2,13 +2,12 @@ import React from 'react';
 import {} from './styles.module.scss';
 
 function Card({ products, category }) {
-  const list = products?.data?.items;
-  // console.log(items);
+  const { items } = products?.data;
+
   return (
     <div>
-      <div>Card</div>
-      {(list || []).map((item) => (
-        <div key={item.title}>{item.quantity}</div>
+      {(items || []).map((item, i) => (
+        <div key={i}>{item.quantity}</div>
       ))}
     </div>
   );
