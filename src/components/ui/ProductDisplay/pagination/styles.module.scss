@@ -11,11 +11,15 @@
 .pageNumbers {
     display: inline-block;
     margin: 0 .5rem 0 .1rem;
-    padding: .75rem;
+    padding: 1.25rem;
     font-size: 1.75rem;
     background: #ccc;
     border-radius: .2rem;
     cursor: pointer;
+    
+    &:hover {
+        background: #fff;
+    }
 }
 
 .active {

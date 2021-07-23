@@ -1,4 +1,5 @@
 import React from 'react';
+import Modal from '../../modal';
 import {
   container,
   image,
@@ -6,8 +7,12 @@ import {
   productRowDisplay,
 } from './styles.module.scss';
 
-function index({ products, category }) {
+function Row({ products, category }) {
+  const [modalIsOpen, setIsOpen] = React.useState(false);
   const { items } = products?.data;
+
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
 
   return (
     <div>
@@ -22,15 +27,16 @@ function index({ products, category }) {
             <span>Price: ${item.price}</span>
             <span>Quantity Available: {item.quantity}</span>
             <div>
-              <button>
+              <button onClick={openModal}>
                 View Product <i className="fa fa-eye"></i>
               </button>
             </div>
           </div>
         </div>
       ))}
+      <Modal modalIsOpen={modalIsOpen} closeModal={closeModal} />
     </div>
   );
 }
 
-export default index;
+export default Row;

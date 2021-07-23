@@ -13,6 +13,8 @@ import {
   /* getFilteredUrl */
 } from '../../ui/ProductDisplay/pagination/actions';
 
+import { loader } from './styles.module.scss';
+
 function Submenu() {
   const dispatch = useDispatch();
   const { products, isRow, category, loading } = useSelector(
@@ -46,7 +48,13 @@ function Submenu() {
           <div style={{ display: 'grid', gridTemplateColumns: '25% 75%' }}>
             <SideBar />
             <div>
-              {loading ? <div>LOADING...</div> : productLayout(isRow)}
+              {loading ? (
+                <div className={loader}>
+                  <img src="/images/loading-page.gif" alt="load" />
+                </div>
+              ) : (
+                productLayout(isRow)
+              )}
               {!loading && <Pagination />}
             </div>
           </div>
