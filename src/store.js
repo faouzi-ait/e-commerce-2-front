@@ -8,7 +8,7 @@ import { register } from './components/pages/register/reducers';
 import { products } from './components/pages/product/reducers';
 import { home_page_products } from './components/pages/home/reducers';
 import { tokenRequest } from './components/ui/resend_token/reducers';
-import { search } from './components/ui/ProductDisplay/pagination/reducers';
+import { search } from './components/ui/product_display/pagination/reducers';
 
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
