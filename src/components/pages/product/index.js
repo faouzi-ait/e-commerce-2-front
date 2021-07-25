@@ -3,17 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from './actions';
 
 import SwitchLayout from './LayoutSwitch';
-import Row from '../../ui/ProductDisplay/row';
-import Card from '../../ui/ProductDisplay/card';
-import SideBar from '../../ui/ProductDisplay/sidebar';
-import Pagination from '../../ui/ProductDisplay/pagination';
+import Row from '../../ui/product_display/row';
+import Card from '../../ui/product_display/card';
+import SideBar from '../../ui/product_display/sidebar';
+import Pagination from '../../ui/product_display/pagination';
+import PageLoader from '../../ui/page_loader';
+import Footer from '../../ui/footer';
 import { filteredCategoryUrl, defaultUrl /* queryUrl */ } from '../../../utils';
 import {
   getDefaultUrl,
   /* getFilteredUrl */
-} from '../../ui/ProductDisplay/pagination/actions';
-
-import { loader } from './styles.module.scss';
+} from '../../ui/product_display/pagination/actions';
 
 function Submenu() {
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ function Submenu() {
     }
   }, [category, dispatch]);
 
-  const productLayout = (row) =>
+  const productDisplayLayout = (row) =>
     row ? (
       <Row products={products} category={category} />
     ) : (
@@ -45,19 +45,19 @@ function Submenu() {
       {category && (
         <div>
           <SwitchLayout />
-          <div style={{ display: 'grid', gridTemplateColumns: '25% 75%' }}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '25% 75%',
+              padding: '0 2rem 0 0',
+            }}>
             <SideBar />
             <div>
-              {loading ? (
-                <div className={loader}>
-                  <img src="/images/loading-page.gif" alt="load" />
-                </div>
-              ) : (
-                productLayout(isRow)
-              )}
+              {loading ? <PageLoader /> : productDisplayLayout(isRow)}
               {!loading && <Pagination />}
             </div>
           </div>
+          <Footer />
         </div>
       )}
     </>

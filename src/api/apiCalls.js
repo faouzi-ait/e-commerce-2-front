@@ -86,6 +86,14 @@ export async function fetchProducts(query, params) {
   }
 }
 
+export async function searchProducts(query, params) {
+  try {
+    return await apiClient.get(`/search?${query}`, params);
+  } catch (error) {
+    return { error };
+  }
+}
+
 // export async function upload_picture(payload) {
 //   try {
 //     const response = await apiClient.post('/upload', payload);

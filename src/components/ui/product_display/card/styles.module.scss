@@ -1,0 +1,78 @@
+.container {
+    display: flex;
+    padding: 2rem 0 0;
+    font-size: 3rem;
+
+    &::after {
+        padding-left: 1rem
+    }
+
+    &:hover button {
+        display: inline-block !important;
+    }
+}
+
+.rowContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border-radius: 1rem;
+}
+
+.image {
+    width: 100%;
+}
+
+.productRowDisplay {
+    display: flex;
+    flex-direction: column;
+
+        span:nth-child(1) {
+            margin: .75rem 0 .75rem 0;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+
+        span:not(:nth-child(1)) {
+            margin-bottom: .5rem;
+        }
+
+        span:nth-child(2) {
+            font-size: 1.75rem;
+            font-weight: bold;
+        }
+
+        span:nth-child(3) {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        span:nth-child(4),
+        span:nth-child(5) {
+            font-size: 1.35rem;
+        }
+
+        div {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+        }
+
+        button {
+            width: 75%;
+            margin-left: 5%;
+            margin-top: .5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 0;
+            border-radius: 2rem;
+            cursor: pointer;
+
+
+        &:active button {
+            background: #ccc;
+        }
+    }
+}

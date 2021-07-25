@@ -4,12 +4,7 @@
     font-size: 3rem;
 
     &::after {
-        content: ' Products';
         padding-left: 1rem
-    }
-
-    &:hover button {
-        display: inline-block !important;
     }
 }
 
@@ -68,14 +63,15 @@
         border: 0;
         border-radius: 2rem;
         cursor: pointer;
+        
+    
+        &:active button {
+            background: #ccc;
+        }
     }
 
     &:hover button {
         display: block;
-    }
-
-    &:active button {
-        background: #ccc;
     }
 }
 

@@ -14,9 +14,11 @@ function Row({ products, category }) {
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
 
+  console.log(category);
+
   return (
     <div>
-      <div className={container}>{category.category}</div>
+      <div className={container}>{category.label}</div>
       {(items || []).map((item) => (
         <div className={rowContainer} key={item._id}>
           <img src={item.photo} alt="product" className={image} />
@@ -26,11 +28,9 @@ function Row({ products, category }) {
             <span>Model: {item.name}</span>
             <span>Price: ${item.price}</span>
             <span>Quantity Available: {item.quantity}</span>
-            <div>
-              <button onClick={openModal}>
-                View Product <i className="fa fa-eye"></i>
-              </button>
-            </div>
+            <button onClick={openModal}>
+              View Product <i className="fa fa-eye"></i>
+            </button>
           </div>
         </div>
       ))}
