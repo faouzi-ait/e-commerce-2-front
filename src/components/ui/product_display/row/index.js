@@ -1,41 +1,29 @@
 import React from 'react';
+import ProductDisplay from './ProductDisplay';
 import Modal from '../../modal';
-import {
-  container,
-  image,
-  rowContainer,
-  productRowDisplay,
-} from './styles.module.scss';
 
-function Row({ products, category }) {
+function Row({ products, category, isRow }) {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const { items } = products?.data;
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
 
-  console.log(category);
-
   return (
-    <div>
-      <div className={container}>{category.label}</div>
-      {(items || []).map((item) => (
-        <div className={rowContainer} key={item._id}>
-          <img src={item.photo} alt="product" className={image} />
-          <div className={productRowDisplay}>
-            <span>{item.brand}</span>
-            <span>Description: {item.description}</span>
-            <span>Model: {item.name}</span>
-            <span>Price: ${item.price}</span>
-            <span>Quantity Available: {item.quantity}</span>
-            <button onClick={openModal}>
-              View Product <i className="fa fa-eye"></i>
-            </button>
-          </div>
-        </div>
-      ))}
+    <>
+      <div className="container">{category.label}</div>
+      <div className={`${isRow ? 'grid-container' : ''}`}>
+        {(items || []).map((item) => (
+          <ProductDisplay
+            isRow={isRow}
+            openModal={openModal}
+            item={item}
+            key={item._id}
+          />
+        ))}
+      </div>
       <Modal modalIsOpen={modalIsOpen} closeModal={closeModal} />
-    </div>
+    </>
   );
 }
 

@@ -4,7 +4,6 @@ import { getProducts } from './actions';
 
 import SwitchLayout from './LayoutSwitch';
 import Row from '../../ui/product_display/row';
-import Card from '../../ui/product_display/card';
 import SideBar from '../../ui/product_display/sidebar';
 import Pagination from '../../ui/product_display/pagination';
 import PageLoader from '../../ui/page_loader';
@@ -33,13 +32,6 @@ function Submenu() {
     }
   }, [category, dispatch]);
 
-  const productDisplayLayout = (row) =>
-    row ? (
-      <Row products={products} category={category} />
-    ) : (
-      <Card products={products} category={category} />
-    );
-
   return (
     <>
       {category && (
@@ -53,7 +45,11 @@ function Submenu() {
             }}>
             <SideBar />
             <div>
-              {loading ? <PageLoader /> : productDisplayLayout(isRow)}
+              {loading ? (
+                <PageLoader />
+              ) : (
+                <Row products={products} category={category} isRow={isRow} />
+              )}
               {!loading && <Pagination />}
             </div>
           </div>

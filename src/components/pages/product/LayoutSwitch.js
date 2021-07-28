@@ -15,10 +15,8 @@ function LayoutSwitch() {
   const { items } = products.data;
 
   return (
-    <div
-      onClick={() => dispatch(switchLayout())}
-      className={viewSwitchContainer}>
-      <span className={viewSwitch}>
+    <div className={viewSwitchContainer}>
+      <span className={viewSwitch} onClick={() => dispatch(switchLayout())}>
         Change View
         {!isRow ? (
           <i className="fa fa-bars" aria-hidden="true"></i>
