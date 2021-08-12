@@ -20,6 +20,12 @@
     background: rgb(21, 25, 31);
 }
 
+.productGrid {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    padding: 0 2rem 0 0;
+}
+
 .productCount {
     margin-left: 1.25rem;
     font-size: 1.3rem;

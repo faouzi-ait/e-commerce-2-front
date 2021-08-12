@@ -14,6 +14,8 @@ import {
   /* getFilteredUrl */
 } from '../../ui/product_display/pagination/actions';
 
+import { productGrid } from './styles.module.scss';
+
 function Submenu() {
   const dispatch = useDispatch();
   const { products, isRow, category, loading } = useSelector(
@@ -37,12 +39,7 @@ function Submenu() {
       {category && (
         <div>
           <SwitchLayout />
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '25% 75%',
-              padding: '0 2rem 0 0',
-            }}>
+          <div className={productGrid}>
             <SideBar />
             <div>
               {loading ? (

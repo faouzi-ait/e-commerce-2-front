@@ -1,9 +1,9 @@
 import { DEFAULT_URL, FILTER_URL, QUERY } from './constants';
 
 const initialState = {
-  defaultUrl: '',
-  filteredUrl: '',
-  query: '',
+  defaultUrl: null,
+  filteredUrl: null,
+  query: null,
 };
 
 export const search = (state = initialState, action) => {
