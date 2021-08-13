@@ -1,5 +1,5 @@
 import React from 'react';
-import { stars } from './styles.module.scss';
+import { stars } from '../styles.module.scss';
 
 function Stars({ starrating = 1 }) {
   const DisplayStars = () => {

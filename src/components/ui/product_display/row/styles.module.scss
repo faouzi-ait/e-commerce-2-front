@@ -1,6 +1,6 @@
 .container {
     display: flex;
-    padding: 2rem 0;
+    padding: 2rem 0 1rem;
     font-size: 3rem;
 
     &::after {
@@ -27,7 +27,7 @@
     grid-row-gap: 1.1rem;
     grid-column-gap: 3rem;
     margin-bottom: 5rem;
-    padding: 2rem 2rem 0 0;
+    padding: 0 2rem 0 0;
 }
 
 .image {

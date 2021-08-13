@@ -13,7 +13,7 @@ function Row({ products, category, isRow }) {
 
   return (
     <>
-      <div className={container}>{category.label}</div>
+      <div className={container}>{category.label} Category</div>
       <div className={`${isRow ? gridContainer : ''}`}>
         {(items || []).map((item) => (
           <ProductDisplay

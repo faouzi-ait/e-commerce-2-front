@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getProducts } from '../../../pages/product/actions';
-import { getQuery } from '../../../ui/product_display/pagination/actions';
+import { getProducts } from '../../../../pages/product/actions';
+import { getQuery } from '../../pagination/actions';
 import Stars from './Stars';
 import {
   starLayout,
@@ -9,7 +9,7 @@ import {
   starTitle,
   starLabel,
   clear,
-} from './styles.module.scss';
+} from '../styles.module.scss';
 
 function StarsFilter() {
   const dispatch = useDispatch();

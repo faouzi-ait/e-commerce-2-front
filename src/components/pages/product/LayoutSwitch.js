@@ -11,8 +11,26 @@ import {
 function LayoutSwitch() {
   const dispatch = useDispatch();
   const { isRow, products } = useSelector((state) => state.products);
-  const { totalNumberOfPages, currentPage } = products;
-  const { items } = products.data;
+  const {
+    currentPage,
+    totalNumberOfItems,
+    startIndex,
+    numberOfItemsPerPage,
+  } = products;
+
+  const recordCounts = () => {
+    let str = '';
+    const index = startIndex === 0 ? 1 : startIndex;
+    const endIndex = startIndex * currentPage >= totalNumberOfItems;
+
+    if (!endIndex) {
+      str = `Showing ${index} - ${numberOfItemsPerPage * currentPage} of ${totalNumberOfItems} results`;
+    } else {
+      str = `Showing ${totalNumberOfItems} of ${totalNumberOfItems} results`;
+    }
+
+    return str;
+  };
 
   return (
     <div className={viewSwitchContainer}>
@@ -24,10 +42,7 @@ function LayoutSwitch() {
           <i className="fa fa-columns" aria-hidden="true"></i>
         )}
       </span>
-      <span className={productCount}>
-        Showing {items?.length} Products | Page {currentPage} /{' '}
-        {totalNumberOfPages}
-      </span>
+      <span className={productCount}>{recordCounts()}</span>
     </div>
   );
 }
