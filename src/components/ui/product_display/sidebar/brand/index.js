@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector /* useDispatch */ } from 'react-redux';
 import { starLayout, starTitle } from '../styles.module.scss';
 
 function Brand() {
+  //   const dispatch = useDispatch();
   const {
     data: { items },
   } = useSelector((state) => state.products.products);
