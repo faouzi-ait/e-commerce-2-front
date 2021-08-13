@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProducts } from '../../../pages/product/actions';
-import { getDefaultUrl /* getFilteredUrl */ } from './actions';
+import { getDefaultUrl /* getFilteredUrl */, getPage } from './actions';
 import {
   defaultUrl,
   filteredCategoryUrl /* queryUrl */,
@@ -20,6 +20,8 @@ function Navigation() {
   const { totalNumberOfPages, currentPage, nextPage, previousPage } = products;
 
   const dispatchFilterAction = (id, page) => {
+    dispatch(getPage(page));
+
     if (id === 0) {
       dispatch(getProducts(defaultUrl(page))); // API Call to get the products
       dispatch(getDefaultUrl(getProducts(defaultUrl(page)).payload)); // Dispatch URL to redux state

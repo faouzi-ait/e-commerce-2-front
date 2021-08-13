@@ -1,9 +1,20 @@
-import { DEFAULT_URL, FILTER_URL, QUERY } from './constants';
+import {
+  DEFAULT_URL,
+  FILTER_URL,
+  QUERY,
+  RATING,
+  BRAND,
+  LIMIT,
+  PAGE,
+} from './constants';
 
 const initialState = {
   defaultUrl: null,
   filteredUrl: null,
-  query: null,
+  rating: null,
+  brand: null,
+  limit: 1,
+  page: 8,
 };
 
 export const search = (state = initialState, action) => {
@@ -12,8 +23,14 @@ export const search = (state = initialState, action) => {
       return { ...state, defaultUrl: action.payload };
     case FILTER_URL:
       return { ...state, filteredUrl: action.payload };
-    case QUERY:
-      return { ...state, query: action.payload };
+    case RATING:
+      return { ...state, rating: action.payload };
+    case BRAND:
+      return { ...state, brand: action.payload };
+    case LIMIT:
+      return { ...state, limit: action.payload };
+    case PAGE:
+      return { ...state, page: action.payload };
     default:
       return state;
   }

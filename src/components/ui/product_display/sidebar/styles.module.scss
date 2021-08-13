@@ -21,6 +21,10 @@
     margin: 1rem 0 1rem 0;
 }
 
+.bottomMargin {
+    margin-bottom: 0;
+}
+
 .starLabel {
     font-size: 1.3rem;
     font-weight: bold;
@@ -36,9 +40,25 @@
     font-size: 1.25rem;
     margin-top: .5rem;
     margin-left: 2.75rem;
+    text-align: center;
     cursor: pointer;
 
     &:hover {
         color: rgb(255, 98, 98);
     }
+}
+
+.brandLabel {
+    display: flex;
+    cursor: pointer;
+    
+    &:hover {
+        color: rgb(255, 98, 98);
+    }
+}
+
+.brandList {
+    list-style: none;
+    margin-top: -.25rem;
+    margin-left: -3rem;
 }

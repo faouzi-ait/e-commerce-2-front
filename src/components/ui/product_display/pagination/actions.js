@@ -1,4 +1,4 @@
-import { DEFAULT_URL, FILTER_URL, QUERY } from './constants';
+import { DEFAULT_URL, FILTER_URL, QUERY, RATING, BRAND, LIMIT, PAGE } from './constants';
 
 export const getDefaultUrl = (payload) => {
   return { type: DEFAULT_URL, payload };
@@ -10,4 +10,20 @@ export const getFilteredUrl = (payload) => {
 
 export const getQuery = (payload) => {
   return { type: QUERY, payload };
+};
+
+export const getRating = (payload) => {
+  return { type: RATING, payload };
+};
+
+export const getBrand = (payload) => {
+  return { type: BRAND, payload };
+};
+
+export const getLimit = (payload) => {
+  return { type: LIMIT, payload };
+};
+
+export const getPage = (payload) => {
+  return { type: PAGE, payload };
 };
