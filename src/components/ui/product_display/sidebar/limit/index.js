@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Select from 'react-select';
 
 import { getProducts } from '../../../../pages/product/actions';
-import { getLimit } from '../../pagination/actions';
+import { getLimit, /* getPage */ } from '../../pagination/actions';
 import { defaultUrl } from '../../../../../utils';
 
 import { starLayout, starTitle } from '../styles.module.scss';
@@ -44,7 +44,7 @@ function Limit() {
       <Select
         options={options}
         styles={styles}
-        defaultValue={{ label: "Select", value: null }}
+        defaultValue={{ label: 'Select', value: null }}
         onChange={(e) => dispatch(getLimit(e.value))}
       />
     </div>
