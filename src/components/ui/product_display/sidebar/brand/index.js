@@ -23,7 +23,7 @@ function Brand() {
     const list = data.items.map((item) => item.brand);
     const filteredList = [...new Set(list)];
     setBrands(filteredList);
-  }, [data.items]);
+  }, [data]);
 
   useEffect(() => {
     dispatch(getProducts(`${defaultUrl(page, limit)}${rating}${brand}`));
