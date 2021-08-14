@@ -60,7 +60,7 @@ function Header() {
     });
 
     setMenuList(menuListFiltered);
-    setFilteredSubmenu(submenuFiltered || {});
+    setFilteredSubmenu(submenuFiltered);
   }, [category]);
 
   const goToCategory = (category, id) => ({
