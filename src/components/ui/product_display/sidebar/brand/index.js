@@ -18,7 +18,7 @@ function Brand() {
   const { rating, brand, page, limit } = useSelector((state) => state.search);
   const {
     data: { items },
-  } = useSelector((state) => state.products.products);
+  } = useSelector((state) => state?.products?.products);
   const [brands, setBrands] = useState(null);
 
   useEffect(() => {
