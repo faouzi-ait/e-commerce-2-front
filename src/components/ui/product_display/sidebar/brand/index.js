@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { getProducts } from '../../../../pages/product/actions';
 import { getBrand } from '../../pagination/actions';
+import { defaultUrl } from '../../../../../utils';
+import { getPage } from '../../pagination/actions';
 
 import {
   starLayout,
@@ -13,7 +15,7 @@ import {
 
 function Brand() {
   const dispatch = useDispatch();
-  const { defaultUrl, rating, brand } = useSelector((state) => state.search);
+  const { rating, brand, page, limit } = useSelector((state) => state.search);
   const {
     data: { items },
   } = useSelector((state) => state.products.products);
@@ -26,8 +28,8 @@ function Brand() {
   }, [items]);
 
   useEffect(() => {
-    dispatch(getProducts(`${defaultUrl}${rating}${brand}`));
-  }, [defaultUrl, brand, rating, dispatch]);
+    dispatch(getProducts(`${defaultUrl(page, limit)}${rating}${brand}`));
+  }, [brand, rating, page, limit, dispatch]);
 
   const handleChange = () => {
     let chks = document.getElementsByTagName('input');
@@ -39,8 +41,9 @@ function Brand() {
       }
     }
 
-    const newQuery = `&brand=${selected.join(',')}`;
-    dispatch(getBrand(`${newQuery}`));
+    dispatch(getPage(1));
+    dispatch(getBrand(`&brand=${selected.join(',')}`));
+    dispatch(getProducts(`${defaultUrl(page, limit)}${rating}${brand}`));
   };
 
   const DisplayBrands = () => {

@@ -6,7 +6,7 @@ import Limit from './limit';
 import { useSelector, useDispatch } from 'react-redux';
 import { getRating, getBrand } from '../pagination/actions';
 
-import { clear } from './styles.module.scss';
+import { clear, clearMargin } from './styles.module.scss';
 
 function Sidebar() {
   const dispatch = useDispatch();
@@ -26,7 +26,9 @@ function Sidebar() {
       <Brand />
 
       {brand && (
-        <div onClick={() => dispatch(getBrand(''))} className={clear}>
+        <div
+          onClick={() => dispatch(getBrand(''))}
+          className={`${clear} ${clearMargin}`}>
           <i className="fa fa-chevron-left"></i> Clear Filter
         </div>
       )}

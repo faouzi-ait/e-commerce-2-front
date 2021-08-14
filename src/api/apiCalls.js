@@ -5,7 +5,8 @@ const TOKEN =
   JSON.parse(localStorage.getItem('CURRENT_USER')) || 'NOT_LOGGED_IN';
 
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_URL_PROD,
+  baseURL: process.env.REACT_APP_URL_DEV,
+  // baseURL: process.env.REACT_APP_URL_PROD,
 });
 
 axiosInstance.interceptors.request.use(
@@ -20,6 +21,7 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   (response) => {
+    response.headers['Access-Control-Allow-Origin'] = '*';
     /* 
       DECODE TOKEN
       IF TOKEN EXPIRED
