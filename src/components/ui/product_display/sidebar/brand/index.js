@@ -15,17 +15,15 @@ import {
 
 function Brand() {
   const dispatch = useDispatch();
-  const { rating, brand, page, limit } = useSelector((state) => state.search);
-  const {
-    data: { items },
-  } = useSelector((state) => state?.products?.products);
   const [brands, setBrands] = useState(null);
+  const { data } = useSelector((state) => state?.products?.products);
+  const { rating, brand, page, limit } = useSelector((state) => state.search);
 
   useEffect(() => {
-    const list = items.map((item) => item.brand);
+    const list = data.items.map((item) => item.brand);
     const filteredList = [...new Set(list)];
     setBrands(filteredList);
-  }, [items]);
+  }, [data.items]);
 
   useEffect(() => {
     dispatch(getProducts(`${defaultUrl(page, limit)}${rating}${brand}`));
