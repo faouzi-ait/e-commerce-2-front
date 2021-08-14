@@ -37,7 +37,7 @@ function Limit() {
 
   useEffect(() => {
     dispatch(getProducts(`${defaultUrl(page, limit)}${rating}${brand}`));
-  }, [defaultUrl, dispatch, limit, brand, page, limit, rating]);
+  }, [dispatch, limit, brand, page, limit, rating]);
 
   return (
     <div className={starLayout}>
