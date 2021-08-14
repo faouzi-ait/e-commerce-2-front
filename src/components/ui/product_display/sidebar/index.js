@@ -2,7 +2,6 @@ import React from 'react';
 import StarsFilter from './stars';
 import Brand from './brand';
 import Limit from './limit';
-import Clear from './clearing';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { getRating, getBrand } from '../pagination/actions';

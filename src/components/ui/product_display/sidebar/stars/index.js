@@ -16,7 +16,7 @@ function StarsFilter() {
 
   useEffect(() => {
     dispatch(getProducts(`${defaultUrl}${rating}${brand}`));
-  }, [defaultUrl, rating, dispatch]);
+  }, [defaultUrl, rating, brand, dispatch]);
 
   const StarItems = ({ nb }) => {
     return (

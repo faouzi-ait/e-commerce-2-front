@@ -1,7 +1,6 @@
 import {
   DEFAULT_URL,
   FILTER_URL,
-  QUERY,
   RATING,
   BRAND,
   LIMIT,

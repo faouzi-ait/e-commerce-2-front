@@ -4,10 +4,7 @@ import Select from 'react-select';
 
 import { getProducts } from '../../../../pages/product/actions';
 import { getLimit } from '../../pagination/actions';
-import {
-  defaultUrl,
-  filteredCategoryUrl /* queryUrl */,
-} from '../../../../../utils';
+import { defaultUrl } from '../../../../../utils';
 
 import { starLayout, starTitle } from '../styles.module.scss';
 
@@ -40,7 +37,7 @@ function Limit() {
 
   useEffect(() => {
     dispatch(getProducts(`${defaultUrl(page, limit)}${rating}${brand}`));
-  }, [defaultUrl, dispatch, limit]);
+  }, [defaultUrl, dispatch, limit, brand, page, limit, rating]);
 
   return (
     <div className={starLayout}>

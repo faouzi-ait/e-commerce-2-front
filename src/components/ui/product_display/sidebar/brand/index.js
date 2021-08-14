@@ -27,7 +27,7 @@ function Brand() {
 
   useEffect(() => {
     dispatch(getProducts(`${defaultUrl}${rating}${brand}`));
-  }, [defaultUrl, brand, dispatch]);
+  }, [defaultUrl, brand, rating, dispatch]);
 
   const handleChange = () => {
     let chks = document.getElementsByTagName('input');

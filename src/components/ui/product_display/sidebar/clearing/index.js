@@ -4,13 +4,13 @@ import { getQuery } from '../../pagination/actions';
 
 import { clear } from '../styles.module.scss';
 
-function Clear({}) {
+function Clear() {
   const dispatch = useDispatch();
-  const { query, rating, brand } = useSelector((state) => state.search);
+  const { query, brand } = useSelector((state) => state.search);
 
   return (
     <div>
-      {query || brand && (
+      {query && (
         <div onClick={() => dispatch(getQuery(''))} className={clear}>
           <i className="fa fa-chevron-left"></i> Clear Filter
         </div>
