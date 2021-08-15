@@ -21,7 +21,7 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   (response) => {
-    response.headers['Access-Control-Allow-Origin'] = '*';
+    // response.headers['Access-Control-Allow-Origin'] = '*';
     /* 
       DECODE TOKEN
       IF TOKEN EXPIRED
