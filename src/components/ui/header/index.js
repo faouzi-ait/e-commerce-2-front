@@ -41,7 +41,7 @@ function Header() {
       };
     });
 
-    const submenuFiltered = (category || []).items
+    const submenuFiltered = category.items
       ?.filter((item) => item.showOnNav === true)
       .map((label) => {
         return {
