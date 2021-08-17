@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Select from 'react-select';
 
 import { getLimit, getPage } from '../../pagination/actions';
@@ -7,7 +7,6 @@ import { starLayout, starTitle } from '../styles.module.scss';
 
 function Limit() {
   const dispatch = useDispatch();
-  const { limit } = useSelector((state) => state.search);
 
   const options = [
     { value: 5, label: '5' },
@@ -37,7 +36,7 @@ function Limit() {
       <Select
         options={options}
         styles={styles}
-        defaultValue={{ label: limit ? limit : 'Select...', value: limit }}
+        defaultValue={{ label: 'Select', value: null }}
         onChange={(e) => {
           dispatch(getLimit(e.value));
           dispatch(getPage(1));

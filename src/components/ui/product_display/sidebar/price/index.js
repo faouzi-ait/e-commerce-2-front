@@ -1,6 +1,6 @@
 import React from 'react';
-import { getPrice } from '../../pagination/actions';
 import { useSelector, useDispatch } from 'react-redux';
+import { getPrice } from '../../pagination/actions';
 
 import {
   starLayout,

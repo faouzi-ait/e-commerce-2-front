@@ -9,7 +9,8 @@ import {
   brandLabelDisplay,
   brandList,
   clear,
-  clearMargin
+  clearMargin,
+  priceLimitColor,
 } from '../styles.module.scss';
 
 function Brand() {
@@ -23,6 +24,8 @@ function Brand() {
     const filteredList = [...new Set(list)];
     setBrands(filteredList);
   }, [data]);
+
+  const brandFormat = brand.split('=')[1];
 
   const handleChange = (e) => {
     let chks = document.getElementsByTagName('input');
@@ -57,7 +60,9 @@ function Brand() {
               style={{ marginRight: '.5rem' }}></i>
             <label
               htmlFor={`custom-checkbox-${item}`}
-              className={`${brandLabelDisplay} ${brandLabel}`}>
+              className={`${brandLabelDisplay} ${brandLabel} ${
+                brandFormat === item && priceLimitColor
+              }`}>
               {item}
             </label>
           </li>

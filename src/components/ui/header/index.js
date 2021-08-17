@@ -52,12 +52,7 @@ function Header() {
         };
       });
 
-    submenuFiltered.unshift({
-      id: 0,
-      value: 'All',
-      label: 'All',
-      url: '',
-    });
+    submenuFiltered.unshift();
 
     setMenuList(menuListFiltered);
     setFilteredSubmenu(submenuFiltered);
