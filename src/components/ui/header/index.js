@@ -33,7 +33,7 @@ function Header() {
   const category = useSelector(catgoriesList);
 
   useEffect(() => {
-    const menuListFiltered = (category.items || []).map((label) => {
+    const menuListFiltered = category?.items?.map((label) => {
       return {
         value: label._id,
         label: label.name,
