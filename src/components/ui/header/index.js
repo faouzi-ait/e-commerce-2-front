@@ -52,12 +52,12 @@ function Header() {
         };
       });
 
-    submenuFiltered.push({
-      id: 0,
-      value: 'All',
-      label: 'All',
-      url: '',
-    });
+    // submenuFiltered.push({
+    //   id: 0,
+    //   value: 'All',
+    //   label: 'All',
+    //   url: '',
+    // });
 
     setMenuList(menuListFiltered);
     setFilteredSubmenu(submenuFiltered);
