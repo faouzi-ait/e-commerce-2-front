@@ -41,7 +41,7 @@ function Header() {
       };
     });
 
-    const submenuFiltered = category?.items
+    const submenuFiltered = (category || []).items
       ?.filter((item) => item.showOnNav === true)
       .map((label) => {
         return {
@@ -52,7 +52,7 @@ function Header() {
         };
       });
 
-    submenuFiltered.unshift({
+    submenuFiltered.push({
       id: 0,
       value: 'All',
       label: 'All',
