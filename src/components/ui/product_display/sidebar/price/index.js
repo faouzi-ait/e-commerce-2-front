@@ -15,7 +15,7 @@ import {
 function Price() {
   const dispatch = useDispatch();
   const prices = [100, 200, 300, 400];
-  const { pricing } = useSelector((state) => state.search);
+  const { pricing } = useSelector((state) => state?.search);
 
   const pricingFormat = pricing.split('=')[1];
 

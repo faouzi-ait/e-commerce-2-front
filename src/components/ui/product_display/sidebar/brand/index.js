@@ -17,7 +17,7 @@ function Brand() {
   const dispatch = useDispatch();
   const [brands, setBrands] = useState(null);
   const { data } = useSelector((state) => state?.products?.products);
-  const { brand } = useSelector((state) => state.search);
+  const { brand } = useSelector((state) => state?.search);
 
   useEffect(() => {
     const list = data.items.map((item) => item.brand);
@@ -25,7 +25,7 @@ function Brand() {
     setBrands(filteredList);
   }, [data]);
 
-  const brandFormat = brand.split('=')[1];
+  const brandFormat = brand?.split('=')[1];
 
   const handleChange = (e) => {
     let chks = document.getElementsByTagName('input');
