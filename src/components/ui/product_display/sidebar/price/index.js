@@ -17,7 +17,7 @@ function Price() {
   const prices = [100, 200, 300, 400];
   const { pricing } = useSelector((state) => state?.search);
 
-  const pricingFormat = pricing.split('=')[1];
+  const pricingFormat = pricing?.split('=')[1];
 
   return (
     <div className={`${starLayout} ${priceBottomMargin}`}>
