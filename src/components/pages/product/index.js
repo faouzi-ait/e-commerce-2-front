@@ -8,7 +8,7 @@ import SideBar from '../../ui/product_display/sidebar';
 import Pagination from '../../ui/product_display/pagination';
 import PageLoader from '../../ui/page_loader';
 import Footer from '../../ui/footer';
-import { filteredCategoryUrl, defaultUrl } from '../../../utils';
+import { filteredCategoryUrl /*defaultUrl*/ } from '../../../utils';
 import { getDefaultUrl } from '../../ui/product_display/pagination/actions';
 
 import { productGrid } from './styles.module.scss';
