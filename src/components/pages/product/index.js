@@ -16,7 +16,7 @@ import { productGrid } from './styles.module.scss';
 function Submenu() {
   const dispatch = useDispatch();
   const { products, isRow, category, loading } = useSelector(
-    (state) => state.products
+    (state) => state?.products
   );
 
   useEffect(() => {
