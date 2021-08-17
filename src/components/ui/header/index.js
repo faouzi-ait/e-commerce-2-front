@@ -141,7 +141,7 @@ function Header() {
         </span>
       </div>
       <div className={bottomHeader}>
-        {(filteredSubmenu || []).map((item) => (
+        {filteredSubmenu?.map((item) => (
           <Link
             key={item.id}
             className={submenu}
