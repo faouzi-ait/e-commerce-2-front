@@ -8,5 +8,5 @@ export const selectedTheme = createSelector(
 );
 export const catgoriesList = createSelector(
   [baseState],
-  (state) => state?.categories.categories
+  (state) => state?.categories?.categories
 );

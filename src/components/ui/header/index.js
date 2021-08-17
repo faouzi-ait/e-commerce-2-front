@@ -33,7 +33,7 @@ function Header() {
   const category = useSelector(catgoriesList);
 
   useEffect(() => {
-    const menuListFiltered = category?.items?.map((label) => {
+    const menuListFiltered = (category.items || []).map((label) => {
       return {
         value: label._id,
         label: label.name,
@@ -41,7 +41,7 @@ function Header() {
       };
     });
 
-    const submenuFiltered = (category || []).items
+    const submenuFiltered = category?.items
       ?.filter((item) => item.showOnNav === true)
       .map((label) => {
         return {
@@ -52,12 +52,12 @@ function Header() {
         };
       });
 
-    // submenuFiltered.unshift({
-    //   id: 0,
-    //   value: 'All',
-    //   label: 'All',
-    //   url: '',
-    // });
+    submenuFiltered.unshift({
+      id: 0,
+      value: 'All',
+      label: 'All',
+      url: '',
+    });
 
     setMenuList(menuListFiltered);
     setFilteredSubmenu(submenuFiltered);
@@ -100,8 +100,6 @@ function Header() {
     // IF selectedCategory HAS A VALUE THEN DISPATCH THE SEARCH ACTION
     // IF THERE IS A SEARCH SEARCH TERM THEN USE IT INSTEAD
   };
-
-  console.log(filteredSubmenu);
 
   return (
     <>
