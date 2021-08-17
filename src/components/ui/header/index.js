@@ -52,7 +52,7 @@ function Header() {
         };
       });
 
-    submenuFiltered.push({
+    submenuFiltered.unshift({
       id: 0,
       value: 'All',
       label: 'All',
