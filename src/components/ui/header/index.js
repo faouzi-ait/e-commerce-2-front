@@ -42,7 +42,7 @@ function Header() {
     });
 
     const submenuFiltered = (category || []).items
-      .filter((item) => item.showOnNav === true)
+      ?.filter((item) => item.showOnNav === true)
       .map((label) => {
         return {
           id: label._id,
