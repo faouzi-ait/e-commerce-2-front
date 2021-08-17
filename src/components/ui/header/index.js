@@ -52,13 +52,13 @@ function Header() {
         };
       });
 
-    const all = {
-      id: 0,
-      value: 'All',
-      label: 'All',
-      url: '',
-    };
-    submenuFiltered.unshift(all);
+    // const all = {
+    //   id: 0,
+    //   value: 'All',
+    //   label: 'All',
+    //   url: '',
+    // };
+    // submenuFiltered.unshift(all);
 
     setMenuList(menuListFiltered);
     setFilteredSubmenu(submenuFiltered);
