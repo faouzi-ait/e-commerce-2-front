@@ -6,7 +6,7 @@ import { container, gridContainer } from './styles.module.scss';
 
 function Row({ products, category, isRow }) {
   const [modalIsOpen, setIsOpen] = React.useState(false);
-  const { items } = products?.data;
+  const { items } = products.data;
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);

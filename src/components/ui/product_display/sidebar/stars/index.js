@@ -1,22 +1,19 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getProducts } from '../../../../pages/product/actions';
-import { getRating } from '../../pagination/actions';
+import React from 'react';
 import Stars from './Stars';
+import { useDispatch, useSelector } from 'react-redux';
+import { getRating } from '../../pagination/actions';
+
 import {
   starLayout,
   starStyling,
   starTitle,
   starLabel,
+  clear,
 } from '../styles.module.scss';
 
 function StarsFilter() {
   const dispatch = useDispatch();
-  const { defaultUrl, rating, brand } = useSelector((state) => state.search);
-
-  useEffect(() => {
-    dispatch(getProducts(`${defaultUrl}${rating}${brand}`));
-  }, [defaultUrl, rating, brand, dispatch]);
+  const { rating } = useSelector((state) => state.search);
 
   const StarItems = ({ nb }) => {
     return (
@@ -38,6 +35,11 @@ function StarsFilter() {
         <StarItems nb={3} />
         <StarItems nb={4} />
       </ul>
+      {rating && (
+        <div onClick={() => dispatch(getRating(''))} className={clear}>
+          <i className="fa fa-chevron-left"></i> Clear Filter
+        </div>
+      )}
     </div>
   );
 }

@@ -5,3 +5,4 @@ export const RATING = 'RATING';
 export const BRAND = 'BRAND';
 export const LIMIT = 'LIMIT';
 export const PAGE = 'PAGE';
+export const PRICING = 'PRICING';

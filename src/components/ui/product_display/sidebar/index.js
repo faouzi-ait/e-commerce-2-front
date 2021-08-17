@@ -1,37 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { getProducts } from '../../../pages/product/actions';
+import { defaultUrl } from '../../../../utils';
+
 import StarsFilter from './stars';
 import Brand from './brand';
 import Limit from './limit';
-
-import { useSelector, useDispatch } from 'react-redux';
-import { getRating, getBrand } from '../pagination/actions';
-
-import { clear, clearMargin } from './styles.module.scss';
+import Pricing from './price';
 
 function Sidebar() {
   const dispatch = useDispatch();
-  const { rating, brand } = useSelector((state) => state.search);
+  const { rating, brand, pricing, page, limit } = useSelector(
+    (state) => state.search
+  );
+
+  useEffect(() => {
+    dispatch(
+      getProducts(`${defaultUrl(page, limit)}${rating}${brand}${pricing}`)
+    );
+  }, [limit, rating, brand, page, pricing, dispatch]);
 
   return (
     <div>
       <Limit />
       <StarsFilter />
-
-      {rating && (
-        <div onClick={() => dispatch(getRating(''))} className={clear}>
-          <i className="fa fa-chevron-left"></i> Clear Filter
-        </div>
-      )}
-
+      <Pricing />
       <Brand />
-
-      {brand && (
-        <div
-          onClick={() => dispatch(getBrand(''))}
-          className={`${clear} ${clearMargin}`}>
-          <i className="fa fa-chevron-left"></i> Clear Filter
-        </div>
-      )}
     </div>
   );
 }

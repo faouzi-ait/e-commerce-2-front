@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
-import { getProducts } from '../../../../pages/product/actions';
-import { getBrand } from '../../pagination/actions';
-import { defaultUrl } from '../../../../../utils';
-import { getPage } from '../../pagination/actions';
+import { getBrand, getPage } from '../../pagination/actions';
 
 import {
   starLayout,
   starTitle,
   brandLabel,
+  brandLabelDisplay,
   brandList,
+  clear,
+  clearMargin
 } from '../styles.module.scss';
 
 function Brand() {
   const dispatch = useDispatch();
   const [brands, setBrands] = useState(null);
   const { data } = useSelector((state) => state?.products?.products);
-  const { rating, brand, page, limit } = useSelector((state) => state.search);
+  const { brand } = useSelector((state) => state.search);
 
   useEffect(() => {
     const list = data.items.map((item) => item.brand);
@@ -25,11 +24,7 @@ function Brand() {
     setBrands(filteredList);
   }, [data]);
 
-  useEffect(() => {
-    dispatch(getProducts(`${defaultUrl(page, limit)}${rating}${brand}`));
-  }, [brand, rating, page, limit, dispatch]);
-
-  const handleChange = () => {
+  const handleChange = (e) => {
     let chks = document.getElementsByTagName('input');
     const selected = [];
 
@@ -40,15 +35,15 @@ function Brand() {
     }
 
     dispatch(getPage(1));
-    dispatch(getBrand(`&brand=${selected.join(',')}`));
-    dispatch(getProducts(`${defaultUrl(page, limit)}${rating}${brand}`));
+    dispatch(getBrand(`&brand=${e.target.value}`));
+    // dispatch(getBrand(`&brand=${selected.join(',')}`));
   };
 
   const DisplayBrands = () => {
     return (
       <ul className={brandList}>
         {(brands || []).map((item) => (
-          <li key={item} className={brandLabel}>
+          <li key={item} className={`${brandLabelDisplay} ${brandLabel}`}>
             <input
               type="checkbox"
               name={item}
@@ -60,11 +55,20 @@ function Brand() {
             <i
               className="fa fa-chevron-right"
               style={{ marginRight: '.5rem' }}></i>
-            <label htmlFor={`custom-checkbox-${item}`} className={brandLabel}>
+            <label
+              htmlFor={`custom-checkbox-${item}`}
+              className={`${brandLabelDisplay} ${brandLabel}`}>
               {item}
             </label>
           </li>
         ))}
+        {brand && (
+          <div
+            onClick={() => dispatch(getBrand(''))}
+            className={`${clear} ${clearMargin}`}>
+            <i className="fa fa-chevron-left"></i> Clear Filter
+          </div>
+        )}
       </ul>
     );
   };

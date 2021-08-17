@@ -21,8 +21,12 @@
     margin: 1rem 0 1rem 0;
 }
 
-.bottomMargin {
-    margin-bottom: 0;
+.titleBottomMargin {
+    margin-bottom: 1rem;
+}
+
+.priceBottomMargin {
+    margin-bottom: -.75rem;
 }
 
 .starLabel {
@@ -36,7 +40,7 @@
 }
 
 .clear {
-    width: 49%;
+    width: 75%;
     font-size: 1.25rem;
     margin-top: .5rem;
     margin-left: 2.75rem;
@@ -49,20 +53,26 @@
 }
 
 .clearMargin {
-    margin-top: -1rem;
+    margin-top: .7rem;
 }
 
 .brandLabel {
-    display: flex;
     cursor: pointer;
     
     &:hover {
         color: rgb(255, 98, 98);
     }
 }
+.brandLabelDisplay {
+    display: flex;
+}
 
 .brandList {
     list-style: none;
     margin-top: -.25rem;
     margin-left: -3rem;
+}
+
+.priceLimitColor {
+    color: rgb(255, 98, 98);
 }

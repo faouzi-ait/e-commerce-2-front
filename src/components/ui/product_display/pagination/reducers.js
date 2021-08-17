@@ -5,6 +5,7 @@ import {
   BRAND,
   LIMIT,
   PAGE,
+  PRICING,
 } from './constants';
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
   brand: null,
   limit: 1,
   page: 8,
+  pricing: 20,
 };
 
 export const search = (state = initialState, action) => {
@@ -30,6 +32,8 @@ export const search = (state = initialState, action) => {
       return { ...state, limit: action.payload };
     case PAGE:
       return { ...state, page: action.payload };
+    case PRICING:
+      return { ...state, pricing: action.payload };
     default:
       return state;
   }

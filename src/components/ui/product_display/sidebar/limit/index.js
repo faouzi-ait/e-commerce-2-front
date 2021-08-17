@@ -1,16 +1,13 @@
-import React /*, { useEffect } */ from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 
-import { getProducts } from '../../../../pages/product/actions';
-import { getLimit /* getPage */ } from '../../pagination/actions';
-import { defaultUrl } from '../../../../../utils';
-
+import { getLimit, getPage } from '../../pagination/actions';
 import { starLayout, starTitle } from '../styles.module.scss';
 
 function Limit() {
   const dispatch = useDispatch();
-  const { limit, rating, brand, page } = useSelector((state) => state.search);
+  const { limit } = useSelector((state) => state.search);
 
   const options = [
     { value: 5, label: '5' },
@@ -34,20 +31,16 @@ function Limit() {
     }),
   };
 
-//   useEffect(() => {
-//     dispatch(getProducts(`${defaultUrl(page, limit)}${rating}${brand}`));
-//   }, [dispatch, limit, brand, page, rating]);
-
   return (
     <div className={starLayout}>
-      <span className={starTitle}>Number of Items</span>
+      <span className={starTitle}>Number of Items per Page</span>
       <Select
         options={options}
         styles={styles}
-        defaultValue={{ label: 'Select', value: null }}
+        defaultValue={{ label: limit ? limit : 'Select...', value: limit }}
         onChange={(e) => {
           dispatch(getLimit(e.value));
-          dispatch(getProducts(`${defaultUrl(page, limit)}${rating}${brand}`));
+          dispatch(getPage(1));
         }}
       />
     </div>

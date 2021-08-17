@@ -19,6 +19,8 @@ function Submenu() {
     (state) => state.products
   );
 
+  console.log(products.data.items);
+
   useEffect(() => {
     const { id } = category || {};
 
