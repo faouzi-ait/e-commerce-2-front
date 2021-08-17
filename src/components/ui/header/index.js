@@ -43,7 +43,7 @@ function Header() {
 
     const submenuFiltered = category?.items
       ?.filter((item) => item.showOnNav === true)
-      .map((label) => {
+      ?.map((label) => {
         return {
           id: label._id,
           value: label.name,
