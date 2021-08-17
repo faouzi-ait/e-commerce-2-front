@@ -63,6 +63,18 @@ function Header() {
     setFilteredSubmenu(submenuFiltered);
   }, [category]);
 
+  const SubMenuFiltered = () => {
+    return (filteredSubmenu || []).map((item) => (
+      <Link
+        key={item.id}
+        className={submenu}
+        to={goToCategory(item.value, item.id)}
+        onClick={() => dispatch(getCategory(item))}>
+        {item.value}
+      </Link>
+    ));
+  };
+
   const goToCategory = (category, id) => ({
     pathname: `/category/${id}`,
     query: { id, category },
@@ -141,15 +153,7 @@ function Header() {
         </span>
       </div>
       <div className={bottomHeader}>
-        {(filteredSubmenu || []).map((item) => (
-          <Link
-            key={item.id}
-            className={submenu}
-            to={goToCategory(item.value, item.id)}
-            onClick={() => dispatch(getCategory(item))}>
-            {item.value}
-          </Link>
-        ))}
+        <SubMenuFiltered />
         <div className={logo2}>
           <span>Amazon Prime </span>
           <span>&nbsp;| 30 Days Free Trial</span>
