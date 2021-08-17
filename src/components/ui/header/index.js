@@ -43,7 +43,7 @@ function Header() {
 
     const submenuFiltered = (category || []).items
       ?.filter((item) => item.showOnNav === true)
-      ?.map((label) => {
+      .map((label) => {
         return {
           id: label._id,
           value: label.name,
@@ -52,12 +52,12 @@ function Header() {
         };
       });
 
-    submenuFiltered.unshift({
-      id: 0,
-      value: 'All',
-      label: 'All',
-      url: '',
-    });
+    // submenuFiltered.unshift({
+    //   id: 0,
+    //   value: 'All',
+    //   label: 'All',
+    //   url: '',
+    // });
 
     setMenuList(menuListFiltered);
     setFilteredSubmenu(submenuFiltered);
@@ -100,6 +100,8 @@ function Header() {
     // IF selectedCategory HAS A VALUE THEN DISPATCH THE SEARCH ACTION
     // IF THERE IS A SEARCH SEARCH TERM THEN USE IT INSTEAD
   };
+
+  console.log(filteredSubmenu);
 
   return (
     <>
