@@ -22,13 +22,13 @@ function Submenu() {
   useEffect(() => {
     const { id } = category || {};
 
-    if (id === 0) {
-      dispatch(getProducts(defaultUrl()));
-      dispatch(getDefaultUrl(getProducts(defaultUrl()).payload));
-    } else {
-      dispatch(getProducts(filteredCategoryUrl(id)));
-      dispatch(getDefaultUrl(getProducts(filteredCategoryUrl(id)).payload));
-    }
+    // if (id === 0) {
+    //   dispatch(getProducts(defaultUrl()));
+    //   dispatch(getDefaultUrl(getProducts(defaultUrl()).payload));
+    // } else {
+    // }
+    dispatch(getProducts(filteredCategoryUrl(id)));
+    dispatch(getDefaultUrl(getProducts(filteredCategoryUrl(id)).payload));
   }, [category, dispatch]);
 
   return (
