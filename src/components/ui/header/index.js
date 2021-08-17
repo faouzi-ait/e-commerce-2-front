@@ -41,7 +41,7 @@ function Header() {
       };
     });
 
-    const submenuFiltered = category?.items
+    let submenuFiltered = category?.items
       ?.filter((item) => item.showOnNav === true)
       .map((label) => {
         return {
