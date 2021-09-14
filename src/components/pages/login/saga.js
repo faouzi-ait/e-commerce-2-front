@@ -22,7 +22,11 @@ export function* authentication({ payload }) {
     yield delay(4000);
     yield put(setAuthenticationError(null));
   } else {
-    localStorage.setItem('CURRENT_USER', JSON.stringify(result.data.token));
+    localStorage.setItem('ACCESS_TOKEN', JSON.stringify(result.data.token));
+    localStorage.setItem(
+      'REFRESH_TOKEN',
+      JSON.stringify(result.data.refreshToken)
+    );
     yield call(decodeUserProfile);
     yield put(setIsUserAuthenticated(true));
     window.location.href = '/dashboard';
@@ -31,7 +35,7 @@ export function* authentication({ payload }) {
 }
 
 export function* decodeUserProfile() {
-  const user = localStorage.getItem('CURRENT_USER');
+  const user = localStorage.getItem('ACCESS_TOKEN');
 
   if (user) {
     const token = JSON.parse(user);
@@ -52,14 +56,15 @@ export function* decodeUserProfile() {
 }
 
 export function* logout() {
-  localStorage.removeItem('CURRENT_USER');
+  localStorage.removeItem('ACCESS_TOKEN');
+  localStorage.removeItem('REFRESH_TOKEN');
   yield put(
     updateUserInfoAction({
       isLoaded: false,
     })
   );
   yield put(setIsUserAuthenticated(false));
-  window.location.href = '/login';
+  window.location.href = '/';
 }
 
 export function* authenticateSaga() {

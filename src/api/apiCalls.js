@@ -21,21 +21,13 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   (response) => {
-    response.headers['Access-Control-Allow-Origin'] = '*';
-    /* 
-      DECODE TOKEN
-      IF TOKEN EXPIRED
-        DISPATCH USER LOGOUT ACTION
-        DISPATCH SET_AUTH TO FALSE
-        REDIRECT TO HOME PAGE
-      ELSE
-        ADD TOKEN TO AUTHORIZATION HEADER
-        DISPATCH FECTH USER DETAILS
-        DISPATCH SET_AUTH TO TRUE
-    */
     return response;
   },
-  (error) => Promise.reject(error)
+  (error) => {
+    const originalRequest = error.config;
+    // REFRESH TOKEN CONFIGURATION HERE
+    return Promise.reject(error);
+  }
 );
 
 const apiClient = new ApiClient(axiosInstance);

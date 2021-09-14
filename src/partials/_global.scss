@@ -21,7 +21,6 @@ html {
     background: var(--theme-page-background);
 }
 
-// MODAL STYLES
 /* MODAL STYLES */
 .mymodal {
     position: fixed;
@@ -35,7 +34,7 @@ html {
     transform: translate(-50%, -50%);
     background: #fff;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: .8rem;
     overflow: auto;
 }
 
@@ -45,7 +44,7 @@ html {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .ReactModal__Overlay {

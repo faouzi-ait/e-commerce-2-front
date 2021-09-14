@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getPrice } from '../../pagination/actions';
+import { getPrice, getPage } from '../../pagination/actions';
 
 import {
   starLayout,
@@ -9,7 +9,7 @@ import {
   priceBottomMargin,
   brandLabel,
   priceLimitColor,
-  clear
+  clear,
 } from '../styles.module.scss';
 
 function Price() {
@@ -33,8 +33,10 @@ function Price() {
               style={{ visibility: 'hidden' }}
               onChange={() => {
                 if (item === 400) {
+                  dispatch(getPage(1));
                   dispatch(getPrice(`&price[gte]=${item}`));
                 } else {
+                  dispatch(getPage(1));
                   dispatch(getPrice(`&price[lte]=${item}`));
                 }
               }}

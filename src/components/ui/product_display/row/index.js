@@ -6,6 +6,7 @@ import { container, gridContainer } from './styles.module.scss';
 
 function Row({ products, category, isRow }) {
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [productId, setProductId] = React.useState(null);
   const { items } = products.data;
 
   const openModal = () => setIsOpen(true);
@@ -17,14 +18,19 @@ function Row({ products, category, isRow }) {
       <div className={`${isRow ? gridContainer : ''}`}>
         {(items || []).map((item) => (
           <ProductDisplay
-            isRow={isRow}
-            openModal={openModal}
-            item={item}
             key={item._id}
+            isRow={isRow}
+            item={item}
+            openModal={openModal}
+            setProductId={setProductId}
           />
         ))}
       </div>
-      <Modal modalIsOpen={modalIsOpen} closeModal={closeModal} />
+      <Modal
+        modalIsOpen={modalIsOpen}
+        closeModal={closeModal}
+        productId={productId}
+      />
     </>
   );
 }

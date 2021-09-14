@@ -8,7 +8,7 @@ import {
   image,
 } from './styles.module.scss';
 
-function ProductDisplay({ isRow, openModal, item }) {
+function ProductDisplay({ isRow, openModal, item, setProductId }) {
   return (
     <div className={`${isRow ? cardRowContainer : rowContainer}`}>
       <img src={item.photo} alt="p" className={`${isRow ? rowImage : image}`} />
@@ -18,7 +18,7 @@ function ProductDisplay({ isRow, openModal, item }) {
         <span>Model: {item.name}</span>
         <span>Price: ${item.price}</span>
         <span>Quantity Available: {item.quantity}</span>
-        <div>
+        <div onClick={() => setProductId(item._id)}>
           <button onClick={openModal}>
             View Product <i className="fa fa-eye"></i>
           </button>
