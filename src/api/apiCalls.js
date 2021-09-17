@@ -24,7 +24,7 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   (error) => {
-    const originalRequest = error.config;
+    // const originalRequest = error.config;
     // REFRESH TOKEN CONFIGURATION HERE
     return Promise.reject(error);
   }
