@@ -11,11 +11,11 @@ import {
 const initialState = {
   defaultUrl: null,
   filteredUrl: null,
-  rating: null,
-  brand: null,
-  limit: 1,
-  page: 8,
-  pricing: 20,
+  rating: "",
+  brand: "",
+  limit: 8,
+  page: 1,
+  pricing: '&price[gt]=1',
 };
 
 export const search = (state = initialState, action) => {

@@ -1,26 +1,28 @@
-import React, { useEffect } from 'react';
-import Provider from './i18n/Provider';
+import React, { useEffect } from "react";
+import Provider from "./i18n/Provider";
 
-import { useSelector, useDispatch } from 'react-redux';
-import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
-import history from './history';
+import { useSelector, useDispatch } from "react-redux";
+import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import history from "./history";
 
-import Home from './components/pages/home';
-import Header from './components/ui/header';
-import Login from './components/pages/login';
-import Search from './components/pages/search';
-import Product from './components/pages/product';
-import Register from './components/pages/register';
-import Dashboard from './components/pages/dashboard';
-import PublicRoutes from './components/access_to_routes/PublicRoutes';
-import PrivateRoutes from './components/access_to_routes/PrivateRoutes';
+import Home from "./components/pages/home";
+import Header from "./components/ui/header";
+import Login from "./components/pages/login";
+import Search from "./components/pages/search";
+import Product from "./components/pages/product";
+import Register from "./components/pages/register";
+import Dashboard from "./components/pages/dashboard";
+import PublicRoutes from "./components/access_to_routes/PublicRoutes";
+import PrivateRoutes from "./components/access_to_routes/PrivateRoutes";
 
-import { getCategories } from './components/ui/header/actions';
-import { getHomePageProducts } from './components/pages/home/actions';
+import { getCategories } from "./components/ui/header/actions";
+import { getHomePageProducts } from "./components/pages/home/actions";
+import { getProducts } from "./components/pages/product/actions";
+import { defaultUrl } from "./utils";
 
-import { selectedLanguage } from './components/ui/header/selectors';
+import { selectedLanguage } from "./components/ui/header/selectors";
 
-import './index.scss';
+import "./index.scss";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +31,7 @@ function App() {
   useEffect(() => {
     dispatch(getCategories());
     dispatch(getHomePageProducts());
+    dispatch(getProducts(defaultUrl()));
   }, [dispatch]);
 
   return (

@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory, Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import Select from 'react-select';
+import React, { useState, useEffect } from "react";
+import { useHistory, Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import Select from "react-select";
 // import { THEMES } from '../../ui/toggles/constants';
 // import { t } from '../../i18n/translate';
 
-import { catgoriesList } from '../../ui/toggles/selectors';
-import { getCategory } from '../../pages/product/actions';
-import ToggleButtons from '../toggles';
+import { catgoriesList } from "../../ui/toggles/selectors";
+import { getCategory } from "../../pages/product/actions";
+
+import { getProducts } from "../../pages/product/actions";
+import { filteredCategoryUrl } from "../../../utils";
+import { getDefaultUrl } from "../../ui/product_display/pagination/actions";
+
+import ToggleButtons from "../toggles";
 
 import {
   topHeader,
@@ -20,7 +25,7 @@ import {
   search,
   submit,
   selectBox,
-} from './styles.module.scss';
+} from "./styles.module.scss";
 
 function Header() {
   // const { isDark } = useSelector(selectedTheme);
@@ -28,8 +33,8 @@ function Header() {
   const history = useHistory();
   const [menuList, setMenuList] = useState([]);
   const [filteredSubmenu, setFilteredSubmenu] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
   const category = useSelector(catgoriesList);
 
   useEffect(() => {
@@ -52,12 +57,12 @@ function Header() {
         };
       });
 
-    submenuFiltered.unshift({
-      id: 0,
-      value: 'All',
-      label: 'All',
-      url: '',
-    });
+    // submenuFiltered.unshift({
+    //   id: 0,
+    //   value: 'All',
+    //   label: 'All',
+    //   url: '',
+    // });
 
     setMenuList(menuListFiltered);
     setFilteredSubmenu(submenuFiltered);
@@ -72,30 +77,30 @@ function Header() {
     control: (base) => ({
       ...base,
       border: 0,
-      boxShadow: 'none',
-      width: '15rem',
+      boxShadow: "none",
+      width: "15rem",
       height: 37.05,
     }),
     option: (provided, state) => ({
       ...provided,
-      fontWeight: state.isSelected ? 'bold' : 'normal',
-      fontSize: '1.3rem',
+      fontWeight: state.isSelected ? "bold" : "normal",
+      fontSize: "1.3rem",
     }),
   };
 
   const backToHomePage = () => {
     history.replace({
-      search: '',
+      search: "",
     });
-    history.push('/');
+    history.push("/");
   };
 
   const submitQuery = (e) => {
-    if (selectedCategory === 'Departments' && !searchTerm) {
+    if (selectedCategory === "Departments" && !searchTerm) {
       return false;
     }
 
-    history.push('/search');
+    history.push("/search");
     // DISPATCH THE SEARCH QUERY HERE
     // IF selectedCategory HAS A VALUE THEN DISPATCH THE SEARCH ACTION
     // IF THERE IS A SEARCH SEARCH TERM THEN USE IT INSTEAD
@@ -104,20 +109,20 @@ function Header() {
   return (
     <>
       <div className={topHeader}>
-        <div style={{ padding: '1rem', display: 'flex', alignItems: 'center' }}>
+        <div style={{ padding: "1rem", display: "flex", alignItems: "center" }}>
           <img
             src="/images/logo.png"
             alt="logo"
             className={logo}
             onClick={() => backToHomePage()}
           />
-          <div style={{ marginLeft: '12%', display: 'flex' }}>
+          <div style={{ marginLeft: "12%", display: "flex" }}>
             <Select
               options={menuList}
               styles={styles}
               className={selectBox}
               onChange={(e) => setSelectedCategory(e.value)}
-              defaultValue={{ label: 'Departments', value: 'Departments' }}
+              defaultValue={{ label: "Departments", value: "Departments" }}
             />
             <input
               type="text"
@@ -145,8 +150,15 @@ function Header() {
           <Link
             key={item.id}
             className={submenu}
-            to={goToCategory(item.value, item.id)}
-            onClick={() => dispatch(getCategory(item))}>
+            to={() => goToCategory(item.value, item.id)}
+            onClick={() => {
+              dispatch(
+                getDefaultUrl(getProducts(filteredCategoryUrl(item.id)).payload)
+              );
+              dispatch(getProducts(filteredCategoryUrl(item.id)));
+              dispatch(getCategory(item));
+            }}
+          >
             {item.value}
           </Link>
         ))}
