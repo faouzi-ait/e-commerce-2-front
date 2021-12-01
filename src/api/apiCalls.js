@@ -7,10 +7,15 @@ const TOKEN =
 const axiosInstance = axios.create({
   // baseURL: process.env.REACT_APP_URL_DEV,
   baseURL: process.env.REACT_APP_URL_PROD,
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json',
+  },
 });
 
 axiosInstance.interceptors.request.use(
   (config) => {
+    // CREATE ORIGIN LIST TO ATTACH THE TOKEN
     if (TOKEN) {
       config.headers['Authorization'] = `Bearer ${TOKEN}`;
     }
@@ -75,6 +80,15 @@ export async function fetchHomePageProducts() {
 export async function fetchProducts(query, params) {
   try {
     return await apiClient.get(`/products?${query}`, params);
+  } catch (error) {
+    return { error };
+  }
+}
+
+export async function fetchRelatedProducts(urlParams, queryParams) {
+  console.log(urlParams)
+  try {
+    return await apiClient.get(`/related/${urlParams}`, queryParams);
   } catch (error) {
     return { error };
   }

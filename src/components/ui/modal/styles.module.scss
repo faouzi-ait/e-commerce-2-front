@@ -2,3 +2,105 @@
     width: 35rem;
     height: 30rem;
 }
+
+.modalContent {
+    display: flex; justify-content: space-around
+}
+
+.imgAlignment {
+    text-align: right;
+}
+
+.review {
+    display: flex; align-items: center
+}
+
+.productDetails {
+    width: 35%;
+}
+
+.relatedProducts {
+    background: #F5F5F5;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 31%;
+}
+
+.productPrice {
+    color: #000;
+}
+
+.relatedProductsTitle {
+    padding-top: 1rem; text-align: center;
+    color: #565959;
+    font-size: 1.75rem;
+    letter-spacing: .3px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.closeBtn {
+    width: 4%;
+    cursor: pointer;
+}
+
+.buyBtn {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    padding: 8px 0;
+    margin: 3rem auto;
+    outline: none;
+    background: rgba(255, 208, 22, 1);
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+    
+    &:hover {
+        background: rgb(226, 181, 0);
+    }
+    
+    &:active {
+        background: rgba(250, 216, 76, 1);
+    }
+}
+
+.buyBtnDeactivated {
+    background: #CECECE;
+    cursor: not-allowed;
+
+        &:active,
+        &:hover {
+            background: #CECECE;
+        }
+}
+
+.productAvailability {
+    display: block;
+    margin-left: 3.2rem;
+    margin-top: -3rem !important;
+    font-size: 1.25rem;
+    color: green;
+}
+
+.productNotAvailable {
+    color: red !important;
+}
+
+.relatedProductContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.relatedProductImg {
+    width: 125px;
+    height: 105px;
+}
+
+.relatedProductsBrand {
+    font-size: 1.25rem;
+    margin-top: .5rem;
+    font-weight: bold;
+}

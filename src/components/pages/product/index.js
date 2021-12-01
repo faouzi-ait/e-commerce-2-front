@@ -8,7 +8,7 @@ import SideBar from '../../ui/product_display/sidebar';
 import Pagination from '../../ui/product_display/pagination';
 import PageLoader from '../../ui/page_loader';
 import Footer from '../../ui/footer';
-import { filteredCategoryUrl, defaultUrl } from '../../../utils';
+import { filteredCategoryUrl } from '../../../utils';
 import { getDefaultUrl } from '../../ui/product_display/pagination/actions';
 
 import { productGrid } from './styles.module.scss';
@@ -22,13 +22,8 @@ function Submenu() {
   useEffect(() => {
     const { id } = category || {};
 
-    if (id === 0) {
-      dispatch(getProducts(defaultUrl()));
-      dispatch(getDefaultUrl(getProducts(defaultUrl()).payload));
-    } else {
-      dispatch(getProducts(filteredCategoryUrl(id)));
-      dispatch(getDefaultUrl(getProducts(filteredCategoryUrl(id)).payload));
-    }
+    dispatch(getProducts(filteredCategoryUrl(id)));
+    dispatch(getDefaultUrl(getProducts(filteredCategoryUrl(id)).payload));
   }, [category, dispatch]);
 
   return (

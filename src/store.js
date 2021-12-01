@@ -9,6 +9,8 @@ import { products } from './components/pages/product/reducers';
 import { home_page_products } from './components/pages/home/reducers';
 import { tokenRequest } from './components/ui/resend_token/reducers';
 import { search } from './components/ui/product_display/pagination/reducers';
+import { basket } from './components/ui/product_display/row/reducers';
+import { relatedProducts } from './components/ui/modal/reducer';
 
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
@@ -25,7 +27,9 @@ const combinedReducers = combineReducers({
   categories,
   products,
   home_page_products,
+  relatedProducts,
   search,
+  basket,
 });
 
 const sagaMiddleware = createSagaMiddleware();
@@ -41,9 +45,9 @@ export const persistedReducer = persistReducer(persistConfig, combinedReducers);
 export const store = createStore(
   persistedReducer,
   compose(
-    applyMiddleware(logger, sagaMiddleware)
+    applyMiddleware(logger, sagaMiddleware),
     // ADD CONDITION FOR DEV ENV
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 
