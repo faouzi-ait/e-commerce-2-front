@@ -152,7 +152,7 @@ function ProductModal({ modalIsOpen, closeModal, productId }) {
         <div className={relatedProducts}>
           <div className={relatedProductsTitle}>Customers also bought</div>
           <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '2rem' }}>
-            {data.products.map((item) => (
+            {data?.products.map((item) => (
               <div className={relatedProductContainer}>
                 <img
                   src={item.photo}
