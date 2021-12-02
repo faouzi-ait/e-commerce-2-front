@@ -11,7 +11,7 @@ const initialState = {
   category: null,
   errors: null,
   loading: false,
-  isRow: false,
+  isRow: true,
 };
 
 export const products = (state = initialState, action) => {

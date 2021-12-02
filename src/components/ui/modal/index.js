@@ -13,6 +13,7 @@ import {
   productDetails,
   closeBtn,
   buyBtn,
+  loader,
   imgAlignment,
   productPrice,
   productAvailability,
@@ -21,6 +22,7 @@ import {
   relatedProductContainer,
   relatedProductImg,
   relatedProductsBrand,
+  productDisplay,
 } from './styles.module.scss';
 
 Modal.setAppElement('#root');
@@ -40,7 +42,7 @@ function ProductModal({ modalIsOpen, closeModal, productId }) {
   const dispatch = useDispatch();
   const { cart } = useSelector((state) => state?.basket);
   const { products } = useSelector((state) => state?.products);
-  const { data } = useSelector((state) => state?.relatedProducts);
+  const { data, loading } = useSelector((state) => state?.relatedProducts);
 
   const product = products.data.items.filter((item) => item._id === productId);
   const productInCart = cart.find((item) => item._id === productId);
@@ -88,7 +90,7 @@ function ProductModal({ modalIsOpen, closeModal, productId }) {
           />
         ) : (
           <Label
-            label="This item is no longer available"
+            label="This item is currently out of stock"
             className={`${productAvailability} ${productNotAvailable}`}
           />
         )}
@@ -100,8 +102,6 @@ function ProductModal({ modalIsOpen, closeModal, productId }) {
     const category = item?.category?._id;
     dispatch(getRelatedProducts(`${productId}/${category}`));
   }, [dispatch, productId, item]);
-
-  // console.log(product);
 
   return (
     <Modal
@@ -151,15 +151,21 @@ function ProductModal({ modalIsOpen, closeModal, productId }) {
         </div>
         <div className={relatedProducts}>
           <div className={relatedProductsTitle}>Customers also bought</div>
-          <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '2rem' }}>
+          <div className={productDisplay}>
             {data?.products.map((item) => (
-              <div className={relatedProductContainer}>
-                <img
-                  src={item.photo}
-                  alt="product"
-                  className={relatedProductImg}
-                />
-                <span className={relatedProductsBrand}>{item.brand}</span>
+              <div className={relatedProductContainer} key={item._id}>
+                {loading ? (
+                  <div className={loader}></div>
+                ) : (
+                  <>
+                    <img
+                      src={item.photo}
+                      alt="product"
+                      className={relatedProductImg}
+                    />
+                    <span className={relatedProductsBrand}>{item.brand}</span>
+                  </>
+                )}
               </div>
             ))}
           </div>

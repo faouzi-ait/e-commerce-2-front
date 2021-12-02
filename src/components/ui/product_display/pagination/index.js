@@ -23,10 +23,10 @@ function Navigation() {
   const dispatchFilterAction = (id, page) => {
     dispatch(getPage(page));
 
-    dispatch(getProducts(filteredCategoryUrl(id, page, limit))); // API Call to get the products
+    dispatch(getProducts(filteredCategoryUrl(id, page, limit)));
     dispatch(
       getDefaultUrl(getProducts(filteredCategoryUrl(id, page, limit)).payload)
-    ); // Dispatch URL to redux state
+    );
   };
 
   const navigationBtn = (id, pageNb, label, className, isCurrent) => {

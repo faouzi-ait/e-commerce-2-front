@@ -6,7 +6,7 @@ const PrivateRoute = ({ component, ...rest }) => {
   const { loggedIn } = useSelector((state) => state.login);
 
   if (loggedIn) {
-    return <Route {...rest} component={component} />;
+    return <Route component={component} {...rest} />;
   } else {
     return <Redirect to="/login" />;
   }
