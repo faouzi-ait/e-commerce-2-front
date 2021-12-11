@@ -15,8 +15,8 @@ function Carousel() {
   };
 
   const carouselSource = [
+    { src: './images/caroussel-1.jpg' },
     { src: './images/caroussel-2.jpg' },
-    { src: './images/caroussel-3.jpg' },
     { src: './images/caroussel-4.jpg' },
   ];
 
