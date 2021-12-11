@@ -3,14 +3,15 @@ import { useSelector } from 'react-redux';
 import { THEMES } from '../../ui/toggles/constants';
 // import { t } from '../../../i18n/translate';
 
+import { userProfile } from './selector';
 import { selectedTheme } from '../../ui/toggles/selectors';
 import {} from './styles.module.scss';
 
 function Dashboard() {
-  const { user } = useSelector((state) => state.login);
   const { isDark } = useSelector(selectedTheme);
+  const { profile } = useSelector(userProfile);
 
-  console.log(user.profile);
+  console.log(profile);
 
   return (
     <div className={`baseTheme app ${isDark ? THEMES.DARK : THEMES.LIGHT}`}>

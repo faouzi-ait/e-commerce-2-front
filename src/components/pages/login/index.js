@@ -5,6 +5,7 @@ import { THEMES } from '../../ui/toggles/constants';
 import { t } from '../../../i18n/translate';
 
 import { selectedTheme } from '../../ui/toggles/selectors';
+import { loginStatus } from './selector';
 import { login_user_action } from './actions';
 
 import { loginForm } from './styles.module.scss';
@@ -15,9 +16,7 @@ function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { isDark } = useSelector(selectedTheme);
-  const { authenticating, loggedIn, errors } = useSelector(
-    (state) => state.login
-  );
+  const { authenticating, loggedIn, errors } = useSelector(loginStatus);
 
   const activationLandingScreen = (query) => {
     const queryString = query;

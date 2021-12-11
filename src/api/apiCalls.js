@@ -5,10 +5,11 @@ const TOKEN =
   JSON.parse(localStorage.getItem('CURRENT_USER')) || 'NOT_LOGGED_IN';
 
 const axiosInstance = axios.create({
-  // baseURL: process.env.REACT_APP_URL_DEV,
-  baseURL: process.env.REACT_APP_URL_PROD,
+  baseURL: process.env.REACT_APP_URL_DEV,
+  // baseURL: process.env.REACT_APP_URL_PROD,
   headers: {
     'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Credentials': 'true',
     'Content-Type': 'application/json',
   },
 });
@@ -86,7 +87,6 @@ export async function fetchProducts(query, params) {
 }
 
 export async function fetchRelatedProducts(urlParams, queryParams) {
-  console.log(urlParams)
   try {
     return await apiClient.get(`/related/${urlParams}`, queryParams);
   } catch (error) {

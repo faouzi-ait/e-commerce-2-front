@@ -14,18 +14,7 @@ import { getDefaultUrl } from "../../ui/product_display/pagination/actions";
 
 import ToggleButtons from "../toggles";
 
-import {
-  topHeader,
-  bottomHeader,
-  toggleBtn,
-  logo,
-  logo2,
-  submenu,
-  cartContainer,
-  search,
-  submit,
-  selectBox,
-} from "./styles.module.scss";
+import * as cmpStyle from './styles.module.scss';
 
 function Header() {
   // const { isDark } = useSelector(selectedTheme);
@@ -108,48 +97,48 @@ function Header() {
 
   return (
     <>
-      <div className={topHeader}>
-        <div style={{ padding: "1rem", display: "flex", alignItems: "center" }}>
+      <div className={cmpStyle.topHeader}>
+        <div style={{ padding: '1rem', display: 'flex', alignItems: 'center' }}>
           <img
             src="/images/logo.png"
             alt="logo"
-            className={logo}
+            className={cmpStyle.logo}
             onClick={() => backToHomePage()}
           />
-          <div style={{ marginLeft: "12%", display: "flex" }}>
+          <div style={{ marginLeft: '12%', display: 'flex' }}>
             <Select
               options={menuList}
               styles={styles}
-              className={selectBox}
+              className={cmpStyle.selectBox}
               onChange={(e) => setSelectedCategory(e.value)}
-              defaultValue={{ label: "Departments", value: "Departments" }}
+              defaultValue={{ label: 'Departments', value: 'Departments' }}
             />
             <input
               type="text"
               name="search"
               id="search"
-              className={search}
+              className={cmpStyle.search}
               onChange={(e) => setSearchTerm(e.target.value)}
               value={searchTerm}
               autoComplete="off"
             />
-            <div className={submit} onClick={submitQuery}>
+            <div className={cmpStyle.submit} onClick={submitQuery}>
               <i className="fa fa-search"></i>
             </div>
           </div>
-          <div className={cartContainer}>
+          <div className={cmpStyle.cartContainer}>
             <i className="fa fa-shopping-bag"></i>
           </div>
         </div>
-        <span className={toggleBtn}>
+        <span className={cmpStyle.toggleBtn}>
           <ToggleButtons />
         </span>
       </div>
-      <div className={bottomHeader}>
+      <div className={cmpStyle.bottomHeader}>
         {(filteredSubmenu || []).map((item) => (
           <Link
             key={item.id}
-            className={submenu}
+            className={cmpStyle.submenu}
             to={() => goToCategory(item.value, item.id)}
             onClick={() => {
               dispatch(
@@ -157,12 +146,11 @@ function Header() {
               );
               dispatch(getProducts(filteredCategoryUrl(item.id)));
               dispatch(getCategory(item));
-            }}
-          >
+            }}>
             {item.value}
           </Link>
         ))}
-        <div className={logo2}>
+        <div className={cmpStyle.logo2}>
           <span>Amazon Prime </span>
           <span>&nbsp;| 30 Days Free Trial</span>
         </div>

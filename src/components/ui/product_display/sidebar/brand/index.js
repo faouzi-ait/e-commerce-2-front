@@ -1,23 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getBrand, getPage } from '../../pagination/actions';
+import * as cmpStyle from '../styles.module.scss';
 
-import {
-  starLayout,
-  starTitle,
-  brandLabel,
-  brandLabelDisplay,
-  brandList,
-  clear,
-  clearMargin,
-  priceLimitColor,
-} from '../styles.module.scss';
-
-function Brand() {
+function Brand({ brand, data }) {
   const dispatch = useDispatch();
   const [brands, setBrands] = useState(null);
-  const { data } = useSelector((state) => state?.products?.products);
-  const { brand } = useSelector((state) => state?.search);
 
   useEffect(() => {
     const list = data.items.map((item) => item.brand);
@@ -44,9 +32,11 @@ function Brand() {
 
   const DisplayBrands = () => {
     return (
-      <ul className={brandList}>
+      <ul className={cmpStyle.brandList}>
         {(brands || []).map((item) => (
-          <li key={item} className={`${brandLabelDisplay} ${brandLabel}`}>
+          <li
+            key={item}
+            className={`${cmpStyle.brandLabelDisplay} ${cmpStyle.brandLabel}`}>
             <input
               type="checkbox"
               name={item}
@@ -60,9 +50,9 @@ function Brand() {
               style={{ marginRight: '.5rem' }}></i>
             <label
               htmlFor={`custom-checkbox-${item}`}
-              className={`${brandLabelDisplay} ${brandLabel} ${
-                brandFormat === item && priceLimitColor
-              }`}>
+              className={`${cmpStyle.brandLabelDisplay} ${
+                cmpStyle.brandLabel
+              } ${brandFormat === item && cmpStyle.priceLimitColor}`}>
               {item}
             </label>
           </li>
@@ -70,7 +60,7 @@ function Brand() {
         {brand && (
           <div
             onClick={() => dispatch(getBrand(''))}
-            className={`${clear} ${clearMargin}`}>
+            className={`${cmpStyle.clear} ${cmpStyle.clearMargin}`}>
             <i className="fa fa-chevron-left"></i> Clear Filter
           </div>
         )}
@@ -79,8 +69,8 @@ function Brand() {
   };
 
   return (
-    <div className={starLayout}>
-      <span className={starTitle}>Filter Products by Brand</span>
+    <div className={cmpStyle.starLayout}>
+      <span className={cmpStyle.starTitle}>Filter Products by Brand</span>
       <DisplayBrands />
     </div>
   );

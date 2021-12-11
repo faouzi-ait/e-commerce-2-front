@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { switchLayout } from './actions';
+import { productData } from './selector';
 
 import {
   viewSwitch,
@@ -10,7 +11,7 @@ import {
 
 function LayoutSwitch() {
   const dispatch = useDispatch();
-  const { isRow, products } = useSelector((state) => state.products);
+  const { isRow, products } = useSelector(productData);
   const {
     currentPage,
     totalNumberOfItems,

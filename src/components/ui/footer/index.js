@@ -1,20 +1,14 @@
 import React from 'react';
-import {
-  topFooter,
-  middleFooter,
-  countries,
-  bottomLinks,
-  footerLogo,
-} from './styles.module.scss';
+import * as cmpStyle from './styles.module.scss';
 
 const TopFooter = () => {
-  return <div className={topFooter}>Back to Top</div>;
+  return <div className={cmpStyle.topFooter}>Back to Top</div>;
 };
 
 const MiddleFooter = () => {
   return (
     <>
-      <div className={middleFooter}>
+      <div className={cmpStyle.middleFooter}>
         <ul>
           <li>Get to Know Us</li>
           <li>Career</li>
@@ -55,8 +49,8 @@ const MiddleFooter = () => {
           <li>Manage Your Content and Devices</li>
         </ul>
       </div>
-      <div className={countries}>
-        <div className={footerLogo}>
+      <div className={cmpStyle.countries}>
+        <div className={cmpStyle.footerLogo}>
           <img src="/images/amazon-logo.png" alt="logo" />
         </div>
         <ul>
@@ -85,7 +79,7 @@ const MiddleFooter = () => {
 const BottomFooter = () => {
   return (
     <>
-      <div className={`${countries} ${bottomLinks}`}>
+      <div className={`${cmpStyle.countries} ${cmpStyle.bottomLinks}`}>
         <ul>
           <li>Conditions of Use & Sale</li>
           <li>Privacy Notice</li>

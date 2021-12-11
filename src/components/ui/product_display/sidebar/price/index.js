@@ -1,27 +1,19 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getPrice, getPage } from '../../pagination/actions';
+import * as cmpStyle from '../styles.module.scss';
 
-import {
-  starLayout,
-  starTitle,
-  titleBottomMargin,
-  priceBottomMargin,
-  brandLabel,
-  priceLimitColor,
-  clear,
-} from '../styles.module.scss';
-
-function Price() {
+function Price({ pricing }) {
   const dispatch = useDispatch();
   const prices = [100, 200, 300, 400];
-  const { pricing } = useSelector((state) => state?.search);
 
   const pricingFormat = pricing?.split('=')[1];
 
   return (
-    <div className={`${starLayout} ${priceBottomMargin}`}>
-      <span className={`${starTitle} ${titleBottomMargin}`}>Price Limit</span>
+    <div className={`${cmpStyle.starLayout} ${cmpStyle.priceBottomMargin}`}>
+      <span className={`${cmpStyle.starTitle} ${cmpStyle.titleBottomMargin}`}>
+        Price Limit
+      </span>
       {prices.map((item) => (
         <li key={item} style={{ listStyle: 'none', marginBottom: '.5rem' }}>
           <label>
@@ -45,8 +37,8 @@ function Price() {
               className="fa fa-chevron-right"
               style={{ marginRight: '.5rem' }}></i>
             <span
-              className={`${brandLabel} ${
-                parseInt(pricingFormat) === item && priceLimitColor
+              className={`${cmpStyle.brandLabel} ${
+                parseInt(pricingFormat) === item && cmpStyle.priceLimitColor
               }`}>
               {item}$
             </span>
@@ -54,7 +46,7 @@ function Price() {
         </li>
       ))}
       {pricing && (
-        <div onClick={() => dispatch(getPrice(''))} className={clear}>
+        <div onClick={() => dispatch(getPrice(''))} className={cmpStyle.clear}>
           <i className="fa fa-chevron-left"></i> Clear Filter
         </div>
       )}

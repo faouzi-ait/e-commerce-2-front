@@ -10,14 +10,19 @@ import PageLoader from '../../ui/page_loader';
 import Footer from '../../ui/footer';
 import { filteredCategoryUrl } from '../../../utils';
 import { getDefaultUrl } from '../../ui/product_display/pagination/actions';
+import { productData } from './selector';
+import { searchSelector } from '../../ui/product_display/pagination/selectors';
+import { productSelector } from '../../ui/modal/selectors';
 
 import { productGrid } from './styles.module.scss';
 
 function Submenu() {
   const dispatch = useDispatch();
-  const { products, isRow, category, loading } = useSelector(
-    (state) => state?.products
-  );
+  const { products, isRow, category, loading } = useSelector(productData);
+  const { rating, brand, pricing, page, limit } = useSelector(searchSelector);
+  const {
+    products: { data },
+  } = useSelector(productSelector);
 
   useEffect(() => {
     const { id } = category || {};
@@ -32,7 +37,15 @@ function Submenu() {
         <div>
           <SwitchLayout />
           <div className={productGrid}>
-            <SideBar />
+            <SideBar
+              rating={rating}
+              brand={brand}
+              pricing={pricing}
+              page={page}
+              limit={limit}
+              data={data}
+              action="product"
+            />
             <div>
               {loading ? (
                 <PageLoader />

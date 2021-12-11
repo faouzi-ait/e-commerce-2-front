@@ -1,13 +1,13 @@
 import React from 'react';
-import { loaderContainer, loader, loadingLabel } from './styles.module.scss';
+import * as cmpStyle from './styles.module.scss';
 
 function PageLoader() {
   return (
-    <div className={loaderContainer}>
-      <div className={loader}>
+    <div className={cmpStyle.loaderContainer}>
+      <div className={cmpStyle.loader}>
         <img src="/images/loading-page.gif" alt="load" />
       </div>
-      <div className={loadingLabel}>Loading Products...</div>
+      <div className={cmpStyle.loadingLabel}>Loading Products...</div>
     </div>
   );
 }

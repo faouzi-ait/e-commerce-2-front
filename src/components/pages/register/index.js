@@ -5,11 +5,12 @@ import { t } from '../../../i18n/translate';
 
 import { selectedTheme } from '../../ui/toggles/selectors';
 import { register_user } from './actions';
+import { registration } from './selector';
 
 import { loginForm } from './styles.module.scss';
 
 function Register() {
-  const { user, errors, registering } = useSelector((state) => state.register);
+  const { user, errors, registering } = useSelector(registration);
   const { isDark } = useSelector(selectedTheme);
   const [password, setPassword] = useState('');
   const [surname, setSurname] = useState('');

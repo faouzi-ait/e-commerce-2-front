@@ -7,6 +7,7 @@ import { setLanguage } from '../header/actions';
 
 import { switchTheme } from '../../ui/toggles/actions';
 import { selectedTheme } from '../../ui/toggles/selectors';
+import { loginStatus } from '../../access_to_routes/selectors';
 
 import sun from '../../../images/sun.svg';
 import night from '../../../images/night.svg';
@@ -31,7 +32,7 @@ function ToggleLanguage() {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const { isDark } = useSelector(selectedTheme);
-  const { loggedIn } = useSelector((state) => state.login);
+  const loggedIn = useSelector(loginStatus);
 
   return (
     <>

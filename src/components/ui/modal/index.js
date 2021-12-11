@@ -5,25 +5,11 @@ import Stars from '../../ui/product_display/sidebar/stars/Stars';
 import { addItem, addOne } from '../../ui/product_display/row/actions';
 import { getRelatedProducts } from './actions';
 import {
-  img,
-  relatedProducts,
-  relatedProductsTitle,
-  modalContent,
-  review,
-  productDetails,
-  closeBtn,
-  buyBtn,
-  loader,
-  imgAlignment,
-  productPrice,
-  productAvailability,
-  productNotAvailable,
-  buyBtnDeactivated,
-  relatedProductContainer,
-  relatedProductImg,
-  relatedProductsBrand,
-  productDisplay,
-} from './styles.module.scss';
+  basketSelector,
+  productSelector,
+  relatedProductSelector,
+} from './selectors';
+import * as cmpStyle from './styles.module.scss';
 
 Modal.setAppElement('#root');
 
@@ -40,9 +26,9 @@ const customStyles = {
 
 function ProductModal({ modalIsOpen, closeModal, productId }) {
   const dispatch = useDispatch();
-  const { cart } = useSelector((state) => state?.basket);
-  const { products } = useSelector((state) => state?.products);
-  const { data, loading } = useSelector((state) => state?.relatedProducts);
+  const { cart } = useSelector(basketSelector);
+  const { products } = useSelector(productSelector);
+  const { data, loading } = useSelector(relatedProductSelector);
 
   const product = products.data.items.filter((item) => item._id === productId);
   const productInCart = cart.find((item) => item._id === productId);
@@ -63,13 +49,13 @@ function ProductModal({ modalIsOpen, closeModal, productId }) {
           <Button
             label="Add to cart"
             onClick={() => dispatch(addItem(item))}
-            className={buyBtn}
+            className={cmpStyle.buyBtn}
           />
         ) : (
           <Button
             label="+ 1 More"
             onClick={() => dispatch(addOne(item._id))}
-            className={buyBtn}
+            className={cmpStyle.buyBtn}
           />
         )}
       </div>
@@ -86,12 +72,12 @@ function ProductModal({ modalIsOpen, closeModal, productId }) {
         {stock > 0 ? (
           <Label
             label="Item available in stock"
-            className={`${productAvailability}`}
+            className={`${cmpStyle.productAvailability}`}
           />
         ) : (
           <Label
             label="This item is currently out of stock"
-            className={`${productAvailability} ${productNotAvailable}`}
+            className={`${cmpStyle.productAvailability} ${cmpStyle.productNotAvailable}`}
           />
         )}
       </div>
@@ -112,22 +98,22 @@ function ProductModal({ modalIsOpen, closeModal, productId }) {
       overlayClassName="myoverlay"
       closeTimeoutMS={500}>
       <div>
-        <div className={imgAlignment}>
+        <div className={cmpStyle.imgAlignment}>
           <img
             src="/icons/close.svg"
             alt="close"
             onClick={closeModal}
-            className={closeBtn}
+            className={cmpStyle.closeBtn}
           />
         </div>
-        <div className={modalContent}>
+        <div className={cmpStyle.modalContent}>
           <div>
-            <img src={item?.photo} alt="product" className={img} />
+            <img src={item?.photo} alt="product" className={cmpStyle.img} />
           </div>
-          <div className={productDetails}>
+          <div className={cmpStyle.productDetails}>
             <h1>{item?.name}</h1>
             <h2>{item?.description}</h2>
-            <div className={review}>
+            <div className={cmpStyle.review}>
               {item?.totalReviews === 0 ? (
                 <span>There are no reviews for this product</span>
               ) : (
@@ -137,33 +123,37 @@ function ProductModal({ modalIsOpen, closeModal, productId }) {
                 </>
               )}
             </div>
-            <h3 className={productPrice}>Price: £{item?.price}</h3>
+            <h3 className={cmpStyle.productPrice}>Price: £{item?.price}</h3>
             {item?.quantity > 0 ? (
               <DisplayButtons inCart={productInCart} />
             ) : (
               <Button
                 label="Not Available"
-                className={`${buyBtn} ${buyBtnDeactivated}`}
+                className={`${cmpStyle.buyBtn} ${cmpStyle.buyBtnDeactivated}`}
               />
             )}
             <DisplayLabel stock={item?.quantity} />
           </div>
         </div>
-        <div className={relatedProducts}>
-          <div className={relatedProductsTitle}>Customers also bought</div>
-          <div className={productDisplay}>
+        <div className={cmpStyle.relatedProducts}>
+          <div className={cmpStyle.relatedProductsTitle}>
+            Customers also bought
+          </div>
+          <div className={cmpStyle.productDisplay}>
             {data?.products.map((item) => (
-              <div className={relatedProductContainer} key={item._id}>
+              <div className={cmpStyle.relatedProductContainer} key={item._id}>
                 {loading ? (
-                  <div className={loader}></div>
+                  <div className={cmpStyle.loader}></div>
                 ) : (
                   <>
                     <img
                       src={item.photo}
                       alt="product"
-                      className={relatedProductImg}
+                      className={cmpStyle.relatedProductImg}
                     />
-                    <span className={relatedProductsBrand}>{item.brand}</span>
+                    <span className={cmpStyle.relatedProductsBrand}>
+                      {item.brand}
+                    </span>
                   </>
                 )}
               </div>

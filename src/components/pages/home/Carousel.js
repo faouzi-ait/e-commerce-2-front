@@ -14,22 +14,22 @@ function Carousel() {
     style: { zIndex: 999 },
   };
 
+  const carouselSource = [
+    { src: './images/caroussel-2.jpg' },
+    { src: './images/caroussel-3.jpg' },
+    { src: './images/caroussel-4.jpg' },
+  ];
+
   return (
     <Slider {...settings}>
-      <div>
-        <video autoPlay loop muted allow="autoplay" width="100%" height="100%">
-          <source src="./images/advert.mp4" type="video/mp4" />
-        </video>
-      </div>
-      <div className="sliderImg">
-        <img src="./images/caroussel-2.jpg" alt="carousel" />
-      </div>
-      <div className="sliderImg">
-        <img src="./images/caroussel-4.jpg" alt="carousel" />
-      </div>
-      <div className="sliderImg">
-        <img src="./images/caroussel-5.jpg" alt="carousel" />
-      </div>
+      <video autoPlay loop muted allow="autoplay" width="100%" height="100%">
+        <source src="./images/advert.mp4" type="video/mp4" />
+      </video>
+      {carouselSource.map((item) => (
+        <div className="sliderImg">
+          <img src={item.src} alt="carousel" />
+        </div>
+      ))}
     </Slider>
   );
 }

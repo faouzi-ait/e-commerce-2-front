@@ -1,24 +1,18 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProducts } from '../../../pages/product/actions';
-import { getDefaultUrl /* getFilteredUrl */, getPage } from './actions';
-import {
-  // defaultUrl,
-  filteredCategoryUrl /* queryUrl */,
-} from '../../../../utils';
-import {
-  active,
-  pageNumbers,
-  container,
-  leftArrow,
-  rightArrow,
-} from './styles.module.scss';
+import { getDefaultUrl, getPage } from './actions';
+import { filteredCategoryUrl } from '../../../../utils';
+import * as cmpStyle from './styles.module.scss';
+
+import { searchSelector } from './selectors';
+import { productSelector } from '../../modal/selectors';
 
 function Navigation() {
   const dispatch = useDispatch();
-  const { products, category } = useSelector((state) => state.products);
+  const { products, category } = useSelector(productSelector);
+  const { limit } = useSelector(searchSelector);
   const { totalNumberOfPages, currentPage, nextPage, previousPage } = products;
-  const { limit } = useSelector((state) => state.search);
 
   const dispatchFilterAction = (id, page) => {
     dispatch(getPage(page));
@@ -48,25 +42,28 @@ function Navigation() {
 
     return (
       <>
-        {previousPage && navigationBtn(id, previousPage, left, leftArrow)}
+        {previousPage &&
+          navigationBtn(id, previousPage, left, cmpStyle.leftArrow)}
 
         {Array.from(Array(nbOfPages), (e, i) => {
           let page = parseInt(i + 1);
           const isCurrent = currentPage === page;
-          const style = `${pageNumbers} ${isCurrent && active}`;
+          const style = `${cmpStyle.pageNumbers} ${
+            isCurrent && cmpStyle.active
+          }`;
 
           return (
             <div key={i}>{navigationBtn(id, page, page, style, isCurrent)}</div>
           );
         })}
 
-        {nextPage && navigationBtn(id, nextPage, right, rightArrow)}
+        {nextPage && navigationBtn(id, nextPage, right, cmpStyle.rightArrow)}
       </>
     );
   };
 
   return (
-    <div className={container}>
+    <div className={cmpStyle.container}>
       <Paginate nbOfPages={totalNumberOfPages} />
     </div>
   );
