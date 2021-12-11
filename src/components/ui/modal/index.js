@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Modal from 'react-modal';
+import Modal from '../modalWrapper';
 import Stars from '../../ui/product_display/sidebar/stars/Stars';
 import { addItem, addOne } from '../../ui/product_display/row/actions';
 import { getRelatedProducts } from './actions';
@@ -10,8 +10,6 @@ import {
   relatedProductSelector,
 } from './selectors';
 import * as cmpStyle from './styles.module.scss';
-
-Modal.setAppElement('#root');
 
 const customStyles = {
   content: {
@@ -86,17 +84,18 @@ function ProductModal({ modalIsOpen, closeModal, productId }) {
 
   useEffect(() => {
     const category = item?.category?._id;
-    dispatch(getRelatedProducts(`${productId}/${category}`));
+
+    if (category !== null && category !== undefined && category !== '') {
+      dispatch(getRelatedProducts(`${productId}/${category}`));
+    }
   }, [dispatch, productId, item]);
 
   return (
     <Modal
-      isOpen={modalIsOpen}
-      onRequestClose={closeModal}
+      open={modalIsOpen}
+      onClose={closeModal}
       style={customStyles}
-      className="mymodal"
-      overlayClassName="myoverlay"
-      closeTimeoutMS={500}>
+      timeout={500}>
       <div>
         <div className={cmpStyle.imgAlignment}>
           <img

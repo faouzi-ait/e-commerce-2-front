@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from './actions';
 
-import SwitchLayout from './LayoutSwitch';
+import SwitchLayout from '../../components/switch';
 import Row from '../../ui/product_display/row';
 import SideBar from '../../ui/product_display/sidebar';
 import Pagination from '../../ui/product_display/pagination';
-import PageLoader from '../../ui/page_loader';
-import Footer from '../../ui/footer';
+import PageLoader from '../../ui/loader';
+import Footer from '../../components/footer';
 import { filteredCategoryUrl } from '../../../utils';
 import { getDefaultUrl } from '../../ui/product_display/pagination/actions';
 import { productData } from './selector';

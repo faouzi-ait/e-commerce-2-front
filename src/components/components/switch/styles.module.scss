@@ -1,0 +1,27 @@
+.viewSwitchContainer {
+    display: flex;
+    align-items: center;
+    height: 4.2rem;
+    background: rgb(21, 25, 31);
+}
+
+.productCount {
+    margin-left: 1.25rem;
+    font-size: 1.3rem;
+    color: #fff;
+}
+
+.viewSwitch {
+    margin-left: 1rem;
+    padding: .5rem !important;
+    font-size: 1.2rem;
+    border-radius: 1rem !important;
+    background: #ccc;
+    cursor: pointer;
+    user-select: none;
+
+    i {
+        font-size: 1.5rem;
+        margin-left: 1rem;
+    }
+}

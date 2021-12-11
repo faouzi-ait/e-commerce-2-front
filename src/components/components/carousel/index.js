@@ -1,6 +1,5 @@
 import React from 'react';
 import Slider from 'react-slick';
-import {} from './styles.module.scss';
 
 function Carousel() {
   const settings = {
@@ -25,8 +24,8 @@ function Carousel() {
       <video autoPlay loop muted allow="autoplay" width="100%" height="100%">
         <source src="./images/advert.mp4" type="video/mp4" />
       </video>
-      {carouselSource.map((item) => (
-        <div className="sliderImg">
+      {carouselSource.map((item, i) => (
+        <div className="sliderImg" key={i}>
           <img src={item.src} alt="carousel" />
         </div>
       ))}

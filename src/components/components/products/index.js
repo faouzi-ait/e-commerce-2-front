@@ -3,8 +3,6 @@ import ProductDisplay from './ProductDisplay';
 import { container } from './styles.module.scss';
 
 function HomeProducts({ products }) {
-  // const { bestSeller, deals, featured, topRated } = products;
-  // console.log(featured);
   return (
     <div className={container}>
       <ProductDisplay

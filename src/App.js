@@ -13,8 +13,8 @@ import Product from './components/pages/product';
 import Register from './components/pages/register';
 import Dashboard from './components/pages/dashboard';
 import NotFound from './components/pages/not-found';
-import PublicRoutes from './components/access_to_routes/PublicRoutes';
-import PrivateRoutes from './components/access_to_routes/PrivateRoutes';
+import PublicRoutes from './components/route-access/PublicRoutes';
+import PrivateRoutes from './components/route-access/PrivateRoutes';
 
 import { getCategories } from './components/ui/header/actions';
 import { getHomePageProducts } from './components/pages/home/actions';

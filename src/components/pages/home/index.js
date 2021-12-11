@@ -3,13 +3,13 @@ import { useSelector } from 'react-redux';
 import { THEMES } from '../../ui/toggles/constants';
 // import { t } from '../../../i18n/translate';
 
+import Carousel from '../../components/carousel';
+import HomeProducts from '../../components/products';
+import AdvertBanner from '../../components/advert';
+import Footer from '../../components/footer';
+
 import { selectedTheme } from '../../ui/toggles/selectors';
 import { homeProductItems } from './selectors';
-
-import Carousel from './Carousel';
-import HomeProducts from './HomeProducts';
-import AdvertBanner from './Advert';
-import Footer from '../../ui/footer';
 
 function Home() {
   const { isDark } = useSelector(selectedTheme);
