@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { THEMES } from '../../ui/toggles/constants';
+import { THEMES } from '../../components/toggles/constants';
 import { t } from '../../../i18n/translate';
 
-import { selectedTheme } from '../../ui/toggles/selectors';
+import { selectedTheme } from '../../components/toggles/selectors';
 import { register_user } from './actions';
 import { registration } from './selector';
 

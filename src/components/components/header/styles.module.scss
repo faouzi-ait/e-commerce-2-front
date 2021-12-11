@@ -3,6 +3,12 @@
     height: 5rem;
 }
 
+.headerLayout {
+    padding: 1rem; 
+    display: flex; 
+    align-items: center
+}
+
 .toggleBtn {
     display: inline-flex;
     position: absolute;
@@ -18,6 +24,7 @@
     height: 5.4rem;
     background: rgb(20, 25, 32);
 }
+
 .bottomHeader {
     display: flex;
     max-width:100%;
@@ -94,10 +101,9 @@
         letter-spacing: .5px;
     }
 }
- 
+
 .search {
     width: 45rem;
-    margin-left: -.3rem;
     padding-left: 1rem;
     letter-spacing: .5px;
     font-size: 1.75rem;

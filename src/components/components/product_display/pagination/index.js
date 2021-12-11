@@ -1,12 +1,13 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProducts } from '../../../pages/product/actions';
-import { getDefaultUrl, getPage } from './actions';
 import { filteredCategoryUrl } from '../../../../utils';
-import * as cmpStyle from './styles.module.scss';
+import { getDefaultUrl, getPage } from './actions';
 
+import { productSelector } from '../../../../components/ui/modal/selectors';
 import { searchSelector } from './selectors';
-import { productSelector } from '../../modal/selectors';
+
+import * as cmpStyle from './styles.module.scss';
 
 function Navigation() {
   const dispatch = useDispatch();

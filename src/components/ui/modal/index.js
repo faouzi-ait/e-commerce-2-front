@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Modal from '../modalWrapper';
-import Stars from '../../ui/product_display/sidebar/stars/Stars';
-import { addItem, addOne } from '../../ui/product_display/row/actions';
+
+import Stars from '../../components/stars';
+import { addItem, addOne } from '../../components/product_display/row/actions';
 import { getRelatedProducts } from './actions';
-import {
-  basketSelector,
-  productSelector,
-  relatedProductSelector,
-} from './selectors';
+
+import * as sel from './selectors';
 import * as cmpStyle from './styles.module.scss';
 
 const customStyles = {
@@ -24,9 +22,9 @@ const customStyles = {
 
 function ProductModal({ modalIsOpen, closeModal, productId }) {
   const dispatch = useDispatch();
-  const { cart } = useSelector(basketSelector);
-  const { products } = useSelector(productSelector);
-  const { data, loading } = useSelector(relatedProductSelector);
+  const { cart } = useSelector(sel.basketSelector);
+  const { products } = useSelector(sel.productSelector);
+  const { data, loading } = useSelector(sel.relatedProductSelector);
 
   const product = products.data.items.filter((item) => item._id === productId);
   const productInCart = cart.find((item) => item._id === productId);

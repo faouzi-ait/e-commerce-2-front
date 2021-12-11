@@ -6,7 +6,7 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import history from './history';
 
 import Home from './components/pages/home';
-import Header from './components/ui/header';
+import Header from './components/components/header';
 import Login from './components/pages/login';
 import Search from './components/pages/search';
 import Product from './components/pages/product';
@@ -16,12 +16,12 @@ import NotFound from './components/pages/not-found';
 import PublicRoutes from './components/route-access/PublicRoutes';
 import PrivateRoutes from './components/route-access/PrivateRoutes';
 
-import { getCategories } from './components/ui/header/actions';
+import { getCategories } from './components/components/header/actions';
 import { getHomePageProducts } from './components/pages/home/actions';
 import { getProducts } from './components/pages/product/actions';
 import { defaultUrl } from './utils';
 
-import { selectedLanguage } from './components/ui/header/selectors';
+import { selectedLanguage } from './components/components/header/selectors';
 
 import './index.scss';
 

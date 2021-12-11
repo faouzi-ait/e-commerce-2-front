@@ -6,7 +6,7 @@ import { clear } from '../styles.module.scss';
 
 function Clear() {
   const dispatch = useDispatch();
-  const { query, brand } = useSelector((state) => state.search);
+  const { query, brand } = useSelector((state) => state?.search);
 
   return (
     <div>

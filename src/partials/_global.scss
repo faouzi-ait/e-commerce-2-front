@@ -21,6 +21,11 @@ html {
     background: var(--theme-page-background);
 }
 
+.react-select__control {
+    border: 0 !important;
+    border-radius: 0px !important;
+}
+
 /* MODAL STYLES */
 .mymodal {
     position: fixed;

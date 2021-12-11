@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import Select from "react-select";
+import React, { useState, useEffect } from 'react';
+import { useHistory, Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import ToggleButtons from '../toggles';
+import Select from 'react-select';
 // import { THEMES } from '../../ui/toggles/constants';
 // import { t } from '../../i18n/translate';
 
-import { catgoriesList } from "../../ui/toggles/selectors";
-import { getCategory } from "../../pages/product/actions";
+import { getDefaultUrl } from '../product_display/pagination/actions';
+import { getCategory, getProducts } from '../../pages/product/actions';
+// import {  } from "../../pages/product/actions";
 
-import { getProducts } from "../../pages/product/actions";
-import { filteredCategoryUrl } from "../../../utils";
-import { getDefaultUrl } from "../../ui/product_display/pagination/actions";
-
-import ToggleButtons from "../toggles";
+import { filteredCategoryUrl } from '../../../utils';
+import { catgoriesList } from '../toggles/selectors';
 
 import * as cmpStyle from './styles.module.scss';
 
@@ -22,8 +21,8 @@ function Header() {
   const history = useHistory();
   const [menuList, setMenuList] = useState([]);
   const [filteredSubmenu, setFilteredSubmenu] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
   const category = useSelector(catgoriesList);
 
   useEffect(() => {
@@ -46,13 +45,6 @@ function Header() {
         };
       });
 
-    // submenuFiltered.unshift({
-    //   id: 0,
-    //   value: 'All',
-    //   label: 'All',
-    //   url: '',
-    // });
-
     setMenuList(menuListFiltered);
     setFilteredSubmenu(submenuFiltered);
   }, [category]);
@@ -65,31 +57,33 @@ function Header() {
   const styles = {
     control: (base) => ({
       ...base,
-      border: 0,
-      boxShadow: "none",
-      width: "15rem",
       height: 37.05,
+      width: '15rem',
+      border: 'none',
+      borderRadius: 0,
+      boxShadow: 'none',
     }),
     option: (provided, state) => ({
       ...provided,
-      fontWeight: state.isSelected ? "bold" : "normal",
-      fontSize: "1.3rem",
+      fontWeight: state.isSelected ? 'bold' : 'normal',
+      fontSize: '1.3rem',
+      border: 0,
     }),
   };
 
   const backToHomePage = () => {
     history.replace({
-      search: "",
+      search: '',
     });
-    history.push("/");
+    history.push('/');
   };
 
   const submitQuery = (e) => {
-    if (selectedCategory === "Departments" && !searchTerm) {
+    if (selectedCategory === 'Departments' && !searchTerm) {
       return false;
     }
 
-    history.push("/search");
+    history.push('/search');
     // DISPATCH THE SEARCH QUERY HERE
     // IF selectedCategory HAS A VALUE THEN DISPATCH THE SEARCH ACTION
     // IF THERE IS A SEARCH SEARCH TERM THEN USE IT INSTEAD
@@ -98,7 +92,7 @@ function Header() {
   return (
     <>
       <div className={cmpStyle.topHeader}>
-        <div style={{ padding: '1rem', display: 'flex', alignItems: 'center' }}>
+        <div className={cmpStyle.headerLayout}>
           <img
             src="/images/logo.png"
             alt="logo"
@@ -107,9 +101,10 @@ function Header() {
           />
           <div style={{ marginLeft: '12%', display: 'flex' }}>
             <Select
-              options={menuList}
               styles={styles}
+              options={menuList}
               className={cmpStyle.selectBox}
+              classNamePrefix="react-select"
               onChange={(e) => setSelectedCategory(e.value)}
               defaultValue={{ label: 'Departments', value: 'Departments' }}
             />

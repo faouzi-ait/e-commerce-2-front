@@ -2,17 +2,20 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from './actions';
 
+import Pagination from '../../components/product_display/pagination';
+import SideBar from '../../components/product_display/sidebar';
+import Row from '../../components/product_display/row';
 import SwitchLayout from '../../components/switch';
-import Row from '../../ui/product_display/row';
-import SideBar from '../../ui/product_display/sidebar';
-import Pagination from '../../ui/product_display/pagination';
-import PageLoader from '../../ui/loader';
 import Footer from '../../components/footer';
-import { filteredCategoryUrl } from '../../../utils';
-import { getDefaultUrl } from '../../ui/product_display/pagination/actions';
-import { productData } from './selector';
-import { searchSelector } from '../../ui/product_display/pagination/selectors';
+import PageLoader from '../../ui/loader';
+
+import { searchSelector } from '../../components/product_display/pagination/selectors';
+import { getDefaultUrl } from '../../components/product_display/pagination/actions';
+
 import { productSelector } from '../../ui/modal/selectors';
+import { productData } from './selector';
+
+import { filteredCategoryUrl } from '../../../utils';
 
 import { productGrid } from './styles.module.scss';
 

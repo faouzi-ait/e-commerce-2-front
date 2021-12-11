@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import TokenPane from '../../ui/resend_token';
-import { THEMES } from '../../ui/toggles/constants';
+import TokenPane from '../../components/resend_token';
+import { THEMES } from '../../components/toggles/constants';
 import { t } from '../../../i18n/translate';
 
-import { selectedTheme } from '../../ui/toggles/selectors';
+import { selectedTheme } from '../../components/toggles/selectors';
 import { loginStatus } from './selector';
 import { login_user_action } from './actions';
 

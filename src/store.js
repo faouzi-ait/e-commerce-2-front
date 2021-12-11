@@ -1,15 +1,15 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import logger from 'redux-logger';
 
-import { language, categories } from './components/ui/header/reducers';
-import { theme } from './components/ui/toggles/reducers';
+import { language, categories } from './components/components/header/reducers';
+import { theme } from './components/components/toggles/reducers';
 import { login } from './components/pages/login/reducers';
 import { register } from './components/pages/register/reducers';
 import { products } from './components/pages/product/reducers';
 import { home_page_products } from './components/pages/home/reducers';
-import { tokenRequest } from './components/ui/resend_token/reducers';
-import { search } from './components/ui/product_display/pagination/reducers';
-import { basket } from './components/ui/product_display/row/reducers';
+import { tokenRequest } from './components/components/resend_token/reducers';
+import { search } from './components/components/product_display/pagination/reducers';
+import { basket } from './components/components/product_display/row/reducers';
 import { relatedProducts } from './components/ui/modal/reducer';
 
 import { persistStore, persistReducer } from 'redux-persist';

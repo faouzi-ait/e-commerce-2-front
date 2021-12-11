@@ -5,20 +5,14 @@ import { logout } from '../../pages/login/actions';
 
 import { setLanguage } from '../header/actions';
 
-import { switchTheme } from '../../ui/toggles/actions';
-import { selectedTheme } from '../../ui/toggles/selectors';
-import { loginStatus } from '../../access_to_routes/selectors';
+import { switchTheme } from '../../components/toggles/actions';
+import { selectedTheme } from '../../components/toggles/selectors';
+import { loginStatus } from '../../route-access/selectors';
 
 import sun from '../../../images/sun.svg';
 import night from '../../../images/night.svg';
 
-import {
-  btn,
-  right,
-  leftRadius,
-  rightRadius,
-  marginRight,
-} from './styles.module.scss';
+import * as cmpStyles from './styles.module.scss';
 
 function ToggleButton(props) {
   return (
@@ -39,7 +33,7 @@ function ToggleLanguage() {
       {loggedIn && show && (
         <ToggleButton
           onClick={() => dispatch(logout())}
-          classes={`${btn} ${leftRadius} ${rightRadius} ${marginRight}`}
+          classes={`${cmpStyles.btn} ${cmpStyles.leftRadius} ${cmpStyles.rightRadius} ${cmpStyles.marginRight}`}
           content={<img src="/flags/logout.png" alt="logout" width="25" />}
         />
       )}
@@ -48,7 +42,7 @@ function ToggleLanguage() {
         <>
           <ToggleButton
             onClick={() => dispatch(switchTheme())}
-            classes={`${btn} ${leftRadius}`}
+            classes={`${cmpStyles.btn} ${cmpStyles.leftRadius}`}
             content={
               <img
                 src={isDark ? sun : night}
@@ -59,19 +53,19 @@ function ToggleLanguage() {
           />
           <ToggleButton
             onClick={() => dispatch(setLanguage(LOCALES.ENGLISH))}
-            classes={`${btn} ${right}`}
+            classes={`${cmpStyles.btn} ${cmpStyles.right}`}
             content={<img src="/flags/UK_2.png" alt="UK" width="25" />}
           />
           <ToggleButton
             onClick={() => dispatch(setLanguage(LOCALES.FRENCH))}
-            classes={btn}
+            classes={cmpStyles.btn}
             content={<img src="/flags/FR_2.png" alt="UK" width="21" />}
           />
         </>
       )}
       <ToggleButton
         onClick={() => setShow(!show)}
-        classes={`${btn} ${!show && leftRadius}`}
+        classes={`${cmpStyles.btn} ${!show && cmpStyles.leftRadius}`}
         content={<img src="/flags/translate.png" alt="translate" width="30" />}
       />
     </>

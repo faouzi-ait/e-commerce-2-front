@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { THEMES } from '../../ui/toggles/constants';
+import { THEMES } from '../../components/toggles/constants';
 // import { t } from '../../../i18n/translate';
 
 import Carousel from '../../components/carousel';
@@ -8,7 +8,7 @@ import HomeProducts from '../../components/products';
 import AdvertBanner from '../../components/advert';
 import Footer from '../../components/footer';
 
-import { selectedTheme } from '../../ui/toggles/selectors';
+import { selectedTheme } from '../../components/toggles/selectors';
 import { homeProductItems } from './selectors';
 
 function Home() {

@@ -1,6 +1,6 @@
 import React from 'react';
 import ProductDisplay from './ProductDisplay';
-import Modal from '../../modal';
+import Modal from '../../../ui/modal';
 
 import { container, gridContainer } from './styles.module.scss';
 

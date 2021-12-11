@@ -1,5 +1,5 @@
 import React from 'react';
-import Stars from './Stars';
+import Stars from '../../../stars';
 import { useDispatch } from 'react-redux';
 import { getRating } from '../../pagination/actions';
 import * as cmpStyle from '../styles.module.scss';

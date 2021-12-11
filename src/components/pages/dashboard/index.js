@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { THEMES } from '../../ui/toggles/constants';
 // import { t } from '../../../i18n/translate';
 
+import { selectedTheme } from '../../components/toggles/selectors';
+import { THEMES } from '../../components/toggles/constants';
 import { userProfile } from './selector';
-import { selectedTheme } from '../../ui/toggles/selectors';
 import {} from './styles.module.scss';
 
 function Dashboard() {
