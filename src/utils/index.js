@@ -8,7 +8,7 @@ export const filteredSearchUrl = (term, page = 1, limit = 5) =>
   `search=${term}&page=${page}&limit=${limit}`;
 
 export const filteredMenuList = (category) => {
-  const menuListFiltered = category.items.map((label) => {
+  const menuListFiltered = category?.items?.map((label) => {
     return {
       value: label._id,
       label: label.name,
