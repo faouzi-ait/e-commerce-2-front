@@ -94,9 +94,9 @@ export async function fetchRelatedProducts(urlParams, queryParams) {
   }
 }
 
-export async function searchProducts(query, params) {
+export async function searchProducts(term, params) {
   try {
-    return await apiClient.get(`/search?${query}`, params);
+    return await apiClient.get(`?search=${term}`, params);
   } catch (error) {
     return { error };
   }

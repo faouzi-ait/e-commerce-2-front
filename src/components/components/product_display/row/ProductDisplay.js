@@ -1,18 +1,21 @@
 import React from 'react';
-import {
-  cardRowContainer,
-  rowContainer,
-  productCardDisplay,
-  productRowDisplay,
-  rowImage,
-  image,
-} from './styles.module.scss';
+import * as cmpStyle from './styles.module.scss';
 
 function ProductDisplay({ isRow, openModal, item, setProductId }) {
   return (
-    <div className={`${isRow ? cardRowContainer : rowContainer}`}>
-      <img src={item.photo} alt="p" className={`${isRow ? rowImage : image}`} />
-      <div className={`${isRow ? productCardDisplay : productRowDisplay}`}>
+    <div
+      className={`${
+        isRow ? cmpStyle.cardRowContainer : cmpStyle.rowContainer
+      }`}>
+      <img
+        src={item.photo}
+        alt="p"
+        className={`${isRow ? cmpStyle.rowImage : cmpStyle.image}`}
+      />
+      <div
+        className={`${
+          isRow ? cmpStyle.productCardDisplay : cmpStyle.productRowDisplay
+        }`}>
         <span>{item.brand}</span>
         <span>{item.description}</span>
         <span>Model: {item.name}</span>

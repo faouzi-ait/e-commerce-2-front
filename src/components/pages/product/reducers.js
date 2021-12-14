@@ -1,10 +1,4 @@
-import {
-  LOADING_PRODUCTS,
-  GET_PRODUCT_BY_CATEGORY_SUCCESS,
-  GET_PRODUCT_BY_CATEGORY_FAILURE,
-  GET_CATEGORY,
-  SWITCH_LAYOUT,
-} from './constants';
+import * as cons from './constants';
 
 const initialState = {
   products: null,
@@ -16,15 +10,15 @@ const initialState = {
 
 export const products = (state = initialState, action) => {
   switch (action.type) {
-    case GET_PRODUCT_BY_CATEGORY_SUCCESS:
+    case cons.GET_PRODUCT_BY_CATEGORY_SUCCESS:
       return { ...state, products: action.payload };
-    case GET_PRODUCT_BY_CATEGORY_FAILURE:
+    case cons.GET_PRODUCT_BY_CATEGORY_FAILURE:
       return { ...state, errors: action.payload };
-    case LOADING_PRODUCTS:
+    case cons.LOADING_PRODUCTS:
       return { ...state, loading: action.payload };
-    case GET_CATEGORY:
+    case cons.GET_CATEGORY:
       return { ...state, category: action.payload };
-    case SWITCH_LAYOUT:
+    case cons.SWITCH_LAYOUT:
       const layout = state.isRow;
       return { ...state, isRow: !layout };
     default:

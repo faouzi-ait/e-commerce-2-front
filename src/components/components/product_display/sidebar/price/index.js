@@ -45,7 +45,7 @@ function Price({ pricing }) {
           </label>
         </li>
       ))}
-      {pricing && (
+      {pricing !== '' && (
         <div onClick={() => dispatch(getPrice(''))} className={cmpStyle.clear}>
           <i className="fa fa-chevron-left"></i> Clear Filter
         </div>

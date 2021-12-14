@@ -1,17 +1,13 @@
-import {
-  RESEND_TOKEN_FAILURE,
-  RESEND_TOKEN,
-  RESEND_TOKEN_SUCCESS,
-} from './constants';
+import * as cons from './constants';
 
 export const resendActivationToken = (payload) => {
-  return { type: RESEND_TOKEN, payload };
+  return { type: cons.RESEND_TOKEN, payload };
 };
 
 export const resendActivationTokenSuccess = (payload) => {
-  return { type: RESEND_TOKEN_SUCCESS, payload };
+  return { type: cons.RESEND_TOKEN_SUCCESS, payload };
 };
 
 export const resendActivationTokenFailure = (payload) => {
-  return { type: RESEND_TOKEN_FAILURE, payload };
+  return { type: cons.RESEND_TOKEN_FAILURE, payload };
 };

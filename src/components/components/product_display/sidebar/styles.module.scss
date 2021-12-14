@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
 }
 
 .starStyling {
@@ -21,6 +21,7 @@
 }
 
 .priceBottomMargin {
+    margin-top: .2rem;
     margin-bottom: -.75rem;
 }
 
@@ -51,20 +52,22 @@
     margin-top: .7rem;
 }
 
+.brandLabelDisplay {
+    display: flex;
+}
+
 .brandLabel {
     cursor: pointer;
+    margin-bottom: .28rem;
     
     &:hover {
         color: rgb(255, 98, 98);
     }
 }
-.brandLabelDisplay {
-    display: flex;
-}
 
 .brandList {
     list-style: none;
-    margin-top: -.25rem;
+    margin-top: 0rem;
     margin-left: -3rem;
 }
 

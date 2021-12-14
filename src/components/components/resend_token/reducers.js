@@ -1,4 +1,4 @@
-import { RESEND_TOKEN_SUCCESS, RESEND_TOKEN_FAILURE } from './constants';
+import * as cons from './constants';
 
 const initialState = {
   result: null,
@@ -7,11 +7,11 @@ const initialState = {
 
 export const tokenRequest = (state = initialState, action) => {
   switch (action.type) {
-    case RESEND_TOKEN_SUCCESS:
+    case cons.RESEND_TOKEN_SUCCESS:
       return {
         result: { ...action.payload },
       };
-    case RESEND_TOKEN_FAILURE:
+    case cons.RESEND_TOKEN_FAILURE:
       return {
         error: { ...action.payload },
       };

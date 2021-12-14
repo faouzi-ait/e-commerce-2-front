@@ -4,7 +4,7 @@ import Modal from '../../../ui/modal';
 
 import { container, gridContainer } from './styles.module.scss';
 
-function Row({ products, category, isRow }) {
+function Row({ products, /* category, */ isRow }) {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [productId, setProductId] = React.useState(null);
   const { items } = products.data;
@@ -14,7 +14,7 @@ function Row({ products, category, isRow }) {
 
   return (
     <>
-      <div className={container}>{category.label} Category</div>
+      <div className={container}></div>
       <div className={`${isRow ? gridContainer : ''}`}>
         {(items || []).map((item) => (
           <ProductDisplay

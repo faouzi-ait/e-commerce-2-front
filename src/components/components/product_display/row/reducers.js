@@ -1,4 +1,4 @@
-import { ADD_ITEM, REMOVE_ITEM, ADD_ONE, REMOVE_ONE } from './constants';
+import * as cons from './constants';
 
 const basketState = {
   cart: [],
@@ -6,7 +6,7 @@ const basketState = {
 
 export const basket = (state = basketState, action) => {
   switch (action.type) {
-    case ADD_ITEM:
+    case cons.ADD_ITEM:
       const newBasket = [...state.cart];
       newBasket.push({
         ...action.payload,
@@ -14,7 +14,7 @@ export const basket = (state = basketState, action) => {
         total: action.payload.price,
       });
       return { ...state, cart: newBasket };
-    case REMOVE_ITEM:
+    case cons.REMOVE_ITEM:
       const currentBasket = [...state.cart];
       const updatedBasket = currentBasket.filter(
         (item) => item.id !== action.payload
@@ -23,7 +23,7 @@ export const basket = (state = basketState, action) => {
         ...state,
         cart: updatedBasket,
       };
-    case ADD_ONE:
+    case cons.ADD_ONE:
       let basket = [...state.cart];
       let item = basket.find((item) => item._id === action.payload);
       let indexOfItem = basket.indexOf(item);
@@ -33,7 +33,7 @@ export const basket = (state = basketState, action) => {
       basket.splice(indexOfItem, 1, item);
 
       return { ...state, cart: basket };
-    case REMOVE_ONE:
+    case cons.REMOVE_ONE:
       let cart = [...state.cart];
       const itemToUpdate = cart.find((item) => item._id === action.payload);
       let indexToRemove = cart.indexOf(itemToUpdate);

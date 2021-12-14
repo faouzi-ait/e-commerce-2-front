@@ -1,8 +1,4 @@
-import {
-  REGISTERING,
-  REGISTER_USER_SUCCESS,
-  REGISTER_USER_FAILURE,
-} from './constants';
+import * as cons from './constants';
 
 const initialState = {
   user: null,
@@ -12,11 +8,11 @@ const initialState = {
 
 export const register = (state = initialState, action) => {
   switch (action.type) {
-    case REGISTER_USER_SUCCESS:
+    case cons.REGISTER_USER_SUCCESS:
       return { ...state, user: action.payload };
-    case REGISTER_USER_FAILURE:
+    case cons.REGISTER_USER_FAILURE:
       return { ...state, errors: action.payload };
-    case REGISTERING:
+    case cons.REGISTERING:
       return { ...state, registering: action.payload };
     default:
       return state;

@@ -2,17 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import ToggleButtons from '../toggles';
-import Select from 'react-select';
+import SelectWrapper from '../../ui/select';
 // import { THEMES } from '../../ui/toggles/constants';
 // import { t } from '../../i18n/translate';
 
 import { getDefaultUrl } from '../product_display/pagination/actions';
 import { getCategory, getProducts } from '../../pages/product/actions';
-// import {  } from "../../pages/product/actions";
 
-import { filteredCategoryUrl } from '../../../utils';
 import { catgoriesList } from '../toggles/selectors';
 
+import * as utils from '../../../utils';
 import * as cmpStyle from './styles.module.scss';
 
 function Header() {
@@ -22,71 +21,40 @@ function Header() {
   const [menuList, setMenuList] = useState([]);
   const [filteredSubmenu, setFilteredSubmenu] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
   const category = useSelector(catgoriesList);
 
   useEffect(() => {
-    const menuListFiltered = category?.items?.map((label) => {
-      return {
-        value: label._id,
-        label: label.name,
-        url: label.url,
-      };
-    });
-
-    const submenuFiltered = category?.items
-      ?.filter((item) => item.showOnNav === true)
-      ?.map((label) => {
-        return {
-          id: label._id,
-          value: label.name,
-          label: label.name,
-          url: label.url,
-        };
-      });
+    const menuListFiltered = utils.filteredMenuList(category);
+    const submenuFiltered = utils.submenufilteredMenuList(category);
 
     setMenuList(menuListFiltered);
     setFilteredSubmenu(submenuFiltered);
   }, [category]);
-
-  const goToCategory = (category, id) => ({
-    pathname: `/category/${id}`,
-    query: { id, category },
-  });
-
-  const styles = {
-    control: (base) => ({
-      ...base,
-      height: 37.05,
-      width: '15rem',
-      border: 'none',
-      borderRadius: 0,
-      boxShadow: 'none',
-    }),
-    option: (provided, state) => ({
-      ...provided,
-      fontWeight: state.isSelected ? 'bold' : 'normal',
-      fontSize: '1.3rem',
-      border: 0,
-    }),
-  };
-
-  const backToHomePage = () => {
-    history.replace({
-      search: '',
-    });
-    history.push('/');
-  };
-
+  // console.log(menuList)
   const submitQuery = (e) => {
-    if (selectedCategory === 'Departments' && !searchTerm) {
+    if (!searchTerm) {
       return false;
     }
-
     history.push('/search');
-    // DISPATCH THE SEARCH QUERY HERE
-    // IF selectedCategory HAS A VALUE THEN DISPATCH THE SEARCH ACTION
-    // IF THERE IS A SEARCH SEARCH TERM THEN USE IT INSTEAD
+    console.log(searchTerm);
+    // dispatch(getProducts(filteredCategoryUrl(selectedCategory)));
+    // history.push(`/category/${selectedCategory}`);
+  };
+
+  const linkAction = (item) => {
+    dispatch(
+      getDefaultUrl(getProducts(utils.filteredCategoryUrl(item.id)).payload)
+    );
+    dispatch(getProducts(utils.filteredCategoryUrl(item.id)));
+    dispatch(getCategory(item));
+  };
+
+  const getSelectedCategoryProducts = (e) => {
+    dispatch(getDefaultUrl(`category=${e.value}&page=1&limit=5`));
+    dispatch(
+      getCategory({ id: e.value, value: e.label, label: e.label, url: '' })
+    );
+    history.push(`/category/${e.value}`);
   };
 
   return (
@@ -94,28 +62,28 @@ function Header() {
       <div className={cmpStyle.topHeader}>
         <div className={cmpStyle.headerLayout}>
           <img
-            src="/images/logo.png"
             alt="logo"
+            src="/images/logo.png"
             className={cmpStyle.logo}
-            onClick={() => backToHomePage()}
+            onClick={() => utils.backToHomePage(history)}
           />
-          <div style={{ marginLeft: '12%', display: 'flex' }}>
-            <Select
-              styles={styles}
+          <div className={cmpStyle.inputContainer}>
+            <SelectWrapper
               options={menuList}
+              styles={utils.selectStyles}
               className={cmpStyle.selectBox}
               classNamePrefix="react-select"
-              onChange={(e) => setSelectedCategory(e.value)}
+              onChange={getSelectedCategoryProducts}
               defaultValue={{ label: 'Departments', value: 'Departments' }}
             />
             <input
               type="text"
-              name="search"
               id="search"
+              name="search"
+              autoComplete="off"
+              value={searchTerm}
               className={cmpStyle.search}
               onChange={(e) => setSearchTerm(e.target.value)}
-              value={searchTerm}
-              autoComplete="off"
             />
             <div className={cmpStyle.submit} onClick={submitQuery}>
               <i className="fa fa-search"></i>
@@ -133,15 +101,9 @@ function Header() {
         {(filteredSubmenu || []).map((item) => (
           <Link
             key={item.id}
+            onClick={() => linkAction(item)}
             className={cmpStyle.submenu}
-            to={() => goToCategory(item.value, item.id)}
-            onClick={() => {
-              dispatch(
-                getDefaultUrl(getProducts(filteredCategoryUrl(item.id)).payload)
-              );
-              dispatch(getProducts(filteredCategoryUrl(item.id)));
-              dispatch(getCategory(item));
-            }}>
+            to={() => utils.goToCategory(item.value, item.id)}>
             {item.value}
           </Link>
         ))}

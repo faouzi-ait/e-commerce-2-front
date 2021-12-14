@@ -1,33 +1,33 @@
-import { DEFAULT_URL, FILTER_URL, QUERY, RATING, BRAND, LIMIT, PAGE, PRICING } from './constants';
+import * as cons from './constants';
 
 export const getDefaultUrl = (payload) => {
-  return { type: DEFAULT_URL, payload };
+  return { type: cons.DEFAULT_URL, payload };
 };
 
 export const getFilteredUrl = (payload) => {
-  return { type: FILTER_URL, payload };
+  return { type: cons.FILTER_URL, payload };
 };
 
 export const getQuery = (payload) => {
-  return { type: QUERY, payload };
+  return { type: cons.QUERY, payload };
 };
 
 export const getRating = (payload) => {
-  return { type: RATING, payload };
+  return { type: cons.RATING, payload };
 };
 
 export const getBrand = (payload) => {
-  return { type: BRAND, payload };
+  return { type: cons.BRAND, payload };
 };
 
 export const getLimit = (payload) => {
-  return { type: LIMIT, payload };
+  return { type: cons.LIMIT, payload };
 };
 
 export const getPage = (payload) => {
-  return { type: PAGE, payload };
+  return { type: cons.PAGE, payload };
 };
 
 export const getPrice = (payload) => {
-  return { type: PRICING, payload };
+  return { type: cons.PRICING, payload };
 };

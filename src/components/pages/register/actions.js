@@ -1,22 +1,17 @@
-import {
-  REGISTER_USER,
-  REGISTER_USER_SUCCESS,
-  REGISTER_USER_FAILURE,
-  REGISTERING,
-} from './constants';
+import * as cons from './constants';
 
 export const register_user = (payload) => {
-  return { type: REGISTER_USER, payload };
+  return { type: cons.REGISTER_USER, payload };
 };
 
 export const register_user_success = (payload) => {
-  return { type: REGISTER_USER_SUCCESS, payload };
+  return { type: cons.REGISTER_USER_SUCCESS, payload };
 };
 
 export const register_user_failure = (payload) => {
-  return { type: REGISTER_USER_FAILURE, payload };
+  return { type: cons.REGISTER_USER_FAILURE, payload };
 };
 
 export const registering = (payload) => {
-  return { type: REGISTERING, payload };
+  return { type: cons.REGISTERING, payload };
 };
