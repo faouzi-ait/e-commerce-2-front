@@ -13,7 +13,6 @@ function Navigation() {
   const dispatch = useDispatch();
   const { products, category } = useSelector(productSelector);
   const { limit } = useSelector(searchSelector);
-  const { totalNumberOfPages, currentPage, nextPage, previousPage } = products;
 
   const dispatchFilterAction = (id, page) => {
     dispatch(getPage(page));
@@ -43,12 +42,12 @@ function Navigation() {
 
     return (
       <>
-        {previousPage &&
-          navigationBtn(id, previousPage, left, cmpStyle.leftArrow)}
+        {products?.previousPage &&
+          navigationBtn(id, products?.previousPage, left, cmpStyle.leftArrow)}
 
         {Array.from(Array(nbOfPages), (e, i) => {
           let page = parseInt(i + 1);
-          const isCurrent = currentPage === page;
+          const isCurrent = products?.currentPage === page;
           const style = `${cmpStyle.pageNumbers} ${
             isCurrent && cmpStyle.active
           }`;
@@ -58,14 +57,15 @@ function Navigation() {
           );
         })}
 
-        {nextPage && navigationBtn(id, nextPage, right, cmpStyle.rightArrow)}
+        {products?.nextPage &&
+          navigationBtn(id, products?.nextPage, right, cmpStyle.rightArrow)}
       </>
     );
   };
 
   return (
     <div className={cmpStyle.container}>
-      <Paginate nbOfPages={totalNumberOfPages} />
+      <Paginate nbOfPages={products?.totalNumberOfPages} />
     </div>
   );
 }

@@ -21,11 +21,10 @@ import { productGrid } from './styles.module.scss';
 
 function Submenu() {
   const dispatch = useDispatch();
+  // const productSet = useSelector(productData);
   const { products, isRow, category, loading } = useSelector(productData);
   const { rating, brand, pricing, page, limit } = useSelector(searchSelector);
-  const {
-    products: { data },
-  } = useSelector(productSelector);
+  const productDataList = useSelector(productSelector);
 
   useEffect(() => {
     const { id } = category || {};
@@ -46,7 +45,7 @@ function Submenu() {
               pricing={pricing}
               page={page}
               limit={limit}
-              data={data}
+              data={productDataList?.products?.data}
               action="product"
             />
             <div>

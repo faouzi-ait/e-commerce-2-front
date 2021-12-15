@@ -8,7 +8,7 @@ function Brand({ brand, data }) {
   const [brands, setBrands] = useState(null);
 
   useEffect(() => {
-    const list = data.items.map((item) => item.brand);
+    const list = data?.items?.map((item) => item.brand);
     const filteredList = [...new Set(list)];
     setBrands(filteredList);
   }, [data]);

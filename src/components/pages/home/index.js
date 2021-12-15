@@ -18,7 +18,7 @@ function Home() {
   return (
     <div className={`baseTheme app ${isDark ? THEMES.DARK : THEMES.LIGHT}`}>
       <Carousel />
-      <HomeProducts products={items?.products} />
+      <HomeProducts products={items} />
       <AdvertBanner image="./images/banner-middle.jpg" />
       <AdvertBanner image="./images/gift_card.jpeg" />
       <Footer />

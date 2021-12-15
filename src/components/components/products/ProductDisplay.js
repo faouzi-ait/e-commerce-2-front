@@ -11,17 +11,17 @@ function ProductDisplay({ title, item }) {
             alt="product"
             className={cmpStyle.productImage}
           />
-          <div>{item[0].name}</div>
-          <div>{item[0].description}</div>
-          <div>{item[0].price}</div>
+          <div>{item[0]?.name}</div>
+          <div>{item[0]?.description}</div>
+          <div>{item[0]?.price}</div>
         </div>
       );
     } else {
       return (
         <div className={cmpStyle.productDetailGrid}>
-          {item?.map((item, index) => (
+          {(item || []).map((item, index) => (
             <img
-              src={item.photo}
+              src={item?.photo}
               alt="product"
               className={cmpStyle.productImageGrid}
               key={index}

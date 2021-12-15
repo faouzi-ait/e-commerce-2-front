@@ -4,5 +4,5 @@ const baseState = (state) => state;
 
 export const homeProductItems = createSelector(
   [baseState],
-  (state) => state.home_page_products.products
+  (state) => state?.home_page_products?.products?.products
 );

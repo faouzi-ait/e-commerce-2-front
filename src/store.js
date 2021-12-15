@@ -47,7 +47,7 @@ export const store = createStore(
   compose(
     applyMiddleware(logger, sagaMiddleware),
     // ADD CONDITION FOR DEV ENV
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 
