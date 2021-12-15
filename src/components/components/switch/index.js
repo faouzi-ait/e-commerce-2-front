@@ -7,21 +7,20 @@ import * as cmpStyle from './styles.module.scss';
 
 function LayoutSwitch() {
   const dispatch = useDispatch();
-  // const { isRow, products } = useSelector(productData);
   const { isRow, products } = useSelector(productData);
-  // const { currentPage, totalNumberOfItems, startIndex, numberOfItemsPerPage } =
-  //   products;
-
   const paginationItems = products;
 
   const recordCounts = () => {
     let str = '';
-    const index = paginationItems?.startIndex === 0 ? 1 : paginationItems?.startIndex;
-    const endIndex = paginationItems?.startIndex * paginationItems?.currentPage >= paginationItems?.totalNumberOfItems;
+    const index =
+      paginationItems?.startIndex === 0 ? 1 : paginationItems?.startIndex;
+    const endIndex =
+      paginationItems?.startIndex * paginationItems?.currentPage >=
+      paginationItems?.totalNumberOfItems;
 
     if (!endIndex) {
       str = `Showing ${index} - ${
-        paginationItems?.paginationItems?.currentPage
+        paginationItems?.numberOfItemsPerPage * paginationItems?.currentPage
       } of ${paginationItems?.totalNumberOfItems} results`;
     } else {
       str = `Showing ${paginationItems?.totalNumberOfItems} of ${paginationItems?.totalNumberOfItems} results`;
