@@ -1,18 +1,14 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { getProducts } from '../../../pages/product/actions';
 import { filteredCategoryUrl } from '../../../../utils';
 import { getDefaultUrl, getPage } from './actions';
 
-import { productSelector } from '../../../../components/ui/modal/selectors';
-import { searchSelector } from './selectors';
-
 import * as cmpStyle from './styles.module.scss';
 
-function Navigation() {
+function Pagination({ products, category, limit }) {
   const dispatch = useDispatch();
-  const { products, category } = useSelector(productSelector);
-  const { limit } = useSelector(searchSelector);
 
   const dispatchFilterAction = (id, page) => {
     dispatch(getPage(page));
@@ -70,4 +66,4 @@ function Navigation() {
   );
 }
 
-export default Navigation;
+export default Pagination;

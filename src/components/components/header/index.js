@@ -6,9 +6,12 @@ import SelectWrapper from '../../ui/select';
 // import { THEMES } from '../../ui/toggles/constants';
 // import { t } from '../../i18n/translate';
 
-import { getDefaultUrl } from '../product_display/pagination/actions';
+import {
+  getDefaultUrl,
+  filteredSearchUrl,
+} from '../product_display/pagination/actions';
 import { getCategory, getProducts } from '../../pages/product/actions';
-
+import { getSearch } from './actions';
 import { catgoriesList } from '../toggles/selectors';
 
 import * as utils from '../../../utils';
@@ -30,15 +33,12 @@ function Header() {
     setMenuList(menuListFiltered);
     setFilteredSubmenu(submenuFiltered);
   }, [category]);
-  // console.log(menuList)
+
   const submitQuery = (e) => {
-    if (!searchTerm) {
-      return false;
-    }
+    if (!searchTerm) return false;
+
+    dispatch(getSearch(`${searchTerm}&page=1&limit=5`));
     history.push('/search');
-    console.log(searchTerm);
-    // dispatch(getProducts(filteredCategoryUrl(selectedCategory)));
-    // history.push(`/category/${selectedCategory}`);
   };
 
   const linkAction = (item) => {

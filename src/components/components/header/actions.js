@@ -1,5 +1,6 @@
 import * as cons from './constants';
 
+// LANGUAGE SELECTION
 export const setLanguage = (lang) => {
   return {
     type: cons.SET_LANGUAGE,
@@ -7,6 +8,7 @@ export const setLanguage = (lang) => {
   };
 };
 
+// CATEGORY SELECTION
 export const getCategories = (payload) => {
   return { type: cons.GET_CATEGORIES, payload };
 };
@@ -21,4 +23,21 @@ export const getCategoriesFailure = (payload) => {
 
 export const gettingCategories = (payload) => {
   return { type: cons.GETTING_CATEGORIES, payload };
+};
+
+// SEARCH SELECTION
+export const loadingSearch = (payload) => {
+  return { type: cons.LOADING_SEARCH, payload };
+};
+
+export const getSearch = (payload) => {
+  return { type: cons.GET_SEARCH_RESULTS, payload };
+};
+
+export const getSearchSuccess = (payload) => {
+  return { type: cons.GET_SEARCH_RESULTS_SUCCESS, payload };
+};
+
+export const getSearchFailure = (payload) => {
+  return { type: cons.GET_SEARCH_RESULTS_FAILURE, payload };
 };

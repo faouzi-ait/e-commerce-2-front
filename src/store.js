@@ -1,7 +1,11 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import logger from 'redux-logger';
 
-import { language, categories } from './components/components/header/reducers';
+import {
+  language,
+  categories,
+  productsBySearch,
+} from './components/components/header/reducers';
 import { theme } from './components/components/toggles/reducers';
 import { login } from './components/pages/login/reducers';
 import { register } from './components/pages/register/reducers';
@@ -25,6 +29,7 @@ const combinedReducers = combineReducers({
   register,
   tokenRequest,
   categories,
+  productsBySearch,
   products,
   home_page_products,
   relatedProducts,
@@ -47,7 +52,7 @@ export const store = createStore(
   compose(
     applyMiddleware(logger, sagaMiddleware),
     // ADD CONDITION FOR DEV ENV
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 

@@ -9,10 +9,11 @@ import SwitchLayout from '../../components/switch';
 import Footer from '../../components/footer';
 import PageLoader from '../../ui/loader';
 
-import { searchSelector } from '../../components/product_display/pagination/selectors';
 import { getDefaultUrl } from '../../components/product_display/pagination/actions';
 
+import { searchSelector } from '../../components/product_display/pagination/selectors';
 import { productSelector } from '../../ui/modal/selectors';
+
 import { productData } from './selector';
 
 import { filteredCategoryUrl } from '../../../utils';
@@ -21,7 +22,6 @@ import { productGrid } from './styles.module.scss';
 
 function Submenu() {
   const dispatch = useDispatch();
-  // const productSet = useSelector(productData);
   const { products, isRow, category, loading } = useSelector(productData);
   const { rating, brand, pricing, page, limit } = useSelector(searchSelector);
   const productDataList = useSelector(productSelector);
@@ -52,9 +52,15 @@ function Submenu() {
               {loading ? (
                 <PageLoader />
               ) : (
-                <Row products={products} category={category} isRow={isRow} />
+                <Row products={products} isRow={isRow} />
               )}
-              {!loading && <Pagination />}
+              {!loading && (
+                <Pagination
+                  products={products}
+                  category={category}
+                  limit={limit}
+                />
+              )}
             </div>
           </div>
           <Footer />
