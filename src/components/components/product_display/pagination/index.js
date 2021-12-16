@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { /* useSelector, */ useDispatch } from 'react-redux';
 
 import { getProducts } from '../../../pages/product/actions';
 import { filteredCategoryUrl } from '../../../../utils';

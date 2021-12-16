@@ -1,12 +1,12 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { /*useDispatch, */ useSelector } from 'react-redux';
 
 import Row from '../../components/product_display/row';
 
 import {} from './styles.module.scss';
 
 function Search() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const bySearch = useSelector(
     (state) => state?.productsBySearch?.searchResults
   );

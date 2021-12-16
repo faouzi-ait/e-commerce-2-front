@@ -6,10 +6,7 @@ import SelectWrapper from '../../ui/select';
 // import { THEMES } from '../../ui/toggles/constants';
 // import { t } from '../../i18n/translate';
 
-import {
-  getDefaultUrl,
-  filteredSearchUrl,
-} from '../product_display/pagination/actions';
+import { getDefaultUrl } from '../product_display/pagination/actions';
 import { getCategory, getProducts } from '../../pages/product/actions';
 import { getSearch } from './actions';
 import { catgoriesList } from '../toggles/selectors';
