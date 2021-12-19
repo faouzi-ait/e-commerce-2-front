@@ -31,7 +31,7 @@ function Search() {
     );
   }, [searchString, searchLimit, searchPage, dispatch]);
 
-  const filteredProductList = searchResults?.data?.items.filter((item) => {
+  const filteredProductList = searchResults?.data?.items?.filter((item) => {
     if (starRating && searchBrand) {
       return item.ratings === starRating && item.brand === searchBrand;
     } else if (starRating && !searchBrand) {
@@ -55,7 +55,7 @@ function Search() {
 
   const filterArray = () => {
     if (starRating || searchBrand) {
-      return filteredProductObj.data.items.length > 0
+      return filteredProductObj?.data?.items?.length > 0
         ? filteredProductObj
         : filteredProductObjEmpty;
     } else {
@@ -75,7 +75,7 @@ function Search() {
           <BrandFilter
             searchBrand={searchBrand}
             setSearchBrand={setSearchBrand}
-            data={searchResults.data}
+            data={searchResults?.data}
           />
           {/* BY PRICE FILTER */}
         </div>
