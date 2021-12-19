@@ -8,6 +8,7 @@ const categoryInitialState = {
 
 const searchInitialState = {
   searchResults: null,
+  searchString: null,
   errors: null,
   loading: false,
 };
@@ -36,6 +37,8 @@ export const categories = (state = categoryInitialState, action) => {
 
 export const productsBySearch = (state = searchInitialState, action) => {
   switch (action.type) {
+    case cons.GET_SEARCH_STRING:
+      return { ...state, searchString: action.payload };
     case cons.GET_SEARCH_RESULTS_SUCCESS:
       return { ...state, searchResults: action.payload };
     case cons.GET_SEARCH_RESULTS_FAILURE:

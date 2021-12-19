@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { /*useState, */ useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Modal from '../modalWrapper';
 
@@ -20,15 +20,27 @@ const customStyles = {
   },
 };
 
-function ProductModal({ modalIsOpen, closeModal, productId }) {
+function ProductModal({
+  modalIsOpen,
+  closeModal,
+  productId,
+  isProduct = false,
+  isSearch = false,
+}) {
   const dispatch = useDispatch();
+  const [items, setItems] = useState(null);
   const { cart } = useSelector(sel.basketSelector);
   const { products } = useSelector(sel.productSelector);
   const { data, loading } = useSelector(sel.relatedProductSelector);
 
-  const product = products.data.items.filter((item) => item._id === productId);
+  const search = useSelector(
+    (state) => state?.productsBySearch?.searchResults?.data
+  );
   const productInCart = cart.find((item) => item._id === productId);
-  const item = product[0];
+  const searchItem = search?.items?.filter((item) => item._id === productId);
+  const product = products?.data?.items?.filter(
+    (item) => item._id === productId
+  );
 
   const Button = ({ label, onClick, className, ...rest }) => {
     return (
@@ -44,13 +56,13 @@ function ProductModal({ modalIsOpen, closeModal, productId }) {
         {!inCart ? (
           <Button
             label="Add to cart"
-            onClick={() => dispatch(addItem(item))}
+            onClick={() => dispatch(addItem(items))}
             className={cmpStyle.buyBtn}
           />
         ) : (
           <Button
             label="+ 1 More"
-            onClick={() => dispatch(addOne(item._id))}
+            onClick={() => dispatch(addOne(items._id))}
             className={cmpStyle.buyBtn}
           />
         )}
@@ -81,12 +93,20 @@ function ProductModal({ modalIsOpen, closeModal, productId }) {
   };
 
   useEffect(() => {
-    const category = item?.category?._id;
+    if (isProduct) {
+      setItems(product[0]);
+    } else if (isSearch) {
+      setItems(searchItem[0]);
+    }
+  }, [product, searchItem, isProduct, isSearch]);
+
+  useEffect(() => {
+    const category = items?.category?._id;
 
     if (category !== null && category !== undefined && category !== '') {
       dispatch(getRelatedProducts(`${productId}/${category}`));
     }
-  }, [dispatch, productId, item]);
+  }, [dispatch, productId, items]);
 
   return (
     <Modal
@@ -105,23 +125,23 @@ function ProductModal({ modalIsOpen, closeModal, productId }) {
         </div>
         <div className={cmpStyle.modalContent}>
           <div>
-            <img src={item?.photo} alt="product" className={cmpStyle.img} />
+            <img src={items?.photo} alt="product" className={cmpStyle.img} />
           </div>
           <div className={cmpStyle.productDetails}>
-            <h1>{item?.name}</h1>
-            <h2>{item?.description}</h2>
+            <h1>{items?.name}</h1>
+            <h2>{items?.description}</h2>
             <div className={cmpStyle.review}>
-              {item?.totalReviews === 0 ? (
+              {items?.totalReviews === 0 ? (
                 <span>There are no reviews for this product</span>
               ) : (
                 <>
-                  <Stars starrating={item?.reviews} />
-                  <span>{item?.totalReviews}</span>
+                  <Stars starrating={items?.reviews} />
+                  <span>{items?.totalReviews}</span>
                 </>
               )}
             </div>
-            <h3 className={cmpStyle.productPrice}>Price: £{item?.price}</h3>
-            {item?.quantity > 0 ? (
+            <h3 className={cmpStyle.productPrice}>Price: £{items?.price}</h3>
+            {items?.quantity > 0 ? (
               <DisplayButtons inCart={productInCart} />
             ) : (
               <Button
@@ -129,7 +149,7 @@ function ProductModal({ modalIsOpen, closeModal, productId }) {
                 className={`${cmpStyle.buyBtn} ${cmpStyle.buyBtnDeactivated}`}
               />
             )}
-            <DisplayLabel stock={item?.quantity} />
+            <DisplayLabel stock={items?.quantity} />
           </div>
         </div>
         <div className={cmpStyle.relatedProducts}>
@@ -137,19 +157,19 @@ function ProductModal({ modalIsOpen, closeModal, productId }) {
             Customers also bought
           </div>
           <div className={cmpStyle.productDisplay}>
-            {data?.products.map((item) => (
-              <div className={cmpStyle.relatedProductContainer} key={item._id}>
+            {data?.products.map((items) => (
+              <div className={cmpStyle.relatedProductContainer} key={items._id}>
                 {loading ? (
                   <div className={cmpStyle.loader}></div>
                 ) : (
                   <>
                     <img
-                      src={item.photo}
+                      src={items.photo}
                       alt="product"
                       className={cmpStyle.relatedProductImg}
                     />
                     <span className={cmpStyle.relatedProductsBrand}>
-                      {item.brand}
+                      {items.brand}
                     </span>
                   </>
                 )}

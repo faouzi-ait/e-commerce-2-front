@@ -52,7 +52,7 @@ function Submenu() {
               {loading ? (
                 <PageLoader />
               ) : (
-                <Row products={products} isRow={isRow} />
+                <Row products={products} isRow={isRow} isProduct={true}/>
               )}
               {!loading && (
                 <Pagination

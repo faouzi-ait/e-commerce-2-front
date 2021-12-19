@@ -4,8 +4,8 @@ export const defaultUrl = (page = 1, limit = 5) =>
 export const filteredCategoryUrl = (id, page = 1, limit = 5) =>
   `category=${id}&page=${page}&limit=${limit}`;
 
-export const filteredSearchUrl = (term, page = 1, limit = 5) =>
-  `search=${term}&page=${page}&limit=${limit}`;
+export const filteredSearchUrl = (term, page = 1, limit = 3) =>
+  `${term}&page=${page}&limit=${limit}`;
 
 export const filteredMenuList = (category) => {
   const menuListFiltered = category?.items?.map((label) => {
@@ -63,6 +63,8 @@ export const selectStyles = {
 };
 
 export const limitSelectOptions = [
+  { value: 1, label: '1' },
+  { value: 3, label: '3' },
   { value: 5, label: '5' },
   { value: 10, label: '10' },
   { value: 15, label: '15' },

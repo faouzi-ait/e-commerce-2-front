@@ -34,6 +34,10 @@ export const getSearch = (payload) => {
   return { type: cons.GET_SEARCH_RESULTS, payload };
 };
 
+export const getSearchString = (payload) => {
+  return { type: cons.GET_SEARCH_STRING, payload };
+};
+
 export const getSearchSuccess = (payload) => {
   return { type: cons.GET_SEARCH_RESULTS_SUCCESS, payload };
 };

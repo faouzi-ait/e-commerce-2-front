@@ -13,14 +13,9 @@ function Sidebar({ rating, brand, pricing, page, limit, data, action }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (action === 'product') {
-      dispatch(
-        getProducts(`${defaultUrl(page, limit)}${rating}${brand}${pricing}`)
-      );
-    } else if (action === 'query') {
-      // get the logic for the search feature here.
-      alert('Looking for searching stuff');
-    }
+    dispatch(
+      getProducts(`${defaultUrl(page, limit)}${rating}${brand}${pricing}`)
+    );
   }, [limit, rating, brand, page, pricing, action, dispatch]);
 
   return (

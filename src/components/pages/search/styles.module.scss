@@ -1,0 +1,54 @@
+.productGrid {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    text-align: center;
+    padding: 0rem 7rem;
+}
+
+.navigationLink {
+    margin-right: 6px;
+    padding: 1.25rem;
+    background: #CECECE;
+    cursor: pointer;
+    border: 1px solid transparent;
+    
+    &:hover {
+        background: #FFFFFF;
+        border: 1px solid #CECECE;
+    }
+}
+
+.pageNumbers {
+    display: inline-block;
+    margin: 0 .5rem 0 .1rem;
+    padding: 1.25rem;
+    font-size: 1.75rem;
+    background: #ccc;
+    border-radius: .2rem;
+    cursor: pointer;
+
+    &:hover {
+        background: #fff;
+    }
+}
+
+.active {
+    border-radius: .2rem;
+    background: #fff;
+    border: 1px solid rgb(194, 194, 194);
+    cursor: default;
+}
+
+.layoutDisplay {
+    margin-bottom: 5rem;
+    display: flex;
+    justify-content: center
+}
+
+.marginTop {
+    margin-top: -1rem;
+}
+
+.marginBottom {
+    margin-bottom: 1rem;
+}

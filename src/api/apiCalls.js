@@ -5,8 +5,8 @@ const TOKEN =
   JSON.parse(localStorage.getItem('CURRENT_USER')) || 'NOT_LOGGED_IN';
 
 const axiosInstance = axios.create({
-  // baseURL: process.env.REACT_APP_URL_DEV,
-  baseURL: process.env.REACT_APP_URL_PROD,
+  baseURL: process.env.REACT_APP_URL_DEV,
+  // baseURL: process.env.REACT_APP_URL_PROD,
   headers: {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Credentials': 'true',
@@ -96,7 +96,7 @@ export async function fetchRelatedProducts(urlParams, queryParams) {
 
 export async function searchByTerms(term, params) {
   try {
-    return await apiClient.get(`products?search=${term}`, params);
+    return await apiClient.get(`/products?${term}`, params);
   } catch (error) {
     return { error };
   }

@@ -4,7 +4,7 @@ import Modal from '../../../ui/modal';
 
 import { container, gridContainer } from './styles.module.scss';
 
-function Row({ products, isRow }) {
+function Row({ products, isRow, isProduct = false, isSearch = false }) {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [productId, setProductId] = React.useState(null);
   const item = products?.data;
@@ -30,6 +30,8 @@ function Row({ products, isRow }) {
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}
         productId={productId}
+        isProduct={isProduct}
+        isSearch={isSearch}
       />
     </>
   );

@@ -8,7 +8,7 @@ import SelectWrapper from '../../ui/select';
 
 import { getDefaultUrl } from '../product_display/pagination/actions';
 import { getCategory, getProducts } from '../../pages/product/actions';
-import { getSearch } from './actions';
+import { getSearch, getSearchString } from './actions';
 import { catgoriesList } from '../toggles/selectors';
 
 import * as utils from '../../../utils';
@@ -34,7 +34,8 @@ function Header() {
   const submitQuery = (e) => {
     if (!searchTerm) return false;
 
-    dispatch(getSearch(`${searchTerm}&page=1&limit=5`));
+    dispatch(getSearchString(`${searchTerm}`));
+    dispatch(getSearch(`search=${searchTerm}&page=1`));
     history.push('/search');
   };
 

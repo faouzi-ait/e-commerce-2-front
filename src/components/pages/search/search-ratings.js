@@ -1,20 +1,15 @@
 import React from 'react';
-import Stars from '../../../stars';
-import { useDispatch } from 'react-redux';
-import { getRating, getPage } from '../../pagination/actions';
-import * as cmpStyle from '../styles.module.scss';
+import Stars from '../../components/stars';
 
-function StarsFilter({ rating }) {
-  const dispatch = useDispatch();
+import * as localCmpStyle from './styles.module.scss';
+import * as cmpStyle from '../../components/product_display/sidebar/styles.module.scss';
 
+function StarsFilter({ rating, setStarRating }) {
   const StarItems = ({ nb }) => {
     return (
       <li
         style={{ display: 'flex', cursor: 'pointer' }}
-        onClick={() => {
-          getPage(1);
-          dispatch(getRating(`&ratings=${nb}`));
-        }}>
+        onClick={() => setStarRating(nb)}>
         <Stars starrating={nb} />
         &nbsp;<span className={cmpStyle.starLabel}></span>
       </li>
@@ -24,7 +19,7 @@ function StarsFilter({ rating }) {
   return (
     <div className={cmpStyle.starLayout}>
       <span className={cmpStyle.starTitle}>Customer Ratings &amp; Reviews</span>
-      <ul className={cmpStyle.starStyling}>
+      <ul style={{ marginLeft: '-4rem', marginTop: '0rem' }}>
         <StarItems nb={1} />
         <StarItems nb={2} />
         <StarItems nb={3} />
@@ -32,7 +27,9 @@ function StarsFilter({ rating }) {
         <StarItems nb={5} />
       </ul>
       {rating && (
-        <div onClick={() => dispatch(getRating(''))} className={cmpStyle.clear}>
+        <div
+          onClick={() => setStarRating(null)}
+          className={`${cmpStyle.clear} ${localCmpStyle.marginTop} ${localCmpStyle.marginBottom}`}>
           <i className="fa fa-chevron-left"></i> Clear Filter
         </div>
       )}
