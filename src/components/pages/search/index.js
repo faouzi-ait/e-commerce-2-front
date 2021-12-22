@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import PageLoader from '../../ui/loader';
-import SearchFilter from './search-filter';
-import StarsRating from './search-ratings';
-import BrandFilter from './search-brand';
-import Footer from '../../components/footer';
 import Row from '../../components/product_display/row';
+import Footer from '../../components/footer';
+import RatingFilter from './search-ratings';
+import SearchFilter from './search-filter';
+import BrandFilter from './search-brand';
+import PriceFilter from './search-price';
+import PageLoader from '../../ui/loader';
 
 import { getSearch } from '../../components/header/actions';
 import { searchSelector } from './selectors';
@@ -18,6 +19,7 @@ function Search() {
   const [searchLimit, setSearchLimit] = useState(null);
   const [starRating, setStarRating] = useState(null);
   const [searchBrand, setSearchBrand] = useState(null);
+  const [searchPrice, setSearchPrice] = useState(null);
   const [searchPage, setSearchPage] = useState(1);
 
   // const { isRow } = useSelector((state) => state?.products);
@@ -31,15 +33,28 @@ function Search() {
     );
   }, [searchString, searchLimit, searchPage, dispatch]);
 
-  const filteredProductList = searchResults?.data?.items?.filter((item) => {
-    if (starRating && searchBrand) {
-      return item.ratings === starRating && item.brand === searchBrand;
-    } else if (starRating && !searchBrand) {
-      return item.ratings === starRating;
-    } else if (!starRating && searchBrand) {
-      return item.brand === searchBrand;
-    }
-  });
+  let filteredProductList =
+    starRating !== null || searchBrand !== null
+      ? searchResults?.data?.items?.filter((item) => {
+          if (starRating && searchBrand) {
+            return item.ratings === starRating && item.brand === searchBrand;
+          } else if (starRating && !searchBrand) {
+            return item.ratings === starRating;
+          } else if (!starRating && searchBrand) {
+            return item.brand === searchBrand;
+          }
+        })
+      : searchResults?.data?.items;
+
+  filteredProductList = searchPrice
+    ? filteredProductList.filter((item) => {
+        if (searchPrice === 400) {
+          return item.price >= searchPrice;
+        } else {
+          return item.price <= searchPrice;
+        }
+      })
+    : filteredProductList;
 
   const filteredProductObj = {
     data: {
@@ -54,7 +69,7 @@ function Search() {
   };
 
   const filterArray = () => {
-    if (starRating || searchBrand) {
+    if (starRating || searchBrand || searchPrice) {
       return filteredProductObj?.data?.items?.length > 0
         ? filteredProductObj
         : filteredProductObjEmpty;
@@ -71,13 +86,17 @@ function Search() {
             setSearchPage={setSearchPage}
             setSearchLimit={setSearchLimit}
           />
-          <StarsRating rating={starRating} setStarRating={setStarRating} />
+          <RatingFilter rating={starRating} setStarRating={setStarRating} />
           <BrandFilter
             searchBrand={searchBrand}
             setSearchBrand={setSearchBrand}
             data={searchResults?.data}
           />
-          {/* BY PRICE FILTER */}
+          <PriceFilter
+            searchPrice={searchPrice}
+            setSearchPage={setSearchPage}
+            setSearchPrice={setSearchPrice}
+          />
         </div>
         {loading ? (
           <PageLoader />

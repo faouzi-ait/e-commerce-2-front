@@ -1,6 +1,7 @@
 .productGrid {
     display: grid;
     grid-template-columns: 25% 75%;
+    min-height: 90vh !important;
     padding: 0 2rem 0 0;
 }
 

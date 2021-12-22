@@ -30,7 +30,7 @@ function Brand({ searchBrand, setSearchBrand, data }) {
         {(brand || []).map((item) => (
           <li
             key={item}
-            className={`${cmpStyle.brandLabelDisplay} ${cmpStyle.brandLabel}`}>
+            className={`${cmpStyle.brandLabelDisplay} ${cmpStyle.brandLabel} ${localCmpStyle.marginLeft}`}>
             <input
               type="checkbox"
               name={item}

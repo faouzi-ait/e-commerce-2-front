@@ -13,7 +13,6 @@ import { getDefaultUrl } from '../../components/product_display/pagination/actio
 
 import { searchSelector } from '../../components/product_display/pagination/selectors';
 import { productSelector } from '../../ui/modal/selectors';
-
 import { productData } from './selector';
 
 import { filteredCategoryUrl } from '../../../utils';
