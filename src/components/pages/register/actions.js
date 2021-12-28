@@ -1,6 +1,6 @@
 import * as cons from './constants';
 
-export const register_user = (payload) => {
+export const register= (payload) => {
   return { type: cons.REGISTER_USER, payload };
 };
 

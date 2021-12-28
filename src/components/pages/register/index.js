@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import Input from '../../ui/input';
 import { THEMES } from '../../components/toggles/constants';
 import { t } from '../../../i18n/translate';
 
 import { selectedTheme } from '../../components/toggles/selectors';
-import { register_user } from './actions';
+import { register } from './actions';
 import { registration } from './selector';
 
 import { loginForm } from './styles.module.scss';
@@ -27,67 +28,54 @@ function Register() {
       return;
     }
 
-    dispatch(register_user({ name, age, surname, email, password }));
+    dispatch(register({ name, age, surname, email, password }));
   };
 
   return (
     <div className={`baseTheme app ${isDark ? THEMES.DARK : THEMES.LIGHT}`}>
       <div className={loginForm}>
         <form onSubmit={onSubmit}>
-          <div>
-            <label>{t('username')}:</label>
-            <input
-              type="text"
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-            />
-          </div>
+          <Input
+            label={t('username')}
+            type="text"
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+          />
 
-          <div>
-            <label>{t('surname')}:</label>
-            <input
-              type="text"
-              onChange={(e) => setSurname(e.target.value)}
-              value={surname}
-            />
-          </div>
+          <Input
+            label={t('surname')}
+            type="text"
+            onChange={(e) => setSurname(e.target.value)}
+            value={surname}
+          />
 
-          <div>
-            <label>{t('age')}:</label>
-            <input
-              type="number"
-              onChange={(e) => setAge(e.target.value)}
-              value={age}
-            />
-          </div>
+          <Input
+            label={t('email')}
+            type="text"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+          />
 
-          <div>
-            <label>{t('email')}:</label>
-            <input
-              type="email"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-            />
-          </div>
+          <Input
+            label={t('age')}
+            type="number"
+            onChange={(e) => setAge(e.target.value)}
+            value={age}
+          />
 
-          <div>
-            <label>{t('password')}:</label>
-            <input
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-            />
-          </div>
+          <Input
+            label={t('password')}
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+          />
 
           <button type="submit">
             {registering ? 'Registering...' : 'Register'}
           </button>
 
           <div>
-            {errors &&
-              errors.data &&
-              errors.data.message &&
-              errors.data.message}
+            {errors && errors?.data?.message}
             {user &&
               user.message &&
               'Registration successful, please check your email to activate your account'}

@@ -88,6 +88,11 @@ function Header() {
             </div>
           </div>
           <div className={cmpStyle.cartContainer}>
+            <div
+              className={cmpStyle.loginLink}
+              onClick={() => history.push('/login')}>
+              <span>Login</span>
+            </div>
             <i className="fa fa-shopping-bag"></i>
           </div>
         </div>

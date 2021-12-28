@@ -134,3 +134,15 @@
     margin-left: 12%;
     display: flex
 }
+
+.loginLink {
+    margin-right: 1rem;
+    margin-top: -.4rem;
+    border: 2px solid transparent;
+    padding: 1rem;
+    cursor: pointer;
+    
+    &:hover {
+        border: 2px solid #FFFFFF;
+    }
+}

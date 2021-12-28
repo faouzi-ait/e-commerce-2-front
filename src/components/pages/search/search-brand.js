@@ -30,7 +30,7 @@ function Brand({ searchBrand, setSearchBrand, data }) {
         {(brand || []).map((item) => (
           <li
             key={item}
-            className={`${cmpStyle.brandLabelDisplay} ${cmpStyle.brandLabel} ${localCmpStyle.marginLeft}`}>
+            className={`${cmpStyle.brandLabelDisplay} ${cmpStyle.brandLabel}`}>
             <input
               type="checkbox"
               name={item}
@@ -46,7 +46,7 @@ function Brand({ searchBrand, setSearchBrand, data }) {
               htmlFor={`custom-checkbox-${item}`}
               className={`${cmpStyle.brandLabelDisplay} ${
                 cmpStyle.brandLabel
-              } ${brand === item && cmpStyle.priceLimitColor}`}>
+              } ${searchBrand === item && cmpStyle.priceLimitColor}`}>
               {item}
             </label>
           </li>

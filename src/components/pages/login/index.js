@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import TokenPane from '../../components/resend_token';
+
 import { THEMES } from '../../components/toggles/constants';
+import TokenPane from '../../components/resend_token';
 import { t } from '../../../i18n/translate';
+import Input from '../../ui/input';
 
 import { selectedTheme } from '../../components/toggles/selectors';
 import { loginStatus } from './selector';
-import { login_user_action } from './actions';
+import { login } from './actions';
 
 import { loginForm } from './styles.module.scss';
 
 function Login() {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { isDark } = useSelector(selectedTheme);
-  const { authenticating, loggedIn, errors } = useSelector(loginStatus);
+  const { authenticating, /*loggedIn,*/ errors } = useSelector(loginStatus);
 
   const activationLandingScreen = (query) => {
     const queryString = query;
@@ -38,16 +40,16 @@ function Login() {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (!username || !password) return;
+    if (!email || !password) return;
 
     const payload = {
-      email: username,
+      email,
       password,
     };
 
-    dispatch(login_user_action(payload));
+    dispatch(login(payload));
     setPassword('');
-    setUsername('');
+    setEmail('');
   };
 
   return (
@@ -55,39 +57,29 @@ function Login() {
       {activationLandingScreen(window.location.search)}
       <div className={loginForm}>
         <form onSubmit={onSubmit}>
-          <div>
-            <label>{t('username')}:</label>
-            <input
-              type="email"
-              onChange={(e) => setUsername(e.target.value)}
-              value={username}
-            />
-          </div>
-          <div>
-            <label>{t('password')}:</label>
-            <input
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-            />
-          </div>
-          {!loggedIn && (
-            <button type="submit" disabled={authenticating ? true : false}>
-              {authenticating ? 'Logging in...' : 'Login'}
-            </button>
-          )}
+          <Input
+            label={t('username')}
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+          <Input
+            label={t('password')}
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button type="submit" disabled={authenticating ? true : false}>
+            {authenticating ? 'Logging in...' : 'Login'}
+          </button>
           <span
             onClick={() => setIsOpen(!isOpen)}
             style={{ cursor: 'pointer', userSelect: 'none' }}>
             {t('loginToken')}
           </span>
           {isOpen && <TokenPane setOpen={setIsOpen} />}
-          <span>
-            {errors &&
-              errors.data &&
-              errors.data.message &&
-              errors.data.message}
-          </span>
+          <span>{errors && errors?.data?.message}</span>
         </form>
       </div>
     </div>
