@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import TokenPane from '../../components/resend_token';
+import Footer from '../../components/footer';
+
 import Input from '../../ui/input';
 import { THEMES } from '../../components/toggles/constants';
 import { t } from '../../../i18n/translate';
@@ -8,12 +12,14 @@ import { selectedTheme } from '../../components/toggles/selectors';
 import { register } from './actions';
 import { registration } from './selector';
 
-import { loginForm } from './styles.module.scss';
+import * as cmpStyle from '../login/styles.module.scss';
+import { loginForm, backToLogin } from './styles.module.scss';
 
 function Register() {
   const { user, errors, registering } = useSelector(registration);
   const { isDark } = useSelector(selectedTheme);
   const [password, setPassword] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -32,14 +38,19 @@ function Register() {
   };
 
   return (
-    <div className={`baseTheme app ${isDark ? THEMES.DARK : THEMES.LIGHT}`}>
+    <div className={`baseTheme ${isDark ? THEMES.DARK : THEMES.LIGHT}`}>
       <div className={loginForm}>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className={cmpStyle.form}>
+          <p className={cmpStyle.h3}>{t('registerTitle')}</p>
+
           <Input
             label={t('username')}
             type="text"
             onChange={(e) => setName(e.target.value)}
             value={name}
+            className={cmpStyle.inputField}
+            labelClassName={cmpStyle.label}
+            placeholder="Your Firstname"
           />
 
           <Input
@@ -47,6 +58,9 @@ function Register() {
             type="text"
             onChange={(e) => setSurname(e.target.value)}
             value={surname}
+            className={cmpStyle.inputField}
+            labelClassName={cmpStyle.label}
+            placeholder="Your Lastname"
           />
 
           <Input
@@ -54,6 +68,9 @@ function Register() {
             type="text"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
+            className={cmpStyle.inputField}
+            labelClassName={cmpStyle.label}
+            placeholder="unique-email@somewhere.com"
           />
 
           <Input
@@ -61,6 +78,9 @@ function Register() {
             type="number"
             onChange={(e) => setAge(e.target.value)}
             value={age}
+            className={cmpStyle.inputField}
+            labelClassName={cmpStyle.label}
+            placeholder="How old are you"
           />
 
           <Input
@@ -68,20 +88,32 @@ function Register() {
             type="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
+            className={cmpStyle.inputField}
+            labelClassName={cmpStyle.label}
+            placeholder="Your Password"
           />
 
-          <button type="submit">
-            {registering ? 'Registering...' : 'Register'}
+          <button type="submit" className={cmpStyle.signinBtn}>
+            {registering ? t('registering...') : t('register')}
           </button>
+
+          <Link to="/login" className={`${cmpStyle.activate} ${backToLogin}`}>
+            {t('returnToLogin')}
+          </Link>
+
+          <div onClick={() => setIsOpen(!isOpen)} className={cmpStyle.activate}>
+            {t('loginToken')}
+          </div>
+
+          {isOpen && <TokenPane setOpen={setIsOpen} />}
 
           <div>
             {errors && errors?.data?.message}
-            {user &&
-              user.message &&
-              'Registration successful, please check your email to activate your account'}
+            {user && user.message && t('registrationSucessful')}
           </div>
         </form>
       </div>
+      <Footer />
     </div>
   );
 }

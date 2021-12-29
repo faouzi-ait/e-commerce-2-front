@@ -3,14 +3,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-bottom: 10px;
     position: absolute;
-    top: 50%;
+    bottom: 2.65%;
     left: 50%;
     transform: translate(-50%, -50%);
-    min-width: 23%;
-    min-height: 20%;
+    min-width: 440px;
+    min-height: 125px;
     background: var(--theme-token_panel-background);
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .tokenPaneMsg,

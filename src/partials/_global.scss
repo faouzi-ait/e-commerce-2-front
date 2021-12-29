@@ -11,14 +11,11 @@ html {
     }
 }
 
-.app {
-    min-height: 93.75vh;
-    overflow-x: hidden;
-}
-
 .baseTheme {
     color: var(--theme-page-text);
     background: var(--theme-page-background);
+    min-height: 90vh;
+    overflow-x: hidden;
 }
 
 .react-select__control {

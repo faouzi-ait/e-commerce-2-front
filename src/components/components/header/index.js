@@ -9,6 +9,8 @@ import SelectWrapper from '../../ui/select';
 import { getDefaultUrl } from '../product_display/pagination/actions';
 import { getCategory, getProducts } from '../../pages/product/actions';
 import { getSearch, getSearchString } from './actions';
+
+import { loginStatus } from '../../pages/login/selector';
 import { catgoriesList } from '../toggles/selectors';
 
 import * as utils from '../../../utils';
@@ -18,10 +20,11 @@ function Header() {
   // const { isDark } = useSelector(selectedTheme);
   const dispatch = useDispatch();
   const history = useHistory();
-  const [menuList, setMenuList] = useState([]);
-  const [filteredSubmenu, setFilteredSubmenu] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
   const category = useSelector(catgoriesList);
+  const [menuList, setMenuList] = useState([]);
+  const { loggedIn } = useSelector(loginStatus);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredSubmenu, setFilteredSubmenu] = useState([]);
 
   useEffect(() => {
     const menuListFiltered = utils.filteredMenuList(category);
@@ -88,11 +91,13 @@ function Header() {
             </div>
           </div>
           <div className={cmpStyle.cartContainer}>
-            <div
-              className={cmpStyle.loginLink}
-              onClick={() => history.push('/login')}>
-              <span>Login</span>
-            </div>
+            {!loggedIn && (
+              <div
+                className={cmpStyle.loginLink}
+                onClick={() => history.push('/login')}>
+                <span>Login</span>
+              </div>
+            )}
             <i className="fa fa-shopping-bag"></i>
           </div>
         </div>

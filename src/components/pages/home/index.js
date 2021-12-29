@@ -16,7 +16,7 @@ function Home() {
   const items = useSelector(homeProductItems);
 
   return (
-    <div className={`baseTheme app ${isDark ? THEMES.DARK : THEMES.LIGHT}`}>
+    <div className={`baseTheme ${isDark ? THEMES.DARK : THEMES.LIGHT}`}>
       <Carousel />
       <HomeProducts products={items} />
       <AdvertBanner image="./images/banner-middle.jpg" />

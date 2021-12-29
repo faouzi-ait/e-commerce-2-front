@@ -8,6 +8,8 @@ function Input({
   label,
   value,
   classname,
+  labelClassName,
+  labelStyle,
   style,
   containerClass,
   placeholder,
@@ -15,7 +17,9 @@ function Input({
 }) {
   return (
     <div className={containerClass}>
-      <label>{label}</label>
+      <label className={labelClassName} style={labelStyle}>
+        {label}
+      </label>
       <input
         type={type}
         onChange={onChange}

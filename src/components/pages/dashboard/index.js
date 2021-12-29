@@ -14,7 +14,7 @@ function Dashboard() {
   console.log(profile);
 
   return (
-    <div className={`baseTheme app ${isDark ? THEMES.DARK : THEMES.LIGHT}`}>
+    <div className={`baseTheme ${isDark ? THEMES.DARK : THEMES.LIGHT}`}>
       {/* {t('greeting')} */}
       dashboard
     </div>

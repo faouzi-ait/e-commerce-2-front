@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Footer from '../../components/footer';
 
 import { THEMES } from '../../components/toggles/constants';
 import TokenPane from '../../components/resend_token';
@@ -10,7 +12,7 @@ import { selectedTheme } from '../../components/toggles/selectors';
 import { loginStatus } from './selector';
 import { login } from './actions';
 
-import { loginForm } from './styles.module.scss';
+import * as cmpStyle from './styles.module.scss';
 
 function Login() {
   const dispatch = useDispatch();
@@ -53,15 +55,19 @@ function Login() {
   };
 
   return (
-    <div className={`baseTheme app ${isDark ? THEMES.DARK : THEMES.LIGHT}`}>
+    <div className={`baseTheme ${isDark ? THEMES.DARK : THEMES.LIGHT}`}>
       {activationLandingScreen(window.location.search)}
-      <div className={loginForm}>
-        <form onSubmit={onSubmit}>
+      <div className={cmpStyle.loginForm}>
+        <form onSubmit={onSubmit} className={cmpStyle.form}>
+          <p className={cmpStyle.h3}>{t('signIn')}</p>
           <Input
             label={t('username')}
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className={cmpStyle.inputField}
+            labelClassName={cmpStyle.label}
+            placeholder="your-email@somewhere.com"
           />
 
           <Input
@@ -69,19 +75,33 @@ function Login() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className={cmpStyle.inputField}
+            labelClassName={cmpStyle.label}
+            placeholder="Your Password"
           />
-          <button type="submit" disabled={authenticating ? true : false}>
-            {authenticating ? 'Logging in...' : 'Login'}
+
+          <button
+            type="submit"
+            disabled={authenticating ? true : false}
+            className={cmpStyle.signinBtn}>
+            {authenticating ? t('signingIn') : t('signIn')}
           </button>
-          <span
-            onClick={() => setIsOpen(!isOpen)}
-            style={{ cursor: 'pointer', userSelect: 'none' }}>
+
+          <Link
+            to="/register"
+            className={`${cmpStyle.signinBtn} ${cmpStyle.register}`}>
+            {t('register')}
+          </Link>
+
+          <div onClick={() => setIsOpen(!isOpen)} className={cmpStyle.activate}>
             {t('loginToken')}
-          </span>
+          </div>
+
           {isOpen && <TokenPane setOpen={setIsOpen} />}
           <span>{errors && errors?.data?.message}</span>
         </form>
       </div>
+      <Footer />
     </div>
   );
 }

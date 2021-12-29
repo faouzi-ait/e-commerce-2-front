@@ -1,8 +1,9 @@
 .loginForm {
     display: flex;
-    min-height: 94vh;
+    min-height: 80vh;
     justify-content: center;
     align-items: center;
+    margin: 2rem 0
 }
 
 label {
@@ -15,4 +16,9 @@ form {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.backToLogin {
+    color: var(--theme-page-text);
+    text-decoration: none;
 }
