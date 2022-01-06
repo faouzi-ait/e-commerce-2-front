@@ -14,7 +14,8 @@
     border: 1px solid transparent;
     
     &:hover {
-        background: #FFFFFF;
+        color: var(--theme-page-text);
+        background: var(--theme-page-background);
         border: 1px solid #CECECE;
     }
 }
@@ -24,19 +25,19 @@
     margin: 0 .5rem 0 .1rem;
     padding: 1.25rem;
     font-size: 1.75rem;
-    background: #ccc;
+    background: rgb(180, 180, 180);
     border-radius: .2rem;
     cursor: pointer;
 
     &:hover {
-        background: #fff;
+        color: var(--theme-page-text);
+        background: (--theme-page-background);
     }
 }
 
 .active {
     border-radius: .2rem;
-    background: #fff;
-    border: 1px solid rgb(194, 194, 194);
+    background: rgb(129, 129, 129);
     cursor: default;
 }
 

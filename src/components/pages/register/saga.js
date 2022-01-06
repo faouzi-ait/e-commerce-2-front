@@ -19,12 +19,12 @@ export function* user_registration({ payload }) {
     yield put(registering(false));
     const { data, status } = result.error.response;
     yield put(register_user_failure({ data, status }));
-    yield delay(4000);
+    yield delay(2750);
     yield put(register_user_failure(null));
   } else {
     yield put(registering(false));
     yield put(register_user_success(result.data));
-    yield delay(4000);
+    yield delay(2500);
     yield put(register_user_success(null));
     // localStorage.setItem('CURRENT_USER', JSON.stringify(result.data.token));
     // window.location.href = '/dashboard';

@@ -7,6 +7,7 @@ export default {
     username: 'What is your Firstname',
     surname: 'What is your Lastname',
     age: 'How old are you',
+    picture: 'Choose your picture (Optional)',
     email: 'Email',
     password: 'Password',
     loginToken: 'Renew activation token',

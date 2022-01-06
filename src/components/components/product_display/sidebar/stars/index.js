@@ -25,11 +25,11 @@ function StarsFilter({ rating }) {
     <div className={cmpStyle.starLayout}>
       <span className={cmpStyle.starTitle}>Customer Ratings &amp; Reviews</span>
       <ul className={cmpStyle.starStyling}>
-        <StarItems nb={1} />
-        <StarItems nb={2} />
-        <StarItems nb={3} />
-        <StarItems nb={4} />
         <StarItems nb={5} />
+        <StarItems nb={4} />
+        <StarItems nb={3} />
+        <StarItems nb={2} />
+        <StarItems nb={1} />
       </ul>
       {rating && (
         <div onClick={() => dispatch(getRating(''))} className={cmpStyle.clear}>

@@ -1,8 +1,13 @@
 import { createSelector } from 'reselect';
 
-const language = (state) => state;
+const states = (state) => state;
 
 export const selectedLanguage = createSelector(
-  [language],
+  [states],
   ({ language }) => language
+);
+
+export const basketSelector = createSelector(
+  [states],
+  ({ basket }) => basket?.cart
 );

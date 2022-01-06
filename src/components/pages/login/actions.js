@@ -26,3 +26,7 @@ export const setIsAuthenticating = (payload) => {
 export const setIsUserAuthenticated = (payload) => {
   return { type: cons.IS_AUTHENTICATED, payload };
 };
+
+export const fromPaymentLink = (payload) => {
+  return { type: cons.FROM_PAYMENT_LINK, payload };
+};

@@ -1,19 +1,27 @@
 import React from 'react';
-import ProductDisplay from './ProductDisplay';
 import Modal from '../../../ui/modal';
+import { useSelector } from 'react-redux';
+import ProductDisplay from './ProductDisplay';
 
-import { container, gridContainer } from './styles.module.scss';
+import { THEMES } from '../../../components/toggles/constants';
+import { selectedTheme } from '../../../components/toggles/selectors';
+
+import { container, gridContainer, marginLeft } from './styles.module.scss';
 
 function Row({ products, isRow, isProduct = false, isSearch = false }) {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [productId, setProductId] = React.useState(null);
+  const { isDark } = useSelector(selectedTheme);
   const item = products?.data;
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
 
   return (
-    <>
+    <div
+      className={`baseTheme ${
+        isDark ? THEMES.DARK : THEMES.LIGHT
+      } ${marginLeft}`}>
       <div className={container}></div>
       <div className={`${isRow ? gridContainer : ''}`}>
         {(item?.items || []).map((item) => (
@@ -33,7 +41,7 @@ function Row({ products, isRow, isProduct = false, isSearch = false }) {
         isProduct={isProduct}
         isSearch={isSearch}
       />
-    </>
+    </div>
   );
 }
 

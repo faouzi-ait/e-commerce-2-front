@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Footer from '../../components/footer';
 
 import { THEMES } from '../../components/toggles/constants';
@@ -10,26 +10,28 @@ import Input from '../../ui/input';
 
 import { selectedTheme } from '../../components/toggles/selectors';
 import { loginStatus } from './selector';
-import { login } from './actions';
+import { login, fromPaymentLink } from './actions';
 
 import * as cmpStyle from './styles.module.scss';
 
 function Login() {
   const dispatch = useDispatch();
-  const [isOpen, setIsOpen] = useState(false);
+  const search = useLocation().search;
   const [email, setEmail] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
   const [password, setPassword] = useState('');
   const { isDark } = useSelector(selectedTheme);
-  const { authenticating, /*loggedIn,*/ errors } = useSelector(loginStatus);
+  const { authenticating, errors } = useSelector(loginStatus);
 
   const activationLandingScreen = (query) => {
-    const queryString = query;
-    const urlParams = new URLSearchParams(queryString);
-    const status = urlParams.get('status');
+    const param = new URLSearchParams(search).get('status');
+    // const queryString = query;
+    // const urlParams = new URLSearchParams(queryString);
+    // const status = urlParams.get('status');
 
-    switch (status) {
+    switch (param) {
       case 'activated':
-        return 'Your account is now activated';
+        return 'Your account has been activated';
       case 'expired':
         return 'Your activation token has expired, please renew your token and try again';
       case 'already_activated':
@@ -38,6 +40,16 @@ function Login() {
         return '';
     }
   };
+
+  useEffect(() => {
+    const param = new URLSearchParams(search).get('redirect');
+
+    if (param === 'payment') {
+      dispatch(fromPaymentLink(true));
+    } else {
+      dispatch(fromPaymentLink(false));
+    }
+  }, [dispatch, search]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -50,6 +62,7 @@ function Login() {
     };
 
     dispatch(login(payload));
+    // redirectToPayment(window.location.search);
     setPassword('');
     setEmail('');
   };

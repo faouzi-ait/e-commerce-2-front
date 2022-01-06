@@ -1,7 +1,7 @@
 export const defaultUrl = (page = 1, limit = 5) =>
   `page=${page}&limit=${limit}`;
 
-export const filteredCategoryUrl = (id, page = 1, limit = 5) =>
+export const filteredCategoryUrl = (id, page = 1, limit = 3) =>
   `category=${id}&page=${page}&limit=${limit}`;
 
 export const filteredSearchUrl = (term, page = 1, limit = 3) =>
@@ -19,8 +19,8 @@ export const filteredMenuList = (category) => {
 };
 
 export const submenufilteredMenuList = (category) => {
-  const submenuFiltered = category.items
-    ?.filter((item) => item.showOnNav === true)
+  const submenuFiltered = category?.items
+    ?.filter((item) => item?.showOnNav === true)
     ?.map((label) => {
       return {
         id: label._id,
@@ -50,8 +50,11 @@ export const selectStyles = {
     width: '15rem',
     height: 37.05,
     marginRight: '-.1rem',
-    border: 'none',
-    borderRadius: 0,
+    color: '#000 !important',
+    borderTopLeftRadius: '5px !important',
+    borderBottomLeftRadius: '5px !important',
+    borderRight: '1px solid #A9A9A9 !important',
+    background: 'rgb(243, 243, 243)',
     boxShadow: 'none',
   }),
   option: (provided, state) => ({
@@ -59,6 +62,18 @@ export const selectStyles = {
     fontWeight: state.isSelected ? 'bold' : 'normal',
     fontSize: '1.3rem',
     border: 0,
+    color: '#000 !important',
+  }),
+  indicatorSeparator: (base) => ({
+    ...base,
+    backgroundColor: '#000 !important',
+    color: '#000 !important',
+  }),
+  dropdownIndicator: (provided) => ({
+    ...provided,
+    svg: {
+      fill: '#000',
+    },
   }),
 };
 
@@ -74,14 +89,15 @@ export const limitSelectOptions = [
 export const limitSelectStyles = {
   control: (base) => ({
     ...base,
-    border: '1px solid #cecece !important',
-    boxShadow: 'none',
     width: '10vw',
     height: 37.05,
+    boxShadow: 'none',
+    border: '1px solid #cecece !important',
   }),
   option: (provided, state) => ({
     ...provided,
     fontWeight: state.isSelected ? 'bold' : 'normal',
     fontSize: '1.3rem',
+    color: '#000',
   }),
 };

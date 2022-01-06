@@ -7,6 +7,7 @@ export default {
     username: 'Votre Nom',
     surname: 'Nom de Famille',
     age: 'Votre age',
+    picture: 'Choisir votre image (Optionnel)',
     email: 'Email',
     password: 'Mot de Passe',
     loginToken: "Nouveau code d'activation",

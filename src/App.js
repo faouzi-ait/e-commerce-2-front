@@ -5,14 +5,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import history from './history';
 
+import Cart from './components/pages/cart';
 import Home from './components/pages/home';
-import Header from './components/components/header';
 import Login from './components/pages/login';
 import Search from './components/pages/search';
+import Payment from './components/pages/payment';
 import Product from './components/pages/product';
 import Register from './components/pages/register';
-import Dashboard from './components/pages/dashboard';
 import NotFound from './components/pages/not-found';
+import Header from './components/components/header';
+import Dashboard from './components/pages/dashboard';
 import PublicRoutes from './components/route-access/PublicRoutes';
 import PrivateRoutes from './components/route-access/PrivateRoutes';
 
@@ -42,11 +44,13 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/home" component={Home} />
+          <Route exact path="/checkout" component={Cart} />
+          <Route exact path="/search" component={Search} />
+          <Route exact path="/payment" component={Payment} />
           <PublicRoutes exact path="/login" component={Login} />
           <PublicRoutes exact path="/register" component={Register} />
-          <PrivateRoutes exact path="/dashboard" component={Dashboard} />
-          <Route exact path="/search" component={Search} />
           <Route exact path="/category/:category" component={Product} />
+          <PrivateRoutes exact path="/dashboard" component={Dashboard} />
           <Route path="*" component={NotFound} />
         </Switch>
       </Router>

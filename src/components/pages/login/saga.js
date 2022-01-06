@@ -1,4 +1,4 @@
-import { call, takeEvery, put, delay } from 'redux-saga/effects';
+import { call, takeEvery, put, delay, select } from 'redux-saga/effects';
 import jwt_decode from 'jwt-decode';
 import { login } from '../../../api/apiCalls';
 import {
@@ -8,6 +8,8 @@ import {
   setAuthenticationError,
 } from './actions';
 import { LOGIN_USER, LOGOUT_USER } from './constants';
+
+const fromPaymentLink = (state) => state?.login;
 
 export function* authentication({ payload }) {
   yield put(setIsAuthenticating(true));
@@ -22,6 +24,7 @@ export function* authentication({ payload }) {
     yield delay(4000);
     yield put(setAuthenticationError(null));
   } else {
+    const redirect = yield select(fromPaymentLink);
     localStorage.setItem('ACCESS_TOKEN', JSON.stringify(result.data.token));
     localStorage.setItem(
       'REFRESH_TOKEN',
@@ -29,7 +32,12 @@ export function* authentication({ payload }) {
     );
     yield call(decodeUserProfile);
     yield put(setIsUserAuthenticated(true));
-    window.location.href = '/dashboard';
+
+    if (redirect.fromPaymentLink) {
+      window.location.href = '/payment';
+    } else {
+      window.location.href = '/dashboard';
+    }
   }
   yield put(setIsAuthenticating(false));
 }

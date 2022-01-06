@@ -1,5 +1,8 @@
 import React from 'react';
-import { /* useSelector, */ useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { THEMES } from '../../../components/toggles/constants';
+import { selectedTheme } from '../../../components/toggles/selectors';
 
 import { getProducts } from '../../../pages/product/actions';
 import { filteredCategoryUrl } from '../../../../utils';
@@ -8,6 +11,7 @@ import { getDefaultUrl, getPage } from './actions';
 import * as cmpStyle from './styles.module.scss';
 
 function Pagination({ products, category, limit }) {
+  const { isDark } = useSelector(selectedTheme);
   const dispatch = useDispatch();
 
   const dispatchFilterAction = (id, page) => {
@@ -60,7 +64,10 @@ function Pagination({ products, category, limit }) {
   };
 
   return (
-    <div className={cmpStyle.container}>
+    <div
+      className={`${cmpStyle.container} baseTheme ${
+        isDark ? THEMES.DARK : THEMES.LIGHT
+      }`}>
       <Paginate nbOfPages={products?.totalNumberOfPages} />
     </div>
   );

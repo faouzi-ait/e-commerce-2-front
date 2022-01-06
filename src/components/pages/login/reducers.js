@@ -4,6 +4,7 @@ const initialState = {
   user: null,
   authenticating: false,
   loggedIn: false,
+  fromPaymentLink: false,
   errors: null,
 };
 
@@ -35,6 +36,11 @@ export const login = (state = initialState, action) => {
         authenticating: false,
         loggedIn: false,
         errors: null,
+      };
+    case cons.FROM_PAYMENT_LINK:
+      return {
+        ...state,
+        fromPaymentLink: action.payload,
       };
     default:
       return state;

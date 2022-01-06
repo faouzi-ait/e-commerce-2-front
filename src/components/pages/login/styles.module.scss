@@ -86,4 +86,8 @@
     font-weight: bold;
     cursor: pointer; 
     user-select: none; 
+
+    &:hover {
+        color: rgba(255, 184, 20, 0.76);
+    }
 }

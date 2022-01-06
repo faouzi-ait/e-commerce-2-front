@@ -6,25 +6,28 @@ const basketState = {
 
 export const basket = (state = basketState, action) => {
   switch (action.type) {
-    case cons.ADD_ITEM:
-      const newBasket = [...state.cart];
-      newBasket.push({
+    case cons.ADD_ITEM: {
+      const basket = [...state.cart];
+      basket.push({
         ...action.payload,
         quantity: 1,
         total: action.payload.price,
       });
-      return { ...state, cart: newBasket };
-    case cons.REMOVE_ITEM:
-      const currentBasket = [...state.cart];
-      const updatedBasket = currentBasket.filter(
-        (item) => item.id !== action.payload
+      return { ...state, cart: basket };
+    }
+    case cons.REMOVE_ITEM: {
+      const basket = [...state.cart];
+      const filteredBasket = basket.filter(
+        (item) => item._id !== action.payload
       );
+
       return {
         ...state,
-        cart: updatedBasket,
+        cart: filteredBasket,
       };
-    case cons.ADD_ONE:
-      let basket = [...state.cart];
+    }
+    case cons.ADD_ONE: {
+      const basket = [...state.cart];
       let item = basket.find((item) => item._id === action.payload);
       let indexOfItem = basket.indexOf(item);
 
@@ -33,21 +36,24 @@ export const basket = (state = basketState, action) => {
       basket.splice(indexOfItem, 1, item);
 
       return { ...state, cart: basket };
-    case cons.REMOVE_ONE:
-      let cart = [...state.cart];
-      const itemToUpdate = cart.find((item) => item._id === action.payload);
-      let indexToRemove = cart.indexOf(itemToUpdate);
+    }
+    case cons.REMOVE_ONE: {
+      let basket = [...state.cart];
+      const itemToUpdate = basket.find((item) => item._id === action.payload);
+      let indexToRemove = basket.indexOf(itemToUpdate);
 
       if (itemToUpdate.quantity >= 1) {
         itemToUpdate.quantity = itemToUpdate.quantity - 1;
-        cart.splice(indexToRemove, 1, itemToUpdate);
+        itemToUpdate.total = itemToUpdate.quantity * itemToUpdate.price;
+        basket.splice(indexToRemove, 1, itemToUpdate);
       }
 
       if (itemToUpdate.quantity === 0) {
-        cart = cart.filter((item) => item._id !== action.payload);
+        basket = basket.filter((item) => item._id !== action.payload);
       }
 
-      return { ...state, cart };
+      return { ...state, cart: basket };
+    }
     default:
       return state;
   }

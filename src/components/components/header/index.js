@@ -12,6 +12,7 @@ import { getSearch, getSearchString } from './actions';
 
 import { loginStatus } from '../../pages/login/selector';
 import { catgoriesList } from '../toggles/selectors';
+import { basketSelector } from './selectors';
 
 import * as utils from '../../../utils';
 import * as cmpStyle from './styles.module.scss';
@@ -21,6 +22,7 @@ function Header() {
   const dispatch = useDispatch();
   const history = useHistory();
   const category = useSelector(catgoriesList);
+  const basket = useSelector(basketSelector);
   const [menuList, setMenuList] = useState([]);
   const { loggedIn } = useSelector(loginStatus);
   const [searchTerm, setSearchTerm] = useState('');
@@ -98,7 +100,11 @@ function Header() {
                 <span>Login</span>
               </div>
             )}
-            <i className="fa fa-shopping-bag"></i>
+            <i
+              className="fa fa-shopping-bag"
+              onClick={() => history.push('/checkout')}>
+              <span className={cmpStyle.cartCnt}>{basket.length}</span>
+            </i>
           </div>
         </div>
         <span className={cmpStyle.toggleBtn}>

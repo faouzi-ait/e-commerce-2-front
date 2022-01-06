@@ -9,8 +9,8 @@ import { THEMES } from '../../components/toggles/constants';
 import { t } from '../../../i18n/translate';
 
 import { selectedTheme } from '../../components/toggles/selectors';
-import { register } from './actions';
 import { registration } from './selector';
+import { register } from './actions';
 
 import * as cmpStyle from '../login/styles.module.scss';
 import { loginForm, backToLogin } from './styles.module.scss';
@@ -21,12 +21,14 @@ function Register() {
   const [password, setPassword] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [surname, setSurname] = useState('');
+  const [photo, setPhoto] = useState();
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const dispatch = useDispatch();
 
   const onSubmit = (e) => {
+    const data = new FormData();
     e.preventDefault();
 
     if (!name || !password || !surname || !email) {
@@ -34,7 +36,21 @@ function Register() {
       return;
     }
 
-    dispatch(register({ name, age, surname, email, password }));
+    data.append('name', name);
+    data.append('age', age);
+    data.append('surname', surname);
+    data.append('email', email);
+    data.append('password', password);
+
+    if (photo) {
+      data.append('image', photo);
+    }
+
+    dispatch(register(data));
+
+    setTimeout(() => {
+      window.location.href = '/login';
+    }, 3000);
   };
 
   return (
@@ -93,15 +109,33 @@ function Register() {
             placeholder="Your Password"
           />
 
+          <div>
+            <label
+              htmlFor="image"
+              style={{ fontWeight: 'bold', fontSize: '1.4rem' }}>
+              {t('picture')}
+            </label>
+            <input
+              type="file"
+              id="image"
+              name="image"
+              onChange={(e) => setPhoto(e.target.files[0])}
+              value={undefined}
+              className={cmpStyle.inputField}
+            />
+          </div>
+
           <button type="submit" className={cmpStyle.signinBtn}>
-            {registering ? t('registering...') : t('register')}
+            {registering ? t('registering') : t('register')}
           </button>
 
           <Link to="/login" className={`${cmpStyle.activate} ${backToLogin}`}>
             {t('returnToLogin')}
           </Link>
 
-          <div onClick={() => setIsOpen(!isOpen)} className={cmpStyle.activate}>
+          <div
+            onClick={() => setIsOpen(!isOpen)}
+            className={`${cmpStyle.activate} ${backToLogin}`}>
             {t('loginToken')}
           </div>
 

@@ -9,6 +9,9 @@ import BrandFilter from './search-brand';
 import PriceFilter from './search-price';
 import PageLoader from '../../ui/loader';
 
+import { selectedTheme } from '../../components/toggles/selectors';
+import { THEMES } from '../../components/toggles/constants';
+
 import { getSearch } from '../../components/header/actions';
 import { searchSelector } from './selectors';
 
@@ -16,8 +19,9 @@ import * as localCmpStyle from './styles.module.scss';
 
 function Search() {
   const dispatch = useDispatch();
-  const [searchLimit, setSearchLimit] = useState(null);
+  const { isDark } = useSelector(selectedTheme);
   const [starRating, setStarRating] = useState(null);
+  const [searchLimit, setSearchLimit] = useState(null);
   const [searchBrand, setSearchBrand] = useState(null);
   const [searchPrice, setSearchPrice] = useState(null);
   const [searchPage, setSearchPage] = useState(1);
@@ -80,7 +84,10 @@ function Search() {
 
   return (
     <>
-      <div className={localCmpStyle.productGrid}>
+      <div
+        className={`baseTheme ${localCmpStyle.productGrid} ${
+          isDark ? THEMES.DARK : THEMES.LIGHT
+        }`}>
         <div>
           <SearchFilter
             setSearchPage={setSearchPage}

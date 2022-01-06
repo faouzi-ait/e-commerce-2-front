@@ -31,17 +31,18 @@ function LayoutSwitch() {
 
   return (
     <div className={cmpStyle.viewSwitchContainer}>
-      <span
-        className={cmpStyle.viewSwitch}
-        onClick={() => dispatch(switchLayout())}>
-        Change View
-        {!isRow ? (
-          <i className="fa fa-bars" aria-hidden="true"></i>
-        ) : (
-          <i className="fa fa-columns" aria-hidden="true"></i>
-        )}
-      </span>
-      <span className={cmpStyle.productCount}>{recordCounts()}</span>
+      <>
+        <span
+          className={cmpStyle.viewSwitch}
+          onClick={() => dispatch(switchLayout())}>
+          Change View
+          <i
+            className={`fa fa-${!isRow ? 'bars' : 'columns'}`}
+            aria-hidden="true"
+          />
+        </span>
+        <span className={cmpStyle.productCount}>{recordCounts()}</span>
+      </>
     </div>
   );
 }

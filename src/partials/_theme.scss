@@ -4,12 +4,18 @@
     
     --theme-page-background: #FFF;
     --theme-page-text: rgb(13, 28, 49);
+
+    --theme-checkout-background: rgb(235, 237, 237);
+    --theme-checkout-text: rgb(13, 28, 49);
 }
 
 .dark {
     --theme-token_panel-background: #FFF;
     --theme-token_panel-text: rgb(13, 28, 49);
-
+    
     --theme-page-background: rgb(13, 28, 49);
     --theme-page-text: #FFF;
+
+    --theme-checkout-background: rgb(13, 28, 49);
+    --theme-checkout-text: #FFF
 }

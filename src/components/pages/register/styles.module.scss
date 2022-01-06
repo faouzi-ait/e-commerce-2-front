@@ -21,4 +21,8 @@ form {
 .backToLogin {
     color: var(--theme-page-text);
     text-decoration: none;
+
+    &:hover {
+        color: rgba(255, 184, 20, 1);
+    }
 }

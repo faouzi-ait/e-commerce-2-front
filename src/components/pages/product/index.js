@@ -9,9 +9,11 @@ import SwitchLayout from '../../components/switch';
 import Footer from '../../components/footer';
 import PageLoader from '../../ui/loader';
 
-import { getDefaultUrl } from '../../components/product_display/pagination/actions';
+import { selectedTheme } from '../../components/toggles/selectors';
+import { THEMES } from '../../components/toggles/constants';
 
 import { searchSelector } from '../../components/product_display/pagination/selectors';
+import { getDefaultUrl } from '../../components/product_display/pagination/actions';
 import { productSelector } from '../../ui/modal/selectors';
 import { productData } from './selector';
 
@@ -21,6 +23,7 @@ import { productGrid } from './styles.module.scss';
 
 function Submenu() {
   const dispatch = useDispatch();
+  const { isDark } = useSelector(selectedTheme);
   const { products, isRow, category, loading } = useSelector(productData);
   const { rating, brand, pricing, page, limit } = useSelector(searchSelector);
   const productDataList = useSelector(productSelector);
@@ -28,12 +31,12 @@ function Submenu() {
   useEffect(() => {
     const { id } = category || {};
 
-    dispatch(getProducts(filteredCategoryUrl(id)));
+    dispatch(getProducts(filteredCategoryUrl(id, 1, limit)));
     dispatch(getDefaultUrl(getProducts(filteredCategoryUrl(id)).payload));
-  }, [category, dispatch]);
+  }, [limit, category, dispatch]);
 
   return (
-    <>
+    <div className={`baseTheme ${isDark ? THEMES.DARK : THEMES.LIGHT}`}>
       {category && (
         <div>
           <SwitchLayout />
@@ -51,7 +54,7 @@ function Submenu() {
               {loading ? (
                 <PageLoader />
               ) : (
-                <Row products={products} isRow={isRow} isProduct={true}/>
+                <Row products={products} isRow={isRow} isProduct={true} />
               )}
               {!loading && (
                 <Pagination
@@ -65,7 +68,7 @@ function Submenu() {
           <Footer />
         </div>
       )}
-    </>
+    </div>
   );
 }
 

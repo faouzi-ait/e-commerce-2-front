@@ -40,8 +40,10 @@
     flex-grow: 1;
     height: 32rem;
     padding: 1.5rem;
+    color: var(--theme-page-text);
     background: #fff;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    box-shadow: rgba(149, 157, 165, 0.2) 1px 8px 24px;
+    background: var(--theme-page-background);
 
     &:not(:last-of-type) {
         margin-right: 3rem;
@@ -53,6 +55,7 @@
 .productBoxTitle {
     margin: 1rem 0;
     text-align: center;
+    color: var(--theme-page-text);
 }
 
 .productImage {
@@ -63,6 +66,8 @@
 .productDetailGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    background: var(--theme-page-background);
+
 }
 
 .productImageGrid {

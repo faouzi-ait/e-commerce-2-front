@@ -8,6 +8,10 @@
     }
 }
 
+.marginLeft {
+    padding-left: 2rem;
+}
+
 .rowContainer {
     display: flex;
 }
@@ -17,7 +21,7 @@
     flex-direction: column;
     width: 100%;
     padding: 1rem;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    box-shadow: rgba(149, 157, 165, 0.2) 1px 8px 16px;
     border-radius: 1rem;
 }
 
