@@ -5,6 +5,7 @@ function useSticky() {
   const element = useRef(null);
 
   // This function handles the scroll performance issue
+  // eslint-disable-next-line
   const debounce = useCallback((func, wait = 10, immediate = true) => {
     let timeOut;
     return () => {
