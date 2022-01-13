@@ -46,7 +46,7 @@ function App() {
           <Route exact path="/home" component={Home} />
           <Route exact path="/checkout" component={Cart} />
           <Route exact path="/search" component={Search} />
-          <Route exact path="/payment" component={Payment} />
+          <PrivateRoutes exact path="/payment" component={Payment} />
           <PublicRoutes exact path="/login" component={Login} />
           <PublicRoutes exact path="/register" component={Register} />
           <Route exact path="/category/:category" component={Product} />

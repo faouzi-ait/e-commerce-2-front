@@ -29,7 +29,7 @@ SelectWrapper.propTypes = {
   onClose: PropTypes.func,
   style: PropTypes.object,
   classname: PropTypes.object,
-  defaultValue: PropTypes.object,
+  // defaultValue: PropTypes.string,
   rest: PropTypes.shape({}),
 };
 
@@ -38,7 +38,7 @@ SelectWrapper.defaultProps = {
   onClose: () => {},
   style: {},
   classname: {},
-  defaultValue: 'react-select',
+  // defaultValue: 'react-select',
   rest: {},
 };
 

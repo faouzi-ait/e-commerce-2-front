@@ -21,5 +21,21 @@ export default {
     resendTokenMsg: 'Activer votre compte avec le lien envoyé par email',
     resendTokenLabel: 'Envoyer le Token',
     returnToLogin: 'Déjà membre? Accédé à votre compte ici.',
+
+    step1: 'Adresse de Facturation',
+    step2: 'Adresse de Livraison',
+    step: 'Etapes',
+    address: 'Adresse',
+    city: 'Ville',
+    province: 'Etat ou Province',
+    country: 'Pays',
+    postcode: 'Code Postale',
+    phone: 'Numéro de Téléphone',
+    next: 'Suivant',
+    previous: 'Précédent',
+    order: 'Commande',
+    backToCart: 'Retour au Panier',
+    copyBillingAddress:
+      "Votre adresse de livraison est-elle la même que l'adresse de facturation?",
   },
 };

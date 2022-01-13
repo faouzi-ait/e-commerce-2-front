@@ -38,27 +38,16 @@
     position: fixed;
     top: 10px;
     right: 20px;
-    box-shadow: 1px 1px 1px #222;
-    // animation: moveDown 0.5s ease-in-out;
+    animation: moveDown 0.5s ease-in-out;
 }
 
 @keyframes moveDown {
     from {
-        transform: translateY(-5rem);
+        transform: translateY(-12rem);
     }
 
     to {
         transform: translateY(0rem);
-    }
-}
-
-@keyframes rotate {
-    0% {
-        transform: rotateY(360deg);
-    }
-
-    100% {
-        transform: rotateY(0rem);
     }
 }
 
@@ -153,4 +142,12 @@ hr {
     padding: 5px !important;
     font-size: 1.25rem !important;
     font-weight: normal;
+}
+.checkoutBtnCheckout {
+    display: block;
+    width: 150px !important;
+    margin-right: 1rem !important;
+    padding: 8px !important;
+    font-size: 1rem !important;
+    font-weight: normal !important;
 }

@@ -44,6 +44,39 @@ export const goToCategory = (category, id) => ({
   query: { id, category },
 });
 
+export const paymentSelectStyles = {
+  control: (base) => ({
+    ...base,
+    height: 37.05,
+    color: '#000 !important',
+    borderTopLeftRadius: '3px !important',
+    borderTopRightRadius: '3px !important',
+    borderBottomLeftRadius: '3px !important',
+    borderBottomRightRadius: '3px !important',
+    border: '1px solid #808080 !important',
+    background: 'rgb(243, 243, 243)',
+    boxShadow: 'none',
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    fontWeight: state.isSelected ? 'bold' : 'normal',
+    fontSize: '1.3rem',
+    border: 0,
+    color: '#000 !important',
+  }),
+  indicatorSeparator: (base) => ({
+    ...base,
+    backgroundColor: '#000 !important',
+    color: '#000 !important',
+  }),
+  dropdownIndicator: (provided) => ({
+    ...provided,
+    svg: {
+      fill: '#000',
+    },
+  }),
+};
+
 export const selectStyles = {
   control: (base) => ({
     ...base,

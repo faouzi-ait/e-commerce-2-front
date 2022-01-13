@@ -1,4 +1,122 @@
 .cartPageLayout {
     min-height: 80vh;
     padding: 2rem;
+    color: var(--theme-checkout-text);
+    background: var(--theme-checkout-background);
+
+    .clentDetails {
+        width: 75%;
+    }
+
+    .orderSummary {
+        position: absolute;
+        top: 15.6%;
+        right: 3%;
+        width: 28%;
+        margin-left: 1rem;
+        border: 1px solid lightgray;
+        border-radius: 5px;
+
+        .orderSummaryLayout {
+            margin-top: 2rem;
+            padding-left: 2rem;
+            padding-bottom: 2rem;
+            font-size: 3rem;
+            font-weight: bold;
+            border-bottom: 1px solid lightgray;
+        }
+
+        .orderSummaryItems {
+            display: flex;
+            justify-content: space-around;
+            padding: 1rem 0;
+            font-size: 1.25rem;
+            font-weight: 400;
+            border-bottom: 1px solid lightgray;
+
+            &:hover {
+                background: var(--theme-token_panel-background);
+                color: var(--theme-token_panel-text);
+            }
+
+            .marginFix {
+                width: 25%; 
+                margin-left: -3%
+            }
+        }
+
+        .summaryTotal {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .totalSection {
+            margin-right: 1rem !important;
+            font-size: 1.4rem !important;
+            font-weight: bold !important;
+        }
+
+        .backToCart {
+            width: 100px !important;
+            margin-left: 1rem;
+            margin-bottom: 1.1rem !important;
+            font-size: 1rem !important;
+        }
+    }
+}
+
+.form {
+    display: block;
+    width: 750px !important;
+    margin: 0 auto;
+
+    .countryLayout {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 3rem;
+    }
+}
+
+.inputField {
+    width: 338px !important;
+    margin-bottom: 3rem !important;
+
+    &:first-of-type {
+        margin-right: 2.5rem;
+    }
+}
+
+.inputAddress {
+    width: 97% !important;
+    margin-bottom: 3rem !important;
+}
+
+.countryWidth {
+    width: 700px !important;
+}
+
+.copyBillingAddress {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.navbarSticky {
+    position: fixed !important;
+    top: 10px !important;
+    right: 20px;
+    animation: moveDown 0.5s ease-in-out;
+    background: var(--theme-checkout-background);
+    color: var(--theme-checkout-text);
+}
+
+@keyframes moveDown {
+    from {
+        transform: translateY(-13rem);
+    }
+
+    to {
+        transform: translateY(0rem);
+    }
 }

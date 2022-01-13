@@ -13,6 +13,7 @@ function Input({
   style,
   containerClass,
   placeholder,
+  disabled,
   ...rest
 }) {
   return (
@@ -27,6 +28,7 @@ function Input({
         className={classname}
         style={style}
         placeholder={placeholder}
+        disabled={disabled}
         {...rest}
       />
     </div>
@@ -34,9 +36,10 @@ function Input({
 }
 
 Input.propTypes = {
-  label: PropTypes.object,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   type: PropTypes.string,
   value: PropTypes.string,
+  disabled: PropTypes.bool,
   classname: PropTypes.object,
   style: PropTypes.object,
   containerClass: PropTypes.object,
@@ -45,9 +48,10 @@ Input.propTypes = {
 };
 
 Input.defaultProps = {
-  label: null,
+  label: '',
   type: 'text',
   value: undefined || '',
+  disabled: false,
   classname: {},
   style: {},
   containerClass: {},

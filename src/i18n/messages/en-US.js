@@ -1,4 +1,4 @@
-import { LOCALES } from "../constants";
+import { LOCALES } from '../constants';
 
 export default {
   [LOCALES.ENGLISH]: {
@@ -21,5 +21,21 @@ export default {
     resendTokenMsg: 'Check your email to activate your account',
     resendTokenLabel: 'Resend Token',
     returnToLogin: 'Already registered? login here.',
+
+    step1: 'Billing Address',
+    step2: 'Delivery Address',
+    step: 'Step',
+    address: 'Address',
+    city: 'City',
+    province: 'State or Province',
+    country: 'Country',
+    postcode: 'Postcode',
+    phone: 'Phone Number',
+    next: 'Next',
+    previous: 'Previous',
+    order: 'Order Summary',
+    backToCart: 'Back to Cart',
+    copyBillingAddress:
+      'Is the delivery address the same as the billing address?',
   },
 };

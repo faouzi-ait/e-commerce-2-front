@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import Footer from '../../components/footer';
 
-import useSticky from './useSticky';
+import useSticky from '../../../hooks/useSticky';
 
 import {
   addOne,
@@ -17,7 +17,7 @@ import { loginStatus } from '../../pages/login/selector';
 import { cartItems } from './selectors';
 
 import * as localStyles from './styles.module.scss';
-import * as cmpStyles from '../login/./styles.module.scss';
+import * as cmpStyles from '../login/styles.module.scss';
 
 function Cart() {
   const history = useHistory();

@@ -12,7 +12,7 @@
 }
 
 .form {
-    max-width: 30% !important;
+    width: 30% !important;
     padding: 16px 25px 25px 25px;
     border: 1px solid lightgrey;
     border-radius: 5px;
@@ -50,7 +50,7 @@
     transition: all 300ms linear;
     
     &:hover {
-        background: rgba(255, 184, 20, 0.76);
+        background: rgba(238, 167, 0, 0.76);
     }
 }
 

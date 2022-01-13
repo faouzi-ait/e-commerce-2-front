@@ -23,7 +23,7 @@ function useSticky() {
   }, []);
 
   const handleScroll = useCallback(() => {
-    window.scrollY > element?.current?.getBoundingClientRect()?.top + 100
+    window.scrollY > element?.current?.getBoundingClientRect()?.top + 300
       ? setSticky(true)
       : setSticky(false);
   }, []);

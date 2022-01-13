@@ -14,6 +14,7 @@ import { home_page_products } from './components/pages/home/reducers';
 import { tokenRequest } from './components/components/resend_token/reducers';
 import { search } from './components/components/product_display/pagination/reducers';
 import { basket } from './components/components/product_display/row/reducers';
+import { billing } from './components/pages/payment/reducers';
 import { relatedProducts } from './components/ui/modal/reducer';
 
 import { persistStore, persistReducer } from 'redux-persist';
@@ -35,6 +36,7 @@ const combinedReducers = combineReducers({
   relatedProducts,
   search,
   basket,
+  billing,
 });
 
 const sagaMiddleware = createSagaMiddleware();
