@@ -23,21 +23,22 @@ import storage from 'redux-persist/lib/storage';
 import createSagaMiddleware from 'redux-saga';
 import { sagas } from './saga';
 
-const combinedReducers = combineReducers({
-  language,
-  theme,
-  login,
-  register,
-  tokenRequest,
-  categories,
-  productsBySearch,
-  products,
-  home_page_products,
-  relatedProducts,
-  search,
-  basket,
-  billing,
-});
+const combinedReducers = () =>
+  combineReducers({
+    language,
+    theme,
+    login,
+    register,
+    tokenRequest,
+    categories,
+    productsBySearch,
+    products,
+    home_page_products,
+    relatedProducts,
+    search,
+    basket,
+    billing,
+  });
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -47,12 +48,12 @@ const persistConfig = {
   blacklist: [],
 };
 
-export const persistedReducer = persistReducer(persistConfig, combinedReducers);
+export const persistedReducer = persistReducer(persistConfig, combinedReducers());
 
 export const store = createStore(
   persistedReducer,
   compose(
-    applyMiddleware(logger, sagaMiddleware),
+    applyMiddleware(logger, sagaMiddleware)
     // ADD CONDITION FOR DEV ENV
     // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )

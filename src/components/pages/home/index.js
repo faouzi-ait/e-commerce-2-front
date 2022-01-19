@@ -1,28 +1,26 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { THEMES } from '../../components/toggles/constants';
 // import { t } from '../../../i18n/translate';
 
 import Carousel from '../../components/carousel';
 import HomeProducts from '../../components/products';
 import AdvertBanner from '../../components/advert';
 import Footer from '../../components/footer';
+import Page from '../../../components/components/container';
 
-import { selectedTheme } from '../../components/toggles/selectors';
 import { homeProductItems } from './selectors';
 
 function Home() {
-  const { isDark } = useSelector(selectedTheme);
   const items = useSelector(homeProductItems);
 
   return (
-    <div className={`baseTheme ${isDark ? THEMES.DARK : THEMES.LIGHT}`}>
+    <Page>
       <Carousel />
       <HomeProducts products={items} />
       <AdvertBanner image="./images/banner-middle.jpg" />
       <AdvertBanner image="./images/gift_card.jpeg" />
       <Footer />
-    </div>
+    </Page>
   );
 }
 

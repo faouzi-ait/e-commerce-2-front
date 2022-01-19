@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import Footer from '../../components/footer';
+import Page from '../../../components/components/container';
 
 import useSticky from '../../../hooks/useSticky';
 
@@ -11,8 +12,6 @@ import {
   removeItem,
 } from '../../components/product_display/row/actions';
 
-import { selectedTheme } from '../../components/toggles/selectors';
-import { THEMES } from '../../components/toggles/constants';
 import { loginStatus } from '../../pages/login/selector';
 import { cartItems } from './selectors';
 
@@ -24,7 +23,6 @@ function Cart() {
   const dispatch = useDispatch();
   const { isSticky, element } = useSticky();
   const { cart } = useSelector(cartItems);
-  const { isDark } = useSelector(selectedTheme);
   const { loggedIn } = useSelector(loginStatus);
 
   const calculateTotal = (cart) =>
@@ -123,7 +121,7 @@ function Cart() {
   };
 
   return (
-    <div className={`baseTheme ${isDark ? THEMES.DARK : THEMES.LIGHT}`}>
+    <Page>
       {cart.length ? (
         <div
           className={localStyles.cartPageLayout}
@@ -177,7 +175,7 @@ function Cart() {
         </div>
       )}
       <Footer />
-    </div>
+    </Page>
   );
 }
 

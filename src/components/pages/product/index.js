@@ -8,9 +8,7 @@ import Row from '../../components/product_display/row';
 import SwitchLayout from '../../components/switch';
 import Footer from '../../components/footer';
 import PageLoader from '../../ui/loader';
-
-import { selectedTheme } from '../../components/toggles/selectors';
-import { THEMES } from '../../components/toggles/constants';
+import Page from '../../../components/components/container';
 
 import { searchSelector } from '../../components/product_display/pagination/selectors';
 import { getDefaultUrl } from '../../components/product_display/pagination/actions';
@@ -23,7 +21,6 @@ import { productGrid } from './styles.module.scss';
 
 function Submenu() {
   const dispatch = useDispatch();
-  const { isDark } = useSelector(selectedTheme);
   const { products, isRow, category, loading } = useSelector(productData);
   const { rating, brand, pricing, page, limit } = useSelector(searchSelector);
   const productDataList = useSelector(productSelector);
@@ -36,7 +33,7 @@ function Submenu() {
   }, [limit, category, dispatch]);
 
   return (
-    <div className={`baseTheme ${isDark ? THEMES.DARK : THEMES.LIGHT}`}>
+    <Page>
       {category && (
         <div>
           <SwitchLayout />
@@ -68,7 +65,7 @@ function Submenu() {
           <Footer />
         </div>
       )}
-    </div>
+    </Page>
   );
 }
 

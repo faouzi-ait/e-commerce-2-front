@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import Footer from '../../components/footer';
+import Page from '../../../components/components/container';
 
-import { THEMES } from '../../components/toggles/constants';
 import TokenPane from '../../components/resend_token';
 import { t } from '../../../i18n/translate';
 import Input from '../../ui/input';
 
-import { selectedTheme } from '../../components/toggles/selectors';
 import { loginStatus } from './selector';
 import { login, fromPaymentLink } from './actions';
 
@@ -20,14 +19,10 @@ function Login() {
   const [email, setEmail] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [password, setPassword] = useState('');
-  const { isDark } = useSelector(selectedTheme);
   const { authenticating, errors } = useSelector(loginStatus);
 
   const activationLandingScreen = (query) => {
     const param = new URLSearchParams(search).get('status');
-    // const queryString = query;
-    // const urlParams = new URLSearchParams(queryString);
-    // const status = urlParams.get('status');
 
     switch (param) {
       case 'activated':
@@ -68,7 +63,7 @@ function Login() {
   };
 
   return (
-    <div className={`baseTheme ${isDark ? THEMES.DARK : THEMES.LIGHT}`}>
+    <Page>
       {activationLandingScreen(window.location.search)}
       <div className={cmpStyle.loginForm}>
         <form onSubmit={onSubmit} className={cmpStyle.form}>
@@ -115,7 +110,7 @@ function Login() {
         </form>
       </div>
       <Footer />
-    </div>
+    </Page>
   );
 }
 

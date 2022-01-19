@@ -1,3 +1,6 @@
+import * as cartStyles from '../components/pages/cart/styles.module.scss';
+import * as cmpStyles from '../components/pages/login/styles.module.scss';
+
 export const defaultUrl = (page = 1, limit = 5) =>
   `page=${page}&limit=${limit}`;
 
@@ -134,3 +137,7 @@ export const limitSelectStyles = {
     color: '#000',
   }),
 };
+
+export const inputStyles = (styles = '') => `${cmpStyles.inputField} ${styles}`;
+export const btnStyles = () =>
+  `${cmpStyles.signinBtn} ${cartStyles.checkoutBtnWidth} ${cartStyles.checkoutBtnCheckout}`;

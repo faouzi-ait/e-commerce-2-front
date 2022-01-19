@@ -3,12 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import TokenPane from '../../components/resend_token';
 import Footer from '../../components/footer';
+import Page from '../../../components/components/container';
 
 import Input from '../../ui/input';
-import { THEMES } from '../../components/toggles/constants';
 import { t } from '../../../i18n/translate';
 
-import { selectedTheme } from '../../components/toggles/selectors';
 import { registration } from './selector';
 import { register } from './actions';
 
@@ -17,7 +16,6 @@ import { loginForm, backToLogin } from './styles.module.scss';
 
 function Register() {
   const { user, errors, registering } = useSelector(registration);
-  const { isDark } = useSelector(selectedTheme);
   const [password, setPassword] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [surname, setSurname] = useState('');
@@ -47,14 +45,10 @@ function Register() {
     }
 
     dispatch(register(data));
-
-    setTimeout(() => {
-      window.location.href = '/login';
-    }, 3000);
   };
 
   return (
-    <div className={`baseTheme ${isDark ? THEMES.DARK : THEMES.LIGHT}`}>
+    <Page>
       <div className={loginForm}>
         <form onSubmit={onSubmit} className={cmpStyle.form}>
           <p className={cmpStyle.h3}>{t('registerTitle')}</p>
@@ -148,7 +142,7 @@ function Register() {
         </form>
       </div>
       <Footer />
-    </div>
+    </Page>
   );
 }
 

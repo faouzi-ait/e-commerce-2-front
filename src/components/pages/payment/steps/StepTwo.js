@@ -1,26 +1,22 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import countryList from 'react-select-country-list';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
+import Title from '../../../components/payment_title';
 import SelectBox from '../../../ui/select';
 import Button from '../../../ui/button';
 import Input from '../../../ui/input';
 
 import { setStep, setDeliveryDetails, copyBillingDetails } from '../actions';
-import { basketData } from '../selectors';
 
 import { t } from '../../../../i18n/translate';
 import * as utils from '../../../../utils';
 
 import * as headerStyles from '../../../components/header/styles.module.scss';
-import * as cartStyles from '../../cart/styles.module.scss';
 import * as cmpStyles from '../../login/styles.module.scss';
 import * as localCmp from '../styles.module.scss';
 
-function StepTwo() {
+function StepTwo({ step, billing, copyBillingInfo, options }) {
   const dispatch = useDispatch();
-  const options = useMemo(() => countryList().getData(), []);
-  const { step, billing, copyBillingInfo } = useSelector(basketData);
 
   const [deliveryCity, setDeliveryCity] = useState('');
   const [deliveryAddress, setDeliveryAddress] = useState('');
@@ -28,9 +24,6 @@ function StepTwo() {
   const [deliveryStates, setDeliveryState] = useState('');
   const [deliveryPostcode, setDeliveryPostCode] = useState('');
   const [deliveryPhone, setDeliveryPhone] = useState('');
-
-  const btnStyles = `${cmpStyles.signinBtn} ${cartStyles.checkoutBtnWidth} ${cartStyles.checkoutBtnCheckout}`;
-  const inputStyles = `${cmpStyles.inputField} ${localCmp.inputField}`;
 
   useEffect(() => {
     if (copyBillingInfo) {
@@ -42,24 +35,13 @@ function StepTwo() {
     } else {
       setDeliveryAddress('');
       setDeliveryCity('');
+      setDeliveryCountry({});
       setDeliveryState('');
       setDeliveryPostCode('');
     }
   }, [copyBillingInfo, billing]);
 
   const changeDeliveryHandler = (value) => setDeliveryCountry(value);
-
-  const Title = ({ step, title }) => {
-    return (
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <p className={cmpStyles.h3}>{title}</p>
-        <p className={cmpStyles.h3}>
-          {t('step')} {step} / 3
-        </p>
-      </div>
-    );
-  };
-
   const stepTwoHandler = (e) => {
     dispatch(
       setDeliveryDetails({
@@ -77,7 +59,11 @@ function StepTwo() {
   return (
     <div className={localCmp.clentDetails}>
       <div className={`${cmpStyles.form} ${localCmp.form}`}>
-        <Title step={step} title={t('step2')} />
+        <Title
+          title={t('step2')}
+          currentLabel={t('step')}
+          currentStep={`${step} / 3`}
+        />
         <label className={localCmp.copyBillingAddress}>
           <span className={cmpStyles.label}>{t('copyBillingAddress')}</span>
 
@@ -101,7 +87,7 @@ function StepTwo() {
           type="text"
           value={deliveryAddress}
           onChange={(e) => setDeliveryAddress(e.target.value)}
-          className={`${cmpStyles.inputField} ${localCmp.inputAddress}`}
+          className={utils.inputStyles(localCmp.inputAddress)}
           labelClassName={cmpStyles.label}
           placeholder="What is your address?"
           disabled={copyBillingInfo}
@@ -113,7 +99,7 @@ function StepTwo() {
             type="text"
             value={deliveryCity}
             onChange={(e) => setDeliveryCity(e.target.value)}
-            className={inputStyles}
+            className={utils.inputStyles(localCmp.inputField)}
             labelClassName={cmpStyles.label}
             placeholder="What is your city?"
             disabled={copyBillingInfo}
@@ -123,7 +109,7 @@ function StepTwo() {
             type="text"
             value={deliveryStates}
             onChange={(e) => setDeliveryState(e.target.value)}
-            className={inputStyles}
+            className={utils.inputStyles(localCmp.inputField)}
             labelClassName={cmpStyles.label}
             placeholder="What is your State?"
             disabled={copyBillingInfo}
@@ -141,7 +127,7 @@ function StepTwo() {
             styles={utils.paymentSelectStyles}
             className={headerStyles.selectBox}
             classNamePrefix="react-select"
-            disabled={copyBillingInfo}
+            isDisabled={copyBillingInfo}
           />
         </div>
         <div style={{ display: 'flex' }}>
@@ -150,7 +136,7 @@ function StepTwo() {
             type="text"
             value={deliveryPostcode}
             onChange={(e) => setDeliveryPostCode(e.target.value)}
-            className={inputStyles}
+            className={utils.inputStyles(localCmp.inputField)}
             labelClassName={cmpStyles.label}
             placeholder="What is your postcode?"
             disabled={copyBillingInfo}
@@ -160,7 +146,7 @@ function StepTwo() {
             type="number"
             value={deliveryPhone}
             onChange={(e) => setDeliveryPhone(e.target.value)}
-            className={inputStyles}
+            className={utils.inputStyles(localCmp.inputField)}
             labelClassName={cmpStyles.label}
             placeholder="What is your phone number?"
           />
@@ -170,13 +156,13 @@ function StepTwo() {
           <Button
             label={t('previous')}
             onClick={() => dispatch(setStep(1))}
-            className={btnStyles}
+            className={utils.btnStyles()}
             type="button"
           />
           <Button
             label={t('next')}
             onClick={stepTwoHandler}
-            className={btnStyles}
+            className={utils.btnStyles()}
             type="button"
           />
         </div>
