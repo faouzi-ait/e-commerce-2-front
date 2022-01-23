@@ -1,75 +1,55 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import PaginationItems from '../../paginationItems';
+import PaginationBtn from '../../PaginationBtn';
+import Page from '../../../../components/components/container';
 
-import { THEMES } from '../../../components/toggles/constants';
-import { selectedTheme } from '../../../components/toggles/selectors';
-
-import { getProducts } from '../../../pages/product/actions';
 import { filteredCategoryUrl } from '../../../../utils';
+import { getProducts } from '../../../pages/product/actions';
 import { getDefaultUrl, getPage } from './actions';
 
 import * as cmpStyle from './styles.module.scss';
 
 function Pagination({ products, category, limit }) {
-  const { isDark } = useSelector(selectedTheme);
+  const { currentPage, previousPage, nextPage } = products;
   const dispatch = useDispatch();
+  const { id } = category;
 
   const dispatchFilterAction = (id, page) => {
     dispatch(getPage(page));
-
     dispatch(getProducts(filteredCategoryUrl(id, page, limit)));
     dispatch(
       getDefaultUrl(getProducts(filteredCategoryUrl(id, page, limit)).payload)
     );
   };
 
-  const navigationBtn = (id, pageNb, label, className, isCurrent) => {
-    return (
-      <span
-        onClick={() => {
-          if (!isCurrent) dispatchFilterAction(id, pageNb);
-        }}
-        className={className}>
-        {label}
-      </span>
-    );
-  };
-
-  const Paginate = ({ nbOfPages }) => {
-    const { id } = category;
-    const left = <i className="fa fa-chevron-left"></i>;
-    const right = <i className="fa fa-chevron-right"></i>;
-
-    return (
-      <>
-        {products?.previousPage &&
-          navigationBtn(id, products?.previousPage, left, cmpStyle.leftArrow)}
-
-        {Array.from(Array(nbOfPages), (e, i) => {
-          let page = parseInt(i + 1);
-          const isCurrent = products?.currentPage === page;
-          const style = `${cmpStyle.pageNumbers} ${
-            isCurrent && cmpStyle.active
-          }`;
-
-          return (
-            <div key={i}>{navigationBtn(id, page, page, style, isCurrent)}</div>
-          );
-        })}
-
-        {products?.nextPage &&
-          navigationBtn(id, products?.nextPage, right, cmpStyle.rightArrow)}
-      </>
-    );
-  };
-
   return (
-    <div
-      className={`${cmpStyle.container} baseTheme ${
-        isDark ? THEMES.DARK : THEMES.LIGHT
-      }`}>
-      <Paginate nbOfPages={products?.totalNumberOfPages} />
-    </div>
+    <Page style={cmpStyle.container}>
+      <PaginationBtn
+        label={<i className="fa fa-chevron-left"></i>}
+        pageNb={previousPage}
+        className={cmpStyle.leftArrow}
+        onClick={() => {
+          if (previousPage) dispatchFilterAction(id, previousPage);
+        }}
+      />
+
+      <PaginationItems
+        id={id}
+        products={products}
+        currentPage={currentPage}
+        cmpStyle={cmpStyle}
+      />
+
+      <PaginationBtn
+        label={<i className="fa fa-chevron-right"></i>}
+        pageNb={nextPage}
+        className={cmpStyle.rightArrow}
+        onClick={() => {
+          if (nextPage) dispatchFilterAction(id, nextPage);
+        }}
+      />
+    </Page>
   );
 }
 

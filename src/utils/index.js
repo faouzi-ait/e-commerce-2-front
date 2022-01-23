@@ -1,13 +1,20 @@
 import * as cartStyles from '../components/pages/cart/styles.module.scss';
 import * as cmpStyles from '../components/pages/login/styles.module.scss';
 
-export const defaultUrl = (page = 1, limit = 5) =>
-  `page=${page}&limit=${limit}`;
+import { store } from '../store';
 
-export const filteredCategoryUrl = (id, page = 1, limit = 3) =>
-  `category=${id}&page=${page}&limit=${limit}`;
+export const defaultUrl = (
+  page = 1,
+  limit = store.getState().search.limit || 5
+) => `page=${page}&limit=${limit}`;
 
-export const filteredSearchUrl = (term, page = 1, limit = 3) =>
+export const filteredCategoryUrl = (
+  id,
+  page = 1,
+  limit = store.getState().search.limit || 5
+) => `category=${id}&page=${page}&limit=${limit}`;
+
+export const filteredSearchUrl = (term, page = 1, limit = 2) =>
   `${term}&page=${page}&limit=${limit}`;
 
 export const filteredMenuList = (category) => {
@@ -141,3 +148,5 @@ export const limitSelectStyles = {
 export const inputStyles = (styles = '') => `${cmpStyles.inputField} ${styles}`;
 export const btnStyles = () =>
   `${cmpStyles.signinBtn} ${cartStyles.checkoutBtnWidth} ${cartStyles.checkoutBtnCheckout}`;
+export const paginationStyle = (cmpStyle, isCurrent) =>
+  `${cmpStyle.pageNumbers} ${isCurrent && cmpStyle.active}`;

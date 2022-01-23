@@ -3,7 +3,7 @@ import Provider from './i18n/Provider';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
-import history from './history';
+// import history from './history';
 
 import Cart from './components/pages/cart';
 import Home from './components/pages/home';
@@ -39,7 +39,7 @@ function App() {
 
   return (
     <Provider locale={language}>
-      <Router history={history}>
+      <Router>
         <Header />
         <Switch>
           <Route exact path="/" component={Home} />

@@ -5,14 +5,12 @@ import { useSelector } from 'react-redux';
 import { THEMES } from '../../components/toggles/constants';
 import { selectedTheme } from '../../components/toggles/selectors';
 
-function Page({ children }) {
+function Page({ children, style }) {
   const { isDark } = useSelector(selectedTheme);
+  const styles = (style) =>
+    `baseTheme ${isDark ? THEMES.DARK : THEMES.LIGHT} ${style}`;
 
-  return (
-    <div className={`baseTheme ${isDark ? THEMES.DARK : THEMES.LIGHT}`}>
-      {children}
-    </div>
-  );
+  return <div className={styles(style)}>{children}</div>;
 }
 
 Page.propTypes = {
