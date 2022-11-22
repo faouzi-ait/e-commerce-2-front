@@ -146,7 +146,36 @@ export const limitSelectStyles = {
 };
 
 export const inputStyles = (styles = '') => `${cmpStyles.inputField} ${styles}`;
+
 export const btnStyles = () =>
   `${cmpStyles.signinBtn} ${cartStyles.checkoutBtnWidth} ${cartStyles.checkoutBtnCheckout}`;
+
 export const paginationStyle = (cmpStyle, isCurrent) =>
   `${cmpStyle.pageNumbers} ${isCurrent && cmpStyle.active}`;
+
+export const buildFormDataObject = (formValues) => {
+  const data = new FormData();
+
+  if (formValues.image) data.append('image', formValues.image);
+
+  for (const [key, value] of Object.entries(formValues)) {
+    data.append(key, value);
+  }
+
+  return data;
+};
+
+export const activationLandingScreen = (search, query = 'status') => {
+  const param = new URLSearchParams(search).get(query);
+
+  switch (param) {
+    case 'activated':
+      return 'Your account has been activated';
+    case 'expired':
+      return 'Your activation token has expired, please renew your token and try again';
+    case 'already_activated':
+      return 'Your account is already active, please login to access your account';
+    default:
+      return '';
+  }
+};

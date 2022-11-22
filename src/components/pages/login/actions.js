@@ -30,3 +30,7 @@ export const setIsUserAuthenticated = (payload) => {
 export const fromPaymentLink = (payload) => {
   return { type: cons.FROM_PAYMENT_LINK, payload };
 };
+
+export const setTokens = (payload) => {
+  return { type: cons.SET_TOKENS, payload };
+};

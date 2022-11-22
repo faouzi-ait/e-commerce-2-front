@@ -16,13 +16,14 @@ import * as cmpStyle from './styles.module.scss';
 function Login() {
   const dispatch = useDispatch();
   const search = useLocation().search;
-  const [email, setEmail] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-  const [password, setPassword] = useState('');
   const { authenticating, errors } = useSelector(loginStatus);
+  
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const activationLandingScreen = (query) => {
-    const param = new URLSearchParams(search).get('status');
+  const activationLandingScreen = (query = 'status') => {
+    const param = new URLSearchParams(search).get(query);
 
     switch (param) {
       case 'activated':
@@ -57,9 +58,6 @@ function Login() {
     };
 
     dispatch(login(payload));
-    // redirectToPayment(window.location.search);
-    setPassword('');
-    setEmail('');
   };
 
   return (

@@ -1,39 +1,52 @@
 import axios from 'axios';
+import jwt from 'jwt-decode';
+import { store } from '../store';
 import ApiClient from './ApiClient';
+// import { safeStorage } from '../hooks/safeLocalStorage';
 
-const TOKEN =
-  JSON.parse(localStorage.getItem('CURRENT_USER')) || 'NOT_LOGGED_IN';
+import * as actions from '../components/pages/login/actions';
+
+const renewTokens = async (token) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_URL_DEV}/token/renewToken`, { token }
+  );
+  return response.data;
+};
 
 const axiosInstance = axios.create({
-  // baseURL: process.env.REACT_APP_URL_DEV,
-  baseURL: process.env.REACT_APP_URL_PROD,
+  baseURL: process.env.REACT_APP_URL_DEV,
+  // baseURL: process.env.REACT_APP_URL_PROD,
   headers: {
+    'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Credentials': 'true',
-    'Content-Type': 'application/json',
   },
 });
 
+// CREATE ORIGIN LIST TO ATTACH THE TOKEN
 axiosInstance.interceptors.request.use(
-  (config) => {
-    // CREATE ORIGIN LIST TO ATTACH THE TOKEN
-    if (TOKEN) {
-      config.headers['Authorization'] = `Bearer ${TOKEN}`;
+  async (req) => {
+    const auth = store.getState().tokens.tokens;
+    let date = new Date();
+
+    if (auth.token) {
+      req.headers['Authorization'] = `Bearer ${auth.token}`;
+
+      if (jwt(auth.token).exp < date.getTime() / 1000) {
+        const { token, refreshToken } = await renewTokens(auth.refreshToken);
+        store.dispatch(actions.setTokens({ token, refreshToken }));
+
+        req.headers['Authorization'] = `Bearer ${token}`;
+      }
     }
-    return config;
+    return req;
   },
   (error) => Promise.reject(error)
 );
 
 axiosInstance.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error) => {
-    // const originalRequest = error.config;
-    // REFRESH TOKEN CONFIGURATION HERE
-    return Promise.reject(error);
-  }
+  (response) => response,
+  (error) => Promise.reject(error)
 );
 
 const apiClient = new ApiClient(axiosInstance);

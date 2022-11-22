@@ -63,6 +63,7 @@ function StepOne({ step, billing, options }) {
         <Input
           label={t('address')}
           type="text"
+          name="billingAddress"
           value={billingAddress}
           onChange={(e) => setBillingAddress(e.target.value)}
           className={utils.inputStyles(localCmp.inputAddress)}
@@ -74,6 +75,7 @@ function StepOne({ step, billing, options }) {
           <Input
             label={t('city')}
             type="text"
+            name="billingCity"
             value={billingCity}
             onChange={(e) => setBillingCity(e.target.value)}
             className={utils.inputStyles(localCmp.inputField)}
@@ -83,6 +85,7 @@ function StepOne({ step, billing, options }) {
           <Input
             label={t('province')}
             type="text"
+            name="province"
             value={billingStates}
             onChange={(e) => setBillingState(e.target.value)}
             className={utils.inputStyles(localCmp.inputField)}
@@ -96,6 +99,7 @@ function StepOne({ step, billing, options }) {
             {t('country')}
           </span>
           <SelectBox
+            name="billingCountry"
             value={billingCountry}
             options={options}
             onChange={changeBillingHandler}
@@ -107,6 +111,7 @@ function StepOne({ step, billing, options }) {
         <Input
           label={t('postcode')}
           type="text"
+          name="billingPostcode"
           value={billingPostcode}
           onChange={(e) => setBillingPostCode(e.target.value)}
           className={utils.inputStyles(localCmp.inputField)}

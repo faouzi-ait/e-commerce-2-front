@@ -6,6 +6,7 @@ const initialState = {
   loggedIn: false,
   fromPaymentLink: false,
   errors: null,
+  tokens: {},
 };
 
 export const login = (state = initialState, action) => {
@@ -14,6 +15,10 @@ export const login = (state = initialState, action) => {
       return {
         user: { ...state.user, ...action.payload },
       };
+    // case cons.SET_TOKENS:
+    //   return {
+    //     tokens: { ...state, ...action.payload },
+    //   };
     case cons.SET_IS_AUTHENTICATING:
       return {
         ...state,
@@ -41,6 +46,17 @@ export const login = (state = initialState, action) => {
       return {
         ...state,
         fromPaymentLink: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export const tokens = (state = initialState, action) => {
+  switch (action.type) {
+    case cons.SET_TOKENS:
+      return {
+        tokens: action.payload,
       };
     default:
       return state;

@@ -3,20 +3,19 @@ import Provider from './i18n/Provider';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
-// import history from './history';
 
+import PrivateRoutes from './components/route-access/PrivateRoutes';
+import PublicRoutes from './components/route-access/PublicRoutes';
+import Dashboard from './components/pages/dashboard';
+import Header from './components/components/header';
+import NotFound from './components/pages/not-found';
+import Register from './components/pages/register';
+import Product from './components/pages/product';
+import Payment from './components/pages/payment';
+import Search from './components/pages/search';
+import Login from './components/pages/login';
 import Cart from './components/pages/cart';
 import Home from './components/pages/home';
-import Login from './components/pages/login';
-import Search from './components/pages/search';
-import Payment from './components/pages/payment';
-import Product from './components/pages/product';
-import Register from './components/pages/register';
-import NotFound from './components/pages/not-found';
-import Header from './components/components/header';
-import Dashboard from './components/pages/dashboard';
-import PublicRoutes from './components/route-access/PublicRoutes';
-import PrivateRoutes from './components/route-access/PrivateRoutes';
 
 import { getCategories } from './components/components/header/actions';
 import { getHomePageProducts } from './components/pages/home/actions';
