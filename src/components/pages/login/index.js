@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
+import { Controller, useForm } from 'react-hook-form';
+
 import Footer from '../../components/footer';
 import Page from '../../../components/components/container';
 
@@ -8,8 +10,10 @@ import TokenPane from '../../components/resend_token';
 import { t } from '../../../i18n/translate';
 import Input from '../../ui/input';
 
+import * as utils from '../../../utils';
+
+import { login, fromPaymentLink, resetError } from './actions';
 import { loginStatus } from './selector';
-import { login, fromPaymentLink } from './actions';
 
 import * as cmpStyle from './styles.module.scss';
 
@@ -18,24 +22,15 @@ function Login() {
   const search = useLocation().search;
   const [isOpen, setIsOpen] = useState(false);
   const { authenticating, errors } = useSelector(loginStatus);
-  
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
-  const activationLandingScreen = (query = 'status') => {
-    const param = new URLSearchParams(search).get(query);
+  const { handleSubmit, control, formState } = useForm({
+    mode: 'onBlur',
+    defaultValues: utils.defaultValues,
+  });
 
-    switch (param) {
-      case 'activated':
-        return 'Your account has been activated';
-      case 'expired':
-        return 'Your activation token has expired, please renew your token and try again';
-      case 'already_activated':
-        return 'Your account is already active, please login to access your account';
-      default:
-        return '';
-    }
-  };
+  useEffect(() => {
+    dispatch(resetError());
+  }, []);
 
   useEffect(() => {
     const param = new URLSearchParams(search).get('redirect');
@@ -47,43 +42,61 @@ function Login() {
     }
   }, [dispatch, search]);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    if (!email || !password) return;
-
-    const payload = {
-      email,
-      password,
-    };
-
-    dispatch(login(payload));
-  };
+  const onSubmit = ({ email, password }) =>
+    dispatch(login({ email, password }));
 
   return (
     <Page>
-      {activationLandingScreen(window.location.search)}
+      <h1 className={cmpStyle.loginTitle}>
+        {utils.activationLandingScreen(search)}
+      </h1>
       <div className={cmpStyle.loginForm}>
-        <form onSubmit={onSubmit} className={cmpStyle.form}>
+        <form onSubmit={handleSubmit(onSubmit)} className={cmpStyle.form}>
           <p className={cmpStyle.h3}>{t('signIn')}</p>
-          <Input
-            label={t('username')}
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={cmpStyle.inputField}
-            labelClassName={cmpStyle.label}
-            placeholder="your-email@somewhere.com"
+          <Controller
+            name="email"
+            control={control}
+            rules={utils.emailFormPattern}
+            render={({ field: { ref, ...field } }) => (
+              <Input
+                {...field}
+                label={t('username')}
+                type="email"
+                name="email"
+                aria-invalid={!!formState.errors?.email}
+                className={cmpStyle.inputField}
+                labelClassName={cmpStyle.label}
+                style={utils.setErrorStyle(formState?.errors?.email)}
+                errorMessage={
+                  formState?.errors?.email
+                    ? formState?.errors?.email.message
+                    : ''
+                }
+                placeholder="your-email@somewhere.com"
+              />
+            )}
           />
 
-          <Input
-            label={t('password')}
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className={cmpStyle.inputField}
-            labelClassName={cmpStyle.label}
-            placeholder="Your Password"
+          <Controller
+            name="password"
+            control={control}
+            rules={{ required: true }}
+            render={({ field: { ref, ...field } }) => (
+              <Input
+                {...field}
+                type="password"
+                name="password"
+                label="Password"
+                aria-invalid={!!formState.errors.password}
+                className={cmpStyle.inputField}
+                labelClassName={cmpStyle.label}
+                style={utils.setErrorStyle(formState?.errors?.password)}
+                errorMessage={
+                  formState.errors?.password ? t('passwordError') : ''
+                }
+                placeholder="Please enter your password"
+              />
+            )}
           />
 
           <button
@@ -103,9 +116,9 @@ function Login() {
             {t('loginToken')}
           </div>
 
-          {isOpen && <TokenPane setOpen={setIsOpen} />}
           <span>{errors && errors?.data?.message}</span>
         </form>
+        {isOpen && <TokenPane setOpen={setIsOpen} />}
       </div>
       <Footer />
     </Page>

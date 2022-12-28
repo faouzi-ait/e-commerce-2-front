@@ -37,7 +37,7 @@ function OrderSummary({ isSticky }) {
         isSticky ? localCmp.navbarSticky : ''
       }`}>
       <p className={`${localCmp.orderSummaryLayout}`}>{t('order')}</p>
-      <div style={{ marginTop: '-2.85rem' }}>
+      <div className={localCmp.summaryMargin}>
         {cart.map((item) => (
           <CartSummary item={item} key={item._id} />
         ))}

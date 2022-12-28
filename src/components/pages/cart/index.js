@@ -67,7 +67,7 @@ function Cart() {
       <div className={localStyles.productContainer}>
         <DisplayProductPhoto item={item} className={localStyles.image} />
         <div className={localStyles.productDetails}>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div className={cmpStyles.cartItemContainer}>
             <DisplayProductInfo
               data={item.description}
               style={localStyles.productTitle}
@@ -93,7 +93,7 @@ function Cart() {
             data={item.quantity}
             style={localStyles.productData}
           />
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div className={cmpStyles.cartQuantityContainer}>
             <CartQuantity
               label="+"
               onClick={() => dispatch(addOne(item._id))}
@@ -141,7 +141,7 @@ function Cart() {
             }`}>
             <div>
               Subtotal {`(${cart.length} items)`}:
-              <span style={{ fontWeight: 'bold', marginLeft: '.5rem' }}>
+              <span className={cmpStyles.cartTotal}>
                 ${calculateTotal(cart)}
               </span>
               <button

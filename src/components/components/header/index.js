@@ -87,6 +87,7 @@ function Header() {
               value={searchTerm}
               className={cmpStyle.search}
               onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Type in your search here..."
             />
             <div className={cmpStyle.submit} onClick={submitQuery}>
               <i className="fa fa-search"></i>
@@ -101,7 +102,7 @@ function Header() {
               </div>
             )}
             <i
-              className="fa fa-shopping-bag"
+              className="fa fa-shopping-bag basket-margin-fix"
               onClick={() => history.push('/checkout')}>
               <span className={cmpStyle.cartCnt}>{basket.length}</span>
             </i>

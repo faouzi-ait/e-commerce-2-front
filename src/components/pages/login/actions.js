@@ -34,3 +34,6 @@ export const fromPaymentLink = (payload) => {
 export const setTokens = (payload) => {
   return { type: cons.SET_TOKENS, payload };
 };
+export const resetError = () => {
+  return { type: cons.RESET_ERROR_MSG };
+};

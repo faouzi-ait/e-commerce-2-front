@@ -1,29 +1,26 @@
-import React /*, { useState, useEffect, useMemo }*/ from 'react';
-import { /*useSelector, */ useDispatch } from 'react-redux';
-// import countryList from 'react-select-country-list';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import * as UI from 'react-accessible-accordion';
 
-// import SelectBox from '../../../ui/select';
+import Input from '../../../ui/input';
 import Button from '../../../ui/button';
-// import Input from '../../../ui/input';
 import Title from '../../../components/payment_title';
+import DeliveryAddress from '../billingDetails/DeliveryAddress';
+import BillingAddress from '../billingDetails/BillingAddress';
 
-import {
-  setStep /*, setDeliveryDetails, copyBillingDetails*/,
-} from '../actions';
-// import { basketData } from '../selectors';
+import { AccordionItem, TableHead, TableBody, theadLabels } from './StepsUI';
 
+import { setStep } from '../actions';
 import { t } from '../../../../i18n/translate';
-// import * as utils from '../../../../utils';
+import { calculateTotal } from '../../../../utils';
 
-// import * as headerStyles from '../../../components/header/styles.module.scss';
-import * as cartStyles from '../../cart/styles.module.scss';
-import * as cmpStyles from '../../login/styles.module.scss';
 import * as localCmp from '../styles.module.scss';
+import * as cmpStyles from '../../login/styles.module.scss';
+import 'react-accessible-accordion/dist/fancy-example.css';
 
-function StepThree({ step /*, billing, copyBillingInfo */ }) {
+function StepThree({ step, billing, basket, delivery }) {
+  const [confirmation, setConfirmation] = useState(false);
   const dispatch = useDispatch();
-  const btnStyles = `${cmpStyles.signinBtn} ${cartStyles.checkoutBtnWidth} ${cartStyles.checkoutBtnCheckout}`;
-  // const inputStyles = `${cmpStyles.inputField} ${localCmp.inputField}`;
 
   return (
     <div className={localCmp.clentDetails}>
@@ -33,12 +30,49 @@ function StepThree({ step /*, billing, copyBillingInfo */ }) {
           currentLabel={t('step')}
           currentStep={`${step} / 3`}
         />
-        <Button
-          label={t('previous')}
-          onClick={() => dispatch(setStep(2))}
-          className={btnStyles}
-          type="button"
-        />
+        <hr />
+        <h4 className={localCmp.stepTwoTitle}>{t('OrderPageTitle')}</h4>
+        <table>
+          <TableHead labels={theadLabels} />
+          <TableBody basket={basket} />
+        </table>
+        <div className={localCmp.stepThreeTotal}>
+          {t('Total')}: {calculateTotal(basket?.cart)}$
+        </div>
+        <hr />
+        <UI.Accordion allowMultipleExpanded allowZeroExpanded>
+          <AccordionItem label={t('BillingLabel')}>
+            <BillingAddress item={billing} />
+            <Button
+              label={t('backToStep1')}
+              onClick={() => dispatch(setStep(1))}
+              className="update-btn"
+              type="button"
+            />
+          </AccordionItem>
+          <AccordionItem label={t('DeliveryLabel')}>
+            <DeliveryAddress item={delivery} />
+            <Button
+              label={t('backToStep2')}
+              onClick={() => dispatch(setStep(2))}
+              className="update-btn"
+              type="button"
+            />
+          </AccordionItem>
+        </UI.Accordion>
+        <div className={localCmp.confirmationBox}>
+          <Input
+            type="checkbox"
+            name="confirmation"
+            id="confirmation"
+            checked={confirmation}
+            onChange={(e) => setConfirmation(!confirmation)}
+            disabled={false}
+          />
+          <label htmlFor="confirmation" className={localCmp.confirmationLabel}>
+            {t('confirmation')}
+          </label>
+        </div>
       </div>
     </div>
   );

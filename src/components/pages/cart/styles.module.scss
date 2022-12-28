@@ -19,6 +19,16 @@
     box-shadow: 2px 2px 2px grey;
 }
 
+.cartItemContainer {
+    display: flex; 
+    justify-content: space-between;
+}
+
+.cartQuantityContainer { 
+    display: flex; 
+    align-items: center 
+}
+
 .pricingSection {
     position: absolute;
     right: 20px;
@@ -150,4 +160,9 @@ hr {
     padding: 8px !important;
     font-size: 1rem !important;
     font-weight: normal !important;
+}
+
+.cartTotal { 
+    font-weight: bold; 
+    margin-left: .5rem 
 }

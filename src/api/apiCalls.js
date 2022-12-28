@@ -8,7 +8,8 @@ import * as actions from '../components/pages/login/actions';
 
 const renewTokens = async (token) => {
   const response = await axios.post(
-    `${process.env.REACT_APP_URL_DEV}/token/renewToken`, { token }
+    `${process.env.REACT_APP_URL_PROD}/token/renewToken`,
+    { token }
   );
   return response.data;
 };

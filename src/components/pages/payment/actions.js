@@ -15,3 +15,11 @@ export const setDeliveryDetails = (payload) => {
 export const copyBillingDetails = (payload) => {
   return { type: cons.COPY_BILLING_DETAILS, payload };
 };
+
+export const getExistingBillingDetails = (payload) => {
+  return { type: cons.EXISTING_BILLING_DETAILS, payload };
+};
+
+export const resetStep1Form = (payload) => {
+  return { type: cons.CLEAR_STEP_1_FORM, payload };
+};

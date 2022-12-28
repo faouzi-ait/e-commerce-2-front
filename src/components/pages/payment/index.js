@@ -9,7 +9,7 @@ import OrderSummary from './steps/OrderSummary';
 import Footer from '../../components/footer';
 import Page from '../../../components/components/container';
 
-import { basketData } from './selectors';
+import { basketData, cartData } from './selectors';
 
 import useSticky from '../../../hooks/useSticky';
 import * as localCmp from './styles.module.scss';
@@ -17,13 +17,20 @@ import * as localCmp from './styles.module.scss';
 function Payment() {
   const { isSticky, element } = useSticky();
   const options = useMemo(() => countryList().getData(), []);
-  const { step, billing, copyBillingInfo } = useSelector(basketData);
+  const { step, billing, delivery, existingBillingDetails, copyBillingInfo } =
+    useSelector(basketData);
+  const basket = useSelector(cartData);
 
   return (
     <Page>
       <div className={localCmp.cartPageLayout} ref={element}>
         {step === 1 && (
-          <StepOne step={step} billing={billing} options={options} />
+          <StepOne
+            step={step}
+            billing={billing}
+            options={options}
+            copyExistingDetails={existingBillingDetails}
+          />
         )}
         {step === 2 && (
           <StepTwo
@@ -37,7 +44,8 @@ function Payment() {
           <StepThree
             step={step}
             billing={billing}
-            copyBillingInfo={copyBillingInfo}
+            delivery={delivery}
+            basket={basket}
           />
         )}
         <OrderSummary isSticky={isSticky} />

@@ -10,7 +10,7 @@ function StarsFilter({ rating }) {
   const StarItems = ({ nb }) => {
     return (
       <li
-        style={{ display: 'flex', cursor: 'pointer' }}
+        className={cmpStyle.starsStyles}
         onClick={() => {
           getPage(1);
           dispatch(getRating(`&ratings=${nb}`));

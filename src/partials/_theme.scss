@@ -6,7 +6,10 @@
     --theme-page-text: rgb(13, 28, 49);
 
     --theme-checkout-background: rgb(235, 237, 237);
-    --theme-checkout-text: rgb(13, 28, 49);
+    --theme-checkout-text: rgb(49, 24, 13);
+
+    --theme-error-text: red;
+    --theme-error-text_contrast: #FFF;
 }
 
 .dark {
@@ -15,7 +18,10 @@
     
     --theme-page-background: rgb(13, 28, 49);
     --theme-page-text: #FFF;
-
+    
     --theme-checkout-background: rgb(13, 28, 49);
-    --theme-checkout-text: #FFF
+    --theme-checkout-text: #FFF;
+    
+    --theme-error-text: #FFF;
+    --theme-error-text_contrast: red;
 }

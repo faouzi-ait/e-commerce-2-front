@@ -43,11 +43,9 @@ function Brand({ brand, data }) {
               value={item}
               id={`custom-checkbox-${item}`}
               onChange={handleChange}
-              style={{ visibility: 'hidden' }}
+              className="brand-visibility"
             />
-            <i
-              className="fa fa-chevron-right"
-              style={{ marginRight: '.5rem' }}></i>
+            <i className="fa fa-chevron-right brand-visibility-margin"></i>
             <label
               htmlFor={`custom-checkbox-${item}`}
               className={`${cmpStyle.brandLabelDisplay} ${
