@@ -15,8 +15,8 @@ const renewTokens = async (token) => {
 };
 
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_URL_DEV,
-  // baseURL: process.env.REACT_APP_URL_PROD,
+  // baseURL: process.env.REACT_APP_URL_DEV,
+  baseURL: process.env.REACT_APP_URL_PROD,
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
