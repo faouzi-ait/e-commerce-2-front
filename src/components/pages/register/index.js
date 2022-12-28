@@ -189,13 +189,12 @@ function Register() {
             {t('loginToken')}
           </div>
 
-          {isOpen && <TokenPane setOpen={setIsOpen} />}
-
           <div>
             {errors && errors?.data?.message}
             {user && user.message && t('registrationSucessful')}
           </div>
         </form>
+        {isOpen && <TokenPane setOpen={setIsOpen} />}
       </div>
       <Footer />
     </Page>
