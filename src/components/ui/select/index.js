@@ -6,6 +6,7 @@ function SelectWrapper({
   options,
   style,
   classname,
+  value,
   onChange,
   defaultValue,
   classNamePrefix,
@@ -16,6 +17,7 @@ function SelectWrapper({
       options={options}
       styles={style}
       className={classname}
+      value={value}
       classNamePrefix={classNamePrefix}
       onChange={onChange}
       defaultValue={defaultValue}

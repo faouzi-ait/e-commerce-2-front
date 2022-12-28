@@ -47,6 +47,11 @@ export const login = (state = initialState, action) => {
         ...state,
         fromPaymentLink: action.payload,
       };
+    case cons.RESET_ERROR_MSG:
+      return {
+        ...state,
+        errors: {},
+      };
     default:
       return state;
   }

@@ -103,6 +103,7 @@
 
 .search {
     width: 45rem;
+    height: 2.8rem;
     margin-left: .1rem;
     padding-left: 1rem;
     letter-spacing: .5px;
@@ -117,11 +118,21 @@
 }
 
 .selectBox {
+    margin-bottom: .9rem;
     z-index: 999999;
+}
+
+.error {
+    border: 2px solid red !important;
+}
+
+.fullWidth {
+    width: 100%;
 }
 
 .submit {
     padding: 4px 13px;
+    height: 3rem;
     margin-left: -4rem;
     font-size: 2.5rem;
     border-top-right-radius: 5px;

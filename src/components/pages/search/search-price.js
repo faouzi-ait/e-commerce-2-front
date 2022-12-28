@@ -12,7 +12,7 @@ function Price({ searchPrice, setSearchPrice, setSearchPage }) {
         Price Limit
       </span>
       {prices.map((item) => (
-        <li key={item} style={{ listStyle: 'none', marginBottom: '.5rem' }}>
+        <li key={item}>
           <label
             className={`${cmpStyle.brandLabel} ${
               searchPrice === item && cmpStyle.priceLimitColor
@@ -21,10 +21,8 @@ function Price({ searchPrice, setSearchPrice, setSearchPage }) {
               setSearchPage(1);
               setSearchPrice(item);
             }}>
-            <i
-              className="fa fa-chevron-right"
-              style={{ marginRight: '.5rem' }}></i>
-            ${item}
+            <i className="fa fa-chevron-right brand-visibility-margin"></i>$
+            {item}
           </label>
         </li>
       ))}

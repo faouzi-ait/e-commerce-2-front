@@ -5,6 +5,7 @@ const initialState = {
   billing: {},
   delivery: {},
   copyBillingInfo: false,
+  existingBillingDetails: false,
 };
 
 export const billing = (state = initialState, action) => {
@@ -28,6 +29,16 @@ export const billing = (state = initialState, action) => {
       return {
         ...state,
         copyBillingInfo: action.payload,
+      };
+    case cons.EXISTING_BILLING_DETAILS:
+      return {
+        ...state,
+        existingBillingDetails: action.payload,
+      };
+    case cons.CLEAR_STEP_1_FORM:
+      return {
+        ...state,
+        billing: action.payload,
       };
     default:
       return state;

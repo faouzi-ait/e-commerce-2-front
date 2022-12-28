@@ -15,14 +15,14 @@ function Price({ pricing }) {
         Price Limit
       </span>
       {prices.map((item) => (
-        <li key={item} style={{ listStyle: 'none', marginBottom: '.5rem' }}>
+        <li key={item} className="price-list-style">
           <label>
             <input
               type="radio"
               name="price"
               value={item}
               id={`custom-radio-${item}`}
-              style={{ visibility: 'hidden' }}
+              className="brand-visibility-margin brand-visibility"
               onChange={() => {
                 if (item === 400) {
                   dispatch(getPage(1));
@@ -33,9 +33,7 @@ function Price({ pricing }) {
                 }
               }}
             />
-            <i
-              className="fa fa-chevron-right"
-              style={{ marginRight: '.5rem' }}></i>
+            <i className="fa fa-chevron-right brand-visibility-margin"></i>
             <span
               className={`${cmpStyle.brandLabel} ${
                 parseInt(pricingFormat) === item && cmpStyle.priceLimitColor

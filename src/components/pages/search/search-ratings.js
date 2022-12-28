@@ -7,9 +7,7 @@ import * as cmpStyle from '../../components/product_display/sidebar/styles.modul
 function StarsFilter({ rating, setStarRating }) {
   const StarItems = ({ nb }) => {
     return (
-      <li
-        style={{ display: 'flex', cursor: 'pointer' }}
-        onClick={() => setStarRating(nb)}>
+      <li className={cmpStyle.starsStyle} onClick={() => setStarRating(nb)}>
         <Stars starrating={nb} />
         &nbsp;<span className={cmpStyle.starLabel}></span>
       </li>
@@ -19,7 +17,7 @@ function StarsFilter({ rating, setStarRating }) {
   return (
     <div className={`${cmpStyle.starLayout} ${localCmpStyle.marginTop}`}>
       <span className={cmpStyle.starTitle}>Customer Ratings &amp; Reviews</span>
-      <ul style={{ marginLeft: '-4rem', marginTop: '0rem' }}>
+      <ul style={cmpStyle.starsContainer}>
         <StarItems nb={5} />
         <StarItems nb={4} />
         <StarItems nb={3} />

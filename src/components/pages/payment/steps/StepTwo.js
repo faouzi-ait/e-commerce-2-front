@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
+import { Controller, useForm } from 'react-hook-form';
 
 import Title from '../../../components/payment_title';
 import SelectBox from '../../../ui/select';
@@ -17,47 +18,42 @@ import * as localCmp from '../styles.module.scss';
 
 function StepTwo({ step, billing, copyBillingInfo, options }) {
   const dispatch = useDispatch();
+  const { handleSubmit, control, formState, getValues } = useForm({
+    mode: 'onBlur',
+    shouldUnregister: true,
+    defaultValues: {
+      firstName: copyBillingInfo ? billing.firstName : '',
+      lastName: copyBillingInfo ? billing.lastName : '',
+      deliveryAddress: copyBillingInfo ? billing.billingAddress : '',
+      deliveryCity: copyBillingInfo ? billing.billingCity : '',
+      deliveryCountry: copyBillingInfo ? billing.billingCountry : '',
+      deliveryStates: copyBillingInfo ? billing.billingStates : '',
+      deliveryPostcode: copyBillingInfo ? billing.billingPostcode : '',
+      deliveryPhone: copyBillingInfo ? billing.billingPhone : '',
+    },
+  });
 
-  const [deliveryCity, setDeliveryCity] = useState('');
-  const [deliveryAddress, setDeliveryAddress] = useState('');
-  const [deliveryCountry, setDeliveryCountry] = useState({});
-  const [deliveryStates, setDeliveryState] = useState('');
-  const [deliveryPostcode, setDeliveryPostCode] = useState('');
-  const [deliveryPhone, setDeliveryPhone] = useState('');
-
-  useEffect(() => {
-    if (copyBillingInfo) {
-      setDeliveryAddress(billing?.billingAddress);
-      setDeliveryCity(billing?.billingCity);
-      setDeliveryCountry(billing?.billingCountry);
-      setDeliveryState(billing?.billingStates);
-      setDeliveryPostCode(billing?.billingPostcode);
-    } else {
-      setDeliveryAddress('');
-      setDeliveryCity('');
-      setDeliveryCountry({});
-      setDeliveryState('');
-      setDeliveryPostCode('');
-    }
-  }, [copyBillingInfo, billing]);
-
-  const changeDeliveryHandler = (value) => setDeliveryCountry(value);
-  const stepTwoHandler = (e) => {
+  const stepTwoHandler = () => {
+    console.log(getValues());
     dispatch(
       setDeliveryDetails({
-        deliveryAddress,
-        deliveryCity,
-        deliveryCountry,
-        deliveryStates,
-        deliveryPostcode,
-        deliveryPhone,
+        firstName: getValues().firstName,
+        lastName: getValues().lastName,
+        deliveryAddress: getValues().deliveryAddress,
+        deliveryCity: getValues().deliveryCity,
+        deliveryCountry: getValues().deliveryCountry,
+        deliveryStates: getValues().deliveryStates,
+        deliveryPostcode: getValues().deliveryPostcode,
+        deliveryPhone: getValues().deliveryPhone,
       })
     );
     dispatch(setStep(3));
   };
 
   return (
-    <div className={localCmp.clentDetails}>
+    <form
+      onSubmit={handleSubmit(stepTwoHandler)}
+      style={{ marginLeft: '9rem' }}>
       <div className={`${cmpStyles.form} ${localCmp.form}`}>
         <Title
           title={t('step2')}
@@ -67,14 +63,16 @@ function StepTwo({ step, billing, copyBillingInfo, options }) {
         <label className={localCmp.copyBillingAddress}>
           <span className={cmpStyles.label}>{t('copyBillingAddress')}</span>
 
-          <span style={{ marginTop: '-10px' }}>
+          <span className={localCmp.copyDetails}>
             <Input
               type="checkbox"
               onChange={(e) => {
                 if (e.target.checked) {
                   dispatch(copyBillingDetails(true));
+                  window.location.reload();
                 } else {
                   dispatch(copyBillingDetails(false));
+                  window.location.reload();
                 }
               }}
               checked={copyBillingInfo}
@@ -82,77 +80,197 @@ function StepTwo({ step, billing, copyBillingInfo, options }) {
           </span>
         </label>
 
-        <Input
-          label={t('address')}
-          type="text"
-          value={deliveryAddress}
-          onChange={(e) => setDeliveryAddress(e.target.value)}
-          className={utils.inputStyles(localCmp.inputAddress)}
-          labelClassName={cmpStyles.label}
-          placeholder="What is your address?"
-          disabled={copyBillingInfo}
+        <div className={localCmp.flex}>
+          <Controller
+            name="firstName"
+            control={control}
+            rules={{ required: true }}
+            render={({ field: { ref, ...field } }) => (
+              <Input
+                {...field}
+                label={t('username')}
+                type="text"
+                name="firstName"
+                aria-invalid={!!formState.errors?.firstName}
+                className={utils.inputStyles(localCmp.inputField)}
+                labelClassName={cmpStyles.label}
+                style={utils.setErrorStyle(formState?.errors?.firstName)}
+                errorMessage={
+                  formState?.errors?.firstName ? t('nameError') : ''
+                }
+                placeholder="Your Firstname"
+              />
+            )}
+          />
+
+          <Controller
+            name="lastName"
+            control={control}
+            rules={{ required: true }}
+            render={({ field: { ref, ...field } }) => (
+              <Input
+                {...field}
+                label={t('surname')}
+                type="text"
+                name="lastName"
+                aria-invalid={!!formState.errors?.lastName}
+                className={utils.inputStyles(localCmp.inputField)}
+                labelClassName={cmpStyles.label}
+                style={utils.setErrorStyle(formState?.errors?.lastName)}
+                errorMessage={
+                  formState?.errors?.lastName ? t('surnameError') : ''
+                }
+                placeholder="Your Lastname"
+              />
+            )}
+          />
+        </div>
+        <Controller
+          name="deliveryAddress"
+          control={control}
+          rules={{ required: true }}
+          render={({ field: { ref, ...field } }) => (
+            <Input
+              {...field}
+              label={t('address')}
+              type="text"
+              name="deliveryAddress"
+              aria-invalid={!!formState.errors?.deliveryAddress}
+              style={utils.setErrorStyle(formState?.errors?.deliveryAddress)}
+              className={`${cmpStyles.inputFieldFull}`}
+              labelClassName={cmpStyles.label}
+              placeholder="What is your address?"
+              errorMessage={
+                formState?.errors?.deliveryAddress ? t('addressError') : ''
+              }
+            />
+          )}
         />
 
-        <div style={{ display: 'flex' }}>
-          <Input
-            label={t('city')}
-            type="text"
-            value={deliveryCity}
-            onChange={(e) => setDeliveryCity(e.target.value)}
-            className={utils.inputStyles(localCmp.inputField)}
-            labelClassName={cmpStyles.label}
-            placeholder="What is your city?"
-            disabled={copyBillingInfo}
+        <div className={localCmp.flex}>
+          <Controller
+            name="deliveryCity"
+            control={control}
+            rules={{ required: true }}
+            render={({ field: { ref, ...field } }) => (
+              <Input
+                {...field}
+                label={t('city')}
+                type="text"
+                name="deliveryCity"
+                aria-invalid={!!formState.errors?.deliveryCity}
+                style={utils.setErrorStyle(formState?.errors?.deliveryCity)}
+                className={utils.inputStyles(localCmp.inputField)}
+                labelClassName={cmpStyles.label}
+                placeholder="What is your city?"
+                errorMessage={
+                  formState?.errors?.deliveryCity ? t('cityError') : ''
+                }
+              />
+            )}
           />
-          <Input
-            label={t('province')}
-            type="text"
-            value={deliveryStates}
-            onChange={(e) => setDeliveryState(e.target.value)}
-            className={utils.inputStyles(localCmp.inputField)}
-            labelClassName={cmpStyles.label}
-            placeholder="What is your State?"
-            disabled={copyBillingInfo}
+
+          <Controller
+            name="deliveryStates"
+            control={control}
+            rules={{ required: true }}
+            render={({ field: { ref, ...field } }) => (
+              <Input
+                {...field}
+                label={t('province')}
+                type="text"
+                name="deliveryStates"
+                aria-invalid={!!formState.errors?.deliveryStates}
+                style={utils.setErrorStyle(formState?.errors?.deliveryStates)}
+                className={utils.inputStyles(localCmp.inputField)}
+                labelClassName={cmpStyles.label}
+                placeholder="What is your State?"
+                errorMessage={
+                  formState?.errors?.deliveryStates ? t('stateError') : ''
+                }
+              />
+            )}
           />
         </div>
-
         <div className={localCmp.countryLayout}>
-          <span style={{ fontWeight: 'bold', marginBottom: '.7rem' }}>
-            {t('country')}
-          </span>
-          <SelectBox
-            value={deliveryCountry}
-            options={options}
-            onChange={changeDeliveryHandler}
+          <span className={localCmp.countrySize}>{t('country')}</span>
+
+          <Controller
+            name="deliveryCountry"
+            control={control}
+            rules={{ required: true }}
             styles={utils.paymentSelectStyles}
             className={headerStyles.selectBox}
-            classNamePrefix="react-select"
-            isDisabled={copyBillingInfo}
+            render={({ field: { ref, ...field } }) => (
+              <>
+                <SelectBox
+                  {...field}
+                  aria-invalid={!!formState.errors?.deliveryCountry}
+                  // value={values.deliveryCountry}
+                  name="deliveryCountry"
+                  options={options}
+                  styles={utils.paymentSelectStyles}
+                  className={`${headerStyles.selectBox} ${
+                    formState?.errors?.deliveryCountry && headerStyles.error
+                  }
+                }`}
+                  classNamePrefix="react-select"
+                />
+                {formState?.errors?.deliveryCountry && (
+                  <span className="form-field-error" role="alert">
+                    {t('countryError')}
+                  </span>
+                )}
+              </>
+            )}
           />
         </div>
-        <div style={{ display: 'flex' }}>
-          <Input
-            label={t('postcode')}
-            type="text"
-            value={deliveryPostcode}
-            onChange={(e) => setDeliveryPostCode(e.target.value)}
-            className={utils.inputStyles(localCmp.inputField)}
-            labelClassName={cmpStyles.label}
-            placeholder="What is your postcode?"
-            disabled={copyBillingInfo}
+        <div className={localCmp.flex}>
+          <Controller
+            name="deliveryPostcode"
+            control={control}
+            rules={{ required: true }}
+            render={({ field: { ref, ...field } }) => (
+              <Input
+                {...field}
+                label={t('postcode')}
+                type="text"
+                name="deliveryPostcode"
+                aria-invalid={!!formState.errors?.deliveryPostcode}
+                style={utils.setErrorStyle(formState?.errors?.deliveryPostcode)}
+                className={utils.inputStyles(localCmp.inputField)}
+                labelClassName={cmpStyles.label}
+                placeholder="What is your State?"
+                errorMessage={
+                  formState?.errors?.deliveryPostcode ? t('postcodeError') : ''
+                }
+              />
+            )}
           />
-          <Input
-            label={t('phone')}
-            type="number"
-            value={deliveryPhone}
-            onChange={(e) => setDeliveryPhone(e.target.value)}
-            className={utils.inputStyles(localCmp.inputField)}
-            labelClassName={cmpStyles.label}
-            placeholder="What is your phone number?"
-          />
-        </div>
 
-        <div style={{ display: 'flex' }}>
+          <Controller
+            name="deliveryPhone"
+            control={control}
+            rules={{ required: true }}
+            render={({ field: { ref, ...field } }) => (
+              <Input
+                {...field}
+                label={t('deliveryPhone')}
+                type="text"
+                name="deliveryPhone"
+                aria-invalid={!!formState.errors?.deliveryPhone}
+                style={utils.setErrorStyle(formState?.errors?.deliveryPhone)}
+                className={utils.inputStyles(localCmp.inputField)}
+                labelClassName={cmpStyles.label}
+                placeholder="What is your State?"
+                errorMessage={
+                  formState?.errors?.deliveryPhone ? t('phoneError') : ''
+                }
+              />
+            )}
+          />
+        </div>
+        <div className={localCmp.flex}>
           <Button
             label={t('previous')}
             onClick={() => dispatch(setStep(1))}
@@ -161,13 +279,12 @@ function StepTwo({ step, billing, copyBillingInfo, options }) {
           />
           <Button
             label={t('next')}
-            onClick={stepTwoHandler}
             className={utils.btnStyles()}
-            type="button"
+            type="sumbit"
           />
         </div>
       </div>
-    </div>
+    </form>
   );
 }
 

@@ -1,6 +1,6 @@
 import * as cartStyles from '../components/pages/cart/styles.module.scss';
 import * as cmpStyles from '../components/pages/login/styles.module.scss';
-
+import { t } from '../i18n/translate';
 import { store } from '../store';
 
 export const defaultUrl = (
@@ -153,20 +153,15 @@ export const btnStyles = () =>
 export const paginationStyle = (cmpStyle, isCurrent) =>
   `${cmpStyle.pageNumbers} ${isCurrent && cmpStyle.active}`;
 
-export const buildFormDataObject = (formValues) => {
-  const data = new FormData();
-
-  if (formValues.image) data.append('image', formValues.image);
-
-  for (const [key, value] of Object.entries(formValues)) {
+export const buildFormDataObject = (values, data) => {
+  for (const [key, value] of Object.entries(values)) {
     data.append(key, value);
   }
-
   return data;
 };
 
-export const activationLandingScreen = (search, query = 'status') => {
-  const param = new URLSearchParams(search).get(query);
+export const activationLandingScreen = (search) => {
+  const param = new URLSearchParams(search).get('status');
 
   switch (param) {
     case 'activated':
@@ -178,4 +173,37 @@ export const activationLandingScreen = (search, query = 'status') => {
     default:
       return '';
   }
+};
+
+export const calculateTotal = (cart) =>
+  cart.reduce((acc, item) => acc + item.total, 0);
+
+export const setErrorStyle = (name) => {
+  return {
+    borderColor: name ? 'red' : '',
+    boxShadow: name ? '0 0 1.5px 1px red' : '',
+  };
+};
+
+export const defaultValues = {
+  email: '',
+  password: '',
+};
+
+export const defaultRegisterValues = {
+  name: '',
+  surname: '',
+  email: '',
+  dob: '',
+  password: '',
+  image: '',
+};
+
+export const emailFormPattern = {
+  required: t('emailError'),
+  pattern: {
+    value:
+      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+    message: t('emailFormatError'),
+  },
 };

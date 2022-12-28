@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
+import { Controller, useForm } from 'react-hook-form';
 
 import Title from '../../../components/payment_title';
 import SelectBox from '../../../ui/select';
 import Button from '../../../ui/button';
 import Input from '../../../ui/input';
 
-import { setStep, setBillingDetails } from '../actions';
-
-import { t } from '../../../../i18n/translate';
+import * as actions from '../actions';
 import * as utils from '../../../../utils';
+import { t } from '../../../../i18n/translate';
 
 import * as headerStyles from '../../../components/header/styles.module.scss';
 import * as cmpStyles from '../../login/styles.module.scss';
@@ -17,115 +17,257 @@ import * as localCmp from '../styles.module.scss';
 
 function StepOne({ step, billing, options }) {
   const dispatch = useDispatch();
-  const [billingCity, setBillingCity] = useState('');
-  const [billingStates, setBillingState] = useState('');
-  const [billingAddress, setBillingAddress] = useState('');
-  const [billingCountry, setBillingCountry] = useState('');
-  const [billingPostcode, setBillingPostCode] = useState('');
+  const { handleSubmit, control, formState, getValues } = useForm({
+    mode: 'onBlur',
+    shouldUnregister: true,
+  });
 
-  useEffect(() => {
-    !billingCity && setBillingCity(billing.billingCity);
-    !billingStates && setBillingState(billing.billingStates);
-    !billingAddress && setBillingAddress(billing.billingAddress);
-    !billingCountry && setBillingCountry(billing.billingCountry);
-    !billingPostcode && setBillingPostCode(billing.billingPostcode);
-  }, [
-    billing,
-    billingAddress,
-    billingCity,
-    billingCountry,
-    billingPostcode,
-    billingStates,
-  ]);
-
-  const changeBillingHandler = (value) => setBillingCountry(value);
-  const stepOneHandler = (e) => {
+  const stepOneHandler = () => {
     dispatch(
-      setBillingDetails({
-        billingAddress,
-        billingCity,
-        billingCountry,
-        billingStates,
-        billingPostcode,
+      actions.setBillingDetails({
+        firstName: getValues().firstName,
+        lastName: getValues().lastName,
+        billingAddress: getValues().billingAddress,
+        billingCity: getValues().billingCity,
+        billingCountry: getValues().billingCountry,
+        billingStates: getValues().billingStates,
+        billingPostcode: getValues().billingPostcode,
+        billingPhone: getValues().billingPhone,
       })
     );
-    dispatch(setStep(2));
+    dispatch(actions.setStep(2));
+  };
+
+  const resetStep1Form = () => {
+    dispatch(actions.resetStep1Form({}));
+    window.location.reload();
   };
 
   return (
-    <div className={localCmp.clentDetails}>
+    <form
+      onSubmit={handleSubmit(stepOneHandler)}
+      style={{ marginLeft: '9rem' }}>
       <div className={`${cmpStyles.form} ${localCmp.form}`}>
         <Title
           title={t('step1')}
           currentLabel={t('step')}
           currentStep={`${step} / 3`}
         />
-        <Input
-          label={t('address')}
-          type="text"
+
+        <div className={localCmp.flex}>
+          <Controller
+            name="firstName"
+            control={control}
+            defaultValue={billing.firstName}
+            rules={{ required: true }}
+            render={({ field: { ref, ...field } }) => (
+              <Input
+                {...field}
+                label={t('username')}
+                type="text"
+                name="firstName"
+                aria-invalid={!!formState.errors?.firstName}
+                className={utils.inputStyles(localCmp.inputField)}
+                labelClassName={cmpStyles.label}
+                style={utils.setErrorStyle(formState?.errors?.firstName)}
+                errorMessage={
+                  formState?.errors?.firstName ? t('nameError') : ''
+                }
+                placeholder="Your Firstname"
+              />
+            )}
+          />
+
+          <Controller
+            name="lastName"
+            control={control}
+            defaultValue={billing.lastName}
+            rules={{ required: true }}
+            render={({ field: { ref, ...field } }) => (
+              <Input
+                {...field}
+                label={t('surname')}
+                type="text"
+                name="lastName"
+                aria-invalid={!!formState.errors?.lastName}
+                className={utils.inputStyles(localCmp.inputField)}
+                labelClassName={cmpStyles.label}
+                style={utils.setErrorStyle(formState?.errors?.lastName)}
+                errorMessage={
+                  formState?.errors?.lastName ? t('surnameError') : ''
+                }
+                placeholder="What is your last name?"
+              />
+            )}
+          />
+        </div>
+
+        <Controller
           name="billingAddress"
-          value={billingAddress}
-          onChange={(e) => setBillingAddress(e.target.value)}
-          className={utils.inputStyles(localCmp.inputAddress)}
-          labelClassName={cmpStyles.label}
-          placeholder="What is your address?"
+          control={control}
+          defaultValue={billing.billingAddress}
+          rules={{ required: true }}
+          render={({ field: { ref, ...field } }) => (
+            <Input
+              {...field}
+              label={t('address')}
+              type="text"
+              name="billingAddress"
+              aria-invalid={!!formState.errors?.billingAddress}
+              style={utils.setErrorStyle(formState?.errors?.billingAddress)}
+              className={`${cmpStyles.inputFieldFull}`}
+              labelClassName={cmpStyles.label}
+              placeholder="What is your address?"
+              errorMessage={
+                formState?.errors?.billingAddress ? t('addressError') : ''
+              }
+            />
+          )}
         />
 
-        <div style={{ display: 'flex' }}>
-          <Input
-            label={t('city')}
-            type="text"
+        <div className={localCmp.flex}>
+          <Controller
             name="billingCity"
-            value={billingCity}
-            onChange={(e) => setBillingCity(e.target.value)}
-            className={utils.inputStyles(localCmp.inputField)}
-            labelClassName={cmpStyles.label}
-            placeholder="What is your city?"
+            control={control}
+            defaultValue={billing.billingCity}
+            rules={{ required: true }}
+            render={({ field: { ref, ...field } }) => (
+              <Input
+                {...field}
+                label={t('city')}
+                type="text"
+                name="billingCity"
+                aria-invalid={!!formState.errors?.billingCity}
+                style={utils.setErrorStyle(formState?.errors?.billingCity)}
+                className={utils.inputStyles(localCmp.inputField)}
+                labelClassName={cmpStyles.label}
+                placeholder="What is your city?"
+                errorMessage={
+                  formState?.errors?.billingCity ? t('cityError') : ''
+                }
+              />
+            )}
           />
-          <Input
-            label={t('province')}
-            type="text"
-            name="province"
-            value={billingStates}
-            onChange={(e) => setBillingState(e.target.value)}
-            className={utils.inputStyles(localCmp.inputField)}
-            labelClassName={cmpStyles.label}
-            placeholder="What is your State?"
+
+          <Controller
+            name="billingStates"
+            control={control}
+            defaultValue={billing.billingStates}
+            rules={{ required: true }}
+            render={({ field: { ref, ...field } }) => (
+              <Input
+                {...field}
+                label={t('province')}
+                type="text"
+                name="billingStates"
+                aria-invalid={!!formState.errors?.billingStates}
+                style={utils.setErrorStyle(formState?.errors?.billingStates)}
+                className={utils.inputStyles(localCmp.inputField)}
+                labelClassName={cmpStyles.label}
+                placeholder="What is your State?"
+                errorMessage={
+                  formState?.errors?.billingStates ? t('stateError') : ''
+                }
+              />
+            )}
           />
         </div>
 
         <div className={localCmp.countryLayout}>
-          <span style={{ fontWeight: 'bold', marginBottom: '.7rem' }}>
-            {t('country')}
-          </span>
-          <SelectBox
+          <span className={localCmp.countrySize}>{t('country')}</span>
+          <Controller
             name="billingCountry"
-            value={billingCountry}
-            options={options}
-            onChange={changeBillingHandler}
+            control={control}
+            rules={{ required: true }}
             styles={utils.paymentSelectStyles}
             className={headerStyles.selectBox}
-            classNamePrefix="react-select"
+            render={({ field: { ref, ...field } }) => (
+              <>
+                <SelectBox
+                  {...field}
+                  aria-invalid={!!formState.errors?.billingCountry}
+                  value={getValues().billingCountry}
+                  name="billingCountry"
+                  options={options}
+                  styles={utils.paymentSelectStyles}
+                  className={`${headerStyles.selectBox} ${
+                    formState?.errors?.billingCountry && headerStyles.error
+                  }
+                }`}
+                  classNamePrefix="react-select"
+                />
+                {formState?.errors?.billingCountry && (
+                  <span className="form-field-error" role="alert">
+                    {t('countryError')}
+                  </span>
+                )}
+              </>
+            )}
           />
         </div>
-        <Input
-          label={t('postcode')}
-          type="text"
-          name="billingPostcode"
-          value={billingPostcode}
-          onChange={(e) => setBillingPostCode(e.target.value)}
-          className={utils.inputStyles(localCmp.inputField)}
-          labelClassName={cmpStyles.label}
-          placeholder="What is your postcode?"
-        />
-        <Button
-          label={t('next')}
-          onClick={stepOneHandler}
-          className={utils.btnStyles()}
-          type="button"
-        />
+
+        <div className={localCmp.flex}>
+          <Controller
+            name="billingPostcode"
+            control={control}
+            rules={{ required: true }}
+            defaultValue={billing.billingPostcode}
+            render={({ field: { ref, ...field } }) => (
+              <Input
+                {...field}
+                label={t('postcode')}
+                type="text"
+                name="billingPostcode"
+                aria-invalid={!!formState.errors?.billingPostcode}
+                style={utils.setErrorStyle(formState?.errors?.billingPostcode)}
+                className={utils.inputStyles(localCmp.inputField)}
+                labelClassName={cmpStyles.label}
+                placeholder="What is your postcode?"
+                errorMessage={
+                  formState?.errors?.billingPostcode ? t('postcodeError') : ''
+                }
+              />
+            )}
+          />
+
+          <Controller
+            name="billingPhone"
+            control={control}
+            rules={{ required: true }}
+            defaultValue={billing.billingPhone}
+            render={({ field: { ref, ...field } }) => (
+              <Input
+                {...field}
+                label={t('billingPhone')}
+                type="text"
+                name="billingPhone"
+                aria-invalid={!!formState.errors?.billingPhone}
+                style={utils.setErrorStyle(formState?.errors?.billingPhone)}
+                className={utils.inputStyles(localCmp.inputField)}
+                labelClassName={cmpStyles.label}
+                placeholder="What is your phone number?"
+                errorMessage={
+                  formState?.errors?.billingPhone ? t('phoneError') : ''
+                }
+              />
+            )}
+          />
+        </div>
+        <div style={{ display: 'flex' }}>
+          <Button
+            type="button"
+            label="Clear Form "
+            className={utils.btnStyles()}
+            onClick={resetStep1Form}
+          />
+          <Button
+            label={t('next')}
+            className={utils.btnStyles()}
+            type="submit"
+          />
+        </div>
       </div>
-    </div>
+    </form>
   );
 }
 

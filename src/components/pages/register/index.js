@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { Controller, useForm } from 'react-hook-form';
 
 import Page from '../../../components/components/container';
 import TokenPane from '../../components/resend_token';
@@ -14,104 +15,162 @@ import { t } from '../../../i18n/translate';
 import { registration } from './selector';
 import { register } from './actions';
 
+import * as utils from '../../../utils';
+
 import { loginForm, backToLogin } from './styles.module.scss';
 import * as cmpStyle from '../login/styles.module.scss';
 
-import { buildFormDataObject } from '../../../utils';
-
 function Register() {
-  const dispatch = useDispatch();
   const { user, errors, registering } = useSelector(registration);
-  const [formValues, setFormValues] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [image, setFile] = useState();
+  const dispatch = useDispatch();
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const { handleSubmit, control, formState, getValues } = useForm({
+    mode: 'onBlur',
+    defaultValues: utils.defaultRegisterValues,
+  });
 
-    if (!formValues?.email || !formValues?.password) {
-      alert('Please fill in the form');
-      return;
-    }
-
-    const data = buildFormDataObject(formValues);
-
-    dispatch(register(data));
+  const handleFileChange = ({ target }) => {
+    if (target.files) setFile(target.files[0]);
   };
 
-  const handleFormValues = ({ target }) => {
-    const { name, value, files } = target;
-    setFormValues({ ...formValues, [name]: files ? files[0] : value });
+  const onSubmit = () => {
+    const values = getValues();
+    const data = new FormData();
+
+    if (image) data.append('image', image);
+    const registerData = utils.buildFormDataObject(values, data);
+
+    dispatch(register(registerData));
   };
+
+  // const handleFormValues = ({ target }) => {
+  //   const { name, value, files } = target;
+  //   setFormValues({ ...formValues, [name]: files ? files[0] : value });
+  // };
 
   return (
     <Page>
       <div className={loginForm}>
-        <form onSubmit={onSubmit} className={cmpStyle.form}>
+        <form onSubmit={handleSubmit(onSubmit)} className={cmpStyle.form}>
           <p className={cmpStyle.h3}>{t('registerTitle')}</p>
 
-          <Input
+          <Controller
             name="name"
-            label={t('username')}
-            type="text"
-            onChange={handleFormValues}
-            value={formValues?.name}
-            className={cmpStyle.inputField}
-            labelClassName={cmpStyle.label}
-            placeholder="Your Firstname"
+            control={control}
+            rules={{ required: true }}
+            render={({ field: { ref, ...field } }) => (
+              <Input
+                {...field}
+                label={t('username')}
+                type="text"
+                name="name"
+                aria-invalid={!!formState.errors?.username}
+                className={`${cmpStyle.inputField}`}
+                labelClassName={cmpStyle.label}
+                style={utils.setErrorStyle(formState?.errors?.name)}
+                errorMessage={formState?.errors?.name ? t('nameError') : ''}
+                placeholder="Your Firstname"
+              />
+            )}
           />
 
-          <Input
+          <Controller
             name="surname"
-            label={t('surname')}
-            type="text"
-            onChange={handleFormValues}
-            value={formValues?.surname}
-            className={cmpStyle.inputField}
-            labelClassName={cmpStyle.label}
-            placeholder="Your Lastname"
+            control={control}
+            rules={{ required: true }}
+            render={({ field: { ref, ...field } }) => (
+              <Input
+                {...field}
+                label={t('surname')}
+                type="text"
+                name="surname"
+                aria-invalid={!!formState.errors?.surname}
+                className={cmpStyle.inputField}
+                labelClassName={cmpStyle.label}
+                style={utils.setErrorStyle(formState?.errors?.surname)}
+                errorMessage={
+                  formState?.errors?.surname ? t('surnameError') : ''
+                }
+                placeholder="Your Lastname"
+              />
+            )}
           />
 
-          <Input
+          <Controller
             name="email"
-            label={t('email')}
-            type="text"
-            onChange={handleFormValues}
-            value={formValues?.email}
-            className={cmpStyle.inputField}
-            labelClassName={cmpStyle.label}
-            placeholder="unique-email@somewhere.com"
+            control={control}
+            rules={utils.emailFormPattern}
+            render={({ field: { ref, ...field } }) => (
+              <Input
+                {...field}
+                label={t('email')}
+                type="email"
+                name="email"
+                aria-invalid={!!formState.errors?.email}
+                className={cmpStyle.inputField}
+                labelClassName={cmpStyle.label}
+                style={utils.setErrorStyle(formState?.errors?.email)}
+                placeholder="your-email@somewhere.com"
+                errorMessage={
+                  formState?.errors?.email
+                    ? formState?.errors?.email.message
+                    : ''
+                }
+              />
+            )}
           />
 
-          <Input
-            name="age"
-            label={t('age')}
-            type="number"
-            onChange={handleFormValues}
-            value={formValues?.age}
-            className={cmpStyle.inputField}
-            labelClassName={cmpStyle.label}
-            placeholder="How old are you"
+          <Controller
+            name="dob"
+            control={control}
+            rules={{ required: true }}
+            render={({ field: { ref, ...field } }) => (
+              <Input
+                {...field}
+                type="date"
+                label={t('age')}
+                name="dob"
+                aria-invalid={!!formState.errors?.dob}
+                className={cmpStyle.inputField}
+                labelClassName={cmpStyle.label}
+                style={utils.setErrorStyle(formState?.errors?.dob)}
+                errorMessage={formState?.errors?.dob ? t('dobError') : ''}
+              />
+            )}
           />
 
-          <Input
+          <Controller
             name="password"
-            label={t('password')}
-            type="password"
-            onChange={handleFormValues}
-            value={formValues?.password}
-            className={cmpStyle.inputField}
-            labelClassName={cmpStyle.label}
-            placeholder="Your Password"
+            control={control}
+            rules={{ required: true }}
+            render={({ field: { ref, ...field } }) => (
+              <Input
+                {...field}
+                type="password"
+                name="password"
+                label="Password"
+                aria-invalid={!!formState.errors.password}
+                className={cmpStyle.inputField}
+                labelClassName={cmpStyle.label}
+                style={utils.setErrorStyle(formState?.errors?.password)}
+                errorMessage={
+                  formState.errors?.password ? t('passwordError') : ''
+                }
+                placeholder="Please enter your password"
+              />
+            )}
           />
 
-          <Input
-            label={t('picture')}
-            type="file"
+          <label className={cmpStyle.label}>{t('yourPics')}</label>
+          <input
+            ref={register}
             name="image"
-            onChange={handleFormValues}
-            value={undefined}
+            id="image"
+            type="file"
+            onChange={handleFileChange}
             className={cmpStyle.inputField}
-            labelClassName={cmpStyle.label}
           />
 
           <Button

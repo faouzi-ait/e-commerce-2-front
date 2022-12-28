@@ -14,6 +14,9 @@ function Input({
   containerClass,
   placeholder,
   disabled,
+  checked,
+  errorMessage,
+  isContrast = false,
   ...rest
 }) {
   return (
@@ -29,8 +32,18 @@ function Input({
         style={style}
         placeholder={placeholder}
         disabled={disabled}
+        checked={checked}
         {...rest}
       />
+      {errorMessage && (
+        <div
+          className={`${
+            !isContrast ? 'form-field-error' : 'form-field-error_contrast'
+          }`}
+          role="alert">
+          {errorMessage}
+        </div>
+      )}
     </div>
   );
 }
