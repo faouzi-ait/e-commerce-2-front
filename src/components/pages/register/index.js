@@ -175,8 +175,9 @@ function Register() {
 
           <Button
             type="submit"
-            className={cmpStyle.signinBtn}
             label={registering ? t('registering') : t('register')}
+            className={cmpStyle.signinBtn}
+            disabled={registering ? true : false}
           />
 
           <Link to="/login" className={`${cmpStyle.activate} ${backToLogin}`}>

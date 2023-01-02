@@ -17,7 +17,7 @@ function StarsFilter({ rating, setStarRating }) {
   return (
     <div className={`${cmpStyle.starLayout} ${localCmpStyle.marginTop}`}>
       <span className={cmpStyle.starTitle}>Customer Ratings &amp; Reviews</span>
-      <ul style={cmpStyle.starsContainer}>
+      <ul className={cmpStyle.starsContainer}>
         <StarItems nb={5} />
         <StarItems nb={4} />
         <StarItems nb={3} />
