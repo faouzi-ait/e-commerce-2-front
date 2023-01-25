@@ -30,7 +30,7 @@ function Login() {
 
   useEffect(() => {
     dispatch(resetError());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     const param = new URLSearchParams(search).get('redirect');

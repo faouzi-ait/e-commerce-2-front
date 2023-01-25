@@ -23,3 +23,8 @@ export const getExistingBillingDetails = (payload) => {
 export const resetStep1Form = (payload) => {
   return { type: cons.CLEAR_STEP_1_FORM, payload };
 };
+
+export const saveTransactionId = (payload) => {
+  return { type: cons.SAVE_TRANSACTION_ID, payload };
+};
+

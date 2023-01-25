@@ -1,26 +1,76 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useStripe } from '@stripe/react-stripe-js';
+import uuid from 'react-uuid';
+import jwt from 'jwt-decode';
+import axios from 'axios';
+
 import * as UI from 'react-accessible-accordion';
 
 import Input from '../../../ui/input';
 import Button from '../../../ui/button';
 import Title from '../../../components/payment_title';
-import DeliveryAddress from '../billingDetails/DeliveryAddress';
 import BillingAddress from '../billingDetails/BillingAddress';
+import DeliveryAddress from '../billingDetails/DeliveryAddress';
 
 import { AccordionItem, TableHead, TableBody, theadLabels } from './StepsUI';
 
-import { setStep } from '../actions';
+import { setStep, saveTransactionId } from '../actions';
 import { t } from '../../../../i18n/translate';
 import { calculateTotal } from '../../../../utils';
 
 import * as localCmp from '../styles.module.scss';
 import * as cmpStyles from '../../login/styles.module.scss';
+
 import 'react-accessible-accordion/dist/fancy-example.css';
 
+const API_LOCAL = process.env.REACT_APP_URL_DEV;
+// const API_PROD = process.env.REACT_APP_URL_PROD;
+
 function StepThree({ step, billing, basket, delivery }) {
-  const [confirmation, setConfirmation] = useState(false);
+  const token = useSelector((state) => state?.tokens?.tokens?.token);
+  const [confirmation, setConfirmation] = useState(true);
+  const { email } = jwt(token);
   const dispatch = useDispatch();
+  const stripe = useStripe();
+
+  const [customer_email, setEmail] = useState(email);
+
+  const handleCheckoutSubmit = async (e) => {
+    e.preventDefault();
+    const transactionId = uuid();
+
+    const line_items = basket.cart.map((item) => {
+      return {
+        quantity: item.quantity,
+        price_data: {
+          currency: 'usd',
+          unit_amount: item.price * 100,
+          product_data: {
+            name: item.name,
+            description: item.description,
+            images: [item.photo],
+          },
+        },
+      };
+    });
+
+    const payment = await axios.post(`${API_LOCAL}/payment-checkout`, {
+      line_items,
+      customer_email,
+      cart: basket.cart,
+      transactionId,
+    });
+
+    dispatch(saveTransactionId(transactionId));
+
+    const { data: sessionId } = payment;
+    const { error } = await stripe.redirectToCheckout({
+      sessionId: sessionId.sessionId,
+    });
+
+    if (error) console.log(error);
+  };
 
   return (
     <div className={localCmp.clentDetails}>
@@ -66,13 +116,28 @@ function StepThree({ step, billing, basket, delivery }) {
             name="confirmation"
             id="confirmation"
             checked={confirmation}
-            onChange={(e) => setConfirmation(!confirmation)}
+            onChange={() => setConfirmation(!confirmation)}
             disabled={false}
           />
           <label htmlFor="confirmation" className={localCmp.confirmationLabel}>
             {t('confirmation')}
           </label>
         </div>
+        {confirmation && (
+          <div>
+            <form onSubmit={handleCheckoutSubmit}>
+              <div>
+                <input
+                  type="email"
+                  name="email"
+                  value={customer_email}
+                  onChange={({ target }) => setEmail(target.value)}
+                />
+                <button type="submit">Checkout and Pay</button>
+              </div>
+            </form>
+          </div>
+        )}
       </div>
     </div>
   );

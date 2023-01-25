@@ -4,6 +4,7 @@ const initialState = {
   step: 1,
   billing: {},
   delivery: {},
+  transactionId: '',
   copyBillingInfo: false,
   existingBillingDetails: false,
 };
@@ -34,6 +35,11 @@ export const billing = (state = initialState, action) => {
       return {
         ...state,
         existingBillingDetails: action.payload,
+      };
+    case cons.SAVE_TRANSACTION_ID:
+      return {
+        ...state,
+        transactionId: action.payload,
       };
     case cons.CLEAR_STEP_1_FORM:
       return {

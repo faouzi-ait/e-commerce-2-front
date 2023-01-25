@@ -16,6 +16,7 @@ import Search from './components/pages/search';
 import Login from './components/pages/login';
 import Cart from './components/pages/cart';
 import Home from './components/pages/home';
+import Confirmation from './components/pages/confirmation';
 
 import { getCategories } from './components/components/header/actions';
 import { getHomePageProducts } from './components/pages/home/actions';
@@ -46,6 +47,7 @@ function App() {
           <Route exact path="/checkout" component={Cart} />
           <Route exact path="/search" component={Search} />
           <PrivateRoutes exact path="/payment" component={Payment} />
+          <PrivateRoutes exact path="/success" component={Confirmation} />
           <PublicRoutes exact path="/login" component={Login} />
           <PublicRoutes exact path="/register" component={Register} />
           <Route exact path="/category/:category" component={Product} />
