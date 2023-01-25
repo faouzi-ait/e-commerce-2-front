@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import jwt from 'jwt-decode';
 
 import Page from '../../../components/components/container';
@@ -9,11 +9,17 @@ import Button from '../../ui/button';
 import { basketSelector } from '../../components/header/selectors';
 import { trxBilling } from './selector';
 
+import {
+  saveTransactionId,
+  setDeliveryDetails,
+  setBillingDetails,
+} from '../payment/actions';
 import * as utils from '../../../utils';
 
 import {} from './styles.module.scss';
 
 function Confirmation({ history }) {
+  const dispatch = useDispatch();
   const basket = useSelector(basketSelector);
   const user = useSelector((state) => state.tokens.tokens.token);
   const { transactionId } = useSelector(trxBilling);
@@ -35,12 +41,11 @@ function Confirmation({ history }) {
     }
 
     return () => {
-      // SET TRANSACTION ID TO EMPTY STRING
-      // SET SHOPPING CART TO EMPTY OBJECT
-    }
+      dispatch(saveTransactionId(''));
+      dispatch(setDeliveryDetails({}));
+      dispatch(setBillingDetails({}));
+    };
   }, []);
-
-  console.log(basket);
 
   return (
     <Page>
@@ -100,7 +105,12 @@ function Confirmation({ history }) {
         </p>
         <Button
           label="Back to Shopping"
-          onClick={() => history.push('/')}
+          onClick={() => {
+            dispatch(saveTransactionId(''));
+            dispatch(setDeliveryDetails({}));
+            dispatch(setBillingDetails({}));
+            history.push('/');
+          }}
           className={utils.btnStyles()}
           type="button"
         />
