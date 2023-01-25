@@ -13,7 +13,9 @@ import {
   saveTransactionId,
   setDeliveryDetails,
   setBillingDetails,
+  setStep,
 } from '../payment/actions';
+import { emptyBasket } from '../../components/product_display/row/actions';
 import * as utils from '../../../utils';
 
 import {} from './styles.module.scss';
@@ -44,8 +46,10 @@ function Confirmation({ history }) {
       dispatch(saveTransactionId(''));
       dispatch(setDeliveryDetails({}));
       dispatch(setBillingDetails({}));
+      dispatch(emptyBasket());
+      dispatch(setStep(1));
     };
-  }, []);
+  }, [dispatch]);
 
   return (
     <Page>
@@ -109,6 +113,8 @@ function Confirmation({ history }) {
             dispatch(saveTransactionId(''));
             dispatch(setDeliveryDetails({}));
             dispatch(setBillingDetails({}));
+            dispatch(emptyBasket());
+            dispatch(setStep(1));
             history.push('/');
           }}
           className={utils.btnStyles()}

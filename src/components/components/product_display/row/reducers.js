@@ -54,6 +54,9 @@ export const basket = (state = basketState, action) => {
 
       return { ...state, cart: basket };
     }
+    case cons.EMPTY_BASKET: {
+      return {...state, cart: []}
+    }
     default:
       return state;
   }

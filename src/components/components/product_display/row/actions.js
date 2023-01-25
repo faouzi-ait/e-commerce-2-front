@@ -17,6 +17,6 @@ export const removeItem = (payload) => {
   return { type: cons.REMOVE_ITEM, payload };
 };
 
-export const emptyBasket = (payload) => {
-  return { type: cons.EMPTY_BASKET, payload };
+export const emptyBasket = () => {
+  return { type: cons.EMPTY_BASKET };
 };
