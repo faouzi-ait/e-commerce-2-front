@@ -24,8 +24,8 @@ import * as cmpStyles from '../../login/styles.module.scss';
 
 import 'react-accessible-accordion/dist/fancy-example.css';
 
-const API_LOCAL = process.env.REACT_APP_URL_DEV;
-// const API_PROD = process.env.REACT_APP_URL_PROD;
+// const API_LOCAL = process.env.REACT_APP_URL_DEV;
+const API_PROD = process.env.REACT_APP_URL_PROD;
 
 function StepThree({ step, billing, basket, delivery }) {
   const token = useSelector((state) => state?.tokens?.tokens?.token);
@@ -55,7 +55,7 @@ function StepThree({ step, billing, basket, delivery }) {
       };
     });
 
-    const payment = await axios.post(`${API_LOCAL}/payment-checkout`, {
+    const payment = await axios.post(`${API_PROD}/payment-checkout`, {
       line_items,
       customer_email,
       cart: basket.cart,
