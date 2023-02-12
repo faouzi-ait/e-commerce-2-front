@@ -2,7 +2,7 @@ import React from 'react';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
 
-function SelectWrapper({
+const SelectWrapper = ({
   options,
   style,
   classname,
@@ -11,7 +11,7 @@ function SelectWrapper({
   defaultValue,
   classNamePrefix,
   ...rest
-}) {
+}) => {
   return (
     <Select
       options={options}
@@ -31,7 +31,6 @@ SelectWrapper.propTypes = {
   onClose: PropTypes.func,
   style: PropTypes.object,
   classname: PropTypes.object,
-  // defaultValue: PropTypes.string,
   rest: PropTypes.shape({}),
 };
 
@@ -40,7 +39,6 @@ SelectWrapper.defaultProps = {
   onClose: () => {},
   style: {},
   classname: {},
-  // defaultValue: 'react-select',
   rest: {},
 };
 

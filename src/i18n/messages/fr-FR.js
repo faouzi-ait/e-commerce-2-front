@@ -71,5 +71,10 @@ export default {
     countryError: 'Votre pays est obligatoire',
     postcodeError: 'Votre code postal est obligatoire',
     phoneError: 'Votre numéro de téléphone est obligatoire',
+
+    orderNumber: 'Votre numéro de commande: ',
+    confirmationTitle: 'Votre commande à été bien reçu',
+    confirmMessage: 'Merci pour votre achat',
+    confirmEmailMessage: 'Un courriel de confirmation vous sera envoyé à ',
   },
 };

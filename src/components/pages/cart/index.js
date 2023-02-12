@@ -169,7 +169,8 @@ function Cart() {
             className={localStyles.emptyCart}
           />
           <span
-            className={`${cmpStyles.signinBtn} ${localStyles.backToShopping}`}>
+            className={`${cmpStyles.signinBtn} ${localStyles.backToShopping}`}
+            onClick={() => history.push('/')}>
             Back to shopping
           </span>
         </div>

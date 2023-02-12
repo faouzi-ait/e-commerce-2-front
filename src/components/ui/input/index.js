@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import * as cmpStyle from './styles.module.scss';
 
 function Input({
   type,
@@ -17,6 +16,7 @@ function Input({
   checked,
   errorMessage,
   isContrast = false,
+  styleInline,
   ...rest
 }) {
   return (
@@ -37,6 +37,7 @@ function Input({
       />
       {errorMessage && (
         <div
+          style={styleInline}
           className={`${
             !isContrast ? 'form-field-error' : 'form-field-error_contrast'
           }`}

@@ -40,7 +40,7 @@ export default {
     Total: 'Total',
 
     confirmation:
-      'Thick this box to confirm your billing and delivery address to proceed to checkout',
+      'Check this box to confirm your billing and delivery address to proceed to checkout',
 
     address: 'Address *',
     city: 'City *',
@@ -70,5 +70,11 @@ export default {
     countryError: 'Your country is required',
     postcodeError: 'Your postcode is required',
     phoneError: 'Your phone number is required',
+
+    orderNumber: 'Reference Number: ',
+    confirmationTitle: 'Your order has been received',
+    confirmMessage: 'Thank you for your purchase',
+    confirmEmailMessage:
+      'You will receive an email shortly to confirm your order at',
   },
 };

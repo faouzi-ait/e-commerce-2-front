@@ -7,6 +7,8 @@ import { t } from '../../../../i18n/translate';
 
 import { cartItems } from '../../../pages/cart/selectors';
 
+import { calculateTotal } from '../../../../utils';
+
 import * as cartStyles from '../../cart/styles.module.scss';
 import * as cmpStyles from '../../login/styles.module.scss';
 import * as localCmp from '../styles.module.scss';
@@ -16,9 +18,6 @@ function OrderSummary({ isSticky }) {
   const { cart } = useSelector(cartItems);
 
   const btnStyles = `${cmpStyles.signinBtn} ${cartStyles.checkoutBtnWidth} ${cartStyles.checkoutBtnCheckout}`;
-
-  const calculateTotal = (cart) =>
-    cart.reduce((acc, item) => acc + item.total, 0);
 
   const CartSummary = ({ item }) => {
     return (
@@ -50,7 +49,7 @@ function OrderSummary({ isSticky }) {
           type="button"
         />
         <span className={localCmp.totalSection}>
-          Total: {calculateTotal(cart)}$
+          Total: &nbsp;${calculateTotal(cart)}
         </span>
       </div>
     </div>

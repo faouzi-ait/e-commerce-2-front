@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 Modal.setAppElement('#root');
 
-export const ModalWrapper = ({
+const ModalWrapper = ({
   open,
   onClose,
   style,

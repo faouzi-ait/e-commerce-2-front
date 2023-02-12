@@ -20,13 +20,13 @@ const customStyles = {
   },
 };
 
-function ProductModal({
+const ProductModal = ({
   modalIsOpen,
   closeModal,
   productId,
   isProduct = false,
   isSearch = false,
-}) {
+}) => {
   const dispatch = useDispatch();
   const [items, setItems] = useState(null);
   const { cart } = useSelector(sel.basketSelector);

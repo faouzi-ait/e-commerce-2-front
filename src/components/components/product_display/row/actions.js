@@ -13,7 +13,6 @@ export const removeOne = (payload) => {
 };
 
 export const removeItem = (payload) => {
-  console.log(payload);
   return { type: cons.REMOVE_ITEM, payload };
 };
 

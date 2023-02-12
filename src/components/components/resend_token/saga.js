@@ -7,14 +7,12 @@ import * as act from './actions';
 export function* resendToken(payload) {
   const result = yield call(resendActivationTokenCall, payload);
 
-  console.log("sending.......");
   if (result.error) {
     const { data, status } = result.error.response;
     yield put(act.resendActivationTokenFailure({ data, status }));
     yield delay(4000);
     yield put(act.resendActivationTokenFailure(null));
   } else {
-    console.log('SUCCESS');
     yield put(act.resendActivationTokenSuccess(result.data));
     yield delay(4000);
     yield put(act.resendActivationTokenSuccess(null));

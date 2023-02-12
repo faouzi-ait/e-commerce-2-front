@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Button({ label, onClick, className, style, type, value, ...rest }) {
+const Button = ({ label, onClick, className, style, type, value, ...rest }) => {
   return (
     <button
       type={type}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Controller, useForm } from 'react-hook-form';
 import { useStripe } from '@stripe/react-stripe-js';
 import uuid from 'react-uuid';
 import jwt from 'jwt-decode';
@@ -17,7 +18,7 @@ import { AccordionItem, TableHead, TableBody, theadLabels } from './StepsUI';
 
 import { setStep, saveTransactionId } from '../actions';
 import { t } from '../../../../i18n/translate';
-import { calculateTotal } from '../../../../utils';
+import * as utils from '../../../../utils';
 
 import * as localCmp from '../styles.module.scss';
 import * as cmpStyles from '../../login/styles.module.scss';
@@ -33,11 +34,14 @@ function StepThree({ step, billing, basket, delivery }) {
   const { email } = jwt(token);
   const dispatch = useDispatch();
   const stripe = useStripe();
-
   const [customer_email, setEmail] = useState(email);
 
-  const handleCheckoutSubmit = async (e) => {
-    e.preventDefault();
+  const { handleSubmit, control, formState } = useForm({
+    mode: 'onBlur',
+    defaultValues: { email: customer_email },
+  });
+
+  const handleCheckoutSubmit = async () => {
     const transactionId = uuid();
 
     const line_items = basket.cart.map((item) => {
@@ -81,13 +85,13 @@ function StepThree({ step, billing, basket, delivery }) {
           currentStep={`${step} / 3`}
         />
         <hr />
-        <h4 className={localCmp.stepTwoTitle}>{t('OrderPageTitle')}</h4>
+        {/* <h4 className={localCmp.stepTwoTitle}>{t('OrderPageTitle')}</h4> */}
         <table>
           <TableHead labels={theadLabels} />
           <TableBody basket={basket} />
         </table>
         <div className={localCmp.stepThreeTotal}>
-          {t('Total')}: {calculateTotal(basket?.cart)}$
+          {t('Total')}: {utils.calculateTotal(basket?.cart)}$
         </div>
         <hr />
         <UI.Accordion allowMultipleExpanded allowZeroExpanded>
@@ -124,19 +128,55 @@ function StepThree({ step, billing, basket, delivery }) {
           </label>
         </div>
         {confirmation && (
-          <div>
-            <form onSubmit={handleCheckoutSubmit}>
+          <>
+            <form
+              // onSubmit={handleCheckoutSubmit}
+              onSubmit={handleSubmit(handleCheckoutSubmit)}
+              className={localCmp.form}>
               <div>
-                <input
+                {/* <Input
                   type="email"
                   name="email"
                   value={customer_email}
+                  className={localCmp.inputCheckoutField}
                   onChange={({ target }) => setEmail(target.value)}
+                /> */}
+                <Controller
+                  name="email"
+                  control={control}
+                  rules={utils.emailFormPattern}
+                  render={({ field: { ref, ...field } }) => (
+                    <Input
+                      {...field}
+                      // label={t('username')}
+                      type="email"
+                      name="email"
+                      aria-invalid={!!formState.errors?.email}
+                      className={localCmp.inputCheckoutField}
+                      styleInline={{ marginTop: "-5px" }}
+                      // labelClassName={cmpStyle.label}
+                      style={utils.setErrorStyle(formState?.errors?.email)}
+                      errorMessage={
+                        formState?.errors?.email
+                          ? formState?.errors?.email.message
+                          : ''
+                      }
+                      placeholder="your-email@somewhere.com"
+                    />
+                  )}
                 />
-                <button type="submit">Checkout and Pay</button>
+
+                <button type="submit" className={localCmp.signinBtn}>
+                  Proceed to Checkout
+                </button>
               </div>
             </form>
-          </div>
+            <div className={localCmp.checkoutmessage}>
+              If the details above are correct, by clicking on the "Proceed to
+              Checkout" button, you will be redirected to our card processing
+              partner to finalize your purchase.
+            </div>
+          </>
         )}
       </div>
     </div>

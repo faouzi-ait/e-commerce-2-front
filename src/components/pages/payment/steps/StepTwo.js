@@ -34,7 +34,6 @@ function StepTwo({ step, billing, copyBillingInfo, options }) {
   });
 
   const stepTwoHandler = () => {
-    console.log(getValues());
     dispatch(
       setDeliveryDetails({
         firstName: getValues().firstName,
@@ -206,7 +205,6 @@ function StepTwo({ step, billing, copyBillingInfo, options }) {
                 <SelectBox
                   {...field}
                   aria-invalid={!!formState.errors?.deliveryCountry}
-                  // value={values.deliveryCountry}
                   name="deliveryCountry"
                   options={options}
                   styles={utils.paymentSelectStyles}

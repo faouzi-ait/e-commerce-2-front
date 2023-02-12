@@ -3,126 +3,89 @@ import { useSelector, useDispatch } from 'react-redux';
 import jwt from 'jwt-decode';
 
 import Page from '../../../components/components/container';
+import CartDisplay from './CartDisplay';
 import Footer from '../../components/footer';
 import Button from '../../ui/button';
 
 import { basketSelector } from '../../components/header/selectors';
 import { trxBilling } from './selector';
-
-import {
-  saveTransactionId,
-  setDeliveryDetails,
-  setBillingDetails,
-  setStep,
-} from '../payment/actions';
 import { emptyBasket } from '../../components/product_display/row/actions';
+
+import { t } from '../../../i18n/translate';
+
+import * as action from '../payment/actions';
 import * as utils from '../../../utils';
 
-import {} from './styles.module.scss';
+import * as styles from './styles.module.scss';
 
 function Confirmation({ history }) {
   const dispatch = useDispatch();
   const basket = useSelector(basketSelector);
-  const user = useSelector((state) => state.tokens.tokens.token);
   const { transactionId } = useSelector(trxBilling);
+  const user = useSelector((state) => state.tokens.tokens.token);
 
-  const total = basket.reduce(function (acc, val) {
-    return acc + val.total;
-  }, 0);
+  const resetCheckoutData = () => {
+    dispatch(action.saveTransactionId(''));
+    dispatch(action.setDeliveryDetails({}));
+    dispatch(action.setBillingDetails({}));
+    dispatch(emptyBasket());
+    dispatch(action.setStep(1));
+  };
 
   useEffect(() => {
     let params = new URL(document.location).searchParams;
-    let name = params.get('session_id');
+    let sessionId = params.get('session_id');
 
-    if (name) {
-      setTimeout(() => {
-        // window.location.href = 'http://localhost:3000/dashboard';
-      }, 2500);
-    } else {
-      window.location.href = 'http://localhost:3000/';
+    if (!sessionId || !transactionId) {
+      window.location.href = process.env.REACT_APP_FRONT_END;
     }
 
-    return () => {
-      dispatch(saveTransactionId(''));
-      dispatch(setDeliveryDetails({}));
-      dispatch(setBillingDetails({}));
-      dispatch(emptyBasket());
-      dispatch(setStep(1));
-    };
+    return () => resetCheckoutData();
   }, [dispatch]);
 
   return (
-    <Page>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          width: '60vw',
-          height: '60vh',
-          borderRadius: '5px',
-          marginLeft: '20%',
-          marginBottom: '8%',
-        }}>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            marginTop: '5%',
-          }}>
-          <h1>Your order has been received</h1>
-          <img
-            src="images/pngwing.png"
-            alt="confirm"
-            className="confirm-image"
-          />
-        </div>
-        <p style={{ fontSize: '2rem' }}>Thank you for your purchase</p>
-        <p>
-          Your order reference number is: <b>{transactionId}</b>
-        </p>
-        <hr style={{ width: '58%' }} />
-        {(basket || []).map((item) => (
-          <>
-            <div
-              style={{
-                display: 'flex',
-                alignSelf: 'flex-start',
-                marginLeft: '25%',
-                marginBottom: '10px',
-              }}>
-              <img src={item.photo} alt="product" className="confirm-product" />
-              <div style={{ fontSize: '1.25rem' }}>
-                <div style={{ fontWeight: 'bold' }}>{item.description}</div>
-                <div>
-                  Unit Price: ${item.price} | Quantity: {item.quantity}
-                </div>
-                <div>Total: ${item.price * item.quantity}</div>
-              </div>
+    <>
+      {transactionId ? (
+        <Page>
+          <div className={styles.confirmationPageLayout}>
+            <div className={styles.confirmationPageContent}>
+              <h1>{t('confirmationTitle')}</h1>
+              <img
+                src="images/pngwing.png"
+                alt="confirm"
+                className="confirm-image"
+              />
             </div>
-          </>
-        ))}
-        <div style={{ fontWeight: 'bold' }}>Total Paid: ${total}</div>
-        <p>
-          You will receive an email shortly to confirm your order at:{' '}
-          <b>{jwt(user).email}</b>
-        </p>
-        <Button
-          label="Back to Shopping"
-          onClick={() => {
-            dispatch(saveTransactionId(''));
-            dispatch(setDeliveryDetails({}));
-            dispatch(setBillingDetails({}));
-            dispatch(emptyBasket());
-            dispatch(setStep(1));
-            history.push('/');
-          }}
-          className={utils.btnStyles()}
-          type="button"
-        />
-      </div>
-      <Footer />
-    </Page>
+            <p className={styles.purchaseTitle}>{t('confirmMessage')}</p>
+            <p>
+              {t('orderNumber')} <b>{transactionId}</b>
+            </p>
+            <hr className={styles.cartWidth} />
+            {(basket || []).map((item) => (
+              <CartDisplay item={item} key={item._id} />
+            ))}
+            <div className={styles.totalPaid}>
+              Total: ${utils.calculateTotal(basket)}
+            </div>
+            <p>
+              {t('confirmEmailMessage')}: <b>{jwt(user).email}</b>
+            </p>
+            <Button
+              label="Back to Shopping"
+              onClick={() => {
+                resetCheckoutData();
+                history.push('/');
+              }}
+              className={utils.btnStyles()}
+              type="button"
+            />
+          </div>
+          <Footer />
+        </Page>
+      ) : (
+        ''
+      )}
+    </>
   );
 }
 export default Confirmation;

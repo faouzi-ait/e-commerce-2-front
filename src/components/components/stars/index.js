@@ -7,8 +7,6 @@ function Stars({ starrating = 1 }) {
 
     const generateStars = (star, img) => {
       return Array.from(Array(star), (e, i) => {
-        console.log(e);
-
         return (
           <span key={i}>
             <img src={img} alt="empty" className={stars} />
