@@ -17,6 +17,7 @@ import { relatedProducts } from './components/ui/modal/reducer';
 import { register } from './components/pages/register/reducers';
 import { products } from './components/pages/product/reducers';
 import { billing } from './components/pages/payment/reducers';
+import { forgotPassword } from './components/components/password-reset/reducers';
 import { login, tokens } from './components/pages/login/reducers';
 
 import { persistStore, persistReducer } from 'redux-persist';
@@ -43,6 +44,7 @@ const combinedReducers = (history) =>
     search,
     basket,
     billing,
+    forgotPassword,
   });
 
 const persistConfig = {

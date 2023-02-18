@@ -9,6 +9,7 @@ import PublicRoutes from './components/route-access/PublicRoutes';
 import Dashboard from './components/pages/dashboard';
 import Header from './components/components/header';
 import NotFound from './components/pages/not-found';
+import PasswordReset from './components/pages/reset-password';
 import Register from './components/pages/register';
 import Product from './components/pages/product';
 import Payment from './components/pages/payment';
@@ -46,6 +47,7 @@ function App() {
           <Route exact path="/home" component={Home} />
           <Route exact path="/checkout" component={Cart} />
           <Route exact path="/search" component={Search} />
+          <Route exact path="/password-reset/:token" component={PasswordReset} />
           <PrivateRoutes exact path="/payment" component={Payment} />
           <PrivateRoutes exact path="/success" component={Confirmation} />
           <PublicRoutes exact path="/login" component={Login} />

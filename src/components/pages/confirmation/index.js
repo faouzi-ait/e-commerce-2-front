@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import jwt from 'jwt-decode';
 
@@ -24,13 +24,13 @@ function Confirmation({ history }) {
   const { transactionId } = useSelector(trxBilling);
   const user = useSelector((state) => state.tokens.tokens.token);
 
-  const resetCheckoutData = () => {
+  const resetCheckoutData = useCallback(() => {
     dispatch(action.saveTransactionId(''));
     dispatch(action.setDeliveryDetails({}));
     dispatch(action.setBillingDetails({}));
     dispatch(emptyBasket());
     dispatch(action.setStep(1));
-  };
+  }, [dispatch]);
 
   useEffect(() => {
     let params = new URL(document.location).searchParams;
@@ -41,7 +41,7 @@ function Confirmation({ history }) {
     }
 
     return () => resetCheckoutData();
-  }, [dispatch]);
+  }, [dispatch, transactionId, resetCheckoutData]);
 
   return (
     <>

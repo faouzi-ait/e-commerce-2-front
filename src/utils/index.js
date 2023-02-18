@@ -190,6 +190,11 @@ export const defaultValues = {
   password: '',
 };
 
+export const resetPasswordDefaultValues = {
+  password: '',
+  confirmPassword: '',
+};
+
 export const defaultRegisterValues = {
   name: '',
   surname: '',

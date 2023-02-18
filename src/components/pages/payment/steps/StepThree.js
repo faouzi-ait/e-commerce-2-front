@@ -34,7 +34,7 @@ function StepThree({ step, billing, basket, delivery }) {
   const { email } = jwt(token);
   const dispatch = useDispatch();
   const stripe = useStripe();
-  const [customer_email, setEmail] = useState(email);
+  const [customer_email,] = useState(email);
 
   const { handleSubmit, control, formState } = useForm({
     mode: 'onBlur',
@@ -130,17 +130,9 @@ function StepThree({ step, billing, basket, delivery }) {
         {confirmation && (
           <>
             <form
-              // onSubmit={handleCheckoutSubmit}
               onSubmit={handleSubmit(handleCheckoutSubmit)}
               className={localCmp.form}>
               <div>
-                {/* <Input
-                  type="email"
-                  name="email"
-                  value={customer_email}
-                  className={localCmp.inputCheckoutField}
-                  onChange={({ target }) => setEmail(target.value)}
-                /> */}
                 <Controller
                   name="email"
                   control={control}
@@ -148,13 +140,11 @@ function StepThree({ step, billing, basket, delivery }) {
                   render={({ field: { ref, ...field } }) => (
                     <Input
                       {...field}
-                      // label={t('username')}
                       type="email"
                       name="email"
                       aria-invalid={!!formState.errors?.email}
                       className={localCmp.inputCheckoutField}
                       styleInline={{ marginTop: "-5px" }}
-                      // labelClassName={cmpStyle.label}
                       style={utils.setErrorStyle(formState?.errors?.email)}
                       errorMessage={
                         formState?.errors?.email

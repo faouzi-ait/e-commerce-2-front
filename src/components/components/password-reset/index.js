@@ -3,13 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form';
 
 import Input from '../../ui/input';
-import { resendActivationToken } from '../../components/resend_token/actions';
+import { forgotPasswordToken } from '../../components/password-reset/actions';
 
 import * as utils from '../../../utils';
-import { t } from '../../../i18n/translate';
 
 import { tokenPane, closeBtn, tokenPaneMsg } from './styles.module.scss';
-import * as cmpStyle from '../../pages/login/styles.module.scss';
+import * as styles from '../../pages/login/styles.module.scss';
 
 function TokenPane({ setOpen }) {
   const dispatch = useDispatch();
@@ -22,10 +21,10 @@ function TokenPane({ setOpen }) {
     mode: 'onBlur',
   });
 
-  const { result, error } = useSelector((state) => state?.tokenRequest);
+  const { result, error } = useSelector((state) => state?.forgotPassword);
 
   const onSubmit = () =>
-    dispatch(resendActivationToken({ email: getValues().user }));
+    dispatch(forgotPasswordToken({ email: getValues().user }));
 
   return (
     <div className={tokenPane}>
@@ -44,8 +43,8 @@ function TokenPane({ setOpen }) {
               type="email"
               name="user"
               aria-invalid={!!errors?.user}
-              className={cmpStyle.inputField}
-              labelClassName={cmpStyle.label}
+              className={styles.inputField}
+              labelClassName={styles.label}
               style={utils.setErrorStyle(errors?.user)}
               errorMessage={errors?.user ? errors?.user.message : ''}
               placeholder="your-email@somewhere.com"
@@ -56,14 +55,16 @@ function TokenPane({ setOpen }) {
 
         <button
           type="submit"
-          className={cmpStyle.signinBtn}
+          className={styles.signinBtn}
           disabled={!isValid}>
-          {isSubmitting ? 'Resending Token...' : t('resendTokenLabel')}
+          {isSubmitting ? 'Reseting Password...' : 'Reset Password'}
         </button>
       </form>
 
       {result && result?.message && (
-        <span className={tokenPaneMsg}>{t('resendTokenMsg')}</span>
+        <span className={tokenPaneMsg} style={{ padding: '6px 50px' }}>
+          Please use the link in your inbox to reset your password
+        </span>
       )}
       {error && error?.data && (
         <span className={tokenPaneMsg}>{error.data.message}</span>

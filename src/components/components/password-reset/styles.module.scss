@@ -1,0 +1,28 @@
+.tokenPane {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+    position: absolute;
+    bottom: 2.65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 440px;
+    min-height: 125px;
+    background: var(--theme-token_panel-background);
+    border-radius: 5px;
+}
+
+.tokenPaneMsg,
+.closeBtn {
+    color: var(--theme-token_panel-text)
+}
+
+.closeBtn {
+    display: block;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+}

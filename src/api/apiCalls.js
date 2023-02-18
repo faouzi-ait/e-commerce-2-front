@@ -2,7 +2,6 @@ import axios from 'axios';
 import jwt from 'jwt-decode';
 import { store } from '../store';
 import ApiClient from './ApiClient';
-// import { safeStorage } from '../hooks/safeLocalStorage';
 
 import * as actions from '../components/pages/login/actions';
 
@@ -105,6 +104,22 @@ export async function fetchRelatedProducts(urlParams, queryParams) {
     return await apiClient.get(`/related/${urlParams}`, queryParams);
   } catch (error) {
     return { error };
+  }
+}
+
+export async function forgotPassword(payload) {
+  try {
+    return await apiClient.post('/users/forgotPassword', payload);
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function resetPassword(token, payload) {
+  try {
+    return await apiClient.patch(`/users/resetPassword/${token}`, payload);
+  } catch (error) {
+    return error;
   }
 }
 

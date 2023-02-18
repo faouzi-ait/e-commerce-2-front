@@ -9,15 +9,17 @@ import {
 } from './components/components/header/saga';
 import { getRelatedProductsSaga } from './components/ui/modal/saga';
 import { getHomePageProductSaga } from './components/pages/home/saga';
+import { forgotPasswordSaga } from './components/components/password-reset/saga';
 
 export function* sagas() {
   yield all([
-    authenticateSaga(),
     registerSaga(),
+    getProductsSaga(),
     resendTokenSaga(),
+    authenticateSaga(),
     getCategoriesSaga(),
     searchProductsSaga(),
-    getProductsSaga(),
+    forgotPasswordSaga(),
     getRelatedProductsSaga(),
     getHomePageProductSaga(),
   ]);

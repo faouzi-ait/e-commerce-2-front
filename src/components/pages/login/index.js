@@ -7,6 +7,7 @@ import Footer from '../../components/footer';
 import Page from '../../../components/components/container';
 
 import TokenPane from '../../components/resend_token';
+import PasswordReset from '../../components/password-reset';
 import { t } from '../../../i18n/translate';
 import Input from '../../ui/input';
 
@@ -21,6 +22,7 @@ function Login() {
   const dispatch = useDispatch();
   const search = useLocation().search;
   const [isOpen, setIsOpen] = useState(false);
+  const [isResetOpen, setIsResetOpen] = useState(false);
   const { authenticating, errors } = useSelector(loginStatus);
 
   const { handleSubmit, control, formState } = useForm({
@@ -116,9 +118,17 @@ function Login() {
             {t('loginToken')}
           </div>
 
+          <div
+            onClick={() => setIsResetOpen(!isResetOpen)}
+            className={cmpStyle.activate}
+            disabled={!formState.isValid}>
+            Forgot password?
+          </div>
+
           <span>{errors && errors?.data?.message}</span>
         </form>
         {isOpen && <TokenPane setOpen={setIsOpen} />}
+        {isResetOpen && <PasswordReset setOpen={setIsResetOpen} />}
       </div>
       <Footer />
     </Page>

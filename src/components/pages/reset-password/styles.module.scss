@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    min-height: 75vh;
+    justify-content: center;
+}
+
+.form {
+    width: 35vw;
+    height: 350px;
+    margin-top: 8rem;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+}
+
+.confirmPassword {
+    margin: 0;
+    margin-left: 6rem;
+    margin-bottom: 10px;
+    margin-top: -6px;
+    color: red;
+    font-weight: bold;
+    align-self: flex-start;
+}
