@@ -15,10 +15,6 @@ export const login = (state = initialState, action) => {
       return {
         user: { ...state.user, ...action.payload },
       };
-    // case cons.SET_TOKENS:
-    //   return {
-    //     tokens: { ...state, ...action.payload },
-    //   };
     case cons.SET_IS_AUTHENTICATING:
       return {
         ...state,

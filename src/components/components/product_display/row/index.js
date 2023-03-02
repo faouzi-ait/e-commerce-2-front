@@ -6,7 +6,7 @@ import ProductDisplay from './ProductDisplay';
 import { THEMES } from '../../../components/toggles/constants';
 import { selectedTheme } from '../../../components/toggles/selectors';
 
-import { container, gridContainer, marginLeft } from './styles.module.scss';
+import * as styles from './styles.module.scss';
 
 function Row({ products, isRow, isProduct = false, isSearch = false }) {
   const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -19,21 +19,27 @@ function Row({ products, isRow, isProduct = false, isSearch = false }) {
 
   return (
     <div
-      className={`baseTheme ${
-        isDark ? THEMES.DARK : THEMES.LIGHT
-      } ${marginLeft}`}>
-      <div className={container}></div>
-      <div className={`${isRow ? gridContainer : ''}`}>
-        {(item?.items || []).map((item) => (
-          <ProductDisplay
-            key={item._id}
-            isRow={isRow}
-            item={item}
-            openModal={openModal}
-            setProductId={setProductId}
-          />
-        ))}
-      </div>
+      className={`baseTheme ${isDark ? THEMES.DARK : THEMES.LIGHT} ${
+        styles.marginLeft
+      }`}>
+      <div className={styles.container}></div>
+      {item.items.length !== 0 ? (
+        <div className={`${isRow ? styles.gridContainer : ''}`}>
+          {(item?.items || []).map((item) => (
+            <ProductDisplay
+              key={item._id}
+              isRow={isRow}
+              item={item}
+              openModal={openModal}
+              setProductId={setProductId}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className={styles.noProductsFoundStyle}>
+          No products were found
+        </div>
+      )}
       <Modal
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}

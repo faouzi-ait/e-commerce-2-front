@@ -66,7 +66,7 @@ function Register() {
                 label={t('username')}
                 type="text"
                 name="name"
-                aria-invalid={!!formState.errors?.username}
+                aria-invalid={!!formState.errors?.name}
                 className={`${cmpStyle.inputField}`}
                 labelClassName={cmpStyle.label}
                 style={utils.setErrorStyle(formState?.errors?.name)}

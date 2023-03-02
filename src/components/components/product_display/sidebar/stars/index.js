@@ -12,8 +12,8 @@ function StarsFilter({ rating }) {
       <li
         className={cmpStyle.starsStyles}
         onClick={() => {
-          getPage(1);
           dispatch(getRating(`&ratings=${nb}`));
+          getPage(0);
         }}>
         <Stars starrating={nb} />
         &nbsp;<span className={cmpStyle.starLabel}></span>

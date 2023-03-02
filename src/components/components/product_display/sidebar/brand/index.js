@@ -25,7 +25,7 @@ function Brand({ brand, data }) {
       }
     }
 
-    dispatch(getPage(1));
+    dispatch(getPage(0));
     dispatch(getBrand(`&brand=${e.target.value}`));
     // dispatch(getBrand(`&brand=${selected.join(',')}`));
   };

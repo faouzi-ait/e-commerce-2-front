@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import StarsFilter from './stars';
 import Pricing from './price';
@@ -9,8 +9,11 @@ import Page from '../../../../components/components/container';
 
 import { defaultUrl } from '../../../../utils';
 import { getProducts } from '../../../pages/product/actions';
+import { productData } from '../../../pages/product/selector';
 
 function Sidebar({ rating, brand, pricing, page, limit, data, action }) {
+  const { products } = useSelector(productData);
+  const items = products?.data?.items;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,8 +26,12 @@ function Sidebar({ rating, brand, pricing, page, limit, data, action }) {
     <Page>
       <Limit />
       <StarsFilter rating={rating} />
-      <Pricing pricing={pricing} />
-      <Brand brand={brand} data={data} />
+      {items.length !== 0 && (
+        <>
+          <Pricing pricing={pricing} />
+          <Brand brand={brand} data={data} />
+        </>
+      )}
     </Page>
   );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -16,15 +16,13 @@ function TokenPane({ setOpen }) {
     handleSubmit,
     control,
     formState: { errors, isValid, isSubmitting },
-    getValues,
   } = useForm({
     mode: 'onBlur',
   });
 
   const { result, error } = useSelector((state) => state?.forgotPassword);
 
-  const onSubmit = () =>
-    dispatch(forgotPasswordToken({ email: getValues().user }));
+  const onSubmit = ({ email }) => dispatch(forgotPasswordToken({ email }));
 
   return (
     <div className={tokenPane}>
@@ -33,7 +31,7 @@ function TokenPane({ setOpen }) {
       </span>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Controller
-          name="user"
+          name="email"
           control={control}
           rules={utils.emailFormPattern}
           render={({ field: { ref, ...field } }) => (
@@ -41,22 +39,19 @@ function TokenPane({ setOpen }) {
               {...field}
               label=""
               type="email"
-              name="user"
-              aria-invalid={!!errors?.user}
+              name="email"
+              aria-invalid={!!errors?.email}
               className={styles.inputField}
               labelClassName={styles.label}
-              style={utils.setErrorStyle(errors?.user)}
-              errorMessage={errors?.user ? errors?.user.message : ''}
+              style={utils.setErrorStyle(errors?.email)}
+              errorMessage={errors?.email ? errors?.email.message : ''}
               placeholder="your-email@somewhere.com"
               isContrast
             />
           )}
         />
 
-        <button
-          type="submit"
-          className={styles.signinBtn}
-          disabled={!isValid}>
+        <button type="submit" className={styles.signinBtn} disabled={!isValid}>
           {isSubmitting ? 'Reseting Password...' : 'Reset Password'}
         </button>
       </form>

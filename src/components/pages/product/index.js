@@ -4,11 +4,11 @@ import { getProducts } from './actions';
 
 import Pagination from '../../components/product_display/pagination';
 import SideBar from '../../components/product_display/sidebar';
+import Page from '../../../components/components/container';
 import Row from '../../components/product_display/row';
 import SwitchLayout from '../../components/switch';
 import Footer from '../../components/footer';
 import PageLoader from '../../ui/loader';
-import Page from '../../../components/components/container';
 
 import { searchSelector } from '../../components/product_display/pagination/selectors';
 import { getDefaultUrl } from '../../components/product_display/pagination/actions';
