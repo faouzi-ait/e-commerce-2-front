@@ -33,7 +33,7 @@ function Cart() {
       <>
         <div className={localStyles.cartHeader}>
           <h1>{basketTitle}</h1>
-          <h1>{priceTitle}</h1>
+          {/* <h1>{priceTitle}</h1> */}
         </div>
         <hr />
       </>
@@ -72,17 +72,7 @@ function Cart() {
               data={item.description}
               style={localStyles.productTitle}
             />
-            <DisplayProductInfo
-              label="$"
-              data={item.price}
-              style={`${localStyles.productTitle}`}
-            />
           </div>
-          <DisplayProductInfo
-            label="Name:"
-            data={item.name}
-            style={localStyles.productData}
-          />
           <DisplayProductInfo
             label="Category:"
             data={item.category.name}
@@ -113,7 +103,7 @@ function Cart() {
           <DisplayProductInfo
             label="Total:"
             data={item.total}
-            style={localStyles.productData}
+            style={localStyles.productTotal}
           />
         </div>
       </div>

@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import * as cartStyles from '../components/pages/cart/styles.module.scss';
 import * as cmpStyles from '../components/pages/login/styles.module.scss';
 import { t } from '../i18n/translate';

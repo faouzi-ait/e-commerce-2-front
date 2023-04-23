@@ -156,14 +156,45 @@
 }
 
 .signinBtn {
-    width: 210px;
+    width: 140px;
     padding: 1rem;
-    font-size: 1.35rem !important;
-    letter-spacing: .4px;
+    font-size: 1.25rem !important;
+    font-family: 'Be Vietnam Pro', sans-serif;
     background: rgb(247, 194, 68);
     border: 0;
     border-radius: 5px;
     cursor: pointer;
+    transition: all 300ms linear;
+    
+    &:hover {
+        background: rgba(238, 167, 0, 0.76);
+    }
+}
+
+.tabBtn {
+    width: 125px;
+    margin-top: 10px;
+    padding: 1.2rem 1rem;
+    font-size: 1.1rem;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    cursor: pointer;
+    border: 0;
+    transition: all 300ms linear;
+    background: #FFF;
+    
+    &:hover {
+        background: rgba(238, 167, 0, 0.76);
+    }
+}
+.tabBtnSelected {
+    width: 125px;
+    margin-top: 10px;
+    padding: 1.2rem 1rem;
+    font-size: 1.1rem;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    background: rgb(247, 194, 68);
+    cursor: pointer;
+    border: 0;
     transition: all 300ms linear;
     
     &:hover {
@@ -181,7 +212,6 @@
 }
 
 .checkoutmessage {
-    margin-top: 1rem;
     margin-left: .2rem;
     font-weight: bold;
     font-size: 1.2rem;

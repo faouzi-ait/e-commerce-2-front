@@ -26,7 +26,7 @@
 
 .cartQuantityContainer { 
     display: flex; 
-    align-items: center 
+    align-items: center;
 }
 
 .pricingSection {
@@ -71,17 +71,25 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 150px;
 }
 
 .productTitle {
-    font-size: 2rem;
+    // margin-bottom: .75rem;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 1.75rem;
     font-weight: bold;
-    margin-bottom: .75rem;
 }
 
 .productData {
-    font-size: 1.50rem;
-    margin-bottom: .5rem;
+    font-size: 1.5rem;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    // margin-bottom: .5rem;
+}
+.productTotal {
+    font-size: 1.5rem;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    margin-top: auto;
 }
 
 .titleSize {

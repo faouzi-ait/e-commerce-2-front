@@ -18,7 +18,7 @@ function ProductDisplay({ isRow, openModal, item, setProductId }) {
         }`}>
         <span>{item.brand}</span>
         <span>{item.description}</span>
-        <span>Model: {item.name}</span>
+        {/* <span>Model: {item.name}</span> */}
         <span>Price: ${item.price}</span>
         <span>Quantity Available: {item.quantity}</span>
         <div onClick={() => setProductId(item._id)}>
