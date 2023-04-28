@@ -6,6 +6,7 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 
 import PrivateRoutes from './components/route-access/PrivateRoutes';
 import PublicRoutes from './components/route-access/PublicRoutes';
+
 import Dashboard from './components/pages/dashboard';
 import Header from './components/components/header';
 import NotFound from './components/pages/not-found';
@@ -18,6 +19,7 @@ import Login from './components/pages/login';
 import Cart from './components/pages/cart';
 import Home from './components/pages/home';
 import Confirmation from './components/pages/confirmation';
+import CardConfirmation from './components/pages/confirmation-card';
 
 import { getCategories } from './components/components/header/actions';
 import { getHomePageProducts } from './components/pages/home/actions';
@@ -50,6 +52,7 @@ function App() {
           <Route exact path="/password-reset/:token" component={PasswordReset} />
           <PrivateRoutes exact path="/payment" component={Payment} />
           <PrivateRoutes exact path="/success" component={Confirmation} />
+          <PrivateRoutes exact path="/success-card" component={CardConfirmation} />
           <PublicRoutes exact path="/login" component={Login} />
           <PublicRoutes exact path="/register" component={Register} />
           <Route exact path="/category/:category" component={Product} />

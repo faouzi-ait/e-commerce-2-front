@@ -69,3 +69,74 @@ h2, h3 {
     margin: .7rem 0 !important;
     color: #909090
 }
+
+/* STRIPE SPECIFIC STILYNG */
+.stripe-card {
+    width: 22%;
+    margin-bottom: 1rem;
+}
+
+.card-element-expiry {
+   width: 6rem;
+
+   span {
+    margin-left: 1rem !important;
+   }
+}
+
+.card-element-cvv {
+    width: 3rem;
+    margin-left: 2.2rem;
+}
+
+.card-label {
+    display: inline-block;
+    margin-left: 1.4rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.card-expiry {
+    display: inline-block;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.submit-btn {
+    margin-top: 1rem;
+}
+
+.StripeElement {
+  background-color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+  box-shadow: .5px 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+/* STRIPE SPECIFIC STILYNG */
+
+.stripe-card span {
+    font-weight: bold;
+    font-size: 1.35rem;
+    font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.error-messge {
+    color: red;
+    font-weight: 500;
+    font-family: 'Be Vietnam Pro', sans-serif;
+}

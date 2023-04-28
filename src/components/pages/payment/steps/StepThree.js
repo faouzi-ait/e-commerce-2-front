@@ -97,7 +97,9 @@ function StepThree({ step, billing, basket, delivery }) {
             </button>
           </>
         )}
-        {confirmation && paymentStep === 1 && <CreditCard />}
+        {confirmation && paymentStep === 1 && (
+          <CreditCard basket={basket} delivery={delivery} billing={billing} />
+        )}
         {confirmation && paymentStep === 2 && <Checkout basket={basket} />}
       </div>
     </div>

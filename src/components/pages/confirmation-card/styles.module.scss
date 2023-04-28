@@ -1,0 +1,35 @@
+.confirmationPageLayout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60vw;
+    min-height: 60vh;
+    border-radius: 5px;
+    margin-left: 20%;
+    margin-bottom: 8%;
+}
+
+.confirmationPageContent {
+    display: flex;
+    align-items: center;
+    margin-top: 5%;
+}
+
+.cartContentDisplay {
+    display: flex;
+    align-self: flex-start;
+    margin-left: 25%;
+    margin-bottom: 10px;
+}
+
+.purchaseTitle {
+    font-size: 2rem;
+}
+
+.cartWidth {
+    width: 58%;
+}
+
+.totalPaid {
+    font-weight: bold;
+}
