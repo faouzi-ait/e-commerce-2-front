@@ -39,7 +39,7 @@ function CardPaymentConfirmation({ history }) {
     if (!sessionId || !transactionId) {
       window.location.href = process.env.REACT_APP_FRONT_END;
     }
-    // return () => resetCheckoutData();
+    return () => resetCheckoutData();
   }, [dispatch, transactionId, resetCheckoutData]);
 
   return (

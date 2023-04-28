@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -20,7 +20,7 @@ import { saveTransactionId } from '../../actions';
 // const API_LOCAL = process.env.REACT_APP_URL_DEV;
 const API_PROD = process.env.REACT_APP_URL_PROD;
 
-function CreditCard({ basket, /*billing,*/ delivery }) {
+function CreditCard({ basket, billing, delivery }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const element = useElements();
@@ -28,15 +28,13 @@ function CreditCard({ basket, /*billing,*/ delivery }) {
 
   const [error, setError] = useState(false);
   const [processing, setProcessing] = useState(false);
-  const [clientSecretId, setClientSecretId] = useState('');
 
   const token = useSelector((state) => state?.tokens?.tokens?.token);
   const { email } = jwt(token);
 
   const getClientSecret = async () => {
-    const purchasedItems = basket?.cart?.map((item) => ({
+    const cartItems = basket?.cart?.map((item) => ({
       id: item._id,
-      photo: item.photo,
       price: item.price,
       quantity: item.quantity,
       total: item.price * item.quantity,
@@ -52,23 +50,28 @@ function CreditCard({ basket, /*billing,*/ delivery }) {
       },
     };
 
+    const billingDetails = {
+      name: `${billing.firstName} ${billing.lastName}`,
+      address: {
+        line1: billing.billingAddress,
+        city: billing.billingStates,
+        postal_code: billing.billingPostcode,
+        country: billing.billingCountry.label,
+      },
+    };
+
     const { data: clientSecret } = await axios.post(
       `${API_PROD}/payment-card`,
       {
-        cartItems: purchasedItems,
-        description: 'Payment intent',
-        receipt_email: email,
+        cartItems,
         shipping,
+        billingDetails,
+        receipt_email: email,
       }
     );
 
-    setClientSecretId(clientSecret);
+    return clientSecret;
   };
-
-  useEffect(() => {
-    getClientSecret();
-    // eslint-disable-next-line
-  }, []);
 
   const handleCardChange = (e) => {
     const { error } = e;
@@ -78,14 +81,14 @@ function CreditCard({ basket, /*billing,*/ delivery }) {
   const handlePayment = async () => {
     setProcessing(true);
 
-    const payload = await stripe.confirmCardPayment(
-      clientSecretId.clientSecret,
-      {
-        payment_method: {
-          card: element.getElement(CardNumberElement),
-        },
-      }
-    );
+    const { clientSecret } = await getClientSecret();
+    // eslint-disable-next-line
+
+    const payload = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: element.getElement(CardNumberElement),
+      },
+    });
 
     if (payload.error) setError(`Payment Failed: ${payload.error.message}`);
 
@@ -117,7 +120,7 @@ function CreditCard({ basket, /*billing,*/ delivery }) {
           />
         </div>
 
-        <div className="">
+        <div>
           <CardCvcElement
             className="card-element-cvv"
             onChange={handleCardChange}
