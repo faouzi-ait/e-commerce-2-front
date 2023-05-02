@@ -14,8 +14,8 @@ const renewTokens = async (token) => {
 };
 
 const axiosInstance = axios.create({
-  // baseURL: process.env.REACT_APP_URL_DEV,
-  baseURL: process.env.REACT_APP_URL_PROD,
+  baseURL: process.env.REACT_APP_URL_DEV,
+  // baseURL: process.env.REACT_APP_URL_PROD,
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
@@ -72,6 +72,23 @@ export async function resendActivationTokenCall({ payload }) {
     return await apiClient.post('/user/resend', payload);
   } catch (error) {
     return { error };
+  }
+}
+
+export async function fetchUserDetails({ payload }) {
+  try {
+    return await apiClient.get(`/user/${payload}`);
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function fetchUserOrders({ payload }) {
+  console.log('ORDER LISTING ID: ', payload);
+  try {
+    return await apiClient.get(`/order/customer/${payload}`);
+  } catch (error) {
+    return error;
   }
 }
 

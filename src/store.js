@@ -15,6 +15,7 @@ import { home_page_products } from './components/pages/home/reducers';
 import { theme } from './components/components/toggles/reducers';
 import { relatedProducts } from './components/ui/modal/reducer';
 import { register } from './components/pages/register/reducers';
+import { user } from './components/pages/dashboard/reducers';
 import { products } from './components/pages/product/reducers';
 import { billing } from './components/pages/payment/reducers';
 import { forgotPassword } from './components/components/password-reset/reducers';
@@ -33,6 +34,7 @@ const combinedReducers = (history) =>
     language,
     theme,
     login,
+    user,
     tokens,
     register,
     tokenRequest,

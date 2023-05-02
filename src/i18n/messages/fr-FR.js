@@ -4,6 +4,7 @@ export default {
   [LOCALES.FRENCH]: {
     greeting: 'bonjour',
     home: 'page principal',
+    login: 'Quel est votre nom d\' utilisateur',
     username: 'Votre Nom',
     surname: 'Nom de Famille',
     age: 'Date de Naissance (optionel)',

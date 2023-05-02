@@ -21,9 +21,9 @@ import { saveTransactionId } from '../../actions';
 const API_PROD = process.env.REACT_APP_URL_PROD;
 
 function CreditCard({ basket, billing, delivery }) {
-  const history = useHistory();
   const dispatch = useDispatch();
   const element = useElements();
+  const history = useHistory();
   const stripe = useStripe();
 
   const [error, setError] = useState(false);

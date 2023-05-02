@@ -32,6 +32,8 @@ const Checkout = ({ basket }) => {
     defaultValues: { email: customer_email },
   });
 
+  console.log(customer_email);
+
   const handleCheckoutSubmit = async () => {
     const transactionId = uuid();
 

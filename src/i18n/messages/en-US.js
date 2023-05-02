@@ -4,6 +4,7 @@ export default {
   [LOCALES.ENGLISH]: {
     greeting: 'hello',
     home: 'home page',
+    login: 'What is your username',
     username: 'What is your Firstname',
     surname: 'What is your Lastname',
     age: 'Date of Birth (optional)?',

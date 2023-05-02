@@ -62,7 +62,7 @@ function Login() {
             render={({ field: { ref, ...field } }) => (
               <Input
                 {...field}
-                label={t('username')}
+                label={t('login')}
                 type="email"
                 name="email"
                 aria-invalid={!!formState.errors?.email}
