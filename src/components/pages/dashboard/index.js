@@ -40,12 +40,12 @@ function Dashboard() {
     },
     {
       id: '2',
-      label: <span>{`ORDER HISTORY (${orders.length})`}</span>,
+      label: <span>{`ORDER HISTORY (${orders?.length})`}</span>,
       step: 'orders',
     },
     {
       id: '3',
-      label: <span>{`WISHLIST (${favorites.length})`}</span>,
+      label: <span>{`WISHLIST (${favorites?.length})`}</span>,
       step: 'wish',
     },
   ];
