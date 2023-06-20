@@ -2,6 +2,7 @@ import * as cons from './constants';
 
 const basketState = {
   cart: [],
+  favorites: [],
 };
 
 export const basket = (state = basketState, action) => {
@@ -54,8 +55,20 @@ export const basket = (state = basketState, action) => {
 
       return { ...state, cart: basket };
     }
+    case cons.ADD_TO_FAVORITES: {
+      const newList = [...state.favorites, action.payload];
+      return { ...state, favorites: newList };
+    }
+    case cons.REMOVE_TO_FAVORITES: {
+      let list = [...state.favorites];
+      list = list.filter(
+        (item) => item._id !== action.payload
+      );
+
+      return { ...state, favorites: list };
+    }
     case cons.EMPTY_BASKET: {
-      return {...state, cart: []}
+      return { ...state, cart: [] };
     }
     default:
       return state;

@@ -2,11 +2,16 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import SelectWrapper from '../../../../ui/select';
 import { getLimit, getPage } from '../../pagination/actions';
-import { limitSelectOptions, limitSelectStyles } from '../../../../../utils';
+import {
+  limitSelectOptions,
+  limitSelectStyles,
+} from '../../../../../utils';
 import { starLayout, starTitle } from '../styles.module.scss';
 
 function Limit() {
   const dispatch = useDispatch();
+
+
 
   return (
     <div className={starLayout}>

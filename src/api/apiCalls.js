@@ -30,13 +30,13 @@ axiosInstance.interceptors.request.use(
     let date = new Date();
 
     if (auth.token) {
-      req.headers['Authorization'] = `Bearer ${auth.token}`;
-
       if (jwt(auth.token).exp < date.getTime() / 1000) {
         const { token, refreshToken } = await renewTokens(auth.refreshToken);
-        store.dispatch(actions.setTokens({ token, refreshToken }));
 
+        store.dispatch(actions.setTokens({ token, refreshToken }));
         req.headers['Authorization'] = `Bearer ${token}`;
+      } else {
+        req.headers['Authorization'] = `Bearer ${auth.token}`;
       }
     }
     return req;
@@ -72,6 +72,22 @@ export async function resendActivationTokenCall({ payload }) {
     return await apiClient.post('/user/resend', payload);
   } catch (error) {
     return { error };
+  }
+}
+
+export async function fetchUserDetails({ payload }) {
+  try {
+    return await apiClient.get(`/user/${payload}`);
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function fetchUserOrders({ payload }) {
+  try {
+    return await apiClient.get(`/order/customer/${payload}`);
+  } catch (error) {
+    return error;
   }
 }
 

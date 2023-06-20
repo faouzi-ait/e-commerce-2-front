@@ -52,44 +52,32 @@ const ProductModal = ({
 
   const DisplayButtons = ({ inCart }) => {
     return (
-      <div>
-        {!inCart ? (
-          <Button
-            label="Add to cart"
-            onClick={() => dispatch(addItem(items))}
-            className={cmpStyle.buyBtn}
-          />
-        ) : (
-          <Button
-            label="+ 1 More"
-            onClick={() => dispatch(addOne(items._id))}
-            className={cmpStyle.buyBtn}
-          />
-        )}
-      </div>
+      <Button
+        label={!inCart ? 'Add to cart' : '+ 1 More'}
+        onClick={() =>
+          !inCart ? dispatch(addItem(items)) : dispatch(addOne(items._id))
+        }
+        className={cmpStyle.buyBtn}
+      />
     );
   };
 
-  const Label = ({ label, className }) => {
-    return <span className={className}>{label}</span>;
-  };
+  const Label = ({ label, className }) => (
+    <span className={className}>{label}</span>
+  );
 
   const DisplayLabel = ({ stock }) => {
-    return (
-      <div>
-        {stock > 0 ? (
-          <Label
-            label="Item available in stock"
-            className={`${cmpStyle.productAvailability}`}
-          />
-        ) : (
-          <Label
-            label="This item is currently out of stock"
-            className={`${cmpStyle.productAvailability} ${cmpStyle.productNotAvailable}`}
-          />
-        )}
-      </div>
-    );
+    const label =
+      stock > 0
+        ? 'Item available in stock'
+        : 'This item is currently out of stock';
+
+    const styling =
+      stock > 0
+        ? `${cmpStyle.productAvailability}`
+        : `${cmpStyle.productAvailability} ${cmpStyle.productNotAvailable}`;
+
+    return <Label label={label} className={styling} />;
   };
 
   useEffect(() => {
@@ -180,6 +168,6 @@ const ProductModal = ({
       </div>
     </Modal>
   );
-}
+};
 
 export default ProductModal;
