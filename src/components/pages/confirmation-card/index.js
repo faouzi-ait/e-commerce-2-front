@@ -2,19 +2,18 @@ import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import jwt from 'jwt-decode';
 
-import Page from '../../components/container';
-import Footer from '../../components/footer';
-import CartDisplay from '../confirmation/CartDisplay';
 import Button from '../../ui/button';
+import Footer from '../../components/footer';
+import Page from '../../components/container';
+import CartDisplay from '../confirmation/CartDisplay';
 
-import { basketSelector } from '../../components/header/selectors';
 import { trxBilling } from './selector';
+import * as action from '../payment/actions';
+import { basketSelector } from '../../components/header/selectors';
 import { emptyBasket } from '../../components/product_display/row/actions';
 
-import { t } from '../../../i18n/translate';
-
-import * as action from '../payment/actions';
 import * as utils from '../../../utils';
+import { t } from '../../../i18n/translate';
 
 import * as styles from './styles.module.scss';
 

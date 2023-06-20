@@ -14,8 +14,8 @@ const renewTokens = async (token) => {
 };
 
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_URL_DEV,
-  // baseURL: process.env.REACT_APP_URL_PROD,
+  // baseURL: process.env.REACT_APP_URL_DEV,
+  baseURL: process.env.REACT_APP_URL_PROD,
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
@@ -30,13 +30,13 @@ axiosInstance.interceptors.request.use(
     let date = new Date();
 
     if (auth.token) {
-      req.headers['Authorization'] = `Bearer ${auth.token}`;
-
       if (jwt(auth.token).exp < date.getTime() / 1000) {
         const { token, refreshToken } = await renewTokens(auth.refreshToken);
-        store.dispatch(actions.setTokens({ token, refreshToken }));
 
+        store.dispatch(actions.setTokens({ token, refreshToken }));
         req.headers['Authorization'] = `Bearer ${token}`;
+      } else {
+        req.headers['Authorization'] = `Bearer ${auth.token}`;
       }
     }
     return req;
@@ -84,7 +84,6 @@ export async function fetchUserDetails({ payload }) {
 }
 
 export async function fetchUserOrders({ payload }) {
-  console.log('ORDER LISTING ID: ', payload);
   try {
     return await apiClient.get(`/order/customer/${payload}`);
   } catch (error) {

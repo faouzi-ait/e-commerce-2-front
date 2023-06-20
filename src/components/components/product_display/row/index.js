@@ -8,7 +8,13 @@ import { selectedTheme } from '../../../components/toggles/selectors';
 
 import * as styles from './styles.module.scss';
 
-function Row({ products, isRow, isProduct = false, isSearch = false }) {
+function Row({
+  products,
+  isRow = true,
+  isProduct = false,
+  isSearch = false,
+  showDetails = false,
+}) {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [productId, setProductId] = React.useState(null);
   const { isDark } = useSelector(selectedTheme);
@@ -22,7 +28,6 @@ function Row({ products, isRow, isProduct = false, isSearch = false }) {
       className={`baseTheme ${isDark ? THEMES.DARK : THEMES.LIGHT} ${
         styles.marginLeft
       }`}>
-      <div className={styles.container}></div>
       {item.items.length !== 0 ? (
         <div className={`${isRow ? styles.gridContainer : ''}`}>
           {(item?.items || []).map((item) => (
@@ -32,6 +37,7 @@ function Row({ products, isRow, isProduct = false, isSearch = false }) {
               item={item}
               openModal={openModal}
               setProductId={setProductId}
+              showDetails={showDetails}
             />
           ))}
         </div>

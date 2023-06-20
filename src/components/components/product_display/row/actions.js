@@ -16,6 +16,14 @@ export const removeItem = (payload) => {
   return { type: cons.REMOVE_ITEM, payload };
 };
 
+export const addToFavorites = (payload) => {
+  return { type: cons.ADD_TO_FAVORITES, payload };
+};
+
+export const removeFromFavorites = (payload) => {
+  return { type: cons.REMOVE_TO_FAVORITES, payload };
+};
+
 export const emptyBasket = () => {
   return { type: cons.EMPTY_BASKET };
 };

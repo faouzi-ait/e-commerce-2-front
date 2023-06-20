@@ -51,7 +51,12 @@ function Submenu() {
               {loading ? (
                 <PageLoader />
               ) : (
-                <Row products={products} isRow={isRow} isProduct={true} />
+                <Row
+                  products={products}
+                  isRow={isRow}
+                  isProduct={true}
+                  showDetails={true}
+                />
               )}
               {!loading && (
                 <Pagination
