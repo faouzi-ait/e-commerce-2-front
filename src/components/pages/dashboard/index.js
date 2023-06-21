@@ -27,9 +27,6 @@ function Dashboard() {
   const order = useSelector((state) => state?.user?.user?.orders);
   const profile = useSelector((state) => state?.tokens?.tokens?.token);
 
-  const { orders } = order;
-  const { favorites } = favorite;
-
   useEffect(() => {
     const { id } = jwt(profile);
     dispatch(getUserDetails(id));
@@ -43,20 +40,20 @@ function Dashboard() {
     },
     {
       id: '2',
-      label: <span>{`ORDER HISTORY (${orders?.length})`}</span>,
+      label: <span>{`ORDER HISTORY (${order?.orders?.length})`}</span>,
       step: 'orders',
     },
     {
       id: '3',
-      label: <span>{`WISHLIST (${favorites?.length})`}</span>,
+      label: <span>{`WISHLIST (${favorite?.favorites?.length})`}</span>,
       step: 'wish',
     },
   ];
 
   const displaySection = {
     info: <Informations />,
-    orders: <History orders={orders} />,
-    wish: <Wishlist favorites={favorites} />,
+    orders: <History orders={order?.orders} />,
+    wish: <Wishlist favorites={favorite?.favorites} />,
   };
 
   return (
