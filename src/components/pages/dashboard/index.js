@@ -23,9 +23,12 @@ function Dashboard() {
   const dispatch = useDispatch();
   const [menu, setMenu] = useState('wish');
 
-  const { favorites } = useSelector((state) => state?.basket);
-  const { orders } = useSelector((state) => state?.user?.user?.orders);
+  const favorite = useSelector((state) => state?.basket);
+  const order = useSelector((state) => state?.user?.user?.orders);
   const profile = useSelector((state) => state?.tokens?.tokens?.token);
+
+  const { orders } = order;
+  const { favorites } = favorite;
 
   useEffect(() => {
     const { id } = jwt(profile);
