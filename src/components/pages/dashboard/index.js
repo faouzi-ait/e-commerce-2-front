@@ -4,7 +4,7 @@ import jwt from 'jwt-decode';
 
 import Page from '../../../components/components/container';
 import Footer from '../../components/footer';
-import Informations from './menu/Informations';
+import Informations from './menu/informations/Informations';
 import History from './menu/History';
 import Wishlist from './menu/Wishlist';
 
@@ -21,14 +21,16 @@ import {
 
 function Dashboard() {
   const dispatch = useDispatch();
-  const [menu, setMenu] = useState('wish');
+  const [menu, setMenu] = useState('info');
 
   const favorite = useSelector((state) => state?.basket);
   const order = useSelector((state) => state?.user?.user?.orders);
+  const details = useSelector((state) => state?.user?.user?.details);
   const profile = useSelector((state) => state?.tokens?.tokens?.token);
 
+  const { id } = jwt(profile);
+
   useEffect(() => {
-    const { id } = jwt(profile);
     dispatch(getUserDetails(id));
   }, [dispatch, profile]);
 
@@ -51,7 +53,7 @@ function Dashboard() {
   ];
 
   const displaySection = {
-    info: <Informations />,
+    info: <Informations details={details} userId={id} />,
     orders: <History orders={order?.orders} />,
     wish: <Wishlist favorites={favorite?.favorites} />,
   };
@@ -61,8 +63,10 @@ function Dashboard() {
       <section className={dashboard}>
         <aside className={asideSection}>
           <ul className={asideItems}>
-            {sideMenuList.map((item) => (
-              <li onClick={() => setMenu(item.step)}>{item.label}</li>
+            {sideMenuList.map((item, i) => (
+              <li key={i} onClick={() => setMenu(item.step)}>
+                {item.label}
+              </li>
             ))}
           </ul>
         </aside>

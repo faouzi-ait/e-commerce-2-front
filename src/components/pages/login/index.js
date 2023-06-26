@@ -8,11 +8,11 @@ import Page from '../../../components/components/container';
 
 import TokenPane from '../../components/resend_token';
 import PasswordReset from '../../components/password-reset';
-import { t } from '../../../i18n/translate';
 import Input from '../../ui/input';
 
 import * as utils from '../../../utils';
 
+import { t } from '../../../i18n/translate';
 import { login, fromPaymentLink, resetError } from './actions';
 import { loginStatus } from './selector';
 
