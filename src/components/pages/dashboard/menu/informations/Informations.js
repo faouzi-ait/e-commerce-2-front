@@ -6,11 +6,11 @@ import Password from './user-details/password';
 
 function Informations({ details, userId }) {
   return (
-    <div style={{ padding: '1rem 3rem' }}>
+    <main>
       {/* <Profile /> */}
       <Info details={details} userId={userId} />
-      <Password />
-    </div>
+      <Password userId={userId} />
+    </main>
   );
 }
 

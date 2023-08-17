@@ -12,21 +12,23 @@
     align-items: center;
     font-family: 'Be Vietnam Pro', sans-serif;
 
-    div {
+    p {
         flex-grow: 1;
+        margin: 0;
+        padding: 0;
     }
 
-    div:nth-child(2) {
+    p:nth-child(2) {
         margin: 1rem 0 0 0;
         font-size: 1.6rem;
         font-weight: bold;
     }
 
-    div:nth-child(3) {
+    p:nth-child(3) {
         font-size: 1.5rem;
     }
 
-    div:nth-child(4) {
+    p:nth-child(4) {
         display: flex;
         margin-top: .5rem;
         font-size: 1.5rem;
@@ -45,12 +47,12 @@
     background: #fff;
     box-shadow: rgba(149, 157, 165, 0.2) 1px 8px 24px;
     background: var(--theme-page-background);
+    z-index: 999;
 
     &:not(:last-of-type) {
         margin-right: 3rem;
     }
 
-    z-index: 99999
 }
 
 .productBoxTitle {

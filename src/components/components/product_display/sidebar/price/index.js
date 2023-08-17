@@ -10,20 +10,22 @@ function Price({ pricing }) {
   const pricingFormat = pricing?.split('=')[1];
 
   return (
-    <div className={`${cmpStyle.starLayout} ${cmpStyle.priceBottomMargin}`}>
-      <span className={`${cmpStyle.starTitle} ${cmpStyle.titleBottomMargin}`}>
+    <section className={`${cmpStyle.starLayout} ${cmpStyle.priceBottomMargin}`}>
+      <h4
+        tabIndex={0}
+        aria-label="Price Limit"
+        className={`${cmpStyle.starTitle} ${cmpStyle.titleBottomMargin}`}>
         Price Limit
-      </span>
-      {prices.map((item) => (
-        <li key={item} className="price-list-style">
-          <label>
-            <input
-              type="radio"
-              name="price"
-              value={item}
-              id={`custom-radio-${item}`}
-              className="brand-visibility-margin brand-visibility"
-              onChange={() => {
+      </h4>
+
+      <ul style={{ margin: 0, padding: 0, marginLeft: '-22px' }}>
+        {prices.map((item) => (
+          <li key={item} className="price-list-style">
+            
+            <button
+              type="button"
+              style={{ border: 0, background: 'none' }}
+              onClick={() => {
                 if (item === 400) {
                   dispatch(getPage(1));
                   dispatch(getPrice(`&price[gte]=${item}`));
@@ -31,24 +33,33 @@ function Price({ pricing }) {
                   dispatch(getPage(1));
                   dispatch(getPrice(`&price[lte]=${item}`));
                 }
-              }}
-            />
-            <i className="fa fa-chevron-right brand-visibility-margin"></i>
-            <span
-              className={`${cmpStyle.brandLabel} ${
-                parseInt(pricingFormat) === item && cmpStyle.priceLimitColor
-              }`}>
-              {item}$
-            </span>
-          </label>
-        </li>
-      ))}
+              }}>
+              <p
+                aria-label={`price filter ${
+                  item === 400 ? 'above' : 'below'
+                } ${item} dollars`}
+                className={`${cmpStyle.priceLabel} ${
+                  parseInt(pricingFormat) === item && cmpStyle.priceLimitColor
+                }`}>
+                <i className="fa fa-chevron-right brand-visibility-margin"></i>
+                {item}$
+              </p>
+            </button>
+
+          </li>
+        ))}
+      </ul>
+
       {pricing !== '' && (
-        <div onClick={() => dispatch(getPrice(''))} className={cmpStyle.clear}>
+        <button
+          type="button"
+          className={cmpStyle.clear}
+          aria-label="Clear price filter"
+          onClick={() => dispatch(getPrice(''))}>
           <i className="fa fa-chevron-left"></i> Clear Filter
-        </div>
+        </button>
       )}
-    </div>
+    </section>
   );
 }
 

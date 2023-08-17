@@ -6,32 +6,47 @@ function Price({ searchPrice, setSearchPrice, setSearchPage }) {
   const prices = [100, 200, 300, 400];
 
   return (
-    <div
+    <section
       className={`${cmpStyle.starLayout} ${cmpStyle.priceBottomMargin} ${localCmpStyle.marginTop}`}>
-      <span className={`${cmpStyle.starTitle} ${cmpStyle.titleBottomMargin}`}>
+      <h4
+        tabIndex={0}
+        aria-label="Price Limit"
+        className={`${cmpStyle.starTitle} ${cmpStyle.titleBottomMargin}`}>
         Price Limit
-      </span>
-      {prices.map((item) => (
-        <li key={item}>
-          <label
-            className={`${cmpStyle.brandLabel} ${
-              searchPrice === item && cmpStyle.priceLimitColor
-            }`}
-            onClick={() => {
-              setSearchPage(1);
-              setSearchPrice(item);
-            }}>
-            <i className="fa fa-chevron-right brand-visibility-margin"></i>$
-            {item}
-          </label>
-        </li>
-      ))}
+      </h4>
+
+      <ul style={{ margin: 0, padding: 0, marginLeft: '-22px' }}>
+        {prices.map((item) => (
+          <li key={item} className="price-list-style">
+            <button
+              type="button"
+              style={{ border: 0, background: 'none' }}
+              onClick={() => {
+                setSearchPage(1);
+                setSearchPrice(item);
+              }}>
+              <p
+                className={`${cmpStyle.brandLabel} ${
+                  searchPrice === item && cmpStyle.priceLimitColor
+                }`}>
+                <i className="fa fa-chevron-right brand-visibility-margin"></i>$
+                {item}
+              </p>
+            </button>
+          </li>
+        ))}
+      </ul>
+
       {searchPrice !== null && (
-        <div onClick={() => setSearchPrice(null)} className={cmpStyle.clear}>
+        <button
+          type="button"
+          className={cmpStyle.clear}
+          aria-label="Clear price filter"
+          onClick={() => setSearchPrice(null)}>
           <i className="fa fa-chevron-left"></i> Clear Filter
-        </div>
+        </button>
       )}
-    </div>
+    </section>
   );
 }
 

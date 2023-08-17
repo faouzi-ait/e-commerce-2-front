@@ -6,9 +6,15 @@
 }
 
 .starStyling {
-    list-style: none;
+    display: flex;
+    flex-direction: column;
     margin: 0;
     padding: 0;
+}
+
+.starsStyles {
+    background: none;
+    border: 0;
 }
 
 .starTitle {
@@ -36,16 +42,21 @@
 }
 
 .clear {
-    width: 75%;
     font-size: 1.25rem;
     margin-top: .5rem;
-    margin-left: 2.75rem;
     text-align: center;
+    background: none;
+    border: 0;
     cursor: pointer;
 
     &:hover {
         color: rgb(255, 98, 98);
     }
+}
+
+.clearLink:hover {
+    color: rgb(255, 98, 98);
+    cursor: pointer;
 }
 
 .clearMargin {
@@ -56,13 +67,19 @@
     display: flex;
 }
 
-.brandLabel {
-    cursor: pointer;
+.priceLabel, .brandLabel {
+    all: unset;
     margin-bottom: .28rem;
+    cursor: pointer;
     
     &:hover {
         color: rgb(255, 98, 98);
     }
+}
+
+.brandLabel {
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 .brandList {

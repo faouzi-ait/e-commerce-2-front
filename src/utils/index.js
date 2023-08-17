@@ -130,6 +130,87 @@ export const limitSelectOptions = [
   { value: 20, label: '20' },
 ];
 
+export const middlefooterData = [
+  {
+    label: 'col1',
+    children: [
+      'Get to Know Us',
+      'Career',
+      'About Us',
+      'UK Fairness Statement',
+      'Sustainability',
+    ],
+  },
+  {
+    label: 'col2',
+    children: [
+      'Make Money with Us',
+      'Sell on Amazon',
+      'Sell on Amazon Business',
+      'Sell on Amazon Handmade',
+      'Associate Programme',
+      'Fulfilment by Amazon',
+      'Seller Fulfilled Prime',
+      'Amazon Pay',
+    ],
+  },
+  {
+    label: 'col3',
+    children: [
+      'Amazon Payment Methods',
+      'Amazon Platinum Mastercard',
+      'Amazon Classic Mastercard',
+      'Amazon Money Store',
+      'Gift Cards',
+      'Amazon Currency Converter',
+      'Payment Methods Help',
+      'Shop with Points',
+      'Top Up Your Account',
+      'Top Up Your Account in Store',
+    ],
+  },
+  {
+    label: 'col4',
+    children: [
+      'Let Us Help You',
+      'COVID-19 and Amazon',
+      'Track Packages or View Orders',
+      'Delivery Rates & Policies',
+      'Amazon Prime',
+      'Returns & Replacements',
+      'Recycling',
+      'Manage Your Content and Devices',
+    ],
+  },
+];
+
+export const bottomCountryFooter = [
+  'Australia',
+  'Brazil',
+  'Canada',
+  'China',
+  'France',
+  'Germany',
+  'India',
+  'Italy',
+  'Japan',
+  'Mexico',
+  'Netherlands',
+  'Poland',
+  'Singapore',
+  'Spain',
+  'Turkey',
+  'United Arab Emirates',
+];
+
+export const termsConditions = [
+  'Conditions of Use & Sale',
+  'Privacy Notice',
+  'Cookies Notice',
+  'Interest-Based Ads Notice',
+  '©1996-2021, Amazon.com, Inc. or its affiliates',
+];
+
 export const limitSelectStyles = {
   control: (base) => ({
     ...base,

@@ -1,13 +1,18 @@
 import React from 'react';
 import PropType from 'prop-types';
 
-const NavigationBtn = ({ pageNb, label, className, onClick }) => {
+const NavigationBtn = ({ pageNb, label, className, onClick, ...rest }) => {
   return (
     <>
       {pageNb ? (
-        <span onClick={onClick} className={className}>
+        <button
+          type="button"
+          onClick={onClick}
+          className={className}
+          tabIndex={0}
+          {...rest}>
           {label}
-        </span>
+        </button>
       ) : null}
     </>
   );

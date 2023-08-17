@@ -4,20 +4,25 @@ import * as cmpStyle from './styles.module.scss';
 const RenderProductDisplay = ({ item }) => {
   if (item?.length < 4) {
     return (
-      <div className={cmpStyle.productDetailContainer}>
-        <img
-          src={item[0]?.photo}
-          alt="product"
-          className={cmpStyle.productImage}
-        />
-        <div className={cmpStyle.homePageProducts}>{item[0]?.name}</div>
-        <div className={cmpStyle.homePageProducts}>{item[0]?.description}</div>
-        <div className={cmpStyle.homePageProducts}>{item[0]?.price}</div>
-      </div>
+      <>
+        <section className={cmpStyle.productDetailContainer}>
+          <img
+            src={item[0]?.photo}
+            alt="product"
+            className={cmpStyle.productImage}
+          />
+          <p tabIndex="0">{item[0]?.name}</p>
+          <p>{item[0]?.description}</p>
+          <p>{item[0]?.price}</p>
+        </section>
+        <a href="/#" className={cmpStyle.seeMoreLinkStyle}>
+          See more
+        </a>
+      </>
     );
   } else {
     return (
-      <div className={cmpStyle.productDetailGrid}>
+      <section className={cmpStyle.productDetailGrid}>
         {(item || []).map((item, index) => (
           <img
             src={item?.photo}
@@ -26,18 +31,22 @@ const RenderProductDisplay = ({ item }) => {
             key={index}
           />
         ))}
-        <div className={cmpStyle.seeMoreLinkStyle}>See more</div>
-      </div>
+        <a href="/#" className={cmpStyle.seeMoreLinkStyle}>
+          See more
+        </a>
+      </section>
     );
   }
 };
 
-function ProductDisplay({ title, item }) {
+function ProductDisplay({ title, item, ...rest }) {
   return (
-    <div className={cmpStyle.productBox}>
-      <h2 className={cmpStyle.productBoxTitle}>{title}</h2>
+    <section className={cmpStyle.productBox} {...rest}>
+      <h2 tabIndex="0" className={cmpStyle.productBoxTitle}>
+        {title}
+      </h2>
       <RenderProductDisplay item={item} />
-    </div>
+    </section>
   );
 }
 

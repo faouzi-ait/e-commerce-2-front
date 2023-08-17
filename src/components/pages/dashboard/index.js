@@ -32,23 +32,26 @@ function Dashboard() {
 
   useEffect(() => {
     dispatch(getUserDetails(id));
-  }, [dispatch, profile]);
+  }, [dispatch, profile, id]);
 
   const sideMenuList = [
     {
       id: '1',
       label: 'INFORMATIONS',
       step: 'info',
+      ariaLabel: 'click to go to the user details page',
     },
     {
       id: '2',
       label: <span>{`ORDER HISTORY (${order?.orders?.length})`}</span>,
       step: 'orders',
+      ariaLabel: 'click to go to the order history page',
     },
     {
       id: '3',
       label: <span>{`WISHLIST (${favorite?.favorites?.length})`}</span>,
       step: 'wish',
+      ariaLabel: 'click to go to the wishlist page',
     },
   ];
 
@@ -62,13 +65,18 @@ function Dashboard() {
     <Page>
       <section className={dashboard}>
         <aside className={asideSection}>
-          <ul className={asideItems}>
+          <section className={asideItems}>
             {sideMenuList.map((item, i) => (
-              <li key={i} onClick={() => setMenu(item.step)}>
+              <button
+                key={i}
+                tabIndex={0}
+                type="button"
+                aria-label={item.ariaLabel}
+                onClick={() => setMenu(item.step)}>
                 {item.label}
-              </li>
+              </button>
             ))}
-          </ul>
+          </section>
         </aside>
         <main className={mainSection}>{displaySection[menu]}</main>
       </section>

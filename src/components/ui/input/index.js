@@ -5,6 +5,9 @@ function Input({
   type,
   onChange,
   label,
+  labelId,
+  name,
+  id,
   value,
   classname,
   labelClassName,
@@ -21,15 +24,23 @@ function Input({
 }) {
   return (
     <div className={containerClass}>
-      <label className={labelClassName} style={labelStyle}>
+      <label
+        htmlFor={name}
+        aria-label={name}
+        id={name}
+        className={labelClassName}
+        style={labelStyle}>
         {label}
       </label>
       <input
         type={type}
-        onChange={onChange}
+        name={name}
+        id={id}
+        aria-labelledby={name}
         value={value}
-        className={classname}
         style={style}
+        className={classname}
+        onChange={onChange}
         placeholder={placeholder}
         disabled={disabled}
         checked={checked}

@@ -32,7 +32,8 @@ function LayoutSwitch() {
   return (
     <div className={cmpStyle.viewSwitchContainer}>
       <>
-        <span
+        <button
+          type="button"
           className={cmpStyle.viewSwitch}
           onClick={() => dispatch(switchLayout())}>
           Change View
@@ -40,7 +41,7 @@ function LayoutSwitch() {
             className={`fa fa-${!isRow ? 'bars' : 'columns'}`}
             aria-hidden="true"
           />
-        </span>
+        </button>
         <span className={cmpStyle.productCount}>{recordCounts()}</span>
       </>
     </div>

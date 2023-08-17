@@ -2,20 +2,20 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import SelectWrapper from '../../../../ui/select';
 import { getLimit, getPage } from '../../pagination/actions';
-import {
-  limitSelectOptions,
-  limitSelectStyles,
-} from '../../../../../utils';
+import { limitSelectOptions, limitSelectStyles } from '../../../../../utils';
 import { starLayout, starTitle } from '../styles.module.scss';
 
 function Limit() {
   const dispatch = useDispatch();
 
-
-
   return (
-    <div className={starLayout}>
-      <span className={starTitle}>Number of Items per Page</span>
+    <section className={starLayout}>
+      <h4
+        tabIndex={0}
+        aria-label="Number of Items per Page"
+        className={starTitle}>
+        Number of Items per Page
+      </h4>
       <SelectWrapper
         options={limitSelectOptions}
         styles={limitSelectStyles}
@@ -25,7 +25,7 @@ function Limit() {
           dispatch(getPage(1));
         }}
       />
-    </div>
+    </section>
   );
 }
 

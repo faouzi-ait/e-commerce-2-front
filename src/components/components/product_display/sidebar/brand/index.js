@@ -15,61 +15,57 @@ function Brand({ brand, data }) {
 
   const brandFormat = brand?.split('=')[1];
 
-  const handleChange = (e) => {
-    let chks = document.getElementsByTagName('input');
-    const selected = [];
-
-    for (let i = 0; i < chks.length; i++) {
-      if (chks[i].checked) {
-        selected.push(chks[i].value);
-      }
-    }
-
-    dispatch(getPage(0));
-    dispatch(getBrand(`&brand=${e.target.value}`));
-  };
-
   const DisplayBrands = () => {
     return (
       <ul className={cmpStyle.brandList}>
         {(brands || []).map((item) => (
-          <li
-            key={item}
-            className={`${cmpStyle.brandLabelDisplay} ${cmpStyle.brandLabel}`}>
-            <input
-              type="checkbox"
-              name={item}
-              value={item}
-              id={`custom-checkbox-${item}`}
-              onChange={handleChange}
-              className="brand-visibility"
-            />
-            <i className="fa fa-chevron-right brand-visibility-margin"></i>
-            <label
-              htmlFor={`custom-checkbox-${item}`}
-              className={`${cmpStyle.brandLabelDisplay} ${
-                cmpStyle.brandLabel
-              } ${brandFormat === item && cmpStyle.priceLimitColor}`}>
-              {item}
-            </label>
+          <li key={item} className="price-list-style">
+            <button
+              type="button"
+              style={{ border: 0, background: 'none' }}
+              onClick={(e) => {
+                dispatch(getPage(0));
+                dispatch(getBrand(`&brand=${item}`));
+              }}>
+
+
+
+              <i className="fa fa-chevron-right brand-visibility-margin"></i>
+              <p
+                className={`${cmpStyle.brandpDisplay} ${cmpStyle.brandLabel} ${
+                  brandFormat === item && cmpStyle.priceLimitColor
+                }`}>
+                {item}
+              </p>
+
+
+
+            </button>
           </li>
         ))}
         {brand && (
-          <div
+          <button
+            type="button"
+            aria-label="Clear brand filter"
             onClick={() => dispatch(getBrand(''))}
             className={`${cmpStyle.clear} ${cmpStyle.clearMargin}`}>
             <i className="fa fa-chevron-left"></i> Clear Filter
-          </div>
+          </button>
         )}
       </ul>
     );
   };
 
   return (
-    <div className={cmpStyle.starLayout}>
-      <span className={cmpStyle.starTitle}>Filter Products by Brand</span>
+    <section className={cmpStyle.starLayout}>
+      <h4
+        tabIndex={0}
+        aria-label="Filter by brand name"
+        className={cmpStyle.starTitle}>
+        Filter Products by Brand
+      </h4>
       <DisplayBrands />
-    </div>
+    </section>
   );
 }
 

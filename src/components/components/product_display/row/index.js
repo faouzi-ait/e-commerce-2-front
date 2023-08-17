@@ -23,13 +23,15 @@ function Row({
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
 
+  
+
   return (
-    <div
+    <section
       className={`baseTheme ${isDark ? THEMES.DARK : THEMES.LIGHT} ${
         styles.marginLeft
       }`}>
       {item.items.length !== 0 ? (
-        <div className={`${isRow ? styles.gridContainer : ''}`}>
+        <section className={`${isRow ? styles.gridContainer : ''}`}>
           {(item?.items || []).map((item) => (
             <ProductDisplay
               key={item._id}
@@ -40,11 +42,11 @@ function Row({
               showDetails={showDetails}
             />
           ))}
-        </div>
+        </section>
       ) : (
-        <div className={styles.noProductsFoundStyle}>
+        <section className={styles.noProductsFoundStyle}>
           No products were found
-        </div>
+        </section>
       )}
       <Modal
         modalIsOpen={modalIsOpen}
@@ -53,7 +55,7 @@ function Row({
         isProduct={isProduct}
         isSearch={isSearch}
       />
-    </div>
+    </section>
   );
 }
 

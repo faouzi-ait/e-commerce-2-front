@@ -26,6 +26,8 @@ function Pagination({ products, category, limit }) {
   return (
     <Page style={cmpStyle.container}>
       <PaginationBtn
+        type="button"
+        aria-label="go to previous page"
         label={<i className="fa fa-chevron-left"></i>}
         pageNb={previousPage}
         className={cmpStyle.leftArrow}
@@ -34,14 +36,11 @@ function Pagination({ products, category, limit }) {
         }}
       />
 
-      <PaginationItems
-        id={id}
-        products={products}
-        currentPage={currentPage}
-        cmpStyle={cmpStyle}
-      />
+      <PaginationItems id={id} products={products} currentPage={currentPage} />
 
       <PaginationBtn
+        type="button"
+        aria-label="go to next page"
         label={<i className="fa fa-chevron-right"></i>}
         pageNb={nextPage}
         className={cmpStyle.rightArrow}

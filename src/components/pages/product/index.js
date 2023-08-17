@@ -35,9 +35,9 @@ function Submenu() {
   return (
     <Page>
       {category && (
-        <div>
+        <>
           <SwitchLayout />
-          <div className={productGrid}>
+          <section className={productGrid}>
             <SideBar
               rating={rating}
               brand={brand}
@@ -47,7 +47,7 @@ function Submenu() {
               data={productDataList?.products?.data}
               action="product"
             />
-            <div>
+            <main>
               {loading ? (
                 <PageLoader />
               ) : (
@@ -65,10 +65,10 @@ function Submenu() {
                   limit={limit}
                 />
               )}
-            </div>
-          </div>
+            </main>
+          </section>
           <Footer />
-        </div>
+        </>
       )}
     </Page>
   );

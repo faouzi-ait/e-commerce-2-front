@@ -29,7 +29,7 @@ export function* authentication({ payload }) {
     if (redirect.fromPaymentLink) {
       window.location.href = '/payment';
     } else {
-      window.location.href = '/';
+      window.location.href = '/dashboard';
     }
   }
   yield put(actions.setIsAuthenticating(false));

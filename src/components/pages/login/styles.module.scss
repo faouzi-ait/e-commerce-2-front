@@ -26,6 +26,13 @@
     width: 25vw;
 }
 
+.label {
+    margin-bottom: .8rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+    letter-spacing: .4px
+}
+
 .inputFieldFull {
     width: 96.6%;
 }
@@ -39,13 +46,6 @@
         outline: none;
         border: 2px solid rgb(255, 195, 67);
     }
-}
-
-.label {
-    margin-bottom: .8rem;
-    font-size: 1.4rem;
-    font-weight: bold;
-    letter-spacing: .4px
 }
 
 .signinBtn {

@@ -9,6 +9,7 @@ import SelectWrapper from '../../ui/select';
 import { getDefaultUrl } from '../product_display/pagination/actions';
 import { getCategory, getProducts } from '../../pages/product/actions';
 import { getSearch, getSearchString } from './actions';
+import { logout } from '../../pages/login/actions';
 
 import { loginStatus } from '../../pages/login/selector';
 import { catgoriesList } from '../toggles/selectors';
@@ -24,6 +25,7 @@ function Header() {
   const category = useSelector(catgoriesList);
   const basket = useSelector(basketSelector);
   const [menuList, setMenuList] = useState([]);
+  const [show, setShow] = useState(false);
   const { loggedIn } = useSelector(loginStatus);
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredSubmenu, setFilteredSubmenu] = useState([]);
@@ -60,21 +62,49 @@ function Header() {
     history.push(`/category/${e.value}`);
   };
 
+  const userModalStyle = {
+    width: '155px',
+    background: 'rgba(21, 25, 31, 8)',
+    border: '3px solid #FFFFFF',
+    position: 'absolute',
+    top: 50,
+    right: 100,
+    zIndex: 99999,
+    cursor: 'default',
+  };
+
+  const UserMenuModal = ({ show, setShow, style, children, ...rest }) => {
+    if (!show) return null;
+
+    return (
+      <>
+        <div className={cmpStyle.mask}></div>
+        <div style={style} {...rest}>
+          {children}
+        </div>
+      </>
+    );
+  };
+
   return (
     <>
-      <div className={cmpStyle.topHeader}>
-        <div className={cmpStyle.headerLayout}>
+      <header className={cmpStyle.topHeader}>
+        <section className={cmpStyle.headerLayout}>
           <img
-            alt="logo"
+            alt=""
+            role="button"
+            tabIndex="0"
             src="/images/logo.png"
             className={cmpStyle.logo}
+            aria-label="back to home page"
             onClick={() => utils.backToHomePage(history)}
           />
-          <div className={cmpStyle.inputContainer}>
+          <section className={cmpStyle.inputContainer}>
             <SelectWrapper
               options={menuList}
               styles={utils.selectStyles}
               className={cmpStyle.selectBox}
+              aria-label="list of all departments"
               classNamePrefix="react-select"
               onChange={getSelectedCategoryProducts}
               defaultValue={{ label: 'Departments', value: 'Departments' }}
@@ -84,35 +114,104 @@ function Header() {
               id="search"
               name="search"
               autoComplete="off"
+              aria-label="search for products here"
               value={searchTerm}
               className={cmpStyle.search}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Type in your search here..."
+              placeholder="Search our product catalogue"
             />
-            <div className={cmpStyle.submit} onClick={submitQuery}>
+            <button
+              type="button"
+              aria-label="click or press enter to start a search"
+              className={cmpStyle.submit}
+              onClick={submitQuery}>
               <i className="fa fa-search"></i>
-            </div>
-          </div>
+            </button>
+          </section>
+
           <div className={cmpStyle.cartContainer}>
-            {!loggedIn && (
-              <div
+            {!loggedIn ? (
+              <section
                 className={cmpStyle.loginLink}
-                onClick={() => history.push('/login')}>
-                <span>Login</span>
-              </div>
+                aria-label="Login section">
+                <a
+                  tabIndex="0"
+                  href="/login"
+                  style={{ all: 'unset' }}
+                  aria-label="Login link">
+                  Login
+                </a>
+              </section>
+            ) : (
+              <>
+                <section
+                  className={cmpStyle.loginLink}
+                  onMouseEnter={() => setShow(true)}>
+                  <a
+                    href="/"
+                    tabIndex="0"
+                    aria-label="open user menu"
+                    className={cmpStyle.welcomeMenu}
+                    onMouseEnter={() => setShow(true)}>
+                    Welcome
+                  </a>
+                  <UserMenuModal
+                    show={show}
+                    setShow={setShow}
+                    style={{ ...userModalStyle }}
+                    onMouseLeave={() => setShow(false)}
+                    aria-modal="true">
+                    <ul className={`${cmpStyle.menuList}`}>
+                      {window.location.pathname !== '/' && (
+                        <li>
+                          <a
+                            href="/"
+                            tabIndex="0"
+                            target="_self"
+                            aria-label="home page link">
+                            Home
+                          </a>
+                        </li>
+                      )}
+                      <li>
+                        <a
+                          tabIndex="0"
+                          target="_self"
+                          href="/dashboard"
+                          aria-label="dashboard page link">
+                          Dashboard
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="/"
+                          tabIndex="0"
+                          aria-label="logout link"
+                          onClick={() => dispatch(logout())}>
+                          Logout
+                        </a>
+                      </li>
+                    </ul>
+                  </UserMenuModal>
+                </section>
+              </>
             )}
+
             <i
+              tabIndex="0"
+              type="button"
+              aria-label="Go to chopping cart page"
               className="fa fa-shopping-bag basket-margin-fix"
               onClick={() => history.push('/checkout')}>
               <span className={cmpStyle.cartCnt}>{basket.length}</span>
             </i>
           </div>
-        </div>
-        <span className={cmpStyle.toggleBtn}>
+        </section>
+        <section className={cmpStyle.toggleBtn}>
           <ToggleButtons />
-        </span>
-      </div>
-      <div className={cmpStyle.bottomHeader}>
+        </section>
+      </header>
+      <nav className={cmpStyle.bottomHeader}>
         {(filteredSubmenu || []).map((item) => (
           <Link
             key={item.id}
@@ -126,7 +225,7 @@ function Header() {
           <span>Amazon Prime </span>
           <span>&nbsp;| 30 Days Free Trial</span>
         </div>
-      </div>
+      </nav>
     </>
   );
 }

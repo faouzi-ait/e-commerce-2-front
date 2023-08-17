@@ -22,7 +22,8 @@ function Carousel() {
   return (
     <Slider {...settings}>
       <video autoPlay loop muted allow="autoplay" width="100%" height="100%">
-        <source src="./images/advert.mp4" type="video/mp4" />
+        {/* <source src="./images/advert.mp4" type="video/mp4" /> */}
+        <source src="./images/advert.webm" type="video/webm" />
       </video>
       {carouselSource.map((item, i) => (
         <div className="sliderImg" key={i}>

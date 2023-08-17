@@ -24,14 +24,16 @@ function Sidebar({ rating, brand, pricing, page, limit, data, action }) {
 
   return (
     <Page>
-      <Limit />
-      <StarsFilter rating={rating} />
-      {items.length !== 0 && (
-        <>
-          <Pricing pricing={pricing} />
-          <Brand brand={brand} data={data} />
-        </>
-      )}
+      <aside>
+        <Limit />
+        <StarsFilter rating={rating} />
+        {items.length !== 0 && (
+          <>
+            <Pricing pricing={pricing} />
+            <Brand brand={brand} data={data} />
+          </>
+        )}
+      </aside>
     </Page>
   );
 }

@@ -2,11 +2,11 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 // import { t } from '../../../i18n/translate';
 
-import Carousel from '../../components/carousel';
+import Page from '../../../components/components/container';
 import HomeProducts from '../../components/products';
 import AdvertBanner from '../../components/advert';
+import Carousel from '../../components/carousel';
 import Footer from '../../components/footer';
-import Page from '../../../components/components/container';
 
 import { homeProductItems } from './selectors';
 

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Row from '../../components/product_display/row';
 import Footer from '../../components/footer';
-import RatingFilter from './search-ratings';
+import SearchRating from './search-ratings';
 import SearchFilter from './search-filter';
 import BrandFilter from './search-brand';
 import PriceFilter from './search-price';
@@ -84,16 +84,16 @@ function Search() {
 
   return (
     <>
-      <div
+      <section
         className={`baseTheme ${localCmpStyle.productGrid} ${
           isDark ? THEMES.DARK : THEMES.LIGHT
         }`}>
-        <div>
+        <aside>
           <SearchFilter
             setSearchPage={setSearchPage}
             setSearchLimit={setSearchLimit}
           />
-          <RatingFilter rating={starRating} setStarRating={setStarRating} />
+          <SearchRating rating={starRating} setStarRating={setStarRating} />
           <BrandFilter
             searchBrand={searchBrand}
             setSearchBrand={setSearchBrand}
@@ -104,11 +104,11 @@ function Search() {
             setSearchPage={setSearchPage}
             setSearchPrice={setSearchPrice}
           />
-        </div>
+        </aside>
         {loading ? (
           <PageLoader />
         ) : (
-          <div>
+          <main>
             <Row products={filterArray()} isRow={true} isSearch={true} />
             {!starRating && !searchBrand && (
               <div className={localCmpStyle.layoutDisplay}>
@@ -122,7 +122,9 @@ function Search() {
                     } ${isCurrent && localCmpStyle.active}`;
 
                     return (
-                      <div
+                      <button
+                        type="button"
+                        aria-label={`go to page ${i}`}
                         key={i}
                         className={style}
                         onClick={() => {
@@ -135,15 +137,15 @@ function Search() {
                             );
                         }}>
                         {page}
-                      </div>
+                      </button>
                     );
                   }
                 )}
               </div>
             )}
-          </div>
+          </main>
         )}
-      </div>
+      </section>
       <Footer />
     </>
   );

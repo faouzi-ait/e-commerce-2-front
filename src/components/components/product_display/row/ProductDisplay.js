@@ -18,16 +18,22 @@ function ProductDisplay({
   const dispatch = useDispatch();
   const { favorites, cart } = useSelector((state) => state.basket);
 
-  const isAdded = favorites.find((product) => product._id === item._id);
+  const isAdded = favorites?.find((product) => product._id === item._id);
   const isInCart = cart?.find((product) => product._id === item._id);
 
   return (
-    <div
+    <main
       className={`${
         isRow ? cmpStyle.cardRowContainer : cmpStyle.rowContainer
       }`}>
-      <div className={cmpStyle.favoritePositioning}>
+      <section className={cmpStyle.favoritePositioning}>
         <img
+          tabIndex={0}
+          aria-label={`${
+            isAdded
+              ? `${item.name} added to favorites, click to remove`
+              : `click here to add ${item.name} to favorites`
+          }`}
           src={isAdded ? '../icons/heart-full.png' : '../icons/heart.png'}
           alt="favorites"
           className={cmpStyle.favorite}
@@ -37,39 +43,52 @@ function ProductDisplay({
               : dispatch(addToFavorites(item));
           }}
         />
-      </div>
+      </section>
       <img
         src={item.photo}
-        alt="p"
+        alt={`${item.brand} product`}
         className={`${isRow ? cmpStyle.rowImage : cmpStyle.image}`}
       />
-      <div
+      <section
         className={`${
           isRow ? cmpStyle.productCardDisplay : cmpStyle.productRowDisplay
         }`}>
-        <span>{item.brand}</span>
+        <span
+          tabIndex={0}
+          aria-label={`${item.brand} product, ${item.description}, priced at ${
+            item.price
+          } dollars, ${
+            item.quantity > 0
+              ? 'item currently available'
+              : 'product out of stock'
+          }`}>
+          {item.brand}
+        </span>
         <span>{item.description}</span>
         <span>Price: ${item.price}</span>
         <span>Quantity Available: {item.quantity}</span>
         {!showDetails && (
-          <div>
-            <button
-              onClick={() =>
-                !isInCart ? dispatch(addItem(item)) : dispatch(addOne(item._id))
-              }>
-              {!isInCart ? 'Add to cart' : '+ 1 More'}
-            </button>
-          </div>
+          <button
+            type="button"
+            style={{ margin: '15px auto' }}
+            aria-label={`${
+              isInCart ? 'product added already, add 1 more' : 'add to cart'
+            }`}
+            onClick={() =>
+              !isInCart ? dispatch(addItem(item)) : dispatch(addOne(item._id))
+            }>
+            {!isInCart ? 'Add to cart' : '+ 1 More'}
+          </button>
         )}
         {showDetails && (
-          <div onClick={() => setProductId(item._id)}>
-            <button onClick={openModal}>
-              View Product <i className="fa fa-eye"></i>
+          <section onClick={() => setProductId(item._id)}>
+            <button type="button" onClick={openModal}>
+              View Product
             </button>
-          </div>
+          </section>
         )}
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
 

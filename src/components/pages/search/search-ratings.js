@@ -4,35 +4,46 @@ import Stars from '../../components/stars';
 import * as localCmpStyle from './styles.module.scss';
 import * as cmpStyle from '../../components/product_display/sidebar/styles.module.scss';
 
-function StarsFilter({ rating, setStarRating }) {
+const StarsFilter = ({ rating, setStarRating, ariaLabel }) => {
   const StarItems = ({ nb }) => {
     return (
-      <li className={cmpStyle.starsStyle} onClick={() => setStarRating(nb)}>
+      <button
+        type="button"
+        tabIndex={0}
+        aria-label={ariaLabel}
+        style={{ display: 'flex', background: 'none', border: 0 }}
+        onClick={() => setStarRating(nb)}>
         <Stars starrating={nb} />
-        &nbsp;<span className={cmpStyle.starLabel}></span>
-      </li>
+      </button>
     );
   };
 
   return (
-    <div className={`${cmpStyle.starLayout} ${localCmpStyle.marginTop}`}>
-      <span className={cmpStyle.starTitle}>Customer Ratings &amp; Reviews</span>
+    <section className={`${cmpStyle.starLayout} ${localCmpStyle.marginTop}`}>
+      <h4
+        tabIndex={0}
+        aria-label="Customer Ratings and Reviews"
+        className={cmpStyle.starTitle}>
+        Customer Ratings &amp; Reviews
+      </h4>
       <ul className={cmpStyle.starsContainer}>
-        <StarItems nb={5} />
-        <StarItems nb={4} />
-        <StarItems nb={3} />
-        <StarItems nb={2} />
-        <StarItems nb={1} />
+        <StarItems nb={5} ariaLabel={`show products with 5 stars rating`} />
+        <StarItems nb={4} ariaLabel={`show products with 4 stars rating`} />
+        <StarItems nb={3} ariaLabel={`show products with 3 stars rating`} />
+        <StarItems nb={2} ariaLabel={`show products with 2 stars rating`} />
+        <StarItems nb={1} ariaLabel={`show products with 1 stars rating`} />
       </ul>
       {rating && (
-        <div
+        <button
+          type="button"
+          aria-label="Clear star ratings"
           onClick={() => setStarRating(null)}
           className={`${cmpStyle.clear} ${localCmpStyle.marginTop} ${localCmpStyle.marginBottom}`}>
           <i className="fa fa-chevron-left"></i> Clear Filter
-        </div>
+        </button>
       )}
-    </div>
+    </section>
   );
-}
+};
 
 export default StarsFilter;

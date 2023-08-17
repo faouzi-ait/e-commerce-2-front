@@ -4,7 +4,7 @@ import { container } from './styles.module.scss';
 
 function HomeProducts({ products }) {
   return (
-    <div className={container}>
+    <section className={container}>
       <ProductDisplay
         title="Best Selling Products"
         item={products?.bestSeller}
@@ -12,7 +12,7 @@ function HomeProducts({ products }) {
       <ProductDisplay title="Latest Products Deals" item={products?.deals} />
       <ProductDisplay title="Featured Products" item={products?.featured} />
       <ProductDisplay title="Top Rated Products" item={products?.topRated} />
-    </div>
+    </section>
   );
 }
 
