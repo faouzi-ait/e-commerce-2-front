@@ -14,20 +14,22 @@ const Footer = () => {
         <a
           href="/#"
           aria-label="Back to top link"
-          style={{ all: 'unset', cursor: 'pointer' }}>
+          style={{ all: 'unset', cursor: 'pointer' }}
+        >
           Back to Top
         </a>
       </section>
       <section className={cmpStyle.middleFooter}>
-        {middlefooterData.map((cols) => (
-          <ul>
-            {cols.children.map((item) => (
-              <li>
+        {middlefooterData.map((cols, i) => (
+          <ul key={i}>
+            {cols.children.map((item, j) => (
+              <li key={j}>
                 <a
                   href="/#"
                   tabIndex="0"
                   aria-label={item}
-                  style={{ all: 'unset', cursor: 'pointer' }}>
+                  style={{ all: 'unset', cursor: 'pointer' }}
+                >
                   {item}
                 </a>
               </li>
@@ -40,8 +42,8 @@ const Footer = () => {
           <img src="/images/amazon-logo.png" alt="logo" />
         </div>
         <ul aria-label="list of countries served by amazon">
-          {bottomCountryFooter.map((item) => (
-            <li>
+          {bottomCountryFooter.map((item, k) => (
+            <li key={k}>
               <span aria-label={item} tabIndex="0">
                 {item}
               </span>
@@ -51,8 +53,8 @@ const Footer = () => {
       </section>
       <section className={`${cmpStyle.countries} ${cmpStyle.bottomLinks}`}>
         <ul>
-          {termsConditions.map((item) => (
-            <li>{item}</li>
+          {termsConditions.map((item, l) => (
+            <li key={l}>{item}</li>
           ))}
         </ul>
       </section>

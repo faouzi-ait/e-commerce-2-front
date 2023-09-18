@@ -1,34 +1,69 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import axios from 'axios';
 import { Controller, useForm } from 'react-hook-form';
 
 import Input from '../../../../../ui/input';
 import Button from '../../../../../ui/button';
 
+import { updatePassword } from '../../../../../../api/apiCalls';
+
 import * as utils from '../../../../../../utils';
 import * as cmpStyle from '../../../styles.module.scss';
 
 function Password({ userId }) {
+  const [isUpdating, setisUpdating] = useState(false);
+  const [message, setMessage] = useState('');
+
   const {
     handleSubmit,
     control,
     formState: { errors, isSubmitting },
     watch,
+    reset,
   } = useForm({
     mode: 'onBlur',
   });
 
-  const onSubmit = (data) => console.log(data, userId);
+  const onSubmit = async ({ currentPassword, password, confirmPassword }) => {
+    setisUpdating(true);
+    const request = await updatePassword({
+      currentPassword,
+      password,
+      confirmPassword,
+    });
+    setisUpdating(false);
+
+    console.log(request?.error?.response?.status);
+
+    if (request?.data?.success === true) {
+      setMessage('Password Update Successfull');
+      reset();
+    } else {
+      if (request?.error?.response?.status === 401) {
+        setMessage('Login with your new password');
+      } else {
+        setMessage('Please try again');
+      }
+    }
+
+    setTimeout(() => {
+      setMessage('');
+    }, 2500);
+  };
 
   return (
     <div>
       <h1
         style={{ marginLeft: '4rem', marginTop: 0 }}
         tabIndex={0}
-        aria-label="ACCOUNT DETAILS SECTION">
+        aria-label="ACCOUNT DETAILS SECTION"
+      >
         PASSWORD MANAGEMENT
       </h1>
       <form onSubmit={handleSubmit(onSubmit)} className={cmpStyle.form}>
+        {message && (
+          <h2 style={{ color: 'green', marginleft: '50px' }}>{message}</h2>
+        )}
         <Controller
           name="currentPassword"
           control={control}
@@ -53,12 +88,11 @@ function Password({ userId }) {
         />
 
         <Controller
-          name="newPassword"
+          name="password"
           control={control}
           rules={{
             required: 'Please type in your new password',
             validate: (val) => {
-              console.log(val);
               if (watch('currentPassword') === val)
                 return 'New and current passwords can not be the same';
             },
@@ -72,13 +106,11 @@ function Password({ userId }) {
               {...field}
               label="New Password"
               type="password"
-              aria-invalid={!!errors?.newPassword}
+              aria-invalid={!!errors?.password}
               className={`${cmpStyle.inputField}`}
               labelClassName={cmpStyle.label}
-              style={utils.setErrorStyle(errors?.newPassword)}
-              errorMessage={
-                errors?.newPassword ? errors?.newPassword.message : ''
-              }
+              style={utils.setErrorStyle(errors?.password)}
+              errorMessage={errors?.password ? errors?.password.message : ''}
               placeholder="Your new password"
             />
           )}
@@ -90,14 +122,14 @@ function Password({ userId }) {
           rules={{
             required: 'Please confirm your new password',
             validate: (val) => {
-              if (watch('newPassword') !== val)
+              if (watch('password') !== val)
                 return 'Your passwords do not match';
             },
           }}
           render={({ field: { ref, ...field } }) => (
             <Input
               {...field}
-              label="New Password"
+              label="Confirm new Password"
               type="password"
               aria-invalid={!!errors?.confirmPassword}
               className={`${cmpStyle.inputField}`}
@@ -113,10 +145,9 @@ function Password({ userId }) {
 
         <Button
           type="submit"
-          // label={!registering ? t('register') : t('registering...')}
-          label="Update Password"
+          label={isUpdating ? 'Updating Password...' : 'Update Password'}
           className={cmpStyle.signinBtn}
-          disabled={isSubmitting ? true : false}
+          disabled={!isUpdating ? false : true}
         />
       </form>
     </div>

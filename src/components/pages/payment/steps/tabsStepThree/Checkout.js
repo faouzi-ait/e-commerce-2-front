@@ -32,8 +32,6 @@ const Checkout = ({ basket }) => {
     defaultValues: { email: customer_email },
   });
 
-  console.log(customer_email);
-
   const handleCheckoutSubmit = async () => {
     const transactionId = uuid();
 
@@ -41,7 +39,7 @@ const Checkout = ({ basket }) => {
       return {
         quantity: item.quantity,
         price_data: {
-          currency: 'usd',
+          currency: 'EUR',
           unit_amount: item.price * 100,
           product_data: {
             name: item.name,

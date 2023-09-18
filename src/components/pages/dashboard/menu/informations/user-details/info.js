@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import axios from 'axios';
+import { updateProfile } from '../../../../../../api/apiCalls';
 import { Controller, useForm } from 'react-hook-form';
 
 import Input from '../../../../../ui/input';
@@ -9,6 +10,8 @@ import * as utils from '../../../../../../utils';
 import * as cmpStyle from '../../../styles.module.scss';
 
 function Info({ details, userId }) {
+  const [isUpdating, setisUpdating] = useState(false);
+  const [message, setMessage] = useState('');
   const userData = details?.data;
 
   const { handleSubmit, control, formState } = useForm({
@@ -20,19 +23,36 @@ function Info({ details, userId }) {
     },
   });
 
-  const onSubmit = ({ name, surname, email }) => {
-    console.log(name, surname, email, userId);
+  const onSubmit = async ({ name, surname, email }) => {
+    setisUpdating(true);
+    const request = await updateProfile({ name, surname, email });
+    setisUpdating(false);
+
+    if (request?.status === 'success') {
+      setMessage('Update Successfull');
+    } else {
+      setMessage('A problem occured, please try again later');
+    }
+
+    setTimeout(() => {
+      setMessage('');
+    }, 2500);
   };
 
   return (
-    <sectopn>
+    <section>
       <h1
-        style={{ marginLeft: '4rem' }}
         tabIndex={0}
-        aria-label="ACCOUNT DETAILS SECTION">
+        style={{ marginLeft: '4rem' }}
+        aria-label="ACCOUNT DETAILS SECTION"
+      >
         ACCOUNT INFORMATION
       </h1>
+
       <form onSubmit={handleSubmit(onSubmit)} className={cmpStyle.form}>
+        {message && (
+          <h2 style={{ color: 'green', margin: '0 0 0 50px' }}>{message}</h2>
+        )}
         <Controller
           name="name"
           control={control}
@@ -42,6 +62,7 @@ function Info({ details, userId }) {
               {...field}
               label="Name"
               type="text"
+              errorMsgId="nameError"
               aria-invalid={!!formState?.errors?.name}
               className={`${cmpStyle.inputField}`}
               labelClassName={cmpStyle.label}
@@ -50,6 +71,8 @@ function Info({ details, userId }) {
                 formState?.errors?.name ? 'Please type in your name' : ''
               }
               placeholder="Your Name"
+              ariaLabelRequired
+              autoFocus
             />
           )}
         />
@@ -64,6 +87,7 @@ function Info({ details, userId }) {
               label="Surname"
               type="text"
               name="surname"
+              errorMsgId="surnameError"
               aria-invalid={!!formState.errors?.surname}
               className={cmpStyle.inputField}
               labelClassName={cmpStyle.label}
@@ -72,6 +96,7 @@ function Info({ details, userId }) {
                 formState?.errors?.surname ? 'Please type in your surname' : ''
               }
               placeholder="Your Lastname"
+              ariaLabelRequired
             />
           )}
         />
@@ -101,13 +126,12 @@ function Info({ details, userId }) {
 
         <Button
           type="submit"
-          // label={!registering ? t('register') : t('registering...')}
-          label="Update Details"
+          label={isUpdating ? 'Updating details...' : 'Update Details'}
           className={cmpStyle.signinBtn}
-          // disabled={!registering ? false : true}
+          disabled={!isUpdating ? false : true}
         />
       </form>
-    </sectopn>
+    </section>
   );
 }
 

@@ -147,16 +147,23 @@ export async function searchByTerms(term, params) {
   }
 }
 
+export async function updatePassword(params) {
+  try {
+    return await apiClient.patch(`/users/updatePassword`, params);
+  } catch (error) {
+    return error;
+  }
+}
+
 export async function updateProfile(params) {
   try {
-    const response = await apiClient.post(`/users/updateUser`, params);
+    const response = await apiClient.patch(`/users/updateUser`, params);
     return await response.data;
   } catch (error) {
     return { error };
   }
 }
 
-// export async function upload_picture(payload) {
 // export async function updateProfile(payload) {
 //   try {
 //     const response = await apiClient.post('/profile', payload);
@@ -165,6 +172,8 @@ export async function updateProfile(params) {
 //     return { error };
 //   }
 // }
+
+// export async function upload_picture(payload) {
 //   try {
 //     const response = await apiClient.post('/upload', payload);
 //     return await response.data;

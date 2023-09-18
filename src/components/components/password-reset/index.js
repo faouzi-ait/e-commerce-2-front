@@ -25,7 +25,7 @@ function TokenPane({ setOpen }) {
   const onSubmit = ({ email }) => dispatch(forgotPasswordToken({ email }));
 
   return (
-    <div className={tokenPane}>
+    <section className={tokenPane}>
       <span onClick={() => setOpen(false)} className={closeBtn}>
         X
       </span>
@@ -64,7 +64,7 @@ function TokenPane({ setOpen }) {
       {error && error?.data && (
         <span className={tokenPaneMsg}>{error.data.message}</span>
       )}
-    </div>
+    </section>
   );
 }
 

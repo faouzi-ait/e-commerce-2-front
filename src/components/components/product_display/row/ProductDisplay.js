@@ -81,7 +81,9 @@ function ProductDisplay({
           </button>
         )}
         {showDetails && (
-          <section onClick={() => setProductId(item._id)}>
+          <section
+            onClick={() => setProductId(item._id)}
+            className={cmpStyle.modalBtn}>
             <button type="button" onClick={openModal}>
               View Product
             </button>

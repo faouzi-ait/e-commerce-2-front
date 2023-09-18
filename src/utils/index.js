@@ -278,7 +278,7 @@ export const resetPasswordDefaultValues = {
 };
 
 export const defaultRegisterValues = {
-  name: '',
+  name: 'Your Username',
   surname: '',
   email: '',
   dob: '',
@@ -289,8 +289,7 @@ export const defaultRegisterValues = {
 export const emailFormPattern = {
   required: t('emailError'),
   pattern: {
-    value:
-      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+    value: /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
     message: t('emailFormatError'),
   },
 };

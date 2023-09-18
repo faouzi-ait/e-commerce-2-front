@@ -2,8 +2,7 @@ import React from 'react';
 
 import Row from '../../../components/product_display/row';
 
-function Wishlist({ favorites }) {
-
+const Wishlist = ({ favorites }) => {
   const obj = {
     data: {
       items: favorites,
@@ -11,10 +10,10 @@ function Wishlist({ favorites }) {
   };
 
   return (
-    <div style={{ paddingTop: '1.35rem', paddingRight: '.8rem' }}>
+    <section style={{ paddingTop: '1.35rem', paddingRight: '.8rem' }}>
       <Row products={obj} showDetails={false} />
-    </div>
+    </section>
   );
-}
+};
 
 export default Wishlist;

@@ -4,7 +4,7 @@ export default {
   [LOCALES.ENGLISH]: {
     greeting: 'hello',
     home: 'home page',
-    login: 'What is your username',
+    login: 'Username',
     username: 'What is your Firstname',
     surname: 'What is your Lastname',
     age: 'Date of Birth (optional)?',
@@ -41,7 +41,7 @@ export default {
     Total: 'Total',
 
     confirmation:
-      'Check this box to confirm your billing and delivery address to proceed to checkout',
+      'Check this box to confirm your billing and delivery address to finalize your order',
 
     address: 'Address *',
     city: 'City *',

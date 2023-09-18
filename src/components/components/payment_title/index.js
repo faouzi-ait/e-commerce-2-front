@@ -6,12 +6,12 @@ import * as cmpStyles from '../../pages/login/styles.module.scss';
 
 function Title({ title, currentLabel, currentStep }) {
   return (
-    <div className={localStyles.titleAlignment}>
+    <section className={localStyles.titleAlignment}>
       <p className={cmpStyles.h3}>{title}</p>
       <p className={cmpStyles.h3}>
         {currentLabel} {currentStep}
       </p>
-    </div>
+    </section>
   );
 }
 

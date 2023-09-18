@@ -20,15 +20,17 @@ import * as cmpStyle from './styles.module.scss';
 
 function Header() {
   // const { isDark } = useSelector(selectedTheme);
-  const dispatch = useDispatch();
   const history = useHistory();
-  const category = useSelector(catgoriesList);
-  const basket = useSelector(basketSelector);
-  const [menuList, setMenuList] = useState([]);
+  const dispatch = useDispatch();
+
   const [show, setShow] = useState(false);
-  const { loggedIn } = useSelector(loginStatus);
+  const [menuList, setMenuList] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredSubmenu, setFilteredSubmenu] = useState([]);
+
+  const category = useSelector(catgoriesList);
+  const { loggedIn } = useSelector(loginStatus);
+  const basket = useSelector(basketSelector);
 
   useEffect(() => {
     const menuListFiltered = utils.filteredMenuList(category);
@@ -39,6 +41,7 @@ function Header() {
   }, [category]);
 
   const submitQuery = (e) => {
+    e.preventDefault();
     if (!searchTerm) return false;
 
     dispatch(getSearchString(`${searchTerm}`));
@@ -78,10 +81,10 @@ function Header() {
 
     return (
       <>
-        <div className={cmpStyle.mask}></div>
-        <div style={style} {...rest}>
+        <section className={cmpStyle.mask}></section>
+        <section style={style} {...rest}>
           {children}
-        </div>
+        </section>
       </>
     );
   };
@@ -99,37 +102,39 @@ function Header() {
             aria-label="back to home page"
             onClick={() => utils.backToHomePage(history)}
           />
-          <section className={cmpStyle.inputContainer}>
-            <SelectWrapper
-              options={menuList}
-              styles={utils.selectStyles}
-              className={cmpStyle.selectBox}
-              aria-label="list of all departments"
-              classNamePrefix="react-select"
-              onChange={getSelectedCategoryProducts}
-              defaultValue={{ label: 'Departments', value: 'Departments' }}
-            />
-            <input
-              type="text"
-              id="search"
-              name="search"
-              autoComplete="off"
-              aria-label="search for products here"
-              value={searchTerm}
-              className={cmpStyle.search}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search our product catalogue"
-            />
-            <button
-              type="button"
-              aria-label="click or press enter to start a search"
-              className={cmpStyle.submit}
-              onClick={submitQuery}>
-              <i className="fa fa-search"></i>
-            </button>
-          </section>
+          <form style={{ margin: '0 auto' }}>
+            <section className={cmpStyle.inputContainer}>
+              <SelectWrapper
+                options={menuList}
+                styles={utils.selectStyles}
+                className={cmpStyle.selectBox}
+                aria-label="list of all departments"
+                classNamePrefix="react-select"
+                onChange={getSelectedCategoryProducts}
+                defaultValue={{ label: 'Departments', value: 'Departments' }}
+              />
+              <input
+                type="text"
+                id="search"
+                name="search"
+                autoComplete="off"
+                aria-label="search for products here"
+                value={searchTerm}
+                className={cmpStyle.search}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Search our product catalogue"
+              />
+              <button
+                type="submit"
+                aria-label="click or press enter to start a search"
+                className={cmpStyle.submit}
+                onClick={submitQuery}>
+                <i className="fa fa-search"></i>
+              </button>
+            </section>
+          </form>
 
-          <div className={cmpStyle.cartContainer}>
+          <section className={cmpStyle.cartContainer}>
             {!loggedIn ? (
               <section
                 className={cmpStyle.loginLink}
@@ -205,7 +210,7 @@ function Header() {
               onClick={() => history.push('/checkout')}>
               <span className={cmpStyle.cartCnt}>{basket.length}</span>
             </i>
-          </div>
+          </section>
         </section>
         <section className={cmpStyle.toggleBtn}>
           <ToggleButtons />
@@ -221,10 +226,10 @@ function Header() {
             {item.value}
           </Link>
         ))}
-        <div className={cmpStyle.logo2}>
+        <section className={cmpStyle.logo2}>
           <span>Amazon Prime </span>
           <span>&nbsp;| 30 Days Free Trial</span>
-        </div>
+        </section>
       </nav>
     </>
   );

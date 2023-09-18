@@ -10,7 +10,7 @@ function Page({ children, style }) {
   const styles = (style) =>
     `baseTheme ${isDark ? THEMES.DARK : THEMES.LIGHT} ${style}`;
 
-  return <div className={styles(style)}>{children}</div>;
+  return <section className={styles(style)}>{children}</section>;
 }
 
 Page.propTypes = {

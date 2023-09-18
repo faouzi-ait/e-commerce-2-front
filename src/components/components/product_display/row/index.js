@@ -45,7 +45,7 @@ function Row({
         </section>
       ) : (
         <section className={styles.noProductsFoundStyle}>
-          No products were found
+          No products to display
         </section>
       )}
       <Modal

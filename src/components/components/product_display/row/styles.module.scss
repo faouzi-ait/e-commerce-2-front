@@ -111,34 +111,17 @@
     display: flex;
     flex-direction: column;
     font-family: 'Be Vietnam Pro', sans-serif;
-    // font-family: Arial, Helvetica, sans-serif;
 
     span:nth-child(1) {
         margin: .75rem 0 .25rem 0;
         font-size: 1.75rem;
         font-weight: bold;
-        // letter-spacing: 1px;
     }
-
-    // span:not(:nth-child(1)) {
-    //     // margin-bottom: .5rem;
-    // }
 
     span:nth-child(2), span:nth-child(3), span:nth-child(4),
     span:nth-child(5) {
         font-size: 1.3rem;
-        // font-weight: bold;
     }
-
-    // span:nth-child(3) {
-    //     font-size: 1.3rem;
-    //     // font-weight: bold;
-    // }
-
-    // span:nth-child(4),
-    // span:nth-child(5) {
-    //     font-size: 1.3rem;
-    // }
 
     div {
         display: flex;
@@ -177,4 +160,8 @@
 .favoritePositioning {
     position: absolute;
     padding: 1rem;
+}
+
+.modalBtn {
+    text-align: center;
 }

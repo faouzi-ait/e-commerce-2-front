@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 
 import Footer from '../../components/footer';
@@ -21,6 +21,7 @@ import * as cmpStyle from './styles.module.scss';
 function Login() {
   const dispatch = useDispatch();
   const search = useLocation().search;
+
   const [isOpen, setIsOpen] = useState(false);
   const [isResetOpen, setIsResetOpen] = useState(false);
   const { authenticating, errors } = useSelector(loginStatus);
@@ -44,17 +45,24 @@ function Login() {
     }
   }, [dispatch, search]);
 
-  const onSubmit = ({ email, password }) =>
+  const onSubmit = ({ email, password }) => {
     dispatch(login({ email, password }));
+  };
 
   return (
     <Page>
       <h1 className={cmpStyle.loginTitle}>
         {utils.activationLandingScreen(search)}
       </h1>
-      <div className={cmpStyle.loginForm}>
+      <main className={cmpStyle.loginForm}>
         <form onSubmit={handleSubmit(onSubmit)} className={cmpStyle.form}>
-          <p className={cmpStyle.h3}>{t('signIn')}</p>
+          <p
+            tabIndex={0}
+            aria-label="account creation page"
+            className={cmpStyle.pageTitle}
+          >
+            {t('signIn')}
+          </p>
           <Controller
             name="email"
             control={control}
@@ -65,6 +73,7 @@ function Login() {
                 label={t('login')}
                 type="email"
                 name="email"
+                errorMsgId="emailError"
                 aria-invalid={!!formState.errors?.email}
                 className={cmpStyle.inputField}
                 labelClassName={cmpStyle.label}
@@ -75,6 +84,8 @@ function Login() {
                     : ''
                 }
                 placeholder="your-email@somewhere.com"
+                ariaLabelRequired
+                autoFocus
               />
             )}
           />
@@ -89,6 +100,7 @@ function Login() {
                 type="password"
                 name="password"
                 label="Password"
+                errorMsgId="passwordError"
                 aria-invalid={!!formState.errors.password}
                 className={cmpStyle.inputField}
                 labelClassName={cmpStyle.label}
@@ -97,39 +109,54 @@ function Login() {
                   formState.errors?.password ? t('passwordError') : ''
                 }
                 placeholder="Please enter your password"
+                ariaLabelRequired
               />
             )}
           />
 
           <button
             type="submit"
-            disabled={authenticating ? true : false}
-            className={cmpStyle.signinBtn}>
+            className={cmpStyle.signinBtn}
+            aria-label="click here to login"
+            // disabled={authenticating ? true : false}
+          >
+            {/* {t('signIn')} */}
             {authenticating ? t('signingIn') : t('signIn')}
           </button>
 
-          <Link
-            to="/register"
-            className={`${cmpStyle.signinBtn} ${cmpStyle.register}`}>
+          <a
+            role="button"
+            href="/register"
+            className={`${cmpStyle.signinBtn} ${cmpStyle.register}`}
+            aria-label="click or press here to create a new account"
+          >
             {t('register')}
-          </Link>
+          </a>
 
-          <div onClick={() => setIsOpen(!isOpen)} className={cmpStyle.activate}>
-            {t('loginToken')}
-          </div>
-
-          <div
-            onClick={() => setIsResetOpen(!isResetOpen)}
+          <button
+            type="button"
             className={cmpStyle.activate}
-            disabled={!formState.isValid}>
-            Forgot password?
-          </div>
+            aria-label="click or press here to open the renew token window"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {t('loginToken')}
+          </button>
 
-          <span>{errors && errors?.data?.message}</span>
+          <button
+            type="button"
+            aria-label="click or press here to reset your password"
+            className={cmpStyle.activate}
+            onClick={() => setIsResetOpen(!isResetOpen)}
+          >
+            Forgot password?
+          </button>
+
+          <span role="alert">{errors && errors?.data?.message}</span>
         </form>
-        {isOpen && <TokenPane setOpen={setIsOpen} />}
+
         {isResetOpen && <PasswordReset setOpen={setIsResetOpen} />}
-      </div>
+        {isOpen && <TokenPane setOpen={setIsOpen} />}
+      </main>
       <Footer />
     </Page>
   );

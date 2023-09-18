@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -52,9 +51,15 @@ function Register() {
 
   return (
     <Page>
-      <div className={loginForm}>
+      <main className={loginForm}>
         <form onSubmit={handleSubmit(onSubmit)} className={cmpStyle.form}>
-          <p className={cmpStyle.h3}>{t('registerTitle')}</p>
+          <p
+            tabIndex={0}
+            aria-label="account creation page"
+            className={cmpStyle.pageTitle}
+          >
+            {t('registerTitle')}
+          </p>
 
           <Controller
             name="name"
@@ -72,6 +77,8 @@ function Register() {
                 style={utils.setErrorStyle(formState?.errors?.name)}
                 errorMessage={formState?.errors?.name ? t('nameError') : ''}
                 placeholder="Your Firstname"
+                ariaLabelRequired
+                autoFocus
               />
             )}
           />
@@ -94,6 +101,7 @@ function Register() {
                   formState?.errors?.surname ? t('surnameError') : ''
                 }
                 placeholder="Your Lastname"
+                ariaLabelRequired
               />
             )}
           />
@@ -112,12 +120,13 @@ function Register() {
                 className={cmpStyle.inputField}
                 labelClassName={cmpStyle.label}
                 style={utils.setErrorStyle(formState?.errors?.email)}
-                placeholder="your-email@somewhere.com"
                 errorMessage={
                   formState?.errors?.email
                     ? formState?.errors?.email.message
                     : ''
                 }
+                placeholder="your-email@somewhere.com"
+                ariaLabelRequired
               />
             )}
           />
@@ -137,6 +146,7 @@ function Register() {
                 labelClassName={cmpStyle.label}
                 style={utils.setErrorStyle(formState?.errors?.dob)}
                 errorMessage={formState?.errors?.dob ? t('dobError') : ''}
+                ariaLabelRequired
               />
             )}
           />
@@ -159,6 +169,7 @@ function Register() {
                   formState.errors?.password ? t('passwordError') : ''
                 }
                 placeholder="Please enter your password"
+                ariaLabelRequired
               />
             )}
           />
@@ -177,26 +188,36 @@ function Register() {
             type="submit"
             label={!registering ? t('register') : t('registering...')}
             className={cmpStyle.signinBtn}
+            aria-label="click here to create your account"
             disabled={!registering ? false : true}
           />
 
-          <Link to="/login" className={`${cmpStyle.activate} ${backToLogin}`}>
+          <a
+            role="button"
+            href="/login"
+            className={`${cmpStyle.activate} ${backToLogin}`}
+            aria-label="click or press here to create a new account"
+          >
             {t('returnToLogin')}
-          </Link>
+          </a>
 
-          <div
+          <button
+            type="button"
+            className={`${cmpStyle.activate} ${backToLogin}`}
+            aria-label="click or press here to open the renew token window"
             onClick={() => setIsOpen(!isOpen)}
-            className={`${cmpStyle.activate} ${backToLogin}`}>
+          >
             {t('loginToken')}
-          </div>
+          </button>
 
-          <div>
-            {errors && errors?.data?.message}
+          <span role="alert">{errors && errors?.data?.message}</span>
+          <span role="alert">
             {user && user.message && t('registrationSucessful')}
-          </div>
+          </span>
         </form>
+
         {isOpen && <TokenPane setOpen={setIsOpen} />}
-      </div>
+      </main>
       <Footer />
     </Page>
   );

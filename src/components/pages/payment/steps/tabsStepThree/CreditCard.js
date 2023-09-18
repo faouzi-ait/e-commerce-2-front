@@ -101,44 +101,40 @@ function CreditCard({ basket, billing, delivery }) {
   };
 
   return (
-    <div>
-      <div style={{ width: '22%', margin: '1rem 0' }}>
-        <img src="/icons/cards.png" alt="cards" />
-      </div>
-      <div className="stripe-card">
-        <CardNumberElement
-          className="card-element"
-          onChange={handleCardChange}
-        />
-      </div>
+    <section>
+      <div className="stripe-card"></div>
 
-      <div style={{ display: 'flex', alignItems: 'baseline' }}>
-        <div className="card-expiry">
+      <section>
+        <div style={{ display: 'flex' }}>
+          <CardNumberElement
+            className="card-element"
+            onChange={handleCardChange}
+          />
           <CardExpiryElement
             className="card-element-expiry"
             onChange={handleCardChange}
           />
-        </div>
-
-        <div>
           <CardCvcElement
             className="card-element-cvv"
             onChange={handleCardChange}
           />
+          <button
+            disabled={processing ? true : false}
+            className="submit-payment"
+            onClick={() => handlePayment()}
+          >
+            {processing ? 'Processing' : 'Pay Now'}
+          </button>
         </div>
-      </div>
+      </section>
 
-      <div>{error && <p className="error-messge">{error}</p>}</div>
-
-      <div className="submit-btn">
-        <button
-          disabled={processing ? true : false}
-          className="submit-payment"
-          onClick={() => handlePayment()}>
-          {processing ? 'Processing' : 'Pay Now'}
-        </button>
-      </div>
-    </div>
+      <section className="submit-btn">
+        <div style={{ width: '34%', margin: '1rem 0' }}>
+          <img src="/icons/cards.png" alt="cards" />
+        </div>
+      </section>
+      <section>{error && <p className="error-messge">{error}</p>}</section>
+    </section>
   );
 }
 
