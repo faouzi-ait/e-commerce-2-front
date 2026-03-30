@@ -47,6 +47,7 @@ function Search() {
           } else if (!starRating && searchBrand) {
             return item.brand === searchBrand;
           }
+          return item;
         })
       : searchResults?.data?.items;
 

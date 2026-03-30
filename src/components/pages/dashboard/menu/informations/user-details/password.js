@@ -17,7 +17,7 @@ function Password({ userId }) {
   const {
     handleSubmit,
     control,
-    formState: { errors, isSubmitting },
+    formState: { errors /*, isSubmitting */ },
     watch,
     reset,
   } = useForm({
