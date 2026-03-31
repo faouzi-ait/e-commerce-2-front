@@ -1,25 +1,22 @@
-import axios from 'axios';
-import jwt from 'jwt-decode';
-import { store } from '../store';
-import ApiClient from './ApiClient';
+import axios from "axios";
+import jwt from "jwt-decode";
+import { store } from "../store";
+import ApiClient from "./ApiClient";
 
-import * as actions from '../components/pages/login/actions';
+import * as actions from "../components/pages/login/actions";
 
 const renewTokens = async (token) => {
   const response = await axios.post(
     `${process.env.REACT_APP_URL_PROD}/token/renewToken`,
-    { token }
+    { token },
   );
   return response.data;
 };
 
 const axiosInstance = axios.create({
-  // baseURL: process.env.REACT_APP_URL_DEV,
   baseURL: process.env.REACT_APP_URL_PROD,
   headers: {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Credentials': 'true',
+    "Content-Type": "application/json",
   },
 });
 
@@ -34,26 +31,26 @@ axiosInstance.interceptors.request.use(
         const { token, refreshToken } = await renewTokens(auth.refreshToken);
 
         store.dispatch(actions.setTokens({ token, refreshToken }));
-        req.headers['Authorization'] = `Bearer ${token}`;
+        req.headers["Authorization"] = `Bearer ${token}`;
       } else {
-        req.headers['Authorization'] = `Bearer ${auth.token}`;
+        req.headers["Authorization"] = `Bearer ${auth.token}`;
       }
     }
     return req;
   },
-  (error) => Promise.reject(error)
+  (error) => Promise.reject(error),
 );
 
 axiosInstance.interceptors.response.use(
   (response) => response,
-  (error) => Promise.reject(error)
+  (error) => Promise.reject(error),
 );
 
 const apiClient = new ApiClient(axiosInstance);
 
 export async function login(payload) {
   try {
-    return await apiClient.post('/users/login', payload);
+    return await apiClient.post("/users/login", payload);
   } catch (error) {
     return error;
   }
@@ -61,7 +58,7 @@ export async function login(payload) {
 
 export async function register(payload) {
   try {
-    return await apiClient.post('/users/signup', payload);
+    return await apiClient.post("/users/signup", payload);
   } catch (error) {
     return { error };
   }
@@ -69,7 +66,7 @@ export async function register(payload) {
 
 export async function resendActivationTokenCall({ payload }) {
   try {
-    return await apiClient.post('/user/resend', payload);
+    return await apiClient.post("/user/resend", payload);
   } catch (error) {
     return { error };
   }
@@ -93,7 +90,7 @@ export async function fetchUserOrders({ payload }) {
 
 export async function fetchCategories() {
   try {
-    return await apiClient.get('/categories');
+    return await apiClient.get("/categories");
   } catch (error) {
     return { error };
   }
@@ -101,7 +98,7 @@ export async function fetchCategories() {
 
 export async function fetchHomePageProducts() {
   try {
-    return await apiClient.get('/home-page-products');
+    return await apiClient.get("/home-page-products");
   } catch (error) {
     return { error };
   }
@@ -125,7 +122,7 @@ export async function fetchRelatedProducts(urlParams, queryParams) {
 
 export async function forgotPassword(payload) {
   try {
-    return await apiClient.post('/users/forgotPassword', payload);
+    return await apiClient.post("/users/forgotPassword", payload);
   } catch (error) {
     return error;
   }

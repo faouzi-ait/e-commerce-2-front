@@ -11,48 +11,20 @@ class ApiClient {
     };
   };
 
-  async get(endpoint, params = {}, opts = {}) {
-    return await this.send({
-      method: "get",
-      endpoint: endpoint,
-      params: params,
+  makeRequest(method, endpoint, data = {}, opts = {}) {
+    const request = {
+      method,
+      endpoint,
       ...opts,
-    });
-  }
+    };
 
-  async post(endpoint, payload = {}, opts = {}) {
-    return await this.send({
-      method: "post",
-      endpoint: endpoint,
-      payload: payload,
-      ...opts,
-    });
-  }
+    if (method.toLowerCase() === "get") {
+      request.params = data;
+    } else {
+      request.payload = data;
+    }
 
-  async put(endpoint, payload = {}, opts = {}) {
-    return await this.send({
-      method: "put",
-      endpoint: endpoint,
-      payload: payload,
-      ...opts,
-    });
-  }
-
-  async patch(endpoint, payload = {}, opts = {}) {
-    return await this.send({
-      method: "patch",
-      endpoint: endpoint,
-      payload: payload,
-      ...opts,
-    });
-  }
-  async delete(endpoint, payload = {}, opts = {}) {
-    return await this.send({
-      method: "delete",
-      endpoint: endpoint,
-      payload: payload,
-      ...opts,
-    });
+    return this.send(request);
   }
 
   async send(request) {
@@ -78,5 +50,11 @@ class ApiClient {
     }
   }
 }
+
+["get", "post", "put", "patch", "delete"].forEach((method) => {
+  ApiClient.prototype[method] = function (endpoint, data = {}, opts = {}) {
+    return this.makeRequest(method, endpoint, data, opts);
+  };
+});
 
 export default ApiClient;

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import {
   useStripe,
@@ -8,16 +8,15 @@ import {
   CardCvcElement,
   CardExpiryElement,
   CardNumberElement,
-} from '@stripe/react-stripe-js';
+} from "@stripe/react-stripe-js";
 
-import jwt from 'jwt-decode';
-import axios from 'axios';
+import jwt from "jwt-decode";
+import axios from "axios";
 
-import { saveTransactionId } from '../../actions';
+import { saveTransactionId } from "../../actions";
 
 // import * as localCmp from '../../styles.module.scss';
 
-// const API_LOCAL = process.env.REACT_APP_URL_DEV;
 const API_PROD = process.env.REACT_APP_URL_PROD;
 
 function CreditCard({ basket, billing, delivery }) {
@@ -67,7 +66,7 @@ function CreditCard({ basket, billing, delivery }) {
         shipping,
         billingDetails,
         receipt_email: email,
-      }
+      },
     );
 
     return clientSecret;
@@ -75,7 +74,7 @@ function CreditCard({ basket, billing, delivery }) {
 
   const handleCardChange = (e) => {
     const { error } = e;
-    setError(error ? error?.message : '');
+    setError(error ? error?.message : "");
   };
 
   const handlePayment = async () => {
@@ -105,7 +104,7 @@ function CreditCard({ basket, billing, delivery }) {
       <div className="stripe-card"></div>
 
       <section>
-        <div style={{ display: 'flex' }}>
+        <div style={{ display: "flex" }}>
           <CardNumberElement
             className="card-element"
             onChange={handleCardChange}
@@ -123,13 +122,13 @@ function CreditCard({ basket, billing, delivery }) {
             className="submit-payment"
             onClick={() => handlePayment()}
           >
-            {processing ? 'Processing' : 'Pay Now'}
+            {processing ? "Processing" : "Pay Now"}
           </button>
         </div>
       </section>
 
       <section className="submit-btn">
-        <div style={{ width: '34%', margin: '1rem 0' }}>
+        <div style={{ width: "34%", margin: "1rem 0" }}>
           <img src="/icons/cards.png" alt="cards" />
         </div>
       </section>

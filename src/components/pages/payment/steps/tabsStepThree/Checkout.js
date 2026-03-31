@@ -1,22 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { useDispatch, useSelector } from 'react-redux';
-import { Controller, useForm } from 'react-hook-form';
-import { useStripe } from '@stripe/react-stripe-js';
-import uuid from 'react-uuid';
-import jwt from 'jwt-decode';
-import axios from 'axios';
+import { useDispatch, useSelector } from "react-redux";
+import { Controller, useForm } from "react-hook-form";
+import { useStripe } from "@stripe/react-stripe-js";
+import uuid from "react-uuid";
+import jwt from "jwt-decode";
+import axios from "axios";
 
-import Input from '../../../../ui/input';
+import Input from "../../../../ui/input";
 
-import { saveTransactionId } from '../../actions';
+import { saveTransactionId } from "../../actions";
 
 // import { t } from '../../../../../i18n/translate';
-import * as utils from '../../../../../utils';
+import * as utils from "../../../../../utils";
 
-import * as localCmp from '../../styles.module.scss';
+import * as localCmp from "../../styles.module.scss";
 
-// const API_LOCAL = process.env.REACT_APP_URL_DEV;
 const API_PROD = process.env.REACT_APP_URL_PROD;
 
 const Checkout = ({ basket }) => {
@@ -28,7 +27,7 @@ const Checkout = ({ basket }) => {
   const [customer_email] = useState(email);
 
   const { handleSubmit, control, formState } = useForm({
-    mode: 'onBlur',
+    mode: "onBlur",
     defaultValues: { email: customer_email },
   });
 
@@ -39,7 +38,7 @@ const Checkout = ({ basket }) => {
       return {
         quantity: item.quantity,
         price_data: {
-          currency: 'EUR',
+          currency: "EUR",
           unit_amount: item.price * 100,
           product_data: {
             name: item.name,
@@ -71,8 +70,9 @@ const Checkout = ({ basket }) => {
     <>
       <form
         onSubmit={handleSubmit(handleCheckoutSubmit)}
-        className={localCmp.form}>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        className={localCmp.form}
+      >
+        <div style={{ display: "flex", alignItems: "center" }}>
           <Controller
             name="email"
             control={control}
@@ -84,12 +84,12 @@ const Checkout = ({ basket }) => {
                 name="email"
                 aria-invalid={!!formState.errors?.email}
                 className={localCmp.inputCheckoutField}
-                styleInline={{ marginTop: '-5px' }}
+                styleInline={{ marginTop: "-5px" }}
                 style={utils.setErrorStyle(formState?.errors?.email)}
                 errorMessage={
                   formState?.errors?.email
                     ? formState?.errors?.email.message
-                    : ''
+                    : ""
                 }
                 placeholder="your-email@somewhere.com"
               />
