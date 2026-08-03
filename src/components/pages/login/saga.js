@@ -1,9 +1,10 @@
-import { call, takeEvery, put, delay, select } from 'redux-saga/effects';
-import { login } from '../../../api/apiCalls';
+import { call, takeEvery, put, delay, select } from "redux-saga/effects";
+import { login } from "../../../api/apiCalls";
+import history from "../../../history";
 
-import * as actions from './actions';
+import * as actions from "./actions";
 
-import { LOGIN_USER, LOGOUT_USER } from './constants';
+import { LOGIN_USER, LOGOUT_USER } from "./constants";
 
 const fromPaymentLink = (state) => state?.login;
 
@@ -27,9 +28,9 @@ export function* authentication({ payload }) {
     yield put(actions.setIsUserAuthenticated(true));
 
     if (redirect.fromPaymentLink) {
-      window.location.href = '/payment';
+      history.push("/payment");
     } else {
-      window.location.href = '/dashboard';
+      history.push("/dashboard");
     }
   }
   yield put(actions.setIsAuthenticating(false));
@@ -39,7 +40,7 @@ export function* logout() {
   yield put(actions.setTokens({}));
   yield put(actions.updateUserInfoAction({ isLoaded: false }));
   yield put(actions.setIsUserAuthenticated(false));
-  window.location.href = '/';
+  history.push("/");
 }
 
 export function* authenticateSaga() {

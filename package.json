@@ -34,12 +34,12 @@
     "sass": "^1.98.0",
     "styled-components": "^5.2.1"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
+"scripts": {
+  "start": "NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
+  "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
+  "test": "NODE_OPTIONS=--openssl-legacy-provider react-scripts test",
+  "eject": "react-scripts eject"
+},
   "eslintConfig": {
     "extends": "react-app"
   },
